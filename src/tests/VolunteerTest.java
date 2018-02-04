@@ -1,8 +1,13 @@
+package tests;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.Job;
+import model.ParkManager;
+import model.Volunteer;
 
 /**
  * Test for business rule 1a.
