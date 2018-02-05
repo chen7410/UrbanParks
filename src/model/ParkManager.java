@@ -1,6 +1,5 @@
 package model;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +31,9 @@ public class ParkManager extends User {
 	}
 	
 	public boolean isJobEndsWithinMaxDays (final Job theJob) {
+		if (theJob.getEndDate().isBefore(LocalDate.now().plusDays(MAX_END_DAY + 1))) {
+			return true;
+		}
 		return false;
 	}
 	

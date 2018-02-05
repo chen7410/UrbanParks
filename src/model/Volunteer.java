@@ -37,6 +37,6 @@ public class Volunteer extends User {
 	}
 	
 	public void removeJob(final Job theJob) {
-		//myJobs.remove(theJob);
+		myJobs.remove(theJob);
 	}
 }
