@@ -50,16 +50,17 @@ public class ParkManagerTest {
 
 	@Test
 	public void isJobEndsWithinMaxDays_JobEndsInFewerDaysThanMaxDays_True() {
-		assertTrue("Job should end in few days than max days", myPM.isJobEndsWithinMaxDays(myJobEndsInFewerDaysThanMaxDays));
+		assertTrue("End date: " + myJobEndsInFewerDaysThanMaxDays.getEndDate(), myPM.isJobEndsWithinMaxDays(myJobEndsInFewerDaysThanMaxDays));
 	}
 	
 	@Test
 	public void isJobEndsWithinMaxDays_JobEndsInMaxDays_True() {
-		assertTrue("Job should end in max days", myPM.isJobEndsWithinMaxDays(myJobEndInMaxDays));
+		assertTrue("End date: " + myJobEndInMaxDays.getEndDate(), myPM.isJobEndsWithinMaxDays(myJobEndInMaxDays));
 	}
 	
 	@Test
 	public void isJobEndsWithinMaxDays_JobEndsInOneMoreDayThanMaxDays_False() {
-		assertFalse("Job should not end in one more day than max day", myPM.isJobEndsWithinMaxDays(myJobEndsInOneMoreDayThanMaxDays));
+		assertFalse("End date: " + myJobEndsInOneMoreDayThanMaxDays
+				.getEndDate(), myPM.isJobEndsWithinMaxDays(myJobEndsInOneMoreDayThanMaxDays));
 	}
 }
