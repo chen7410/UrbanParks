@@ -28,7 +28,6 @@ public class VolunteerTest {
 	private Job myJobEqualsToTwoDaysAway;
 	private Job myJobMoreThanTwoDayAway;			
 	
-	private static final LocalDate myJobStartDateToday = LocalDate.now();
 	private static final LocalDate myJobStartDateLessThanTwoDaysAway = LocalDate.now().plusDays(1);
 	private static final LocalDate myJobStartDateTwoDaysAway = LocalDate.now().plusDays(2);
 	private static final LocalDate myJobStartDateMoreThanTwoDaysAway = LocalDate.now().plusDays(20);
@@ -53,18 +52,21 @@ public class VolunteerTest {
 //		System.out.println("day different " + dayDifferent);
 	}
 	
+	/**
+	 * check whether Volunteer signs up for job that begins much more than the minimum number of calendar days from the current date.
+	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginMoreThanTwoDays_True() {
-		assertTrue(myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
+		assertTrue("Start date: " + myJobMoreThanTwoDayAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
 	}
 	
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactlyTwoDays_True() {
-		assertTrue(myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
+		assertTrue("Start date: " + myJobEqualsToTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
 	}
 	
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanTwoDays_False() {
-		assertFalse(myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
+		assertFalse("Start date: " + myJobLessThanTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
 	}
 }
