@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,25 +17,11 @@ public class ParkManager extends User {
 	}
 
 	public void createJob(final Job theJob) {
-		if (isLessThanMaxJobs(theJob)) {
-			myJobs.add(theJob);
-		}
+		
 	}
 
 	public boolean isLessThanMaxJobs(final Job theJob) {
-		boolean withinMaxDays = true;
-
-		LocalDate jobStartDate = theJob.getStartDate();
-		LocalDate jobEndDate = theJob.getEndDate();
-
-		Period diff = Period.between(jobStartDate, jobEndDate);
-		int daysDifference = diff.getDays();
-
-		if (daysDifference > MAX_JOB_LENGTH) {
-			return false;
-		}
-
-		return withinMaxDays;
+		return false;
 	}
 	
 	public boolean isJobWithinMaxDays(final Job theJob) {
