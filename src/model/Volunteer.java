@@ -1,4 +1,6 @@
 package model;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class Volunteer extends User {
@@ -14,8 +16,20 @@ public class Volunteer extends User {
 		
 	}
 	
+	/**
+	 * check whether the the start date of the jobs being signed up is allowed 
+	 * by the MAX_DAYS_TO_SIGN_UP;
+	 * @param theJob the job that being check.
+	 * @return true if the job date is at least two days after current date; false otherwise.
+	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
-		return false;
+		boolean result = false;
+		final Period period = LocalDate.now().until(theJob.getStartDate());
+		final int dayDifferent = period.getDays();
+		if (dayDifferent >= MAX_DAYS_TO_SIGN_UP) {
+			result = true;
+		}
+		return result;
 	}
 	
 	public boolean isSameDayConflict(final Job theJob) {
