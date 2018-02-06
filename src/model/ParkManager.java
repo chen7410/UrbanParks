@@ -15,6 +15,7 @@ public class ParkManager extends User {
 
 	public ParkManager(final String theUserName, final String theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
+		this.setMyUserType("Park Manager");
 		myJobs = new ArrayList<Job>();
 	}
 
