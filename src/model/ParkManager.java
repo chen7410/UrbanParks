@@ -31,11 +31,13 @@ public class ParkManager extends User {
 		return false;
 	}
 	
+	/**
+	 * Test if the job end date is less than or equal MAX_END_DAY days from now.
+	 * @param theJob The job to check
+	 * @return True if end date is MAX_END_DAY days or less from now.
+	 */
 	public boolean isJobEndsWithinMaxDays (final Job theJob) {
-		if (theJob.getEndDate().isBefore(LocalDate.now().plusDays(MAX_END_DAY + 1))) {
-			return true;
-		}
-		return false;
+		return theJob.getEndDate().isBefore(LocalDate.now().plusDays(MAX_END_DAY + 1));
 	}
 	
 	public void removeJob(final Job theJob) {
