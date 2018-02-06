@@ -1,6 +1,7 @@
 package model;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Volunteer extends User {
@@ -10,6 +11,8 @@ public class Volunteer extends User {
 	
 	public Volunteer(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
+		myJobs = new ArrayList<Job>();
+		this.setMyUserType("Volunteer");
 	}
 	
 	public void signup(final Job theJob) {
