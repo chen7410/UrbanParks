@@ -18,9 +18,13 @@ import model.ParkManager;
  * The specified job ends one more than the maximum number of days from the current date
  * 
  * @author Tuan
+ * @author Hasnah
  * @version 2/4/2018
  */
 public class ParkManagerTest {
+	
+	/* Maximum length of a job is no more than 3 days */
+	private final int MAX_JOB_LENGTH = 3;
 
 	private ParkManager myPM;
 	
@@ -38,6 +42,21 @@ public class ParkManagerTest {
 	 * Job that ends in one more day than maximum end days from now.
 	 */
 	private Job myJobEndsInOneMoreDayThanMaxDays;
+	
+	/** A job that takes 2 days */
+	private Job jobTakesOneFewerThanMax;
+	private LocalDate startOneDayFewer; 
+	private LocalDate endOneDayFewer;
+
+	/** A job that takes 3 days */
+	private Job jobTakesTheMaxDays;
+	private LocalDate startMaxDays;
+	private LocalDate endMaxDays; 
+
+	/** A job that takes 4 days */
+	private Job jobTakesOneMoreThanMax;
+	private LocalDate startOneDayMore;
+	private LocalDate endOneDayMore;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,6 +65,21 @@ public class ParkManagerTest {
 		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM);
 		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY), "Gas Works Park", myPM);
 		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY + 1), "Cal Anderson", myPM);
+	
+		/** A job that takes 2 days */
+		startOneDayFewer = LocalDate.of(2018, 02, 01);
+		endOneDayFewer = LocalDate.of(2018, 02, 03);
+		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM);
+
+		/** A job that takes 3 days */
+		startMaxDays = LocalDate.of(2018, 02, 10);
+		endMaxDays = LocalDate.of(2018, 02, 13);
+		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM);
+
+		/** A job that takes 4 days */
+		startOneDayMore = LocalDate.of(2018, 02, 20);
+		endOneDayMore = LocalDate.of(2018, 02, 24);
+		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM);
 	}
 
 	@Test
@@ -63,4 +97,26 @@ public class ParkManagerTest {
 		assertFalse("End date: " + myJobEndsInOneMoreDayThanMaxDays
 				.getEndDate(), myPM.isJobEndsWithinMaxDays(myJobEndsInOneMoreDayThanMaxDays));
 	}
+	
+
+
+	@Test
+	public void isJobWithinMaxDays_JobTakesOneFewerDayThanMax_True() {
+		assertTrue("The job takes one day less than the maximum days.", 
+					myPM.isJobWithinMaxDays(jobTakesOneFewerThanMax));
+	}
+
+	@Test 
+	public void isJobWithinMaxDays_JobTakesExactlyMaxDays_True() {
+		assertTrue("The job takes exactly the maximum days",
+					myPM.isJobWithinMaxDays(jobTakesTheMaxDays));
+	}
+
+	@Test
+	public void isJobWithinMaxDays_JobTakesOneMoreDayThanMax_False() {
+		assertFalse("The job takes one day more than the maximum days.", 
+					myPM.isJobWithinMaxDays(jobTakesOneMoreThanMax));
+	}
+
+	
 }
