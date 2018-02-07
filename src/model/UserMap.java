@@ -9,10 +9,15 @@ import java.util.Set;
  */
 public class UserMap {
 	/**
-	 * key is user name;value is user.
+	 * a map that store all users.
+	 * key: user name
+	 * value: user object.
 	 */
 	private HashMap<String, User> myUsers;
 	
+	/**
+	 * initialize fields.
+	 */
 	public UserMap() {
 		myUsers = new HashMap<String, User>();
 	}

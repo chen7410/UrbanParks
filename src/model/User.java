@@ -16,7 +16,7 @@ public abstract class User {
 	private String myUserType;
 
 	/**
-	 * initialized fields.
+	 * initialize fields.
 	 * @param theUserName the specified user name.
 	 * @param theFirstName the specified first name.
 	 * @param theLastName the specified last name.
@@ -77,6 +77,5 @@ public abstract class User {
 				" | User name: " + myUserName + 
 				" | First name: " + myFirstName + 
 				" | Last name: " + myLastName;
-		
 	}
 }
