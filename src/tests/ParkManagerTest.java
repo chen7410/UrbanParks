@@ -62,30 +62,24 @@ public class ParkManagerTest {
 	public void setUp() throws Exception {
 		myPM = new ParkManager("hasnahsaid", "Hasnah", "Said");
 		int random = (int) (Math.random() * ParkManager.MAX_END_DAY);//0 <= random < ParkMangaer.MAX_END_DAY
-<<<<<<< HEAD
 		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM, "Seattle, WA");
 		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY), "Gas Works Park", myPM, "Seattle, WA");
 		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY + 1), "Cal Anderson", myPM, "Seattle, WA");
-=======
-		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM);
-		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY), "Gas Works Park", myPM);
-		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY + 1), "Cal Anderson", myPM);
 	
 		/** A job that takes 2 days */
 		startOneDayFewer = LocalDate.of(2018, 02, 01);
 		endOneDayFewer = LocalDate.of(2018, 02, 03);
-		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM);
+		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM, "Seattle, WA");
 
 		/** A job that takes 3 days */
 		startMaxDays = LocalDate.of(2018, 02, 10);
 		endMaxDays = LocalDate.of(2018, 02, 13);
-		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM);
+		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM, "Seattle, WA");
 
 		/** A job that takes 4 days */
 		startOneDayMore = LocalDate.of(2018, 02, 20);
 		endOneDayMore = LocalDate.of(2018, 02, 24);
-		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM);
->>>>>>> e9505b5fc7a09b5748a2894dd0f8270cfd0b96ea
+		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM, "Seattle, WA");
 	}
 
 	@Test
