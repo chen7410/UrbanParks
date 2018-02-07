@@ -24,47 +24,64 @@ import model.Volunteer;
  *
  */
 public class VolunteerTest {
+	/**the start date of a job is tomorrow.*/
 	private Job myJobLessThanTwoDaysAway;
+	
+	/**the start date of a job is the day after tomorrow.*/
 	private Job myJobEqualsToTwoDaysAway;
+
+	/**the start date of a job is more than the day after tomorrow.*/
 	private Job myJobMoreThanTwoDayAway;			
 	
+	/**tomorrow.*/
 	private static final LocalDate myJobStartDateLessThanTwoDaysAway = LocalDate.now().plusDays(1);
+	
+	/**the day after tomorrow.*/
 	private static final LocalDate myJobStartDateTwoDaysAway = LocalDate.now().plusDays(2);
+	
+	/**the date that is more than the day after tomorrow.*/
 	private static final LocalDate myJobStartDateMoreThanTwoDaysAway = LocalDate.now().plusDays(20);
 	
-	/** job's start date = end date */
+	/**end date of a job.*/
 	private static final LocalDate myJobEndDate = LocalDate.now().plusDays(0); 
 	
+	/**any park manager.*/
 	private ParkManager myParkManager;
+	
+	/**any volunteer.*/
 	private Volunteer myAnyVolunteer;
 	
+	/**
+	 * initialize filed.
+	 */
 	@Before
 	public void setUp() {
 		myParkManager = new ParkManager("Matthew Chen", "Matthew", "Chen");
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
-		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA");
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA");
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA");
-		
-//		int dayDifferent = myJobStartDateToday.until(myJobStartDateLessThanTwoDaysAway).getDays();
-//		System.out.println("start date " + myJobStartDateToday.toString());
-//		System.out.println("end date " + myJobStartDateLessThanTwoDaysAway.toString());
-//		System.out.println("day different " + dayDifferent);
+		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager);
+		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager);
+		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager);
 	}
 	
 	/**
-	 * check whether Volunteer signs up for job that begins much more than the minimum number of calendar days from the current date.
+	 * test a volunteer signs up for job that begins much more than the minimum number of calendar days from the current date.
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginMoreThanTwoDays_True() {
 		assertTrue("Start date: " + myJobMoreThanTwoDayAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
 	}
 	
+	/**
+	 * test a volunteer signs up for job that begins the day after tomorrow.
+	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactlyTwoDays_True() {
 		assertTrue("Start date: " + myJobEqualsToTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
 	}
 	
+	/**
+	 * test a volunteer signs up for job that begins tomorrow.
+	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanTwoDays_False() {
 		assertFalse("Start date: " + myJobLessThanTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
