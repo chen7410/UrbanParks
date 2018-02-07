@@ -23,8 +23,13 @@ public class ParkManager extends User {
 		
 	}
 
-	public boolean isLessThanMaxJobs(final Job theJob) {
-		return false;
+	/**
+	 * Checks if there is room for one more job to be added.
+	 * @param theJobList the list of jobs
+	 * @return true if there's at least one more spot for a job.
+	 */
+	public boolean isLessThanMaxJobs(final JobMap theJobList) {
+		return theJobList.size() < MAX_JOB_AMOUNT;
 	}
 	
 	public boolean isJobWithinMaxDays(final Job theJob) {
@@ -32,7 +37,7 @@ public class ParkManager extends User {
 	}
 	
 	/**
-	 * Test if the job end date is less than or equal MAX_END_DAY days from now.
+	 * Tests if the job end date is less than or equal MAX_END_DAY days from now.
 	 * @param theJob The job to check
 	 * @return True if end date is MAX_END_DAY days or less from now.
 	 */
