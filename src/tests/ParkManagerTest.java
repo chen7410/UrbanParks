@@ -9,22 +9,13 @@ import model.Job;
 import model.ParkManager;
 
 /**
- * JUnit to test the business rule: 
- * As a Park Manager I want to submit a new job
- * No job can be specified whose end date is more than the maximum number of
- * days from the current date, default of 75 
- * The specified job ends one fewer than the maximum number of days from the current date
- * The specified job ends the maximum number of days from the current date
- * The specified job ends one more than the maximum number of days from the current date
+ * JUnit to test the business rules for ParkManager.java
  * 
  * @author Tuan
  * @author Hasnah
  * @version 2/4/2018
  */
 public class ParkManagerTest {
-	
-	/* Maximum length of a job is no more than 3 days */
-	private final int MAX_JOB_LENGTH = 3;
 
 	private ParkManager myPM;
 	
@@ -66,17 +57,17 @@ public class ParkManagerTest {
 		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY), "Gas Works Park", myPM, "Seattle, WA");
 		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY + 1), "Cal Anderson", myPM, "Seattle, WA");
 	
-		/** A job that takes 2 days */
+		// A job that takes 2 days
 		startOneDayFewer = LocalDate.of(2018, 02, 01);
 		endOneDayFewer = LocalDate.of(2018, 02, 03);
 		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM, "Seattle, WA");
 
-		/** A job that takes 3 days */
+		// A job that takes 3 days 
 		startMaxDays = LocalDate.of(2018, 02, 10);
 		endMaxDays = LocalDate.of(2018, 02, 13);
 		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM, "Seattle, WA");
 
-		/** A job that takes 4 days */
+		// A job that takes 4 days
 		startOneDayMore = LocalDate.of(2018, 02, 20);
 		endOneDayMore = LocalDate.of(2018, 02, 24);
 		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM, "Seattle, WA");
@@ -97,8 +88,6 @@ public class ParkManagerTest {
 		assertFalse("End date: " + myJobEndsInOneMoreDayThanMaxDays
 				.getEndDate(), myPM.isJobEndsWithinMaxDays(myJobEndsInOneMoreDayThanMaxDays));
 	}
-	
-
 
 	@Test
 	public void isJobWithinMaxDays_JobTakesOneFewerDayThanMax_True() {

@@ -28,7 +28,6 @@ public class ParkManager extends User {
 		return theJobList.size() < MAX_JOB_AMOUNT;
 	}
 	
-	
 	/**
 	 * Check if the job is not more than the max days, default is 3.
 	 * 
