@@ -6,22 +6,22 @@ import java.util.List;
 
 public class ParkManager extends User {
 
-	public static final int MAX_JOB_AMOUNT = 20;
+	private static final int MAX_JOB_AMOUNT = 20;
 
-	public static final int MAX_JOB_LENGTH = 3;
+	private static final int MAX_JOB_LENGTH = 3;
 
-	public static final int MAX_END_DAY = 75;
+	private static final int MAX_END_DAY = 75;
 
-	private List<Job> myJobs;
+	private List<Integer> myJobs;
 
 	public ParkManager(final String theUserName, final String theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
 		this.setMyUserType("Park Manager");
-		myJobs = new ArrayList<Job>();
+		myJobs = new ArrayList<>();
 	}
 
 	public void createJob(final Job theJob) {
-		
+		myJobs.add(theJob.getJobID());
 	}
 
 	public boolean isLessThanMaxJobs(final JobMap theJobList) {
@@ -64,6 +64,18 @@ public class ParkManager extends User {
 	
 	public void removeJob(final Job theJob) {
 		myJobs.remove(theJob);
+	}
+	
+	public int getMaxJobAmount() {
+		return MAX_JOB_AMOUNT;
+	}
+	
+	public int getMaxJobLength() {
+		return MAX_JOB_LENGTH;
+	}
+	
+	public int getMaxEndDay() {
+		return MAX_END_DAY;
 	}
 	
 }

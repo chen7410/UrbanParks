@@ -1,4 +1,4 @@
-package tests;
+package test;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
@@ -58,9 +58,9 @@ public class VolunteerTest {
 	public void setUp() {
 		myParkManager = new ParkManager("Matthew Chen", "Matthew", "Chen");
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
-		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager);
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager);
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager);
+		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA");
+		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA");
+		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA");
 	}
 	
 	/**
