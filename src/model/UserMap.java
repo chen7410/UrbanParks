@@ -43,7 +43,7 @@ public class UserMap {
 	}
 	
 	/**
-	 * Print all users in this UserMap, for testing.
+	 * Print all user names in this UserMap, for testing.
 	 */
 	public void viewAllUser() {
 		Set<String> userNames = myUsers.keySet();

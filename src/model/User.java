@@ -73,9 +73,9 @@ public abstract class User {
 	 */
 	@Override
 	public String toString() {
-		return "User type: " + myUserType +
+		return " | User type: " + myUserType +
 				" | User name: " + myUserName + 
 				" | First name: " + myFirstName + 
-				" | Last name: " + myLastName;
+				" | Last name: " + myLastName + " |";
 	}
 }
