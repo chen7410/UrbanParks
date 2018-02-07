@@ -1,5 +1,6 @@
 package model;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,19 +24,42 @@ public class ParkManager extends User {
 		
 	}
 
-	public boolean isLessThanMaxJobs(final Job theJob) {
-		return false;
+	public boolean isLessThanMaxJobs(final JobMap theJobList) {
+		return theJobList.size() < MAX_JOB_AMOUNT;
 	}
 	
+	/**
+	 * Check if the job is not more than the max days, default is 3.
+	 * 
+	 * @param theJob calculate the length of theJob
+	 * @return true if theJob is within 3 days
+	 * 		   false if theJob is more than 3 days
+	 */
 	public boolean isJobWithinMaxDays(final Job theJob) {
-		return false;
-	}
-	
-	public boolean isJobEndsWithinMaxDays (final Job theJob) {
-		if (theJob.getEndDate().isBefore(LocalDate.now().plusDays(MAX_END_DAY + 1))) {
-			return true;
+		boolean withinMaxDays = true;
+
+		LocalDate jobStartDate = theJob.getStartDate();
+		LocalDate jobEndDate = theJob.getEndDate();
+
+		Period diff = Period.between(jobStartDate, jobEndDate);
+		int daysDifference = diff.getDays();
+
+		if (daysDifference > MAX_JOB_LENGTH) {
+			return false;
 		}
-		return false;
+
+		return withinMaxDays;
+
+	}
+
+	
+	/**
+	 * Test if the job end date is less than or equal MAX_END_DAY days from now.
+	 * @param theJob The job to check
+	 * @return True if end date is MAX_END_DAY days or less from now.
+	 */
+	public boolean isJobEndsWithinMaxDays (final Job theJob) {
+		return theJob.getEndDate().isBefore(LocalDate.now().plusDays(MAX_END_DAY + 1));
 	}
 	
 	public void removeJob(final Job theJob) {
