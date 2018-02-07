@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Volunteer extends User {
-	public final static int MAX_DAYS_TO_SIGN_UP = 2;
+	
+	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	
 	private List<Job> myJobs;
 	
@@ -41,5 +42,9 @@ public class Volunteer extends User {
 	
 	public void removeJob(final Job theJob) {
 		myJobs.remove(theJob);
+	}
+	
+	public int getMaxDaysToSignUp() {
+		return MAX_DAYS_TO_SIGN_UP;
 	}
 }

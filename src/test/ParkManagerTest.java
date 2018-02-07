@@ -52,10 +52,10 @@ public class ParkManagerTest {
 	@Before
 	public void setUp() throws Exception {
 		myPM = new ParkManager("hasnahsaid", "Hasnah", "Said");
-		int random = (int) (Math.random() * ParkManager.MAX_END_DAY);//0 <= random < ParkMangaer.MAX_END_DAY
+		int random = (int) (Math.random() * myPM.getMaxEndDay() );//0 <= random < ParkMangaer.MAX_END_DAY
 		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM, "Seattle, WA");
-		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY), "Gas Works Park", myPM, "Seattle, WA");
-		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(ParkManager.MAX_END_DAY + 1), "Cal Anderson", myPM, "Seattle, WA");
+		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay()), "Gas Works Park", myPM, "Seattle, WA");
+		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay() + 1), "Cal Anderson", myPM, "Seattle, WA");
 	
 		// A job that takes 2 days
 		startOneDayFewer = LocalDate.of(2018, 02, 01);
