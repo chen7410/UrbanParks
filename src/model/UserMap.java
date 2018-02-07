@@ -8,8 +8,16 @@ import java.util.Set;
  *
  */
 public class UserMap {
+	/**
+	 * a map that store all users.
+	 * key: user name
+	 * value: user object.
+	 */
 	private HashMap<String, User> myUsers;
 	
+	/**
+	 * initialize fields.
+	 */
 	public UserMap() {
 		myUsers = new HashMap<String, User>();
 	}
@@ -35,15 +43,11 @@ public class UserMap {
 	}
 	
 	/**
-	 * Print all users in this UserMap.
+	 * Print all users in this UserMap, for testing.
 	 */
 	public void viewAllUser() {
 		Set<String> userNames = myUsers.keySet();
 		System.out.println(userNames.toString());
 	}
 	
-//	@Override
-//	public boolean equals(Object theUser) {
-//		User user = (User) theUser;
-//	}
 }
