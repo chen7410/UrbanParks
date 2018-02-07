@@ -8,6 +8,9 @@ import java.util.Set;
  *
  */
 public class UserMap {
+	/**
+	 * key is user name;value is user.
+	 */
 	private HashMap<String, User> myUsers;
 	
 	public UserMap() {
@@ -35,15 +38,11 @@ public class UserMap {
 	}
 	
 	/**
-	 * Print all users in this UserMap.
+	 * Print all users in this UserMap, for testing.
 	 */
 	public void viewAllUser() {
 		Set<String> userNames = myUsers.keySet();
 		System.out.println(userNames.toString());
 	}
 	
-//	@Override
-//	public boolean equals(Object theUser) {
-//		User user = (User) theUser;
-//	}
 }

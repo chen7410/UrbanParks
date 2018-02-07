@@ -6,14 +6,21 @@ package model;
  *
  */
 public abstract class User {
+	/** user name*/
 	private String myUserName;
-
+	/** first name*/
 	private String myFirstName;
-
+	/** last name*/
 	private String myLastName;
-	
+	/** user type*/
 	private String myUserType;
 
+	/**
+	 * initialized fields.
+	 * @param theUserName the specified user name.
+	 * @param theFirstName the specified first name.
+	 * @param theLastName the specified last name.
+	 */
 	public User(final String theUserName, final String theFirstName, final String theLastName) {
 		myUserName = theUserName;
 		myFirstName = theFirstName;
@@ -21,40 +28,48 @@ public abstract class User {
 		myUserType = "undefined";
 	}
 
+	/**
+	 * return the last name of this user.
+	 * @return the last name of this user.
+	 */
 	public String getMyUserName() {
 		return myUserName;
 	}
 
-	public void setMyUserName(final String theUserName) {
-		this.myUserName = theUserName;
-	}
-
+	/**
+	 * return the last name of this user.
+	 * @return the last name of this user.
+	 */
 	public String getMyFirstName() {
 		return myFirstName;
 	}
-
-	public void setMyFirstName(final String theFirstName) {
-		this.myFirstName = theFirstName;
-	}
-
+	
+	/**
+	 * return the last name of this user.
+	 * @return the last name of this user.
+	 */
 	public String getMyLastName() {
 		return myLastName;
 	}
 
-	public void setMyLastName(final String theLastName) {
-		this.myLastName = theLastName;
-	}
-	
-	public final String getMyUserType() {
+	/**
+	 * return the user type of this user.
+	 * @return the user type of this user.
+	 */
+	public String getMyUserType() {
 		return myUserType;
 	}
 
+	/**
+	 * this method is called from subclass, should never be override
+	 * @param theUserType the specified user type.
+	 */
 	public final void setMyUserType(final String theUserType) {
 		this.myUserType = theUserType;
 	}
 	
 	/**
-	 * Display an user's information.
+	 * display an user's information, for testing.
 	 */
 	@Override
 	public String toString() {

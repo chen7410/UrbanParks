@@ -25,7 +25,7 @@ public class Job {
 		return myJobID;
 	}
 
-	public void setJobID(final int myJobID) {//don't need setter?
+	public void setJobID(final int myJobID) {
 		this.myJobID = myJobID;
 	}
 
