@@ -58,32 +58,39 @@ public class VolunteerTest {
 	public void setUp() {
 		myParkManager = new ParkManager("Matthew Chen", "Matthew", "Chen");
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
-		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA");
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA");
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA");
+		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, 
+				"Discover Park", myParkManager, "Seattle, WA");
+		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, 
+				"Cherry Park", myParkManager, "Seattle, WA");
+		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, 
+				"Kerry Park", myParkManager, "Seattle, WA");
 	}
 	
 	/**
-	 * test a volunteer signs up for job that begins much more than the minimum number of calendar days from the current date.
+	 * test a volunteer signs up for job that begins much more than the minimum number of 
+	 * calendar days from the current date.
 	 */
 	@Test
-	public void isAtLeastMinDays_VolunteersSignUpJobsBeginMoreThanTwoDays_True() {
-		assertTrue("Start date: " + myJobMoreThanTwoDayAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
+	public void isAtLeastMinDays_VolunteersSignUpJobsBeginMoreThanMinimumNumberDays_True() {
+		assertTrue("Start date: " + myJobMoreThanTwoDayAway.getStartDate(), 
+				myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
 	}
 	
 	/**
 	 * test a volunteer signs up for job that begins the day after tomorrow.
 	 */
 	@Test
-	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactlyTwoDays_True() {
-		assertTrue("Start date: " + myJobEqualsToTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
+	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactMinimumNumberDays_True() {
+		assertTrue("Start date: " + myJobEqualsToTwoDaysAway.getStartDate(), 
+				myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
 	}
 	
 	/**
 	 * test a volunteer signs up for job that begins tomorrow.
 	 */
 	@Test
-	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanTwoDays_False() {
-		assertFalse("Start date: " + myJobLessThanTwoDaysAway.getStartDate(), myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
+	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanMinimumNumberDays_False() {
+		assertFalse("Start date: " + myJobLessThanTwoDaysAway.getStartDate(), 
+				myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
 	}
 }
