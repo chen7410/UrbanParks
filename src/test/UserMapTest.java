@@ -15,24 +15,18 @@ import model.Volunteer;
  */
 public class UserMapTest {
 
-	/**test user matthew.*/
 	private User matthew;
 	
-	/**test user hasnah.*/
 	private User hasnah;
 	
-	/**test user brook.*/
 	private User brook;
 	
-	/**test user tuan.*/
 	private User tuan;
 	
 	/**a UserMap that stores users.*/
 	private UserMap myUserMap;
+
 	
-	/**
-	 * initialize fields.
-	 */
 	@Before
 	public void setup() {
 		matthew = new ParkManager("Matthew_Chen", "Matthew", "Chen");

@@ -48,31 +48,22 @@ public class VolunteerTest {
 	private static final LocalDate myThirdJobCandidateStartDate = LocalDate.now().plusDays(16);
 	private static final LocalDate myThirdJobCandidateEndDate = myThirdJobCandidateStartDate;
 	
-	/**the start date of a job is tomorrow.*/
 	private Job myJobLessThanTwoDaysAway;
 	
-	/**the start date of a job is the day after tomorrow.*/
 	private Job myJobEqualsToTwoDaysAway;
 
-	/**the start date of a job is more than the day after tomorrow.*/
 	private Job myJobMoreThanTwoDayAway;			
 	
-	/**tomorrow.*/
 	private static final LocalDate myJobStartDateLessThanTwoDaysAway = LocalDate.now().plusDays(1);
 	
-	/**the day after tomorrow.*/
 	private static final LocalDate myJobStartDateTwoDaysAway = LocalDate.now().plusDays(2);
 	
-	/**the date that is more than the day after tomorrow.*/
 	private static final LocalDate myJobStartDateMoreThanTwoDaysAway = LocalDate.now().plusDays(20);
 	
-	/**end date of a job.*/
 	private static final LocalDate myJobEndDate = LocalDate.now().plusDays(0); 
 	
-	/**any park manager.*/
 	private ParkManager myParkManager;
 	
-	/**any volunteer.*/
 	private Volunteer myAnyVolunteer;
 	
 	

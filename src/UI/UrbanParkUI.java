@@ -11,17 +11,18 @@ import java.util.Scanner;
 import model.ParkManager;
 import model.User;
 import model.UserMap;
+import model.Volunteer;
 
 public class UrbanParkUI {
-	private static final String myWelcomeMessage = ">>> Welcome to Urban Parks.";
+	private static final String myWelcomeMessage = ">>> Welcome to Urban Parks";
 	private static final String myWhatToDo = ">>> What would you like to do?";
-	private static final String mySelectNymber = "    (Please select a number)";
+	private static final String mySelectNumber = "    (Please select a number)";
 	private static final String myLogin = "        1. Log in";
 	private static final String myExit = "        2. Exit";
 	private static final String myLogOut = "        3. Log out";
 	private static final String myEnterUsername = ">>> Please enter your username:";
 	private static final String myLoginAs = "You are logged in as a ";
-	private static final String myWelcome = "Welcome ";
+	private static final String myWelcome = ">>> Welcome ";
 	//private static final String myConsoleChar = ">>>";
 	private static final String mySignUpNewJob = "        1. Sign up for a new job";
 	private static final String myViewUpCommingJob = "        2. View your upcoming jobs";
@@ -35,12 +36,22 @@ public class UrbanParkUI {
 	private static final String myUpcommingJob = ">>> Here are your upcoming jobs:";
 	private static final String myLogOutMessage = ">>> You have logged out successfully.";
 	private static final String myExitSystem = ">>> Thank you for using Urban Parks.";
+	private static final String mySubmitNewJob = "        1. Submit a new job";
+	private static final String myViewAllSubmittedJobs = "        2. View all your submitted jobs";
 
 	private static Scanner myScanner = new Scanner(System.in);
 
 	private static User myCurrentUser;
 
 	private static UserMap myUsers;
+		
+	private static ParkManager myBrook;
+	
+	private static Volunteer myHasnah;
+	
+	private static ParkManager myMatthew;
+	
+	private static Volunteer myTuan;
 
 	public static void main(final String[] theArgs) {
 		load();
@@ -59,10 +70,25 @@ public class UrbanParkUI {
 		if (myCurrentUser instanceof ParkManager) {
 			basicParkManagerOptions();
 		}
+		
+//		if (myCurrentUser instanceof Volunteer) {
+//			basicVolunteerOptions();
+//		} 
 	}
 
 	private static void load() {
 		myUsers = new UserMap();
+		
+		myBrook = new ParkManager("brook", "Brook", "Negussie");
+		myHasnah = new Volunteer("hasnah", "Hasnah", "Said");
+		myMatthew = new ParkManager("matthew", "Minqin", "Chen");
+		myTuan = new Volunteer("tuan", "Tuan", "Dinh");
+		
+		myUsers.addUser(myBrook);
+		myUsers.addUser(myHasnah);
+		myUsers.addUser(myMatthew);
+		myUsers.addUser(myTuan);
+		
 	}
 
 	/**
@@ -84,25 +110,27 @@ public class UrbanParkUI {
 
 	private static void logIn() {
 		enterUsername();
-		
+		Scanner scan = new Scanner(System.in);
 		System.out.println();
-		System.out.print("> ");
-		String username = myScanner.nextLine();
+		System.out.print("> ");		
+		String username = scan.nextLine();
+		
 		System.out.println();
 		myCurrentUser = myUsers.getUser(username);
 		
 		System.out.println(myWelcome + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName()
-				+ myLoginAs + myCurrentUser.getUserType());
+				+ ". " +myLoginAs + myCurrentUser.getUserType());
 	}
 
 	private static void basicParkManagerOptions() {
-		System.out.println(myWhatToDo + mySelectNymber);
-
-		String[] options = { "Submit a new job", "View all your submitted jobs", "Log out" };
-		for (int i = 0; i < options.length; i++) {
-			System.out.println("    " + (i + 1) + ". " + options[i]);
-		}
-
+//		System.out.println(myWhatToDo + mySelectNumber);
+//
+//		String[] options = { "Submit a new job", "View all your submitted jobs", "Log out" };
+//		for (int i = 0; i < options.length; i++) {
+//			System.out.println("    " + (i + 1) + ". " + options[i]);
+//		}
+		
+		parkManagerMenu();
 		System.out.println();
 		System.out.print("> ");
 		int task = myScanner.nextInt();
@@ -113,7 +141,7 @@ public class UrbanParkUI {
 	 * print ">>> Welcome to Urban Parks." and main menu.
 	 */
 	private static void welcomeMessageMainMenu() {
-		System.out.println(myWelcomeMessage + "\n" + myWhatToDo + "\n" + mySelectNymber + "\n" + myLogin
+		System.out.println(myWelcomeMessage + "\n" + myWhatToDo + "\n" + mySelectNumber + "\n" + myLogin
 				 + "\n" + myExit);
 	}
 	
@@ -125,10 +153,19 @@ public class UrbanParkUI {
 	}
 	
 	/**
+	 * print park manager
+	 */
+	
+	private static void parkManagerMenu() {
+		System.out.println(myWhatToDo + "\n" + mySelectNumber + "\n" + mySubmitNewJob + "\n" 
+				+ myViewAllSubmittedJobs + "\n" + myLogOut);
+	}
+	
+	/**
 	 * print volunteer Menu.
 	 */
 	private static void volunteerMenu() {
-		System.out.println(myWhatToDo + "\n" + mySelectNymber + "\n" + mySignUpNewJob  + "\n" + 
+		System.out.println(myWhatToDo + "\n" + mySelectNumber + "\n" + mySignUpNewJob  + "\n" + 
 				myViewUpCommingJob  + "\n" + myLogOut);
 	}
 	
@@ -168,7 +205,7 @@ public class UrbanParkUI {
 	}
 	
 	/**
-	 * print ">>> Job added successfully. Here are your upcoming jobs:"¡£
+	 * print ">>> Job added successfully. Here are your upcoming jobs:"ï¿½ï¿½
 	 */
 	private static void addJobSuccess() {
 		System.out.println(myAddJobSuccess);
