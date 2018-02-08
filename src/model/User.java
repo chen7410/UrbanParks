@@ -1,13 +1,17 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * This class represents a single user in the system.
  * 
  * @author Group 7
  *
  */
-public abstract class User {
-	/** user name */
+public abstract class User implements Serializable {
+
+	private static final long serialVersionUID = 4L;
+	/** user name*/
 	private String myUserName;
 	/** first name */
 	private String myFirstName;
@@ -34,9 +38,9 @@ public abstract class User {
 	}
 
 	/**
-	 * return the last name of this user.
+	 * return the user name of this user.
 	 * 
-	 * @return the last name of this user.
+	 * @return the user name of this user.
 	 */
 	public String getUserName() {
 		return myUserName;
@@ -84,7 +88,7 @@ public abstract class User {
 	 */
 	@Override
 	public String toString() {
-		return "User type: " + myUserType + " | User name: " + myUserName + " | First name: " + myFirstName
+		return "| User type: " + myUserType + " | User name: " + myUserName + " | First name: " + myFirstName
 				+ " | Last name: " + myLastName;
 	}
 }

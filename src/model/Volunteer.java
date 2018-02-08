@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Volunteer extends User {
 	
+	private static final long serialVersionUID = 2L;
+
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	
 	/**

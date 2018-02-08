@@ -3,7 +3,6 @@ package test;
 import model.User;
 import model.UserMap;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import model.ParkManager;
@@ -45,6 +44,28 @@ public class UserMapTest {
 	}
 	
 	/**
+	 * test whether save user information.
+	 */
+	@Test
+	public void writeUsermap_saveAllUserInformationInAtxtFile_createTheTxtFileWithAllInformation() {
+		myUserMap.addUser(brook);
+		myUserMap.addUser(hasnah);
+		myUserMap.writeUsermap("userInformation.ser");
+		myUserMap.viewAllUser();
+	}
+	
+	/**
+	 * test whether load user information from a file.
+	 */
+	@Test
+	public void readUsermap_loadAllUserInformationFromAtxtFile_loadTheTxtFileWithAllInformatioIntoUsermapn() {
+		myUserMap.readUsermap("userInformation.ser");
+		myUserMap.viewAllUser();
+		Volunteer v = (Volunteer) myUserMap.getUser("Hasnah_Said");
+		System.out.println(v.toString());
+	}
+	
+	/**
 	 * Test whether return Matthew_Chen's information.
 	 */
 	@Test
@@ -69,7 +90,7 @@ public class UserMapTest {
 	@Test
 	public void addUser_addMatthewParkManager_Matthew_ChenInTheUserMap() {
 		myUserMap.addUser(matthew);
-		myUserMap.viewAllUser();
+		myUserMap.viewAllUsername();
 	}
 	
 	/**
@@ -78,7 +99,7 @@ public class UserMapTest {
 	@Test
 	public void addUser_addHasnahVolunteer_Hasnah_SaidInTheUserMap() {
 		myUserMap.addUser(hasnah);
-		myUserMap.viewAllUser();
+		myUserMap.viewAllUsername();
 	}
 	
 	/**
@@ -87,7 +108,7 @@ public class UserMapTest {
 	@Test
 	public void addUser_addBrookParkManager_Brook_NegussieInTheUserMap() {
 		myUserMap.addUser(brook);
-		myUserMap.viewAllUser();
+		myUserMap.viewAllUsername();
 	}
 	
 	/**
@@ -96,10 +117,7 @@ public class UserMapTest {
 	@Test
 	public void addUser_addTuanVolunteer_Tuan_DinhInTheUserMap() {
 		myUserMap.addUser(tuan);
-		myUserMap.viewAllUser();
+		myUserMap.viewAllUsername();
 	}
-	
-	
-	
-	
+
 }

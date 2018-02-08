@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ParkManager extends User {
 
+	private static final long serialVersionUID = 1L;
+
 	private static final int MAX_JOB_AMOUNT = 20;
 
 	private static final int MAX_JOB_LENGTH = 3;
@@ -55,7 +57,6 @@ public class ParkManager extends User {
 
 	}
 
-	
 	/**
 	 * Test if the job end date is less than or equal MAX_END_DAY days from now.
 	 * @param theJob The job to check
