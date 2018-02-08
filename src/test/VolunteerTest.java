@@ -1,4 +1,11 @@
+/**
+ * T CSS 360 - Winter 2018
+ * Team: Group 7
+ * Urban Parks Project
+ */
+
 package test;
+
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
@@ -6,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Job;
+import model.JobMap;
 import model.ParkManager;
 import model.Volunteer;
 
@@ -24,6 +32,22 @@ import model.Volunteer;
  *
  */
 public class VolunteerTest {
+	
+	private static final LocalDate myFirstJobStartDate = LocalDate.now().plusDays(10);
+	private static final LocalDate myFirstJobEndDate = myFirstJobStartDate;
+	
+	private static final LocalDate mySecondJobStartDate = LocalDate.now().plusDays(16);
+	private static final LocalDate mySecondJobEndDate = mySecondJobStartDate.plusDays(2);
+	
+	private static final LocalDate myFirstJobCandidateStartDate = LocalDate.now().plusDays(13);
+	private static final LocalDate myFirstJobCandidateEndDate = myFirstJobCandidateStartDate.plusDays(2);
+	
+	private static final LocalDate mySecondJobCandidateStartDate = LocalDate.now().plusDays(18);
+	private static final LocalDate mySecondJobCandidateEndDate = mySecondJobCandidateStartDate;
+	
+	private static final LocalDate myThirdJobCandidateStartDate = LocalDate.now().plusDays(16);
+	private static final LocalDate myThirdJobCandidateEndDate = myThirdJobCandidateStartDate;
+	
 	/**the start date of a job is tomorrow.*/
 	private Job myJobLessThanTwoDaysAway;
 	
@@ -51,16 +75,93 @@ public class VolunteerTest {
 	/**any volunteer.*/
 	private Volunteer myAnyVolunteer;
 	
+	
+	private Job myFirstJob;
+	private Job myFirstJobCandidate;
+	private Job mySecondJob;
+	private Job mySecondJobCandidate;
+	private Job myThirdJobCandidate;
+	
+	private JobMap myJobMap;
+	
+	private Volunteer myVolunteer;
+	
 	/**
 	 * initialize filed.
 	 */
 	@Before
 	public void setUp() {
-		myParkManager = new ParkManager("Matthew Chen", "Matthew", "Chen");
+		
+		myVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
+		myParkManager = new ParkManager("brook", "Brook", "Negussie");
+		myJobMap = new JobMap();
+		
+		myFirstJob = new Job(myFirstJobStartDate, myFirstJobEndDate, "Discovery Park", myParkManager, "Seattle", "Pick up leaves");
+		mySecondJob = new Job(mySecondJobStartDate, mySecondJobEndDate, "Seward Park", myParkManager, "Seattle", "Pick up leaves");
+		
+		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate, myFirstJobCandidateEndDate, "Volunteer Park", myParkManager, "Seattle", "Pick up leaves");
+		mySecondJobCandidate = new Job(mySecondJobCandidateStartDate, mySecondJobCandidateEndDate, "Gas Works Park", myParkManager, "Seattle", "Pick up leaves");
+		myThirdJobCandidate = new Job(myThirdJobCandidateStartDate, myThirdJobCandidateEndDate, "Lincoln Park", myParkManager, "Seattle", "Pick up leaves");
+		myJobMap.addJob(myFirstJob);
+		myJobMap.addJob(mySecondJob);
+		
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
 		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA", "Pick up leaves");
 		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA", "Pick up leaves");
 		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA", "Pick up leaves");
+	}
+	
+	/**
+	 * Checking if a volunteer can sign up for a job when they don't
+	 * have any conflicting jobs.
+	 */
+	@Test
+	public void isSameDayConflict_VolunteerHasNoCurrentJobs_False() {
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap.getJob(jobID)));
+		}
+	}
+	
+	/**
+	 * Checking if a volunteer can sign up for a job even when they
+	 * have other jobs which do not conflict.
+	 */
+	@Test
+	public void isSameDayConflict_VolunteerHasCurrentJobsButNotConflicting_False() {
+		myVolunteer.signup(myFirstJob);
+		myVolunteer.signup(mySecondJob);
+		
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap.getJob(jobID)));
+		}
+	}
+	
+	/**
+	 * Checking if a volunteer can sign up for a job even though the
+	 * potential job starts the same day as the end of an existing job.
+	 */
+	@Test
+	public void isSameDayConflict_ConflictingJobStartsSameDayAsEndOfJobAlreadySignedUpFor_True() {
+		myVolunteer.signup(myFirstJob);
+		myVolunteer.signup(mySecondJob);
+		
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(mySecondJobCandidate, myJobMap.getJob(jobID)));
+		}
+	}
+	
+	/**
+	 * Checking if a volunteer can sign up for a job even though the
+	 * potential job ends the same day as the start of an existing job.
+	 */
+	@Test
+	public void isSameDayConflict_ConflictingJobEndSameDayAsStartOfJobAlreadySignedUpFor_True() {
+		myVolunteer.signup(myFirstJob);
+		myVolunteer.signup(mySecondJob);
+		
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate, myJobMap.getJob(jobID)));
+		}
 	}
 	
 	/**

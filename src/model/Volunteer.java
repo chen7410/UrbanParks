@@ -1,4 +1,11 @@
+/**
+ * T CSS 360 - Winter 2018
+ * Team: Group 7
+ * Urban Parks Project
+ */
+
 package model;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -12,6 +19,8 @@ public class Volunteer extends User {
 	 * List of jobs this volunteer has signed up for.
 	 */
 	private List<Integer> myJobs;
+	
+	
 	
 	public Volunteer(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
@@ -39,8 +48,16 @@ public class Volunteer extends User {
 		return result;
 	}
 	
-	public boolean isSameDayConflict(final Job theJob) {
-		return false;
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isSameDayConflict(final Job theCandidateJob, final Job theCurrentJob) {
+		boolean overlaps = false;
+		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob) || overlaps;
+		
+		
+		return overlaps;
 	}
 	
 	public int getMaxDaysToSignUp() {

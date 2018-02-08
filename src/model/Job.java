@@ -1,3 +1,9 @@
+/**
+ * T CSS 360 - Winter 2018
+ * Team: Group 7
+ * Urban Parks Project
+ */
+
 package model;
 
 import java.time.LocalDate;
@@ -97,5 +103,27 @@ public class Job {
 
 	public String getDescription() {
 		return myDescription;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param theCandidateJob
+	 * @return
+	 */
+	public boolean isOverLappingDay(Job theCandidateJob) {
+		boolean overlaps = false;
+		
+		if (theCandidateJob.getStartDate().isAfter(myStartDate) && theCandidateJob.getStartDate().isBefore(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getEndDate().isAfter(myStartDate) && theCandidateJob.getEndDate().isBefore(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getStartDate().isEqual(myStartDate) || theCandidateJob.getStartDate().isEqual(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getEndDate().isEqual(myStartDate) || theCandidateJob.getEndDate().isEqual(myEndDate)) {
+			overlaps = true;
+		}
+		
+		return overlaps;
 	}
 }
