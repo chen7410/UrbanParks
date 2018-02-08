@@ -15,16 +15,21 @@ public class Volunteer extends User {
 	
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	
-	private List<Job> myJobs;
+	/**
+	 * List of jobs this volunteer has signed up for.
+	 */
+	private List<Integer> myJobs;
+	
+	
 	
 	public Volunteer(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		myJobs = new ArrayList<Job>();
-		this.setMyUserType("Volunteer");
+		myJobs = new ArrayList<>();
+		this.setUserType("Volunteer");
 	}
 	
 	public void signup(final Job theJob) {
-		
+		myJobs.add(theJob.getJobID());
 	}
 	
 	/**
@@ -47,20 +52,19 @@ public class Volunteer extends User {
 	 * 
 	 * @return
 	 */
-	public boolean isSameDayConflict(Job theCandidateJob) {
+	public boolean isSameDayConflict(final Job theCandidateJob, final Job theCurrentJob) {
 		boolean overlaps = false;
-		for (Job j : myJobs) {
-			overlaps = j.isOverLappingDay(theCandidateJob) || overlaps;
-		}
+		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob) || overlaps;
+		
 		
 		return overlaps;
 	}
 	
-	public void removeJob(final Job theJob) {
-		myJobs.remove(theJob);
-	}
-	
 	public int getMaxDaysToSignUp() {
 		return MAX_DAYS_TO_SIGN_UP;
+	}
+	
+	public List<Integer> getJobList() {
+		return myJobs;
 	}
 }

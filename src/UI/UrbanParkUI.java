@@ -6,6 +6,7 @@ public class UrbanParkUI {
 	
 	private static final String myWelcomeMessage = ">>> Welcome to Urban Parks.";
 	
+<<<<<<< HEAD
 	private static Scanner myScanner = new Scanner(System.in);
 	
 	public static void main(final String[] theArgs) {
@@ -36,3 +37,12 @@ public class UrbanParkUI {
 		return task;
 	}
 }
+=======
+	private String myWelcomeMessage = ">>> Welcome to Urban Parks.";	
+	
+	public static void main(String[] args) {
+		
+	}
+
+}
+>>>>>>> 5783d30376e887af1df3feaccb5c24865dab66ab

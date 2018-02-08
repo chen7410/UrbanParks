@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Job;
+import model.JobMap;
 import model.ParkManager;
 import model.Volunteer;
 
@@ -81,6 +82,8 @@ public class VolunteerTest {
 	private Job mySecondJobCandidate;
 	private Job myThirdJobCandidate;
 	
+	private JobMap myJobMap;
+	
 	private Volunteer myVolunteer;
 	
 	/**
@@ -91,18 +94,21 @@ public class VolunteerTest {
 		
 		myVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
 		myParkManager = new ParkManager("brook", "Brook", "Negussie");
+		myJobMap = new JobMap();
 		
-		myFirstJob = new Job(myFirstJobStartDate, myFirstJobEndDate, "Discovery Park", myParkManager, "Seattle");
-		mySecondJob = new Job(mySecondJobStartDate, mySecondJobEndDate, "Seward Park", myParkManager, "Seattle");
+		myFirstJob = new Job(myFirstJobStartDate, myFirstJobEndDate, "Discovery Park", myParkManager, "Seattle", "Pick up leaves");
+		mySecondJob = new Job(mySecondJobStartDate, mySecondJobEndDate, "Seward Park", myParkManager, "Seattle", "Pick up leaves");
 		
-		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate, myFirstJobCandidateEndDate, "Volunteer Park", myParkManager, "Seattle");
-		mySecondJobCandidate = new Job(mySecondJobCandidateStartDate, mySecondJobCandidateEndDate, "Gas Works Park", myParkManager, "Seattle");
-		myThirdJobCandidate = new Job(myThirdJobCandidateStartDate, myThirdJobCandidateEndDate, "Lincoln Park", myParkManager, "Seattle");
+		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate, myFirstJobCandidateEndDate, "Volunteer Park", myParkManager, "Seattle", "Pick up leaves");
+		mySecondJobCandidate = new Job(mySecondJobCandidateStartDate, mySecondJobCandidateEndDate, "Gas Works Park", myParkManager, "Seattle", "Pick up leaves");
+		myThirdJobCandidate = new Job(myThirdJobCandidateStartDate, myThirdJobCandidateEndDate, "Lincoln Park", myParkManager, "Seattle", "Pick up leaves");
+		myJobMap.addJob(myFirstJob);
+		myJobMap.addJob(mySecondJob);
 		
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
-		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA");
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA");
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA");
+		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, "Discover Park", myParkManager, "Seattle, WA", "Pick up leaves");
+		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, "Cherry Park", myParkManager, "Seattle, WA", "Pick up leaves");
+		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA", "Pick up leaves");
 	}
 	
 	/**
@@ -111,7 +117,9 @@ public class VolunteerTest {
 	 */
 	@Test
 	public void isSameDayConflict_VolunteerHasNoCurrentJobs_False() {
-		assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate));
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap.getJob(jobID)));
+		}
 	}
 	
 	/**
@@ -123,7 +131,9 @@ public class VolunteerTest {
 		myVolunteer.signup(myFirstJob);
 		myVolunteer.signup(mySecondJob);
 		
-		assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate));
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap.getJob(jobID)));
+		}
 	}
 	
 	/**
@@ -135,7 +145,9 @@ public class VolunteerTest {
 		myVolunteer.signup(myFirstJob);
 		myVolunteer.signup(mySecondJob);
 		
-		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate));
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(mySecondJobCandidate, myJobMap.getJob(jobID)));
+		}
 	}
 	
 	/**
@@ -147,7 +159,9 @@ public class VolunteerTest {
 		myVolunteer.signup(myFirstJob);
 		myVolunteer.signup(mySecondJob);
 		
-		assertTrue(myVolunteer.isSameDayConflict(myThirdJobCandidate));
+		for (int jobID : myVolunteer.getJobList()) {
+			assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate, myJobMap.getJob(jobID)));
+		}
 	}
 	
 	/**

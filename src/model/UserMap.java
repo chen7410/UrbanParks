@@ -27,7 +27,7 @@ public class UserMap {
 	 * @param theUser the User that being added to an UserMap.
 	 */
 	public void addUser(final User theUser) {
-		myUsers.put(theUser.getMyUserName(), theUser);
+		myUsers.put(theUser.getUserName(), theUser);
 	}
 	
 	/**
