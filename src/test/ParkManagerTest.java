@@ -53,24 +53,24 @@ public class ParkManagerTest {
 	public void setUp() throws Exception {
 		myPM = new ParkManager("hasnahsaid", "Hasnah", "Said");
 		int random = (int) (Math.random() * myPM.getMaxEndDay() );//0 <= random < ParkMangaer.MAX_END_DAY
-		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM, "Seattle, WA");
-		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay()), "Gas Works Park", myPM, "Seattle, WA");
-		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay() + 1), "Cal Anderson", myPM, "Seattle, WA");
+		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(random), "Cal Anderson", myPM, "Seattle, WA", "Pick up leaves");
+		myJobEndInMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay()), "Gas Works Park", myPM, "Seattle, WA", "Pick up leaves");
+		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(), LocalDate.now().plusDays(myPM.getMaxEndDay() + 1), "Cal Anderson", myPM, "Seattle, WA", "Pick up leaves");
 	
 		// A job that takes 2 days
 		startOneDayFewer = LocalDate.of(2018, 02, 01);
 		endOneDayFewer = LocalDate.of(2018, 02, 03);
-		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM, "Seattle, WA");
+		jobTakesOneFewerThanMax = new Job(startOneDayFewer, endOneDayFewer, "Cal Anderson", myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes 3 days 
 		startMaxDays = LocalDate.of(2018, 02, 10);
 		endMaxDays = LocalDate.of(2018, 02, 13);
-		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM, "Seattle, WA");
+		jobTakesTheMaxDays = new Job(startMaxDays, endMaxDays, "Gas Works Park", myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes 4 days
 		startOneDayMore = LocalDate.of(2018, 02, 20);
 		endOneDayMore = LocalDate.of(2018, 02, 24);
-		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM, "Seattle, WA");
+		jobTakesOneMoreThanMax = new Job(startOneDayMore, endOneDayMore, "Volunteer Park", myPM, "Seattle, WA", "Pick up leaves");
 	}
 
 	@Test

@@ -11,12 +11,15 @@ public class ParkManager extends User {
 	private static final int MAX_JOB_LENGTH = 3;
 
 	private static final int MAX_END_DAY = 75;
-
+	
+	/**
+	 * List of job IDs this Park manager manages.
+	 */
 	private List<Integer> myJobs;
 
 	public ParkManager(final String theUserName, final String theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		this.setMyUserType("Park Manager");
+		this.setUserType("Park Manager");
 		myJobs = new ArrayList<>();
 	}
 
@@ -76,6 +79,10 @@ public class ParkManager extends User {
 	
 	public int getMaxEndDay() {
 		return MAX_END_DAY;
+	}
+	
+	public List<Integer> getJobList() {
+		return myJobs;
 	}
 	
 }
