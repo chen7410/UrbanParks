@@ -168,4 +168,26 @@ public class Job {
 	public void setMyLocation(String myLocation) {
 		this.myLocation = myLocation;
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @param theCandidateJob
+	 * @return
+	 */
+	public boolean isOverLappingDay(Job theCandidateJob) {
+		boolean overlaps = false;
+		
+		if (theCandidateJob.getStartDate().isAfter(myStartDate) && theCandidateJob.getStartDate().isBefore(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getEndDate().isAfter(myStartDate) && theCandidateJob.getEndDate().isBefore(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getStartDate().isEqual(myStartDate) || theCandidateJob.getStartDate().isEqual(myEndDate)) {
+			overlaps = true;
+		} else if (theCandidateJob.getEndDate().isEqual(myStartDate) || theCandidateJob.getEndDate().isEqual(myEndDate)) {
+			overlaps = true;
+		}
+		
+		return overlaps;
+	}
 }
