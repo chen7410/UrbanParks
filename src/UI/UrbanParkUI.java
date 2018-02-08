@@ -64,17 +64,20 @@ public class UrbanParkUI {
 			exitSystemMessage();
 			myScanner.close();
 		default:
-			break;
+			// TODO: have the main menu display again?? 
+			System.out.println("Please enter a valid option");
 		}
 
 		if (myCurrentUser instanceof ParkManager) {
 			basicParkManagerOptions();
 		}
 		
-//		if (myCurrentUser instanceof Volunteer) {
-//			basicVolunteerOptions();
-//		} 
+		if (myCurrentUser instanceof Volunteer) {
+			basicVolunteerOptions();
+		} 
 	}
+
+	
 
 	private static void load() {
 		myUsers = new UserMap();
@@ -111,8 +114,7 @@ public class UrbanParkUI {
 	private static void logIn() {
 		enterUsername();
 		Scanner scan = new Scanner(System.in);
-		System.out.println();
-		System.out.print("> ");		
+		System.out.print("\n> ");		
 		String username = scan.nextLine();
 		
 		System.out.println();
@@ -123,12 +125,33 @@ public class UrbanParkUI {
 	}
 
 	private static void basicParkManagerOptions() {
-		
 		parkManagerMenu();
-		System.out.println();
-		System.out.print("> ");
+		System.out.print("\n> ");
 		int task = myScanner.nextInt();
 		System.out.println();
+	}
+	
+	private static void basicVolunteerOptions() {
+		volunteerMenu();
+		System.out.print("> ");
+		int task = myScanner.nextInt();
+		
+		//there are three options 1. sign up 2. veiw jobs 3. log out
+		
+		switch(task) {
+		case 1:
+			System.out.println(mySignUpNewJob);
+			break;
+		case 2:
+			System.out.println(myViewUpCommingJob);
+			break;
+		case 3:
+			System.out.println(myExit);
+			break;
+		default:
+			System.out.println("Please choose a valid option");
+			basicVolunteerOptions();
+		}
 	}
 	
 	/**
