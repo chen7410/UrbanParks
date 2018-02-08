@@ -11,13 +11,9 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
 
 	private static final long serialVersionUID = 4L;
-	/** user name*/
 	private String myUserName;
-	/** first name */
 	private String myFirstName;
-	/** last name */
 	private String myLastName;
-	/** user type */
 	private String myUserType;
 	
 	/**
