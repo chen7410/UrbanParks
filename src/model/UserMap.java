@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class UserMap {
 	
 	/**
 	 * load all users information from the specified filename.
-	 * @param theFilename file name should be filename.txt.
+	 * @param theFilename file name should be filename.ser.
 	 * @exception throw IOException if load process fail.
 	 */
 	public void readUsermap(final String theFilename) {
@@ -58,7 +57,7 @@ public class UserMap {
 	
 	/**
 	 * save all users information in the specified filename.
-	 * @param theFilename file name should be filename.txt.
+	 * @param theFilename file name should be filename.ser.
 	 * @exception throw IOException if save process fail.
 	 */
 	public void writeUsermap(final String theFilename) {
@@ -81,7 +80,7 @@ public class UserMap {
 	 * @param theUser the User that being added to an UserMap.
 	 */
 	public void addUser(final User theUser) {
-		myUsers.put(theUser.getMyUserName(), theUser);
+		myUsers.put(theUser.getUserName(), theUser);
 	}
 	
 	/**

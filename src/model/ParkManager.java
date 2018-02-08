@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ParkManager extends User {
 
+	private static final long serialVersionUID = 1L;
+
 	private static final int MAX_JOB_AMOUNT = 20;
 
 	private static final int MAX_JOB_LENGTH = 3;
@@ -16,7 +18,7 @@ public class ParkManager extends User {
 
 	public ParkManager(final String theUserName, final String theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		this.setMyUserType("Park Manager");
+		this.setUserType("Park Manager");
 		myJobs = new ArrayList<>();
 	}
 

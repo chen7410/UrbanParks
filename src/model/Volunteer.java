@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Volunteer extends User {
 	
+	private static final long serialVersionUID = 2L;
+
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	
 	private List<Job> myJobs;
@@ -13,7 +15,7 @@ public class Volunteer extends User {
 	public Volunteer(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
 		myJobs = new ArrayList<Job>();
-		this.setMyUserType("Volunteer");
+		this.setUserType("Volunteer");
 	}
 	
 	public void signup(final Job theJob) {
