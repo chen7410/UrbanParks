@@ -1,4 +1,11 @@
+/**
+ * T CSS 360 - Winter 2018
+ * Team: Group 7
+ * Urban Parks Project
+ */
+
 package model;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -36,8 +43,17 @@ public class Volunteer extends User {
 		return result;
 	}
 	
-	public boolean isSameDayConflict(final Job theJob) {
-		return false;
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isSameDayConflict(Job theCandidateJob) {
+		boolean overlaps = false;
+		for (Job j : myJobs) {
+			overlaps = j.isOverLappingDay(theCandidateJob) || overlaps;
+		}
+		
+		return overlaps;
 	}
 	
 	public void removeJob(final Job theJob) {
