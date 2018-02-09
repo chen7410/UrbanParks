@@ -45,16 +45,13 @@ public class JobMap implements Serializable {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
 	
-	public void storeJobMap(final String theFilename, final JobMap theJobMap) {
+	public void storeJobMap(final String theFilename) {
 		try {
 			FileOutputStream file = new FileOutputStream(theFilename);
 			ObjectOutputStream out = new ObjectOutputStream(file);
-			out.writeObject(theJobMap);
-			
+			out.writeObject(myJobs);
 			out.close();
 			file.close();
-			
-			System.out.println("Jobs information have been saved.");
 		} catch (IOException theIOException) {
 			theIOException.printStackTrace();
 			System.out.println("Save users information fail!");
@@ -62,20 +59,13 @@ public class JobMap implements Serializable {
 	}
 	
 	
-	public JobMap loadJobMap(final String theFilename) {
-		
-		JobMap jobMap = new JobMap();
+	public void loadJobMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			
-			jobMap = (JobMap) in.readObject();
-			
+			myJobs = (HashMap) in.readObject();
 			in.close();
 			file.close();
-			System.out.println("Jobs information have been loaded.");
-			
-			
 		} catch (FileNotFoundException theFileNotFoundException) {
 			System.out.println("No such a file!");
 			theFileNotFoundException.printStackTrace();
@@ -86,7 +76,6 @@ public class JobMap implements Serializable {
 			System.out.println("Class not found exception");
 			theClassNotFoundException.printStackTrace();
 		}
-		return jobMap;
 	}
 	
 

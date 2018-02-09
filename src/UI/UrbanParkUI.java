@@ -1,9 +1,5 @@
 package UI;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +18,11 @@ import model.Volunteer;
 public class UrbanParkUI implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
+	
+	private static final String USERS_DATA_FILE = "UsersInformations.ser";
+	
 	private static final String myLogOut = "        3. Log out";
 
 	private static final String WHAT_WOULD_LIKE_TO_DO_MESSAGE = ">>> What would you like to do?";
@@ -60,43 +60,15 @@ public class UrbanParkUI implements Serializable {
 	}
 
 	private static void init() {
-		loadData("UpcomingJobs.ser", "UsersInformations.ser");
-
-		//myJobs.displayJobs();
-
-				
+		myJobs = new JobMap();
+		myUsers = new UserMap();
+		myJobs.loadJobMap(JOBS_DATA_FILE);
+		myUsers.loadUserMap(USERS_DATA_FILE);
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
 	
-	
-	public static void loadData(final String theJobFilename, final String theUserFilename) {
-		FileInputStream file = null;
-		ObjectInputStream in = null;	
-		try {	
-			file = new FileInputStream(theJobFilename);
-			in = new ObjectInputStream(file);		
-			myJobs = (JobMap) in.readObject();
-			
-			file = new FileInputStream(theUserFilename);
-			in = new ObjectInputStream(file);
-			myUsers = (UserMap) in.readObject();
-			
-			in.close();
-			file.close();
-			
-		} catch (FileNotFoundException theFileNotFoundException) {
-			System.out.println("No such a file!");
-			theFileNotFoundException.printStackTrace();
-		} catch (IOException theIOException) {
-			theIOException.printStackTrace();
-			System.out.println("Load users information fail!");
-		} catch (ClassNotFoundException theClassNotFoundException) {
-			System.out.println("Class not found exception");
-			theClassNotFoundException.printStackTrace();
-		}
-		
-	}
+
 
 
 	/**
@@ -230,10 +202,12 @@ public class UrbanParkUI implements Serializable {
 			myJobs.addJob(theJob);
 			myParkManager.createJob(theJob);
 			
-			myJobs.storeJobMap("UpcomingJobs.ser", myJobs);
-			myJobs = myJobs.loadJobMap("UpcomingJobs.ser");
-			
+			myJobs.storeJobMap(JOBS_DATA_FILE);
+			myUsers.storeUserMap(USERS_DATA_FILE);
 			System.out.println("\n>>> Job has been submitted successfully.");
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -319,5 +293,7 @@ public class UrbanParkUI implements Serializable {
 
 	private static void exitSystemMessage() {
 		System.out.println(">>> Thank you for using Urban Parks.");
+		myJobs.storeJobMap(JOBS_DATA_FILE);
+		myUsers.storeUserMap(USERS_DATA_FILE);
 	}
 }
