@@ -13,15 +13,15 @@ public class UrbanParkUI {
 	private static Scanner myScanner = new Scanner(System.in);
 	
 	public static void main(final String[] theArgs) {
-		int task = welcome();
-		switch(task) {
+		int taskUser = welcome();
+		switch(taskUser) {
 			case 1: logIn();
 					break;
 			
 		}
 		
 		// Only if the user is a park manager.
-		basicParkManagerOptions();
+		int taskPM = basicParkManagerOptions();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class UrbanParkUI {
 		System.out.println(">>> Welcome " + username + ". You are logged in as a ...");
 	}
 	
-	private static void basicParkManagerOptions() {
+	private static int basicParkManagerOptions() {
 		System.out.println(">>> What would you like to do? (Please select a number)");
 		
 		String[] options = {"Submit a new job", "View all your submitted jobs", "Log out"};
@@ -73,5 +73,7 @@ public class UrbanParkUI {
 		System.out.print("> ");
 		int task = myScanner.nextInt();
 		System.out.println();
+		
+		return task;
 	}
 }
