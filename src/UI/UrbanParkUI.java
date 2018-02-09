@@ -3,6 +3,7 @@ package UI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -304,11 +305,8 @@ public class UrbanParkUI {
 			System.out.println(">>> Here are your submitted jobs:");
 			List<Integer> jobIDList = myParkManager.getJobList();
 			for (int i = 1; i <= jobIDList.size(); i++) {
-				Job job = myJobs.getJob(jobIDList.get(i - 1));
 				System.out.print("    " + i + ". ");
-				System.out.print(job.getParkName());
-				System.out.print(": " + job.getStartDate().format(myDateFormatter));
-				System.out.println(" - " + job.getEndDate().format(myDateFormatter));
+				System.out.println(myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
 			}
 			if (jobIDList.size() == 0) {
 				System.out.println("    You have not submitted any jobs.");
@@ -365,62 +363,189 @@ public class UrbanParkUI {
 	}
 
 	private static void basicVolunteerOptions() {
-		welcomeUserMessage();
-		System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
-		System.out.println(SELECT_A_NUMBER_MESSAGE);
-		System.out.println("        1. Sign up for a new job");
-		System.out.println("        2. View your upcoming jobs");
-		System.out.println("        3. Log out");
-		System.out.println();
-		System.out.print(USER_INPUT_MESSAGE);
-		int selection = myScanner.nextInt();
-		myScanner.nextLine();
-		switch (selection) {
-		case 1:
-			signUpForNewJob();
-			break;
-		default:
-			break;
+		boolean isExitToMainMenu = false;
+		while(!isExitToMainMenu) {
+			welcomeUserMessage();
+			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
+			System.out.println(SELECT_A_NUMBER_MESSAGE);
+			System.out.println("        1. Sign up for a new job");
+			System.out.println("        2. View your upcoming jobs");
+			System.out.println("        3. Log out");
+			System.out.println();
+			int selection = 0;
+			boolean isExit = false;
+			while(!isExit) {
+				System.out.print(USER_INPUT_MESSAGE);
+				try {
+					selection = myScanner.nextInt();
+					myScanner.nextLine();
+				} catch(final InputMismatchException theException) {
+					myScanner = new Scanner(System.in);
+				}
+				System.out.println();
+				switch (selection) {
+				case 1:
+					signUpForNewJob();
+					isExit = true;
+					break;
+				case 2:
+					printVolunteerSignedUpJobs(true);
+					isExit = true;
+					break;
+				case 3:
+					isExit = true;
+					isExitToMainMenu = true;
+					break;
+				default:
+					System.out.println(INVALID_INPUT_MESSAGE);
+					break;
+				}
+			}
 		}
 	}
 
 	private static void signUpForNewJob() {
-		System.out.println(">>> Here are all the open volunteering jobs:");
-		Job[] jobList = myJobs.getJobsArray();
-		for (int i = 0; i < jobList.length; i++) {
-			if (myVolunteer.isAtLeastMinDays(jobList[i]) || isSameDayConflictCheck(jobList[i])) {
-				System.out.println("        " + (i + 1) + ". " + jobList[i].getParkName()  
-						+ ": " + jobList[i].getStartDate() +  " - " + jobList[i].getEndDate());
+		boolean isExitToMainMenu = false;
+		while (!isExitToMainMenu) {
+			System.out.println(">>> Here are all the open volunteering jobs:");
+			Job[] jobList = myJobs.getJobsArray();
+			List<Job> validJobs = new ArrayList<>();
+			for (int i = 0; i < jobList.length; i++) {
+				if (myVolunteer.isAtLeastMinDays(jobList[i]) && !isSameDayConflictCheck(jobList[i])) {
+					validJobs.add(jobList[i]);
+				}
+			}
+			for (int i = 1; i <= validJobs.size(); i++) {
+				System.out.println("        " + i + ". " + validJobs.get(i - 1).getJobSummary());
+			}
+			System.out.println("\n        0. Return to previous menu");
+			System.out.println("        (Please select a number to view job details)\n");
+			int selection = -1;
+			
+			while(true) {
+				try {
+					System.out.print(USER_INPUT_MESSAGE);
+					selection = myScanner.nextInt();
+					myScanner.nextLine();
+				} catch(final InputMismatchException theException) {
+					myScanner = new Scanner(System.in);
+				}
+				System.out.println();
+				if (selection == 0) {
+					isExitToMainMenu = true;
+					break;
+				} else if (selection > 0 && selection <= validJobs.size()) {
+					Job job = validJobs.get(selection - 1);
+					jobSignUpVerification(job);
+					printVolunteerSignedUpJobs(false);
+					System.out.println("Would you like to sign up for another job?");
+					System.out.println(YES_OR_NO_MESSAGE);
+					boolean isExit = false;
+					while(!isExit) {
+						System.out.print(USER_INPUT_MESSAGE);
+						switch(myScanner.nextLine().toLowerCase()) {
+						case "yes":
+							isExit = true;
+							break;
+						case "no":
+							isExitToMainMenu = true;
+							isExit = true;
+							break;
+						default:
+							break;
+						}
+					}
+					break;
+				} else {
+					System.out.println(INVALID_INPUT_MESSAGE);
+				}
 			}
 		}
-		
-		System.out.println("\n        0. Return to previous menu");
-		System.out.println("        (Please select a number to view job details)\n");
-		System.out.print(USER_INPUT_MESSAGE);
-		
-		//TODO: check invalid input
-		int selection = myScanner.nextInt();
-		System.out.println(jobList[selection - 1]);
-		
-		
+	}
+	
+	private static void jobSignUpVerification(final Job theJob) {
+		System.out.println(theJob.toString());
 		System.out.println(">>> Would you like to sign up for this job?");
-		System.out.println(YES_OR_NO_MESSAGE + '\n');
-		System.out.print(USER_INPUT_MESSAGE);
-		
-		Scanner scan = new Scanner(System.in);
-		
-		switch (scan.nextLine().toLowerCase()) {
-		case "yes":
-			System.out.println("yes");
-//			addJob();
-			break;
-		case "no":
-			System.out.println("no");
-			break;
-		default:
-			System.out.println("Invalid input");
-			break;
+		System.out.println(YES_OR_NO_MESSAGE);
+		boolean isExit = false;
+		while(!isExit) {
+			System.out.print(USER_INPUT_MESSAGE);
+			switch(myScanner.nextLine().toLowerCase()) {
+			case "yes":
+				myVolunteer.signup(theJob);
+				myUsers.storeUserMap(USERS_DATA_FILE);
+				System.out.println("\n>>> You have signed up for the job successfully.");
+				isExit = true;
+				break;
+			case "no":
+				isExit = true;
+				break;
+			default:
+				break;
+			}
 		}
+	}
+	
+	private static void printVolunteerSignedUpJobs(boolean isAbleToViewDetails) {
+		do {
+			System.out.println(">>> Here are your upcoming jobs:");
+			List<Integer> jobIDList = myVolunteer.getJobList();
+			for (int i = 1; i <= jobIDList.size(); i++) {
+				System.out.println("    " + i + ". " + myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+			}
+			
+			if(jobIDList.size() == 0) {
+				System.out.println("    You have not signed up for any jobs.");
+			}
+			
+			if (isAbleToViewDetails) {
+				System.out.println("\n    0. Return to previous menu");
+				System.out.println("    (Please select a number to view job details)\n");
+				while (true) {
+					System.out.print(USER_INPUT_MESSAGE);
+					int selection = -1;
+					try {
+						selection = myScanner.nextInt();
+						myScanner.nextLine();
+					} catch (final InputMismatchException theException) {
+						myScanner = new Scanner(System.in);
+					}
+
+					System.out.println();
+					if (selection > 0 && selection <= jobIDList.size()) {
+						System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+						System.out.println(">>> Do you want to view another job details?");
+						System.out.println(YES_OR_NO_MESSAGE);
+						boolean isExit = false;
+						while (!isExit) {
+							System.out.print(USER_INPUT_MESSAGE);
+							switch (myScanner.nextLine().toLowerCase()) {
+							case "yes":
+								isExit = true;
+								System.out.println();
+								break;
+							case "no":
+								isAbleToViewDetails = false;
+								isExit = true;
+								System.out.println();
+								break;
+							default:
+								System.out.println();
+								System.out.println(INVALID_INPUT_MESSAGE);
+								break;
+							}
+						}
+						break;
+					} else if (selection == 0) {
+						isAbleToViewDetails = false;
+						break;
+					} else {
+						System.out.println(INVALID_INPUT_MESSAGE);
+					}
+				}
+
+			}
+		} while(isAbleToViewDetails);
 	}
 
 	private static boolean isSameDayConflictCheck(final Job theCandidateJob) {

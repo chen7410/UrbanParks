@@ -134,6 +134,16 @@ public class Job implements Serializable {
 		return overlaps;
 	}
 	
+	public String getJobSummary() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		StringBuilder sb = new StringBuilder(100);
+		sb.append(getParkName() + ": ");
+		sb.append(myStartDate.format(formatter));
+		sb.append(" - ");
+		sb.append(myEndDate.format(formatter));
+		return sb.toString();
+	}
+	
 	@Override
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
