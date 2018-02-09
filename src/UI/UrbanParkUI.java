@@ -1,97 +1,73 @@
-/**
- * T CSS 360 - Winter 2018
- * Team: Group 7
- * Urban Parks Project
- */
-
 package UI;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
+import model.Job;
+import model.JobMap;
 import model.ParkManager;
 import model.User;
 import model.UserMap;
 import model.Volunteer;
 
+/**
+ * T CSS 360 - Winter 2018 Team: Group 7 Urban Parks Project
+ */
 public class UrbanParkUI {
-	private static final String myWelcomeMessage = ">>> Welcome to Urban Parks";
-	private static final String myWhatToDo = ">>> What would you like to do?";
-	private static final String mySelectNumber = "    (Please select a number)";
-	private static final String myLogin = "        1. Log in";
-	private static final String myExit = "        2. Exit";
+	
+	
 	private static final String myLogOut = "        3. Log out";
-	private static final String myEnterUsername = ">>> Please enter your username:";
-	private static final String myLoginAs = "You are logged in as a ";
-	private static final String myWelcome = ">>> Welcome ";
-	//private static final String myConsoleChar = ">>>";
-	private static final String mySignUpNewJob = "        1. Sign up for a new job";
-	private static final String myViewUpCommingJob = "        2. View your upcoming jobs";
-	private static final String myAllOpenVolunteerJob = ">>> Here are all the open volunteering jobs:";
-	private static final String myReturnPreviousMessage = "        0. Return to previous menu";
-	private static final String mySelectNumberViewJob = "    (Please select a number to view job details)";
-	private static final String mySignUpJobMessage = "    Would you like to sign up for this job?";
-	private static final String myYesOrNo = "    (Please enter Yes or No)";
-	private static final String myAddJobSuccess = ">>> Job added successfully. Here are your upcoming jobs:";
-	private static final String mySignUpAnotherJob = ">>> Would like to sign up for another job?";
-	private static final String myUpcommingJob = ">>> Here are your upcoming jobs:";
-	private static final String myLogOutMessage = ">>> You have logged out successfully.";
-	private static final String myExitSystem = ">>> Thank you for using Urban Parks.";
-	private static final String mySubmitNewJob = "        1. Submit a new job";
-	private static final String myViewAllSubmittedJobs = "        2. View all your submitted jobs";
 
-	private static Scanner myScanner = new Scanner(System.in);
+	private static final String WHAT_WOULD_LIKE_TO_DO_MESSAGE = ">>> What would you like to do?";
+	
+	private static final String SELECT_A_NUMBER_MESSAGE = "    (Please select a number)";
+	
+	private static final String USER_INPUT_MESSAGE = "> ";
+	
+	private static final String YES_OR_NO_MESSAGE = "    (Please enter Yes or No)";
+	
+	private static Scanner myScanner;
 
 	private static User myCurrentUser;
 
+	private static Volunteer myVolunteer;
+
+	private static ParkManager myParkManager;
+	
 	private static UserMap myUsers;
-		
-	private static ParkManager myBrook;
-	
-	private static Volunteer myHasnah;
-	
-	private static ParkManager myMatthew;
-	
-	private static Volunteer myTuan;
 
+	private static JobMap myJobs;
+
+	private static DateTimeFormatter myDateFormatter;
+	
 	public static void main(final String[] theArgs) {
-		load();
-		int task = welcome();
-		switch (task) {
-		case 1:
-			logIn();
-			break;
-		case 2:
-			exitSystemMessage();
-			myScanner.close();
-		default:
-			// TODO: have the main menu display again?? 
-			System.out.println("Please enter a valid option");
-		}
-
+		init();
+		welcome();
 		if (myCurrentUser instanceof ParkManager) {
+			myParkManager = (ParkManager) myCurrentUser;
 			basicParkManagerOptions();
-		}
-		
-		if (myCurrentUser instanceof Volunteer) {
+		} else if (myCurrentUser instanceof Volunteer) {
+			myVolunteer = (Volunteer) myCurrentUser;
 			basicVolunteerOptions();
-		} 
+		}
 	}
 
-	
-
-	private static void load() {
+	private static void init() {
 		myUsers = new UserMap();
-		
-		myBrook = new ParkManager("brook", "Brook", "Negussie");
-		myHasnah = new Volunteer("hasnah", "Hasnah", "Said");
-		myMatthew = new ParkManager("matthew", "Minqin", "Chen");
-		myTuan = new Volunteer("tuan", "Tuan", "Dinh");
-		
-		myUsers.addUser(myBrook);
-		myUsers.addUser(myHasnah);
-		myUsers.addUser(myMatthew);
-		myUsers.addUser(myTuan);
-		
+		myJobs = new JobMap();
+		User user = new ParkManager("brook", "Brook", "Negussie");
+		myUsers.addUser(user);
+		user = new Volunteer("hasnah", "Hasnah", "Said");
+		myUsers.addUser(user);
+		user = new ParkManager("matthew", "Minqin", "Chen");
+		myUsers.addUser(user);
+		user = new Volunteer("tuan", "Tuan", "Dinh");
+		myUsers.addUser(user);
+
+		myScanner = new Scanner(System.in);
+		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
 
 	/**
@@ -100,160 +76,208 @@ public class UrbanParkUI {
 	 * 
 	 * @return The task value the user selected.
 	 */
-	private static int welcome() {
-		welcomeMessageMainMenu();
+	private static void welcome() {
+		System.out.println(">>> Welcome to Urban Parks");
+		System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
+		System.out.println(SELECT_A_NUMBER_MESSAGE);
+		System.out.println("        1. Log in");
+		System.out.println("        2. Exit\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		int selection = myScanner.nextInt();
+		myScanner.nextLine();
 		System.out.println();
-		System.out.print("> ");
-		int task = myScanner.nextInt();
-		System.out.println();
-
-		return task;
+		switch (selection) {
+		case 1:
+			logIn();
+			break;
+		case 2:
+			exitSystemMessage();
+			myScanner.close();
+			break;
+		default:
+			// TODO: have the main menu display again??
+			System.out.println("Please enter a valid option");
+		}
 	}
 
-
 	private static void logIn() {
-		enterUsername();
-		Scanner scan = new Scanner(System.in);
-		System.out.print("\n> ");		
-		String username = scan.nextLine();
-		
+		System.out.println(">>> Please enter your username:\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		String username = myScanner.nextLine();
 		System.out.println();
 		myCurrentUser = myUsers.getUser(username);
-		
-		System.out.println(myWelcome + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName()
-				+ ". " +myLoginAs + myCurrentUser.getUserType());
+	}
+	
+	private static void welcomeUserMessage() {
+		System.out.println(">>> Welcome " + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName() + ". "
+				+ "You are logged in as a " + myCurrentUser.getUserType() + '.');
 	}
 
 	private static void basicParkManagerOptions() {
-		parkManagerMenu();
-		System.out.print("\n> ");
-		int task = myScanner.nextInt();
-		System.out.println();
+		boolean isExit = false;
+		while(!isExit){
+			welcomeUserMessage();
+			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
+			System.out.println(SELECT_A_NUMBER_MESSAGE);
+			System.out.println("        1. Sign up for a new job");
+			System.out.println("        2. View your upcoming jobs");
+			System.out.println(myLogOut + '\n');
+			System.out.print(USER_INPUT_MESSAGE);
+			int selection = myScanner.nextInt();
+			myScanner.nextLine();
+			System.out.println();
+			switch (selection) {
+			case 1:
+				submitNewJob();
+				break;
+			case 2:
+				printParkManagerSubmittedJobs(true);
+				break;
+			default:
+				isExit = true;
+				break;
+			}
+		}
 	}
+
+	private static void submitNewJob() {
+		System.out.println(">>> Please fill out the job details.");
+		System.out.println(">>> Enter park name:\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		String parkName = myScanner.nextLine();
+		System.out.println();
+		
+		System.out.println(">>> Enter job location:\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		String jobLocation = myScanner.nextLine();
+		System.out.println();
 	
-	private static void basicVolunteerOptions() {
-		volunteerMenu();
-		System.out.print("> ");
-		int task = myScanner.nextInt();
+		System.out.println(">>> Enter job start date(MM/DD/YY):\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		LocalDate jobStartDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
+		System.out.println();
 		
-		//there are three options 1. sign up 2. veiw jobs 3. log out
+		System.out.println(">>> Enter job end date (MM/DD/YY):\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		LocalDate jobEndDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
+		System.out.println();
 		
-		switch(task) {
-		case 1:
-			System.out.println(mySignUpNewJob);
+		System.out.println(">>> Enter job description:\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		String jobDescription = myScanner.nextLine();
+		System.out.println();
+		
+		Job job = new Job(jobStartDate, jobEndDate, parkName, myParkManager, jobLocation, jobDescription);
+		System.out.println(job);
+		System.out.println();
+		
+		if (myParkManager.isJobEndsWithinMaxDays(job) && myParkManager.isJobWithinMaxDays(job)) {
+			jobDetailsVerification(job);
+			printParkManagerSubmittedJobs(false);
+		}
+		
+		System.out.println(">>> Would you like to submit another job?");
+		System.out.println(YES_OR_NO_MESSAGE + '\n');
+		System.out.print(USER_INPUT_MESSAGE);
+		switch (myScanner.nextLine().toLowerCase()) {
+		case "yes":
+			submitNewJob();
 			break;
-		case 2:
-			System.out.println(myViewUpCommingJob);
-			break;
-		case 3:
-			System.out.println(myExit);
+		case "no":
 			break;
 		default:
-			System.out.println("Please choose a valid option");
-			basicVolunteerOptions();
+			System.out.println("Invalid input");
+			break;
 		}
 	}
 	
-	/**
-	 * print ">>> Welcome to Urban Parks." and main menu.
-	 */
-	private static void welcomeMessageMainMenu() {
-		System.out.println(myWelcomeMessage + "\n" + myWhatToDo + "\n" + mySelectNumber + "\n" + myLogin
-				 + "\n" + myExit);
+	private static void jobDetailsVerification(final Job theJob) {
+		System.out.println(">>> Would like to submit this job?");
+		System.out.println(YES_OR_NO_MESSAGE + '\n');
+		System.out.print(USER_INPUT_MESSAGE);
+		switch(myScanner.nextLine().toLowerCase()) {
+		case "yes" :
+			myJobs.addJob(theJob);
+			myParkManager.createJob(theJob);
+			System.out.println("\n>>> Job has been submitted successfully.");
+		}
 	}
 	
-	/**
-	 * print ">>> Please enter your username:".
-	 */
-	private static void enterUsername() {
-		System.out.println(myEnterUsername);
+	private static void printParkManagerSubmittedJobs(boolean isAbleToViewDetails) {
+		do {
+			System.out.println(">>> Here are your submitted jobs:");
+			List<Integer> jobIDList = myParkManager.getJobList();
+			for (int i = 1; i <= jobIDList.size(); i++) {
+				Job job = myJobs.getJob(jobIDList.get(i - 1));
+				System.out.print("    " + i + ". ");
+				System.out.print(job.getParkName());
+				System.out.print(": " + job.getStartDate().format(myDateFormatter));
+				System.out.println(" - " + job.getEndDate().format(myDateFormatter) + '\n');
+			}
+			
+			if(isAbleToViewDetails) {
+				System.out.println("    0. Return to previous menu");
+				System.out.println("    (Please select a number to view job details)\n");
+				System.out.print(USER_INPUT_MESSAGE);
+				int selection = myScanner.nextInt();
+				myScanner.nextLine();
+				if (selection > 0 && selection <= jobIDList.size()) {
+					System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+					System.out.println(">>> Do you want to view another job details?");
+					System.out.println(YES_OR_NO_MESSAGE);
+					System.out.print(USER_INPUT_MESSAGE);
+					switch(myScanner.nextLine().toLowerCase()) {
+					case "no":
+						isAbleToViewDetails = false;
+					}
+				} else if (selection == 0) {
+					isAbleToViewDetails = false;
+				} else {
+					System.out.println("Invalid input");
+				}
+			}
+		} while(isAbleToViewDetails);
+		
 	}
-	
-	/**
-	 * print park manager
-	 */
-	
-	private static void parkManagerMenu() {
-		System.out.println(myWhatToDo + "\n" + mySelectNumber + "\n" + mySubmitNewJob + "\n" 
-				+ myViewAllSubmittedJobs + "\n" + myLogOut);
+
+	private static void basicVolunteerOptions() {
+		System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
+		System.out.println(SELECT_A_NUMBER_MESSAGE);
+		System.out.println("        1. Sign up for a new job");
+		System.out.println("        2. View your upcoming jobs");
+		System.out.println(myLogOut);
+		System.out.println();
+		System.out.print(USER_INPUT_MESSAGE);
+		int selection = myScanner.nextInt();
+		myScanner.nextLine();
+		switch (selection) {
+		case 1:
+			signUpForNewJob();
+			break;
+		default:
+			break;
+		}
 	}
-	
-	/**
-	 * print volunteer Menu.
-	 */
-	private static void volunteerMenu() {
-		System.out.println(myWhatToDo + "\n" + mySelectNumber + "\n" + mySignUpNewJob  + "\n" + 
-				myViewUpCommingJob  + "\n" + myLogOut);
+
+	private static void signUpForNewJob() {
+		System.out.println(">>> Here are all the open volunteering jobs:");
+		Job[] jobList = myJobs.getJobsArray();
+		for (Job job : jobList) {
+			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
+				
+			}
+		}
 	}
-	
-	/**
-	 * print ">>> Here are all the open volunteering jobs:"e.
-	 */
-	private static void allOpenVolunteerJob() {
-		System.out.println(myAllOpenVolunteerJob);
+
+	private static boolean isSameDayConflictCheck(final Job theCandidateJob) {
+		boolean result = false;
+		for (int jobID : myVolunteer.getJobList()) {
+			result = result || myVolunteer.isSameDayConflict(theCandidateJob, myJobs.getJob(jobID));
+		}
+		return result;
 	}
-	
-	/**
-	 * print "        0. Return to previous menu".
-	 */
-	private static void returnPreviousMessage() {
-		System.out.println(myReturnPreviousMessage);
-	}
-	
-	/**
-	 * print "    (Please select a number to view job details)".
-	 */
-	private static void selectNumberViewJob() {
-		System.out.println(mySelectNumberViewJob);
-	}
-	
-	/**
-	 * print "    Would you like to sign up for this job?".
-	 */
-	private static void wouldSignUpJob() {
-		System.out.println(mySignUpJobMessage);
-	}
-	
-	/**
-	 * print "    (Please enter Yes or No)".
-	 */
-	private static void yesOrNo() {
-		System.out.println(myYesOrNo);
-	}
-	
-	/**
-	 * print ">>> Job added successfully. Here are your upcoming jobs:"��
-	 */
-	private static void addJobSuccess() {
-		System.out.println(myAddJobSuccess);
-	}
-	
-	/**
-	 * print ">>> Would like to sign up for another job?".
-	 */
-	private static void wouldSignUpAnotherJob() {
-		System.out.println(mySignUpAnotherJob);
-	}
-	
-	/**
-	 * print ">>> Here are your upcoming jobs:".
-	 */
-	private static void upcommingJob() {
-		System.out.println(myUpcommingJob);
-	}
-	
-	/**
-	 * print ">>> You have logged out successfully.".
-	 */
-	private static void logoutMessage() {
-		System.out.println(myLogOutMessage);
-	}
-	
-	/**
-	 * print ">>> Thank you for using Urban Parks."
-	 */
+
 	private static void exitSystemMessage() {
-		System.out.println(myExitSystem);
+		System.out.println(">>> Thank you for using Urban Parks.");
 	}
 }
-

@@ -51,4 +51,8 @@ public class JobMap {
 	public int size() {
 		return myJobs.size();
 	}
+
+	public Job[] getJobsArray() {
+		return myJobs.values().toArray(new Job[0]);
+	}
 }

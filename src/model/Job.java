@@ -7,6 +7,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Job class holds information relating to a job which then would be added to
@@ -125,5 +126,18 @@ public class Job {
 		}
 		
 		return overlaps;
+	}
+	
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		StringBuilder sb = new StringBuilder(100);
+		sb.append(">>> Park name: " + myParkName +'\n');
+		sb.append("    Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName() + '\n');
+		sb.append("    Park location: " + myLocation + '\n');
+		sb.append("    Job start date: " + myStartDate.format(formatter) + '\n');
+		sb.append("    Job end date: " + myEndDate.format(formatter) + '\n');
+		sb.append("    Job description: " + myDescription);
+		return sb.toString();
 	}
 }

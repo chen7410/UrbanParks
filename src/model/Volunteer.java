@@ -52,13 +52,11 @@ public class Volunteer extends User {
 	
 	/**
 	 * 
-	 * @return
+	 * @return true if there is conflict, false otherwise.
 	 */
 	public boolean isSameDayConflict(final Job theCandidateJob, final Job theCurrentJob) {
 		boolean overlaps = false;
 		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob) || overlaps;
-		
-		
 		return overlaps;
 	}
 	
