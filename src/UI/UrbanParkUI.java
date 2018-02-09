@@ -1,5 +1,5 @@
-/**
- * T CSS 360 - Winter 2018
+/*
+ * TCSS 360 - Winter 2018
  * Team: Group 7
  * Urban Parks Project
  */
@@ -25,6 +25,9 @@ import model.Volunteer;
  * for volunteering jobs to creating volunteering jobs, depending on
  * which type of user they are. There are two types of users:
  * Volunteers and Park Managers.
+ * 
+ * @author Group 7
+ * @version February 12, 2018
  */
 public class UrbanParkUI {
 
@@ -87,9 +90,10 @@ public class UrbanParkUI {
 	}
 
 	/**
-	 * Prints out the welcome statements, prompts the user for next task.
+	 * Prints out the welcome statements and prompts the user for next
+	 * task.
 	 * 
-	 * @return false when the user want to exit the program
+	 * @return false when the user want to exit the program.
 	 */
 	private static boolean welcome() {
 		boolean isExit = false;
@@ -126,11 +130,13 @@ public class UrbanParkUI {
 					break;
 				}
 			}
-
 		}
 		return isExitProgram;
 	}
 
+	/**
+	 * 
+	 */
 	private static void logIn() {
 		System.out.println(">>> Please enter your username:\n");
 		while (true) {
