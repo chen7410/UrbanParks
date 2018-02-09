@@ -28,52 +28,6 @@ public class UserMap {
 		myUsers = new HashMap<String, User>();
 	}
 	
-	/**
-	 * load all users information from the specified filename.
-	 * @param theFilename file name should be filename.ser.
-	 * @exception throw IOException if load process fail.
-	 */
-	public void readUsermap(final String theFilename) {
-		try {
-			FileInputStream file = new FileInputStream(theFilename);
-			ObjectInputStream in = new ObjectInputStream(file);
-			myUsers = (HashMap<String, User>) in.readObject();
-			in.close();
-			file.close();
-			System.out.println("Users information have been loaded.");
-			
-			
-		} catch (FileNotFoundException theFileNotFoundException) {
-			System.out.println("No such a file!");
-			theFileNotFoundException.printStackTrace();
-		} catch (IOException theIOException) {
-			theIOException.printStackTrace();
-			System.out.println("Load users information fail!");
-		} catch (ClassNotFoundException theClassNotFoundException) {
-			System.out.println("Class not found exception");
-			theClassNotFoundException.printStackTrace();
-		}
-	}
-	
-	/**
-	 * save all users information in the specified filename.
-	 * @param theFilename file name should be filename.ser.
-	 * @exception throw IOException if save process fail.
-	 */
-	public void writeUsermap(final String theFilename) {
-		try {
-			FileOutputStream file = new FileOutputStream(theFilename);
-			ObjectOutputStream out = new ObjectOutputStream(file);
-			out.writeObject(myUsers);
-			
-			out.close();
-			file.close();
-			System.out.println("Users information have been saved.");
-		} catch (IOException theIOException) {
-			theIOException.printStackTrace();
-			System.out.println("Save users information fail!");
-		}
-	}
 	
 	/**
 	 * Add an user to an UserMap.
@@ -93,6 +47,39 @@ public class UserMap {
 			return myUsers.get(theUsername);
 		}
 		return null;
+	}
+	
+	public void storeUserMap(final String theFilename) {
+		try {
+			FileOutputStream file = new FileOutputStream(theFilename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			out.writeObject(myUsers);
+			out.close();
+			file.close();
+		} catch (IOException theIOException) {
+			theIOException.printStackTrace();
+			System.out.println("Save users information fail!");
+		}
+	}
+	
+	
+	public void loadUserMap(final String theFilename) {
+		try {
+			FileInputStream file = new FileInputStream(theFilename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			myUsers = (HashMap) in.readObject();
+			in.close();
+			file.close();
+		} catch (FileNotFoundException theFileNotFoundException) {
+			System.out.println("No such a file!");
+			theFileNotFoundException.printStackTrace();
+		} catch (IOException theIOException) {
+			theIOException.printStackTrace();
+			System.out.println("Load users information fail!");
+		} catch (ClassNotFoundException theClassNotFoundException) {
+			System.out.println("Class not found exception");
+			theClassNotFoundException.printStackTrace();
+		}
 	}
 	
 	/**

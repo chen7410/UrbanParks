@@ -1,5 +1,11 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
@@ -8,8 +14,8 @@ import java.util.HashMap;
  * @author Group 7
  * @version 2/6/2018
  */
-public class JobMap {
-
+public class JobMap{
+	
 	/**
 	 * HashMap that holds all the jobs.
 	 */
@@ -31,6 +37,40 @@ public class JobMap {
 	public void addJob(final Job theJob) {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
+	
+	public void storeJobMap(final String theFilename) {
+		try {
+			FileOutputStream file = new FileOutputStream(theFilename);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			out.writeObject(myJobs);
+			out.close();
+			file.close();
+		} catch (IOException theIOException) {
+			theIOException.printStackTrace();
+			System.out.println("Save users information fail!");
+		}
+	}
+	
+	
+	public void loadJobMap(final String theFilename) {
+		try {
+			FileInputStream file = new FileInputStream(theFilename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			myJobs = (HashMap) in.readObject();
+			in.close();
+			file.close();
+		} catch (FileNotFoundException theFileNotFoundException) {
+			System.out.println("No such a file!");
+			theFileNotFoundException.printStackTrace();
+		} catch (IOException theIOException) {
+			theIOException.printStackTrace();
+			System.out.println("Load users information fail!");
+		} catch (ClassNotFoundException theClassNotFoundException) {
+			System.out.println("Class not found exception");
+			theClassNotFoundException.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * Gets the job from the job map using the job ID
@@ -54,5 +94,12 @@ public class JobMap {
 
 	public Job[] getJobsArray() {
 		return myJobs.values().toArray(new Job[0]);
+	}
+	
+	/**
+	 * Print all jobs' information in this JobMap, for testing.
+	 */
+	public void displayJobs() {
+		System.out.println(myJobs.values().toString());
 	}
 }

@@ -1,11 +1,11 @@
 package model;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkManager extends User {
+public class ParkManager extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

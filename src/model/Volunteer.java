@@ -6,14 +6,19 @@
 
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Volunteer extends User {
+public class Volunteer extends User implements Serializable {
 	
-	private static final long serialVersionUID = 2L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	

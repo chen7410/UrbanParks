@@ -44,7 +44,7 @@ public class UserMapTest {
 	public void writeUsermap_saveAllUserInformationInAtxtFile_createTheTxtFileWithAllInformation() {
 		myUserMap.addUser(brook);
 		myUserMap.addUser(hasnah);
-		myUserMap.writeUsermap("userInformation.ser");
+//		myUserMap.writeUsermap("userInformation.ser");
 		myUserMap.viewAllUser();
 	}
 	
@@ -53,7 +53,7 @@ public class UserMapTest {
 	 */
 	@Test
 	public void readUsermap_loadAllUserInformationFromAtxtFile_loadTheTxtFileWithAllInformatioIntoUsermapn() {
-		myUserMap.readUsermap("userInformation.ser");
+//		myUserMap.readUsermap("userInformation.ser");
 		myUserMap.viewAllUser();
 		Volunteer v = (Volunteer) myUserMap.getUser("Hasnah_Said");
 		System.out.println(v.toString());
