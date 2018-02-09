@@ -68,6 +68,5 @@ public class JobMap implements Serializable {
 	 */
 	public void displayJobs() {
 		System.out.println(myJobs.values().toString());
-		
 	}
 }

@@ -63,7 +63,7 @@ public class UrbanParkUI implements Serializable {
 	private static void init() {
 		loadData("UpcomingJobs.ser", "UsersInformations.ser");
 		
-		myJobs.displayJobs();
+		//myJobs.displayJobs();
 				
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
@@ -291,14 +291,14 @@ public class UrbanParkUI implements Serializable {
 
 	private static void signUpForNewJob() {
 		System.out.println(">>> Here are all the open volunteering jobs:");
-		myJobs.displayJobs();
+		//myJobs.displayJobs();
 		
-//		Job[] jobList = myJobs.getJobsArray();
-//		for (Job job : jobList) {
-//			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
-//				job.toString();
-//			}
-//		}
+		Job[] jobList = myJobs.getJobsArray();
+		for (Job job : jobList) {
+			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
+				job.toString();
+			}
+		}
 
 	}
 
