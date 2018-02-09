@@ -20,8 +20,8 @@ import java.time.format.DateTimeFormatter;
 public class Job implements Serializable {
 
 	/**
-	 * 
-	 */
+     * A generated serial version UID for object Serialization.
+     */
 	private static final long serialVersionUID = 1L;
 
 	/**

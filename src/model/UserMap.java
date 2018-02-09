@@ -14,6 +14,7 @@ import java.util.Set;
  *
  */
 public class UserMap {
+	
 	/**
 	 * a map that stores all users.
 	 * key: user name
