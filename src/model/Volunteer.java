@@ -14,10 +14,9 @@ import java.util.List;
 
 public class Volunteer extends User implements Serializable {
 	
-
 	/**
-	 * 
-	 */
+     * A generated serial version UID for object Serialization.
+     */
 	private static final long serialVersionUID = 1L;
 
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
