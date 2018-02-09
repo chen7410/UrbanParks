@@ -386,15 +386,41 @@ public class UrbanParkUI {
 
 	private static void signUpForNewJob() {
 		System.out.println(">>> Here are all the open volunteering jobs:");
-		// myJobs.displayJobs();
-
 		Job[] jobList = myJobs.getJobsArray();
-		for (Job job : jobList) {
-			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
-				System.out.println(job.toString());
+		for (int i = 0; i < jobList.length; i++) {
+			if (myVolunteer.isAtLeastMinDays(jobList[i]) || isSameDayConflictCheck(jobList[i])) {
+				System.out.println("        " + (i + 1) + ". " + jobList[i].getParkName()  
+						+ ": " + jobList[i].getStartDate() +  " - " + jobList[i].getEndDate());
 			}
 		}
-
+		
+		System.out.println("\n        0. Return to previous menu");
+		System.out.println("        (Please select a number to view job details)\n");
+		System.out.print(USER_INPUT_MESSAGE);
+		
+		//TODO: check invalid input
+		int selection = myScanner.nextInt();
+		System.out.println(jobList[selection - 1]);
+		
+		
+		System.out.println(">>> Would you like to sign up for this job?");
+		System.out.println(YES_OR_NO_MESSAGE + '\n');
+		System.out.print(USER_INPUT_MESSAGE);
+		
+		Scanner scan = new Scanner(System.in);
+		
+		switch (scan.nextLine().toLowerCase()) {
+		case "yes":
+			System.out.println("yes");
+//			addJob();
+			break;
+		case "no":
+			System.out.println("no");
+			break;
+		default:
+			System.out.println("Invalid input");
+			break;
+		}
 	}
 
 	private static boolean isSameDayConflictCheck(final Job theCandidateJob) {
