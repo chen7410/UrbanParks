@@ -98,14 +98,9 @@ public class UrbanParkUI {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Prints out the welcome statements and prompts the user for next
-	 * task.
-=======
-	 * Prints out the welcome statements and lets user choose what to
-	 * do. If user puts in wrong input it will tell them to choose a 
+	 * task. If the user inputs an invalid input it will tell them to choose a 
 	 * different input.
->>>>>>> afc6f0899884bc451c4c9f089486d0666aae7f02
 	 * 
 	 * @return false when the user want to exit the program.
 	 */
@@ -149,13 +144,9 @@ public class UrbanParkUI {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * 
-=======
 	 * Lets user log in with a user name. If the user name doesn't 
 	 * exist, let them try again. Will not exit unless they put in
 	 * the right user name.
->>>>>>> afc6f0899884bc451c4c9f089486d0666aae7f02
 	 */
 	private static void logIn() {
 		System.out.println(">>> Please enter your username:\n");
@@ -174,8 +165,10 @@ public class UrbanParkUI {
 	}
 
 	private static void welcomeUserMessage() {
-		System.out.println(">>> Welcome " + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName() + ". "
-				+ "You are logged in as a " + myCurrentUser.getUserType() + '.');
+		System.out.println(">>> Welcome " + myCurrentUser.getFirstName()
+							+ " " + myCurrentUser.getLastName() + ". "
+							+ "You are logged in as a " + myCurrentUser
+							.getUserType() + '.');
 	}
 
 	/**
