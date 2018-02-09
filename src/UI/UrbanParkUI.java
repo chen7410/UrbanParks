@@ -83,7 +83,7 @@ public class UrbanParkUI {
 		myUsers.loadUserMap(USERS_DATA_FILE);
 
 		myScanner = new Scanner(System.in);
-		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");	// (from: Brook) Why are the d's not capital and where are the y's?
+		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
 
 	/**
