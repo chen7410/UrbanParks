@@ -2,16 +2,12 @@ package UI;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import model.Job;
@@ -67,7 +63,7 @@ public class UrbanParkUI implements Serializable {
 	private static void init() {
 		loadData("UpcomingJobs.ser", "UsersInformations.ser");
 		
-//		myJobs.displayJobs();
+		myJobs.displayJobs();
 				
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");

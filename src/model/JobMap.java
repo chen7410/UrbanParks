@@ -2,8 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * JobMap class is a HashMap that will hold all the jobs.
