@@ -1,4 +1,10 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
+
 package model;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,37 +16,34 @@ import java.util.Set;
 
 /**
  * This class represents all user in the system.
+ * 
  * @author Group 7
- *
+ * @version February 12, 2018
  */
 public class UserMap {
-	/**
-	 * a map that stores all users.
-	 * key: user name
-	 * value: user object.
-	 */
+	
+	/** A map that stores all users. key: user name value: user object.*/
 	private HashMap<String, User> myUsers;
 	
-	/**
-	 * initialize fields.
-	 */
 	public UserMap() {
 		myUsers = new HashMap<String, User>();
 	}
 	
-	
 	/**
-	 * Add an user to an UserMap.
-	 * @param theUser the User that being added to an UserMap.
+	 * Add a user to the UserMap.
+	 * 
+	 * @param theUser
+	 *            the User that being added to an UserMap.
 	 */
 	public void addUser(final User theUser) {
 		myUsers.put(theUser.getUserName(), theUser);
 	}
 	
 	/**
-	 * retrieved an user from an UserMap.
+	 * Retrieves a user from an UserMap.
+	 * 
 	 * @param theUser the User that being retrieved from an UserMap.
-	 * @return an user or null if the user doesn't exist.
+	 * @return a user or null if the user doesn't exist.
 	 */
 	public User getUser(final String theUsername) {
 		if (myUsers.containsKey(theUsername)) {
@@ -49,6 +52,14 @@ public class UserMap {
 		return null;
 	}
 	
+	/**
+	 * Outputting all users information into a file specified by the
+	 * given file name.
+	 * 
+	 * @param theFilename
+	 *            The name of the file where the user informations
+	 *            should be placed.
+	 */
 	public void storeUserMap(final String theFilename) {
 		try {
 			FileOutputStream file = new FileOutputStream(theFilename);
@@ -62,7 +73,14 @@ public class UserMap {
 		}
 	}
 	
-	
+	/**
+	 * Loading user information from a file, using the given file name,
+	 * into the UserMap.
+	 * 
+	 * @param theFilename
+	 *            The file name from where the user informations
+	 *            should be gathered.
+	 */
 	public void loadUserMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
@@ -80,22 +98,5 @@ public class UserMap {
 			System.out.println("Class not found exception");
 			theClassNotFoundException.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Print all user names in this UserMap, for testing.
-	 */
-	public void viewAllUsername() {
-		Set<String> userNames = myUsers.keySet();
-		System.out.println(userNames.toString());
-	}
-	
-	/**
-	 * Print all users' information in this UserMap, for testing.
-	 */
-	public void viewAllUser() {
-		System.out.println(myUsers.toString());
-		
-	}
-	
+	}	
 }
