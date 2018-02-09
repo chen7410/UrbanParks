@@ -73,8 +73,6 @@ public class UrbanParkUI {
 			}
 		}
 	}
-	
-
 
 	/** Initializing all the fields.*/
 	private static void init() {
