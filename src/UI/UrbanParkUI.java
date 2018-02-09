@@ -1,3 +1,9 @@
+/**
+ * T CSS 360 - Winter 2018
+ * Team: Group 7
+ * Urban Parks Project
+ */
+
 package UI;
 
 import java.time.LocalDate;
