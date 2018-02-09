@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
-
 import model.Job;
 import model.JobMap;
 import model.ParkManager;
@@ -62,8 +61,9 @@ public class UrbanParkUI implements Serializable {
 
 	private static void init() {
 		loadData("UpcomingJobs.ser", "UsersInformations.ser");
-		
+
 		//myJobs.displayJobs();
+
 				
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
@@ -226,11 +226,18 @@ public class UrbanParkUI implements Serializable {
 		System.out.print(USER_INPUT_MESSAGE);
 		switch(myScanner.nextLine().toLowerCase()) {
 		case "yes" :
+			
 			myJobs.addJob(theJob);
 			myParkManager.createJob(theJob);
+			
+			myJobs.storeJobMap("UpcomingJobs.ser", myJobs);
+			myJobs = myJobs.loadJobMap("UpcomingJobs.ser");
+			
 			System.out.println("\n>>> Job has been submitted successfully.");
 		}
 	}
+	
+	
 	
 	private static void printParkManagerSubmittedJobs(boolean isAbleToViewDetails) {
 		do {
