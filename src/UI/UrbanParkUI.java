@@ -61,8 +61,10 @@ public class UrbanParkUI {
 	private static void init() {
 		myJobs = new JobMap();
 		myUsers = new UserMap();
+				
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		myUsers.loadUserMap(USERS_DATA_FILE);
+		
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
@@ -295,7 +297,7 @@ public class UrbanParkUI {
 		Job[] jobList = myJobs.getJobsArray();
 		for (Job job : jobList) {
 			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
-				job.toString();
+				System.out.println(job.toString());
 			}
 		}
 
