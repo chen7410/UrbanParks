@@ -202,7 +202,11 @@ public class UrbanParkUI {
 				try {
 					System.out.print(USER_INPUT_MESSAGE);
 					jobStartDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
-					isExit = true;
+					if (jobStartDate.isBefore(LocalDate.now())) {
+						System.out.println("\n>>> Invalid date. The date has already passed.\n");
+					} else  {
+						isExit = true;
+					}
 				} catch (final DateTimeParseException theException) {
 					System.out.println("\n>>> Invalid date. Please use MM/DD/YY format.\n");
 				}
@@ -219,7 +223,11 @@ public class UrbanParkUI {
 				try {
 					System.out.print(USER_INPUT_MESSAGE);
 					jobEndDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
-					isExit = true;
+					if (jobEndDate.isBefore(LocalDate.now())) {
+						System.out.println("\n>>> Invalid date. The date has already passed.\n");
+					} else  {
+						isExit = true;
+					}
 				} catch (final DateTimeParseException theException) {
 					System.out.println("\n>>> Invalid date. Please use MM/DD/YY format.\n");
 				}
