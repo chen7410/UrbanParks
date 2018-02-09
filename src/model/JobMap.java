@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -15,13 +14,7 @@ import java.util.HashMap;
  * @author Group 7
  * @version 2/6/2018
  */
-public class JobMap implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class JobMap{
 	
 	/**
 	 * HashMap that holds all the jobs.

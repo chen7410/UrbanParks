@@ -1,6 +1,5 @@
 package UI;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -15,9 +14,7 @@ import model.Volunteer;
 /**
  * T CSS 360 - Winter 2018 Team: Group 7 Urban Parks Project
  */
-public class UrbanParkUI implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+public class UrbanParkUI {
 	
 	private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
 	
