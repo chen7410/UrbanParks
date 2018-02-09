@@ -1,8 +1,17 @@
 package UI;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Job;
@@ -15,9 +24,10 @@ import model.Volunteer;
 /**
  * T CSS 360 - Winter 2018 Team: Group 7 Urban Parks Project
  */
-public class UrbanParkUI {
+public class UrbanParkUI implements Serializable {
 	
-	
+	private static final long serialVersionUID = 1L;
+
 	private static final String myLogOut = "        3. Log out";
 
 	private static final String WHAT_WOULD_LIKE_TO_DO_MESSAGE = ">>> What would you like to do?";
@@ -55,20 +65,43 @@ public class UrbanParkUI {
 	}
 
 	private static void init() {
-		myUsers = new UserMap();
-		myJobs = new JobMap();
-		User user = new ParkManager("brook", "Brook", "Negussie");
-		myUsers.addUser(user);
-		user = new Volunteer("hasnah", "Hasnah", "Said");
-		myUsers.addUser(user);
-		user = new ParkManager("matthew", "Minqin", "Chen");
-		myUsers.addUser(user);
-		user = new Volunteer("tuan", "Tuan", "Dinh");
-		myUsers.addUser(user);
-
+		loadData("UpcomingJobs.ser", "UsersInformations.ser");
+		
+//		myJobs.displayJobs();
+				
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
+	
+	
+	public static void loadData(final String theJobFilename, final String theUserFilename) {
+		FileInputStream file = null;
+		ObjectInputStream in = null;	
+		try {	
+			file = new FileInputStream(theJobFilename);
+			in = new ObjectInputStream(file);		
+			myJobs = (JobMap) in.readObject();
+			
+			file = new FileInputStream(theUserFilename);
+			in = new ObjectInputStream(file);
+			myUsers = (UserMap) in.readObject();
+			
+			in.close();
+			file.close();
+			
+		} catch (FileNotFoundException theFileNotFoundException) {
+			System.out.println("No such a file!");
+			theFileNotFoundException.printStackTrace();
+		} catch (IOException theIOException) {
+			theIOException.printStackTrace();
+			System.out.println("Load users information fail!");
+		} catch (ClassNotFoundException theClassNotFoundException) {
+			System.out.println("Class not found exception");
+			theClassNotFoundException.printStackTrace();
+		}
+		
+	}
+
 
 	/**
 	 * Prints out the welcome statements, prompts the user for next task, and
@@ -119,8 +152,8 @@ public class UrbanParkUI {
 			welcomeUserMessage();
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
-			System.out.println("        1. Sign up for a new job");
-			System.out.println("        2. View your upcoming jobs");
+			System.out.println("        1. Submit a new job");
+			System.out.println("        2. View all your submitted jobs");
 			System.out.println(myLogOut + '\n');
 			System.out.print(USER_INPUT_MESSAGE);
 			int selection = myScanner.nextInt();
@@ -241,6 +274,7 @@ public class UrbanParkUI {
 	}
 
 	private static void basicVolunteerOptions() {
+		welcomeUserMessage();
 		System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
 		System.out.println(SELECT_A_NUMBER_MESSAGE);
 		System.out.println("        1. Sign up for a new job");
@@ -261,12 +295,15 @@ public class UrbanParkUI {
 
 	private static void signUpForNewJob() {
 		System.out.println(">>> Here are all the open volunteering jobs:");
-		Job[] jobList = myJobs.getJobsArray();
-		for (Job job : jobList) {
-			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
-				
-			}
-		}
+		myJobs.displayJobs();
+		
+//		Job[] jobList = myJobs.getJobsArray();
+//		for (Job job : jobList) {
+//			if (myVolunteer.isAtLeastMinDays(job) || isSameDayConflictCheck(job)) {
+//				job.toString();
+//			}
+//		}
+
 	}
 
 	private static boolean isSameDayConflictCheck(final Job theCandidateJob) {

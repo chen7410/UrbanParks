@@ -1,6 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * JobMap class is a HashMap that will hold all the jobs.
@@ -8,8 +11,14 @@ import java.util.HashMap;
  * @author Group 7
  * @version 2/6/2018
  */
-public class JobMap {
+public class JobMap implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	/**
 	 * HashMap that holds all the jobs.
 	 */
@@ -54,5 +63,13 @@ public class JobMap {
 
 	public Job[] getJobsArray() {
 		return myJobs.values().toArray(new Job[0]);
+	}
+	
+	/**
+	 * Print all jobs' information in this JobMap, for testing.
+	 */
+	public void displayJobs() {
+		System.out.println(myJobs.values().toString());
+		
 	}
 }

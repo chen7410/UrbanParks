@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -13,7 +14,11 @@ import java.util.Set;
  * @author Group 7
  *
  */
-public class UserMap {
+public class UserMap implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * a map that stores all users.
 	 * key: user name

@@ -6,6 +6,7 @@
 
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +17,12 @@ import java.time.format.DateTimeFormatter;
  * @author Group 7
  * @version 2/6/2018
  */
-public class Job {
+public class Job implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The job's ID generated using java's hashCode function.
@@ -137,7 +143,7 @@ public class Job {
 		sb.append("    Park location: " + myLocation + '\n');
 		sb.append("    Job start date: " + myStartDate.format(formatter) + '\n');
 		sb.append("    Job end date: " + myEndDate.format(formatter) + '\n');
-		sb.append("    Job description: " + myDescription);
+		sb.append("    Job description: " + myDescription + "\n");
 		return sb.toString();
 	}
 }
