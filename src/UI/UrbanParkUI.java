@@ -220,9 +220,12 @@ public class UrbanParkUI {
 			while (!isExit) {
 				try {
 					System.out.print(USER_INPUT_MESSAGE);
-					jobStartDate = LocalDate.parse(myScanner.nextLine(),
-													myDateFormatter);
-					isExit = true;
+					jobStartDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
+					if (jobStartDate.isBefore(LocalDate.now())) {
+						System.out.println("\n>>> Invalid date. The date has already passed.\n");
+					} else  {
+						isExit = true;
+					}
 				} catch (final DateTimeParseException theException) {
 					System.out.println("\n>>> Invalid date. Please use"
 											+ " MM/DD/YY format.\n");
@@ -239,9 +242,12 @@ public class UrbanParkUI {
 			while (!isExit) {
 				try {
 					System.out.print(USER_INPUT_MESSAGE);
-					jobEndDate = LocalDate.parse(myScanner.nextLine(),
-													myDateFormatter);
-					isExit = true;
+					jobEndDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
+					if (jobEndDate.isBefore(LocalDate.now())) {
+						System.out.println("\n>>> Invalid date. The date has already passed.\n");
+					} else  {
+						isExit = true;
+					}
 				} catch (final DateTimeParseException theException) {
 					System.out.println("\n>>> Invalid date. Please use"
 											+ " MM/DD/YY format.\n");
@@ -528,7 +534,8 @@ public class UrbanParkUI {
 		}
 	}
 	
-	private static void printVolunteerSignedUpJobs(boolean isAbleToViewDetails) {  // (from: Brook) Shouldn't the param start w/ "the"
+	private static void printVolunteerSignedUpJobs(boolean 
+													theIsAbleToViewDetails) {
 		do {
 			System.out.println(">>> Here are your upcoming jobs:");
 			List<Integer> jobIDList = myVolunteer.getJobList();
@@ -543,7 +550,7 @@ public class UrbanParkUI {
 									+ " any jobs.");
 			}
 			
-			if (isAbleToViewDetails) {
+			if (theIsAbleToViewDetails) {
 				System.out.println("\n    0. Return to previous menu");
 				System.out.println("    (Please select a number to"
 									+ " view job details)\n");
@@ -573,7 +580,7 @@ public class UrbanParkUI {
 								System.out.println();
 								break;
 							case "no":
-								isAbleToViewDetails = false;
+								theIsAbleToViewDetails = false;
 								isExit = true;
 								System.out.println();
 								break;
@@ -585,7 +592,7 @@ public class UrbanParkUI {
 						}
 						break;
 					} else if (selection == 0) {
-						isAbleToViewDetails = false;
+						theIsAbleToViewDetails = false;
 						break;
 					} else {
 						System.out.println(INVALID_INPUT_MESSAGE);
@@ -593,7 +600,7 @@ public class UrbanParkUI {
 				}
 
 			}
-		} while(isAbleToViewDetails);
+		} while(theIsAbleToViewDetails);
 	}
 
 	private static boolean isSameDayConflictCheck(final Job
