@@ -62,7 +62,7 @@ public class UrbanParkUI {
 	private static Volunteer myVolunteer;
 
 	public static void main(final String[] theArgs) {
-		init();
+		init();		
 		while (welcome()) {
 			if (myCurrentUser instanceof ParkManager) {
 				myParkManager = (ParkManager) myCurrentUser;
@@ -73,6 +73,8 @@ public class UrbanParkUI {
 			}
 		}
 	}
+	
+
 
 	/** Initializing all the fields.*/
 	private static void init() {
