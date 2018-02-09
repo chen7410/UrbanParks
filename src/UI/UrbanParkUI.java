@@ -83,7 +83,7 @@ public class UrbanParkUI {
 		myUsers.loadUserMap(USERS_DATA_FILE);
 
 		myScanner = new Scanner(System.in);
-		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");	// (from: Brook) Why are the d's not capital and where are the y's?
+		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
 
 	/**
@@ -528,7 +528,8 @@ public class UrbanParkUI {
 		}
 	}
 	
-	private static void printVolunteerSignedUpJobs(boolean isAbleToViewDetails) {  // (from: Brook) Shouldn't the param start w/ "the"
+	private static void printVolunteerSignedUpJobs(boolean 
+													theIsAbleToViewDetails) {
 		do {
 			System.out.println(">>> Here are your upcoming jobs:");
 			List<Integer> jobIDList = myVolunteer.getJobList();
@@ -543,7 +544,7 @@ public class UrbanParkUI {
 									+ " any jobs.");
 			}
 			
-			if (isAbleToViewDetails) {
+			if (theIsAbleToViewDetails) {
 				System.out.println("\n    0. Return to previous menu");
 				System.out.println("    (Please select a number to"
 									+ " view job details)\n");
@@ -573,7 +574,7 @@ public class UrbanParkUI {
 								System.out.println();
 								break;
 							case "no":
-								isAbleToViewDetails = false;
+								theIsAbleToViewDetails = false;
 								isExit = true;
 								System.out.println();
 								break;
@@ -585,7 +586,7 @@ public class UrbanParkUI {
 						}
 						break;
 					} else if (selection == 0) {
-						isAbleToViewDetails = false;
+						theIsAbleToViewDetails = false;
 						break;
 					} else {
 						System.out.println(INVALID_INPUT_MESSAGE);
@@ -593,7 +594,7 @@ public class UrbanParkUI {
 				}
 
 			}
-		} while(isAbleToViewDetails);
+		} while(theIsAbleToViewDetails);
 	}
 
 	private static boolean isSameDayConflictCheck(final Job
