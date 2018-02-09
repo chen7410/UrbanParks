@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
+
 package model;
 
 import java.io.FileInputStream;
@@ -9,35 +14,34 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
- * JobMap class is a HashMap that will hold all the jobs.
+ * JobMap class is a HashMap that will hold all jobs and their IDs.
  * 
  * @author Group 7
- * @version 2/6/2018
+ * @version February 12, 2018
  */
 public class JobMap{
 	
-	/**
-	 * HashMap that holds all the jobs.
-	 */
 	private HashMap<Integer, Job> myJobs;
 
-	/**
-	 * Initializes a HashMap that holds all the jobs.
-	 */
 	public JobMap() {
 		myJobs = new HashMap<Integer, Job>();
 	}
 
 	/**
-	 * Adds a job to the job map.
+	 * Pre-condition: theJob must pass all business rules before being added.
+	 * Post-condition:theJob is added myJobs JobMap.
 	 * 
-	 * @param theJob
-	 *            The job to add
+	 * @param theJob 
 	 */
 	public void addJob(final Job theJob) {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
 	
+	/**
+	 * Store Job maps on local file system.
+	 * 
+	 * @param theFilename
+	 */
 	public void storeJobMap(final String theFilename) {
 		try {
 			FileOutputStream file = new FileOutputStream(theFilename);
@@ -47,11 +51,15 @@ public class JobMap{
 			file.close();
 		} catch (IOException theIOException) {
 			theIOException.printStackTrace();
-			System.out.println("Save users information fail!");
+			System.out.println("Save job information fail!");
 		}
 	}
 	
-	
+	/**
+	 * Load Job map from the local file system.
+	 * 
+	 * @param theFilename
+	 */
 	public void loadJobMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
@@ -64,30 +72,17 @@ public class JobMap{
 			theFileNotFoundException.printStackTrace();
 		} catch (IOException theIOException) {
 			theIOException.printStackTrace();
-			System.out.println("Load users information fail!");
+			System.out.println("Load job information fail!");
 		} catch (ClassNotFoundException theClassNotFoundException) {
 			System.out.println("Class not found exception");
 			theClassNotFoundException.printStackTrace();
 		}
 	}
 	
-
-	/**
-	 * Gets the job from the job map using the job ID
-	 * 
-	 * @param theJobID
-	 *            The job ID
-	 * @return the job
-	 */
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
 
-	/**
-	 * Returns the current size of the job map
-	 * 
-	 * @return the current size of the job map
-	 */
 	public int size() {
 		return myJobs.size();
 	}
@@ -96,9 +91,6 @@ public class JobMap{
 		return myJobs.values().toArray(new Job[0]);
 	}
 	
-	/**
-	 * Print all jobs' information in this JobMap, for testing.
-	 */
 	public void displayJobs() {
 		System.out.println(myJobs.values().toString());
 	}

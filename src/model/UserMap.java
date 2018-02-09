@@ -22,7 +22,15 @@ import java.util.Set;
  */
 public class UserMap {
 	
+<<<<<<< HEAD
 	/** A map that stores all users. key: user name value: user object.*/
+=======
+	/**
+	 * a map that stores all users.
+	 * key: user name
+	 * value: user object.
+	 */
+>>>>>>> afc6f0899884bc451c4c9f089486d0666aae7f02
 	private HashMap<String, User> myUsers;
 	
 	public UserMap() {

@@ -16,8 +16,8 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
 
 	/**
-	 * 
-	 */
+     * A generated serial version UID for object Serialization.
+     */
 	private static final long serialVersionUID = 1L;
 	
 	private String myUserName;
