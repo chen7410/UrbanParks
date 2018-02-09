@@ -1,9 +1,6 @@
 /*
  * TCSS 360 - Winter 2018
-<<<<<<< HEAD
  * Team: Group 7
-=======
->>>>>>> afc6f0899884bc451c4c9f089486d0666aae7f02
  * Urban Parks Project
  */
 
@@ -24,7 +21,6 @@ import model.UserMap;
 import model.Volunteer;
 
 /**
-<<<<<<< HEAD
  * Allows for users to do all sorts of things ranging from signing up
  * for volunteering jobs to creating volunteering jobs, depending on
  * which type of user they are. There are two types of users:
@@ -32,14 +28,6 @@ import model.Volunteer;
  * 
  * @author Group 7
  * @version February 12, 2018
-=======
- * Allows for users to do all sorts of things ranging from signing up for
- * volunteering jobs to creating volunteering jobs, depending on which type of
- * user they are. There are two types of users: Volunteers and Park Managers.
- * 
- * @author Group 7
- * @version February 9, 2018
->>>>>>> afc6f0899884bc451c4c9f089486d0666aae7f02
  */
 public class UrbanParkUI {
 
@@ -98,8 +86,13 @@ public class UrbanParkUI {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Prints out the welcome statements and prompts the user for next
 	 * task. If the user inputs an invalid input it will tell them to choose a 
+=======
+	 * Prints out the welcome statements and lets user choose what to
+	 * do. If user puts in wrong input it will tell them to choose a 
+>>>>>>> development-branch-brook
 	 * different input.
 	 * 
 	 * @return false when the user want to exit the program.
