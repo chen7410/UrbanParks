@@ -177,7 +177,7 @@ public class UrbanParkUI {
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			String[] message = { ". Submit a new job",
 					". View all your submitted jobs",
-					". Log out\n" };
+					". Log out\n\n" };
 			int index = 0;
 			int choiceModifier = 0;
 			if (!myParkManager.isLessThanMaxJobs(myJobs)) {
@@ -514,7 +514,7 @@ public class UrbanParkUI {
 					Job job = validJobs.get(selection - 1);
 					jobSignUpVerification(job);
 					printVolunteerSignedUpJobs(false);
-					System.out.println("Would you like to sign up for" + " another job?");
+					System.out.println(">>> \nWould you like to sign up for" + " another job?");
 					System.out.println(YES_OR_NO_MESSAGE);
 					boolean isExit = false;
 					while (!isExit) {
