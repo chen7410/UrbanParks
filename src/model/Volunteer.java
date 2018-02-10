@@ -28,7 +28,8 @@ public class Volunteer extends User implements Serializable {
 	 */
 	private List<Integer> myJobs;
 	
-	public Volunteer(final String theUserName, final String theFirstName, final String theLastName) {
+	public Volunteer(final String theUserName, final String theFirstName,
+						final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
 		myJobs = new ArrayList<>();
 		this.setUserType("Volunteer");
@@ -52,12 +53,13 @@ public class Volunteer extends User implements Serializable {
 	 * 
 	 * @param theJob 
 	 * 			the job that being check.
-	 * @return true if the stated date of the job is greater than the minimum day current date; 
-	 * 			false otherwise.
+	 * @return true if the stated date of the job is greater than the
+	 * 			minimum day current date and false otherwise.
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
 		boolean result = false;
-		final Period period = LocalDate.now().until(theJob.getStartDate());
+		final Period period = LocalDate.now().until(theJob
+													.getStartDate());
 		final int dayDifferent = period.getDays();
 		if (dayDifferent >= MAX_DAYS_TO_SIGN_UP) {
 			result = true;
@@ -66,18 +68,21 @@ public class Volunteer extends User implements Serializable {
 	}
 	
 	/**
-	 * Check whether the candidate job has conflict with the job has already signed up.
+	 * Check whether the candidate job has conflict with the job has
+	 * already signed up.
 	 * 
-	 * @param theCandidateJob 
-	 * 				the candidate job.
-	 * @param theCurrentJob 
-	 * 				the job has already signed up.
-	 * @return true if the candidate job does not conflict with the job has already signed up; 
-	 * 			false otherwise. 
+	 * @param theCandidateJob
+	 *            the candidate job.
+	 * @param theCurrentJob
+	 *            the job has already signed up.
+	 * @return true if the candidate job does not conflict with the
+	 * 			job has already signed up; false otherwise.
 	 */
-	public boolean isSameDayConflict(final Job theCandidateJob, final Job theCurrentJob) {
+	public boolean isSameDayConflict(final Job theCandidateJob,
+										final Job theCurrentJob) {
 		boolean overlaps = false;
-		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob) || overlaps;
+		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob)
+					|| overlaps;
 		return overlaps;
 	}
 	
