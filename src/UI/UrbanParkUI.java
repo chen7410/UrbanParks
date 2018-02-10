@@ -98,6 +98,8 @@ public class UrbanParkUI {
 		boolean isExitProgram = true;
 		while (!isExit) {
 			System.out.println(">>> Welcome to Urban Parks");
+			System.out.println(">>> A system where you can sign up for volunteering job" 
+									+ "\n    and submit new volunteering opportunities.\n");
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			System.out.println("        1. Log in");
