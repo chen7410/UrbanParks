@@ -176,11 +176,11 @@ public class VolunteerTest {
 					myJobMap.getJob(jobID)));
 		}
 		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, 
-				"Discover Park", myParkManager, "Seattle, WA", "clean");
+				"Discover Park", myParkManager, "Seattle, WA", "Playground clean up");
 		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, 
-				"Cherry Park", myParkManager, "Seattle, WA", "clean");
+				"Cherry Park", myParkManager, "Seattle, WA", "Clean up tree leaves");
 		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, 
-				"Kerry Park", myParkManager, "Seattle, WA", "clean");
+				"Kerry Park", myParkManager, "Seattle, WA", "Planting trees");
 	}
 	
 	/**
