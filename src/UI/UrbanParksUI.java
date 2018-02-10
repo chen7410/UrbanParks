@@ -30,7 +30,7 @@ import model.Volunteer;
  * @author Group 7
  * @version February 12, 2018
  */
-public class UrbanParkUI {
+public class UrbanParksUI {
 
 	private static final String INVALID_INPUT_MESSAGE =
 								">>> Please enter a valid option.\n";
