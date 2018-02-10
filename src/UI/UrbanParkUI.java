@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -86,13 +87,8 @@ public class UrbanParkUI {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Prints out the welcome statements and prompts the user for next
-	 * task. If the user inputs an invalid input it will tell them to choose a 
-=======
 	 * Prints out the welcome statements and lets user choose what to
 	 * do. If user puts in wrong input it will tell them to choose a 
->>>>>>> development-branch-brook
 	 * different input.
 	 * 
 	 * @return false when the user want to exit the program.
@@ -370,11 +366,17 @@ public class UrbanParkUI {
 		do {
 			System.out.println(">>> Here are your submitted jobs:");
 			List<Integer> jobIDList = myParkManager.getJobList();
-			for (int i = 1; i <= jobIDList.size(); i++) {
-				System.out.print("        " + i + ". ");
-				System.out.println(myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+			List<Job> sortedJobList = new ArrayList<>();
+			for (int i = 0; i < jobIDList.size(); i++) {
+				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
 			}
-			if (jobIDList.size() == 0) {
+			Collections.sort(sortedJobList);
+			
+			for (int i = 1; i <= sortedJobList.size(); i++) {
+				System.out.print("        " + i + ". ");
+				System.out.println(sortedJobList.get(i - 1).getJobSummary());
+			}
+			if (sortedJobList.size() == 0) {
 				System.out.println("        You have not submitted any jobs.");
 			}
 			System.out.println();
@@ -392,8 +394,8 @@ public class UrbanParkUI {
 					}
 
 					System.out.println();
-					if (selection > 0 && selection <= jobIDList.size()) {
-						System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+					if (selection > 0 && selection <= sortedJobList.size()) {
+						System.out.println(sortedJobList.get(selection - 1));
 						System.out.println(">>> Do you want to view" + " another job details?");
 						System.out.println(YES_OR_NO_MESSAGE);
 						boolean isExit = false;
@@ -483,7 +485,7 @@ public class UrbanParkUI {
 		boolean isExitToMainMenu = false;
 		while (!isExitToMainMenu) {
 			System.out.println(">>> Here are all the open volunteering jobs:");
-			Job[] jobList = myJobs.getJobsArray();
+			Job[] jobList = myJobs.getSortedJobsArray();
 			List<Job> validJobs = new ArrayList<>();
 			for (int i = 0; i < jobList.length; i++) {
 				if (myVolunteer.isAtLeastMinDays(jobList[i]) && !isSameDayConflictCheck(jobList[i])) {
@@ -576,11 +578,18 @@ public class UrbanParkUI {
 		do {
 			System.out.println(">>> Here are your upcoming jobs:");
 			List<Integer> jobIDList = myVolunteer.getJobList();
-			for (int i = 1; i <= jobIDList.size(); i++) {
-				System.out.println("        " + i + ". " + myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+			List<Job> sortedJobList = new ArrayList<>();
+			for (int i = 0; i < jobIDList.size(); i++) {
+				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
+			}
+			Collections.sort(sortedJobList);
+			
+			for (int i = 1; i <= sortedJobList.size(); i++) {
+				System.out.print("        " + i + ". ");
+				System.out.println(sortedJobList.get(i - 1).getJobSummary());
 			}
 
-			if (jobIDList.size() == 0) {
+			if (sortedJobList.size() == 0) {
 				System.out.println("        You have not signed up for" + " any jobs.");
 			}
 
@@ -598,8 +607,8 @@ public class UrbanParkUI {
 					}
 
 					System.out.println();
-					if (selection > 0 && selection <= jobIDList.size()) {
-						System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+					if (selection > 0 && selection <= sortedJobList.size()) {
+						System.out.println(sortedJobList.get(selection - 1));
 						System.out.println(">>> Do you want to view" + " another job details?");
 						System.out.println(YES_OR_NO_MESSAGE);
 						boolean isExit = false;

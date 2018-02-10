@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class ParkManager extends User implements Serializable {
 
+	/**
+     * A generated serial version UID for object Serialization.
+     */
 	private static final long serialVersionUID = 1L;
 	
 	/**The maximum number of pending jobs in the system.*/

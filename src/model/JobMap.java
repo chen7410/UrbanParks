@@ -11,7 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * JobMap class is a HashMap that will hold all jobs and their IDs.
@@ -85,9 +88,21 @@ public class JobMap {
 	public int size() {
 		return myJobs.size();
 	}
-
-	public Job[] getJobsArray() {
-		return myJobs.values().toArray(new Job[0]);
+	
+	/**
+	 * Return a sorted job array that prioritizing job that starts first,
+	 * or when they starts the same date, job that ends first.
+	 * 
+	 * @return sorted array of jobs
+	 */
+	public Job[] getSortedJobsArray() {
+		List<Job> valuesList = new ArrayList<>(myJobs.values());
+		Collections.sort(valuesList);
+		Job[] jobList = new Job[valuesList.size()];
+		for (int i = 0; i < valuesList.size(); i++) {
+			jobList[i] = valuesList.get(i);
+		}
+		return jobList;
 	}
 
 	public void displayJobs() {

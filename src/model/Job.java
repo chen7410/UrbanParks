@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  * @author Group 7
  * @version February 12, 2018
  */
-public class Job implements Serializable {
+public class Job implements Serializable, Comparable<Job> {
 
 	/**
      * A generated serial version UID for object Serialization.
@@ -127,5 +127,18 @@ public class Job implements Serializable {
 		sb.append("    Job end date: " + myEndDate.format(formatter) + '\n');
 		sb.append("    Job description: " + myDescription + "\n");
 		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(Job o) {
+		if (myStartDate.isBefore(o.getStartDate())) {
+			return -1;
+		} else if(myStartDate.isEqual(o.getStartDate()) && myEndDate.isBefore(o.getEndDate())) {
+			return -1;
+		} else if (myStartDate.isAfter(o.getStartDate())) {
+			return 1;
+		} else  {
+			return 0;
+		}
 	}
 }
