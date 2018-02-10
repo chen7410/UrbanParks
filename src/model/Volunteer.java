@@ -80,6 +80,7 @@ public class Volunteer extends User implements Serializable {
 	
 	/**
 	 * Return the minimums days from today that allow to signed up.
+	 * 
 	 * @return the minimums days from today that allow to signed up.
 	 */
 	public int getMaxDaysToSignUp() {
@@ -88,6 +89,7 @@ public class Volunteer extends User implements Serializable {
 	
 	/**
 	 * Return a list of job ID that a volunteer has signed up.
+	 * 
 	 * @return a list of job ID that a volunteer has signed up.
 	 */
 	public List<Integer> getJobList() {

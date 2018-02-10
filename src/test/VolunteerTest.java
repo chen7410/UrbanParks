@@ -1,4 +1,4 @@
-/**
+/*
  * T CSS 360 - Winter 2018
  * Team: Group 7
  * Urban Parks Project
@@ -27,6 +27,7 @@ import model.Volunteer;
  */
 
 /**
+ * 
  * @author Minqing Chen
  * @version 02/04/2018
  *
@@ -153,12 +154,6 @@ public class VolunteerTest {
 		for (int jobID : myVolunteer.getJobList()) {
 			assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate, myJobMap.getJob(jobID)));
 		}
-		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, myJobEndDate, 
-				"Discover Park", myParkManager, "Seattle, WA", "clean");
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, myJobEndDate, 
-				"Cherry Park", myParkManager, "Seattle, WA", "clean");
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, myJobEndDate, 
-				"Kerry Park", myParkManager, "Seattle, WA", "clean");
 	}
 	
 	/**
