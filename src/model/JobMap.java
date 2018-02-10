@@ -38,8 +38,7 @@ public class JobMap {
 	}
 
 	/**
-	 * Store Job maps on local file system.
-	 * 
+	 * Store Job maps on local file system. File type must be a .ser.
 	 * @param theFilename
 	 */
 	public void storeJobMap(final String theFilename) {
@@ -57,7 +56,7 @@ public class JobMap {
 
 	/**
 	 * Load Job map from the local file system.
-	 * 
+	 * The file must be create by the storeJobMap method.
 	 * @param theFilename
 	 */
 	public void loadJobMap(final String theFilename) {

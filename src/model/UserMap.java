@@ -53,7 +53,7 @@ public class UserMap {
 	
 	/**
 	 * Outputting all users information into a file specified by the
-	 * given file name.
+	 * given file name. File type must be a .ser.
 	 * 
 	 * @param theFilename
 	 *            The name of the file where the user informations
@@ -74,7 +74,7 @@ public class UserMap {
 	
 	/**
 	 * Loading user information from a file, using the given file name,
-	 * into the UserMap.
+	 * into the UserMap. The file must be create by the storeUserMap method.
 	 * 
 	 * @param theFilename
 	 *            The file name from where the user informations
