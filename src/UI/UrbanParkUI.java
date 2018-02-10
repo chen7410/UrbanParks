@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -97,6 +98,8 @@ public class UrbanParkUI {
 		boolean isExitProgram = true;
 		while (!isExit) {
 			System.out.println(">>> Welcome to Urban Parks");
+			System.out.println(">>> Urban Parks is a system where you can sign up for volunteering" 
+									+ "\n    or submit new volunteering job.\n");
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			System.out.println("        1. Log in");
@@ -153,8 +156,10 @@ public class UrbanParkUI {
 	}
 
 	private static void welcomeUserMessage() {
-		System.out.println(">>> Welcome " + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName() + ". "
-				+ "You are logged in as a " + myCurrentUser.getUserType() + '.');
+		System.out.println(">>> Welcome " + myCurrentUser.getFirstName()
+							+ " " + myCurrentUser.getLastName() + ". "
+							+ "You are logged in as a " + myCurrentUser
+							.getUserType() + '.');
 	}
 
 	/**
@@ -170,7 +175,7 @@ public class UrbanParkUI {
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			String[] message = { ". Submit a new job",
 					". View all your submitted jobs",
-					". Log out" };
+					". Log out\n\n" };
 			int index = 0;
 			int choiceModifier = 0;
 			if (!myParkManager.isLessThanMaxJobs(myJobs)) {
@@ -237,12 +242,14 @@ public class UrbanParkUI {
 					System.out.print(USER_INPUT_MESSAGE);
 					jobStartDate = LocalDate.parse(myScanner.nextLine(), myDateFormatter);
 					if (jobStartDate.isBefore(LocalDate.now())) {
-						System.out.println("\n>>> Invalid date. The date has already passed.\n");
+						System.out.println("\n>>> Invalid date. The date has already passed.");
+						System.out.println(">>> Please enter a valid start date.\n");
 					} else {
 						isExit = true;
 					}
 				} catch (final DateTimeParseException theException) {
-					System.out.println("\n>>> Invalid date. Please use" + " MM/DD/YY format.\n");
+					System.out.println("\n>>> Invalid date. Please enter "
+							+ "the start date using MM/DD/YY format.\n");
 				}
 			}
 
@@ -260,8 +267,10 @@ public class UrbanParkUI {
 					System.out.println();
 					if (jobEndDate.isBefore(LocalDate.now())) {
 						System.out.println(">>> Invalid date. The date has already passed.\n");
+						System.out.println(">>> Please enter a valid end date. ");
 					} else if (jobEndDate.isBefore(jobStartDate)) {
 						System.out.println(">>> Invalid date. The end date cannot be before the start date.\n");
+						System.out.println(">>> Please enter a valid end date. ");
 					} else {
 						isExit = true;
 					}
@@ -269,7 +278,6 @@ public class UrbanParkUI {
 					System.out.println("\n>>> Invalid date. Please use" + " MM/DD/YY format.\n");
 				}
 			}
-			System.out.println();
 
 			System.out.println(">>> Enter job description:\n");
 			System.out.print(USER_INPUT_MESSAGE);
@@ -278,10 +286,9 @@ public class UrbanParkUI {
 
 			Job job = new Job(jobStartDate, jobEndDate, parkName, myParkManager, jobLocation, jobDescription);
 			System.out.println(job);
-			System.out.println();
 
 			if (!myParkManager.isJobEndsWithinMaxDays(job) || !myParkManager.isJobWithinMaxDays(job)) {
-				System.out.println("We cannot submit this job:");
+				System.out.println("This job cannot be submitted:");
 				if (!myParkManager.isJobWithinMaxDays(job)) {
 					System.out.println("Your job takes more than " + myParkManager.getMaxJobLength() + " days.");
 				}
@@ -361,17 +368,23 @@ public class UrbanParkUI {
 		do {
 			System.out.println(">>> Here are your submitted jobs:");
 			List<Integer> jobIDList = myParkManager.getJobList();
-			for (int i = 1; i <= jobIDList.size(); i++) {
-				System.out.print("    " + i + ". ");
-				System.out.println(myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+			List<Job> sortedJobList = new ArrayList<>();
+			for (int i = 0; i < jobIDList.size(); i++) {
+				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
 			}
-			if (jobIDList.size() == 0) {
-				System.out.println("    You have not submitted any jobs.");
+			Collections.sort(sortedJobList);
+			
+			for (int i = 1; i <= sortedJobList.size(); i++) {
+				System.out.print("        " + i + ". ");
+				System.out.println(sortedJobList.get(i - 1).getJobSummary());
+			}
+			if (sortedJobList.size() == 0) {
+				System.out.println("        You have not submitted any jobs.");
 			}
 			System.out.println();
 			if (theIsAbleToViewDetails) {
-				System.out.println("    0. Return to previous menu");
-				System.out.println("    (Please select a number to" + " view job details)\n");
+				System.out.println("        Enter 0 to return to the previous menu.");
+				System.out.println("        (Please select a number to" + " view job details)\n");
 				while (true) {
 					System.out.print(USER_INPUT_MESSAGE);
 					int selection = -1;
@@ -383,8 +396,8 @@ public class UrbanParkUI {
 					}
 
 					System.out.println();
-					if (selection > 0 && selection <= jobIDList.size()) {
-						System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+					if (selection > 0 && selection <= sortedJobList.size()) {
+						System.out.println(sortedJobList.get(selection - 1));
 						System.out.println(">>> Do you want to view" + " another job details?");
 						System.out.println(YES_OR_NO_MESSAGE);
 						boolean isExit = false;
@@ -474,7 +487,7 @@ public class UrbanParkUI {
 		boolean isExitToMainMenu = false;
 		while (!isExitToMainMenu) {
 			System.out.println(">>> Here are all the open volunteering jobs:");
-			Job[] jobList = myJobs.getJobsArray();
+			Job[] jobList = myJobs.getSortedJobsArray();
 			List<Job> validJobs = new ArrayList<>();
 			for (int i = 0; i < jobList.length; i++) {
 				if (myVolunteer.isAtLeastMinDays(jobList[i]) && !isSameDayConflictCheck(jobList[i])) {
@@ -484,7 +497,7 @@ public class UrbanParkUI {
 			for (int i = 1; i <= validJobs.size(); i++) {
 				System.out.println("        " + i + ". " + validJobs.get(i - 1).getJobSummary());
 			}
-			System.out.println("\n        0. Return to previous menu");
+			System.out.println("\n        Enter 0 to return to the previous menu.");
 			System.out.println("        (Please select a number to" + " view job details)\n");
 			int selection = -1;
 
@@ -504,7 +517,7 @@ public class UrbanParkUI {
 					Job job = validJobs.get(selection - 1);
 					jobSignUpVerification(job);
 					printVolunteerSignedUpJobs(false);
-					System.out.println("Would you like to sign up for" + " another job?");
+					System.out.println(">>> \nWould you like to sign up for" + " another job?");
 					System.out.println(YES_OR_NO_MESSAGE);
 					boolean isExit = false;
 					while (!isExit) {
@@ -567,17 +580,24 @@ public class UrbanParkUI {
 		do {
 			System.out.println(">>> Here are your upcoming jobs:");
 			List<Integer> jobIDList = myVolunteer.getJobList();
-			for (int i = 1; i <= jobIDList.size(); i++) {
-				System.out.println("    " + i + ". " + myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+			List<Job> sortedJobList = new ArrayList<>();
+			for (int i = 0; i < jobIDList.size(); i++) {
+				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
+			}
+			Collections.sort(sortedJobList);
+			
+			for (int i = 1; i <= sortedJobList.size(); i++) {
+				System.out.print("        " + i + ". ");
+				System.out.println(sortedJobList.get(i - 1).getJobSummary());
 			}
 
-			if (jobIDList.size() == 0) {
-				System.out.println("    You have not signed up for" + " any jobs.");
+			if (sortedJobList.size() == 0) {
+				System.out.println("        You have not signed up for" + " any jobs.");
 			}
 
 			if (theIsAbleToViewDetails) {
-				System.out.println("\n    0. Return to previous menu");
-				System.out.println("    (Please select a number to" + " view job details)\n");
+				System.out.println("\n        Enter 0 to return to the previous menu.");
+				System.out.println("        (Please select a number to" + " view job details)\n");
 				while (true) {
 					System.out.print(USER_INPUT_MESSAGE);
 					int selection = -1;
@@ -589,8 +609,8 @@ public class UrbanParkUI {
 					}
 
 					System.out.println();
-					if (selection > 0 && selection <= jobIDList.size()) {
-						System.out.println(myJobs.getJob(jobIDList.get(selection - 1)));
+					if (selection > 0 && selection <= sortedJobList.size()) {
+						System.out.println(sortedJobList.get(selection - 1));
 						System.out.println(">>> Do you want to view" + " another job details?");
 						System.out.println(YES_OR_NO_MESSAGE);
 						boolean isExit = false;
@@ -626,7 +646,7 @@ public class UrbanParkUI {
 	}
 
 	/**
-	 * Checks if the job conlicts with any job a volunteer current has.
+	 * Checks if the job conflicts with any job a volunteer current has.
 	 * @param theCandidateJob
 	 * 					the job to check
 	 * @return true if there are conflicts, false otherwise

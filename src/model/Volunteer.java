@@ -12,15 +12,13 @@ import java.util.List;
 
 /**
  * This class represents a volunteer.
+ * 
  * @author Group 7
- * @version February 9, 2018
- *
+ * @version February 12, 2018
  */
 public class Volunteer extends User implements Serializable {
 
-	/**
-     * A generated serial version UID for object Serialization.
-     */
+	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
 	
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
@@ -40,6 +38,7 @@ public class Volunteer extends User implements Serializable {
 	 * Sign up a new job.
 	 * Per-condition: the job must be checked before sign up.
 	 * Post-condition: the job add to the volunteer job list.
+	 * 
 	 * @param theJob 
 	 * 			the job a volunteer want to sign up.
 	 */
@@ -50,6 +49,7 @@ public class Volunteer extends User implements Serializable {
 	/**
 	 * Check whether the start date of the jobs being signed up is allowed
 	 * by the minimum day from the current date.
+	 * 
 	 * @param theJob 
 	 * 			the job that being check.
 	 * @return true if the stated date of the job is greater than the minimum day current date; 
@@ -67,8 +67,11 @@ public class Volunteer extends User implements Serializable {
 	
 	/**
 	 * Check whether the candidate job has conflict with the job has already signed up.
-	 * @param theCandidateJob the candidate job.
-	 * @param theCurrentJob the job has already signed up.
+	 * 
+	 * @param theCandidateJob 
+	 * 				the candidate job.
+	 * @param theCurrentJob 
+	 * 				the job has already signed up.
 	 * @return true if the candidate job does not conflict with the job has already signed up; 
 	 * 			false otherwise. 
 	 */

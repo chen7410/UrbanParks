@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class ParkManager extends User implements Serializable {
 
+	/**
+     * A generated serial version UID for object Serialization.
+     */
 	private static final long serialVersionUID = 1L;
 	
 	/**The maximum number of pending jobs in the system.*/
@@ -71,7 +74,7 @@ public class ParkManager extends User implements Serializable {
 		LocalDate jobEndDate = theJob.getEndDate();
 
 		Period diff = Period.between(jobStartDate, jobEndDate);
-		int daysDifference = diff.getDays();
+		int daysDifference = diff.getDays() + 1;
 
 		if (daysDifference > MAX_JOB_LENGTH) {
 			return false;

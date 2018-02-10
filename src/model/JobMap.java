@@ -11,7 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * JobMap class is a HashMap that will hold all jobs and their IDs.
@@ -19,8 +22,8 @@ import java.util.HashMap;
  * @author Group 7
  * @version February 12, 2018
  */
-public class JobMap{
-	
+public class JobMap {
+
 	private HashMap<Integer, Job> myJobs;
 
 	public JobMap() {
@@ -31,15 +34,14 @@ public class JobMap{
 	 * Pre-condition: theJob must pass all business rules before being added.
 	 * Post-condition:theJob is added myJobs JobMap.
 	 * 
-	 * @param theJob 
+	 * @param theJob
 	 */
 	public void addJob(final Job theJob) {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
-	
+
 	/**
-	 * Store Job maps on local file system.
-	 * 
+	 * Store Job maps on local file system. File type must be a .ser.
 	 * @param theFilename
 	 */
 	public void storeJobMap(final String theFilename) {
@@ -54,10 +56,10 @@ public class JobMap{
 			System.out.println("Save job information fail!");
 		}
 	}
-	
+
 	/**
 	 * Load Job map from the local file system.
-	 * 
+	 * The file must be create by the storeJobMap method.
 	 * @param theFilename
 	 */
 	public void loadJobMap(final String theFilename) {
@@ -78,7 +80,7 @@ public class JobMap{
 			theClassNotFoundException.printStackTrace();
 		}
 	}
-	
+
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
@@ -86,11 +88,23 @@ public class JobMap{
 	public int size() {
 		return myJobs.size();
 	}
-
-	public Job[] getJobsArray() {
-		return myJobs.values().toArray(new Job[0]);
-	}
 	
+	/**
+	 * Return a sorted job array that prioritizing job that starts first,
+	 * or when they starts the same date, job that ends first.
+	 * 
+	 * @return sorted array of jobs
+	 */
+	public Job[] getSortedJobsArray() {
+		List<Job> valuesList = new ArrayList<>(myJobs.values());
+		Collections.sort(valuesList);
+		Job[] jobList = new Job[valuesList.size()];
+		for (int i = 0; i < valuesList.size(); i++) {
+			jobList[i] = valuesList.get(i);
+		}
+		return jobList;
+	}
+
 	public void displayJobs() {
 		System.out.println(myJobs.values().toString());
 	}
