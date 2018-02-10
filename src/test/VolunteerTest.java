@@ -20,10 +20,14 @@ import model.Volunteer;
  * 
  * @author Group 7
  * @version February 12, 2018
->>>>>>> 565a7ae51f7d86ba600f0d8d4c591dbe62690568
- *
  */
 public class VolunteerTest {
+	
+	/*
+	 * These dates are used to create different jobs on different
+	 * dates to test whether the different business rules are
+	 * satisfied. 
+	 */
 	
 	private static final LocalDate myFirstJobStartDate = 
 			LocalDate.now().plusDays(10);
@@ -50,13 +54,7 @@ public class VolunteerTest {
 	private static final LocalDate myThirdJobCandidateEndDate = 
 			myThirdJobCandidateStartDate;
 	
-	private Job myJobLessThanTwoDaysAway;
-	
-	private Job myJobEqualsToTwoDaysAway;
-
-	private Job myJobMoreThanTwoDayAway;			
-	
-	private static final LocalDate myJobStartDateLessThanTwoDaysAway = 
+	private static final LocalDate myJobStartDateLessThanTwoDaysAway =
 			LocalDate.now().plusDays(1);
 	
 	private static final LocalDate myJobStartDateTwoDaysAway = 
@@ -68,20 +66,21 @@ public class VolunteerTest {
 	private static final LocalDate myJobEndDate = 
 			LocalDate.now().plusDays(0); 
 	
-	private ParkManager myParkManager;
-	
-	private Volunteer myAnyVolunteer;
-	
-	
 	private Job myFirstJob;
 	private Job myFirstJobCandidate;
 	private Job mySecondJob;
 	private Job mySecondJobCandidate;
 	private Job myThirdJobCandidate;
 	
+	private Job myJobLessThanTwoDaysAway;
+	private Job myJobEqualsToTwoDaysAway;
+	private Job myJobMoreThanTwoDayAway;
+	
 	private JobMap myJobMap;
 	
+	private Volunteer myAnyVolunteer;
 	private Volunteer myVolunteer;
+	private ParkManager myParkManager;
 	
 	/**
 	 * Initialize filed.
@@ -94,32 +93,40 @@ public class VolunteerTest {
 		myJobMap = new JobMap();
 		
 		myFirstJob = new Job(myFirstJobStartDate, myFirstJobEndDate, 
-				"Discovery Park", myParkManager, "Seattle", "Pick up leaves");
+								"Discovery Park", myParkManager,
+								"Seattle", "Pick up leaves");
 		mySecondJob = new Job(mySecondJobStartDate, mySecondJobEndDate, 
-				"Seward Park", myParkManager, "Seattle", "Pick up leaves");
+								"Seward Park", myParkManager,
+								"Seattle", "Pick up leaves");
 		
-		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate, 
-				myFirstJobCandidateEndDate, "Volunteer Park", 
-				myParkManager, "Seattle", "Pick up leaves");
+		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate,
+										myFirstJobCandidateEndDate,
+										"Volunteer Park", myParkManager,
+										"Seattle", "Pick up leaves");
 		mySecondJobCandidate = new Job(mySecondJobCandidateStartDate, 
-				mySecondJobCandidateEndDate, "Gas Works Park", myParkManager, 
-				"Seattle", "Pick up leaves");
+										mySecondJobCandidateEndDate,
+										"Gas Works Park", myParkManager, 
+										"Seattle", "Pick up leaves");
 		myThirdJobCandidate = new Job(myThirdJobCandidateStartDate, 
-				myThirdJobCandidateEndDate, "Lincoln Park", myParkManager, 
-				"Seattle", "Pick up leaves");
+										myThirdJobCandidateEndDate,
+										"Lincoln Park", myParkManager,
+										"Seattle", "Pick up leaves");
 		myJobMap.addJob(myFirstJob);
 		myJobMap.addJob(mySecondJob);
 		
 		myAnyVolunteer = new Volunteer("Hasnah Said", "Hasnah", "Said");
 		myJobLessThanTwoDaysAway = new Job(myJobStartDateLessThanTwoDaysAway, 
-				myJobEndDate, "Discover Park", myParkManager, "Seattle, WA", 
-				"Pick up leaves");
-		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway, 
-				myJobEndDate, "Cherry Park", myParkManager, "Seattle, "
-						+ "WA", "Pick up leaves");
-		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway, 
-				myJobEndDate, "Kerry Park", myParkManager, "Seattle, WA", 
-				"Pick up leaves");
+											myJobEndDate, "Discover Park",
+											myParkManager, "Seattle, WA",
+											"Pick up leaves");
+		myJobEqualsToTwoDaysAway = new Job(myJobStartDateTwoDaysAway,
+											myJobEndDate, "Cherry Park",
+											myParkManager, "Seattle, "
+											+ "WA", "Pick up leaves");
+		myJobMoreThanTwoDayAway = new Job(myJobStartDateMoreThanTwoDaysAway,
+											myJobEndDate, "Kerry Park",
+											myParkManager, "Seattle, WA",
+											"Pick up leaves");
 	}
 	
 	/**
@@ -151,7 +158,8 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobStartsSameDayAsEndOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate, mySecondJob));
+		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate,
+													mySecondJob));
 	}
 	
 	/**
@@ -161,7 +169,8 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobEndSameDayAsStartOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate, mySecondJob));
+		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate,
+												mySecondJob));
 	}
 	
 	/**
@@ -170,17 +179,20 @@ public class VolunteerTest {
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginMoreThanMinimumNumberDays_True() {
-		assertTrue("Start date: " + myJobMoreThanTwoDayAway.getStartDate(), 
-				myAnyVolunteer.isAtLeastMinDays(myJobMoreThanTwoDayAway));
+		assertTrue("Start date: " + myJobMoreThanTwoDayAway
+					.getStartDate(), myAnyVolunteer
+					.isAtLeastMinDays(myJobMoreThanTwoDayAway));
 	}
 	
 	/**
-	 * Test a volunteer signs up for job that begins the day after tomorrow.
+	 * Test a volunteer signs up for job that begins the day after
+	 * tomorrow.
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactMinimumNumberDays_True() {
-		assertTrue("Start date: " + myJobEqualsToTwoDaysAway.getStartDate(), 
-				myAnyVolunteer.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
+		assertTrue("Start date: " + myJobEqualsToTwoDaysAway
+					.getStartDate(), myAnyVolunteer
+					.isAtLeastMinDays(myJobEqualsToTwoDaysAway));
 	}
 	
 	/**
@@ -189,6 +201,6 @@ public class VolunteerTest {
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanMinimumNumberDays_False() {
 		assertFalse("Start date: " + myJobLessThanTwoDaysAway.getStartDate(), 
-				myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
+					myAnyVolunteer.isAtLeastMinDays(myJobLessThanTwoDaysAway));
 	}
 }
