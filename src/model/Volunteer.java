@@ -67,8 +67,10 @@ public class Volunteer extends User implements Serializable {
 	
 	/**
 	 * Check whether the candidate job has conflict with the job has already signed up.
-	 * @param theCandidateJob the candidate job.
-	 * @param theCurrentJob the job has already signed up.
+	 * @param theCandidateJob 
+	 * 				the candidate job.
+	 * @param theCurrentJob 
+	 * 				the job has already signed up.
 	 * @return true if the candidate job does not conflict with the job has already signed up; 
 	 * 			false otherwise. 
 	 */
@@ -79,7 +81,6 @@ public class Volunteer extends User implements Serializable {
 	}
 	
 	/**
-	 * Return the minimums days from today that allow to signed up.
 	 * @return the minimums days from today that allow to signed up.
 	 */
 	public int getMaxDaysToSignUp() {
@@ -87,7 +88,6 @@ public class Volunteer extends User implements Serializable {
 	}
 	
 	/**
-	 * Return a list of job ID that a volunteer has signed up.
 	 * @return a list of job ID that a volunteer has signed up.
 	 */
 	public List<Integer> getJobList() {

@@ -82,7 +82,7 @@ public class VolunteerTest {
 	private Volunteer myVolunteer;
 	
 	/**
-	 * initialize filed.
+	 * Initialize filed.
 	 */
 	@Before
 	public void setUp() {
@@ -184,7 +184,7 @@ public class VolunteerTest {
 	}
 	
 	/**
-	 * test a volunteer signs up for job that begins much more than the minimum number of 
+	 * Test a volunteer signs up for job that begins much more than the minimum number of 
 	 * calendar days from the current date.
 	 */
 	@Test
@@ -194,7 +194,7 @@ public class VolunteerTest {
 	}
 	
 	/**
-	 * test a volunteer signs up for job that begins the day after tomorrow.
+	 * Test a volunteer signs up for job that begins the day after tomorrow.
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginExactMinimumNumberDays_True() {
@@ -203,7 +203,7 @@ public class VolunteerTest {
 	}
 	
 	/**
-	 * test a volunteer signs up for job that begins tomorrow.
+	 * Test a volunteer signs up for job that begins tomorrow.
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanMinimumNumberDays_False() {
