@@ -86,8 +86,13 @@ public class UrbanParkUI {
 	}
 
 	/**
+<<<<<<< HEAD
+	 * Prints out the welcome statements and prompts the user for next
+	 * task. If the user inputs an invalid input it will tell them to choose a 
+=======
 	 * Prints out the welcome statements and lets user choose what to
 	 * do. If user puts in wrong input it will tell them to choose a 
+>>>>>>> development-branch-brook
 	 * different input.
 	 * 
 	 * @return false when the user want to exit the program.
@@ -153,8 +158,10 @@ public class UrbanParkUI {
 	}
 
 	private static void welcomeUserMessage() {
-		System.out.println(">>> Welcome " + myCurrentUser.getFirstName() + " " + myCurrentUser.getLastName() + ". "
-				+ "You are logged in as a " + myCurrentUser.getUserType() + '.');
+		System.out.println(">>> Welcome " + myCurrentUser.getFirstName()
+							+ " " + myCurrentUser.getLastName() + ". "
+							+ "You are logged in as a " + myCurrentUser
+							.getUserType() + '.');
 	}
 
 	/**
