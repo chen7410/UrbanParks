@@ -19,8 +19,8 @@ import java.util.HashMap;
  * @author Group 7
  * @version February 12, 2018
  */
-public class JobMap{
-	
+public class JobMap {
+
 	private HashMap<Integer, Job> myJobs;
 
 	public JobMap() {
@@ -31,12 +31,12 @@ public class JobMap{
 	 * Pre-condition: theJob must pass all business rules before being added.
 	 * Post-condition:theJob is added myJobs JobMap.
 	 * 
-	 * @param theJob 
+	 * @param theJob
 	 */
 	public void addJob(final Job theJob) {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
-	
+
 	/**
 	 * Store Job maps on local file system.
 	 * 
@@ -54,7 +54,7 @@ public class JobMap{
 			System.out.println("Save job information fail!");
 		}
 	}
-	
+
 	/**
 	 * Load Job map from the local file system.
 	 * 
@@ -78,7 +78,7 @@ public class JobMap{
 			theClassNotFoundException.printStackTrace();
 		}
 	}
-	
+
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
@@ -90,7 +90,7 @@ public class JobMap{
 	public Job[] getJobsArray() {
 		return myJobs.values().toArray(new Job[0]);
 	}
-	
+
 	public void displayJobs() {
 		System.out.println(myJobs.values().toString());
 	}

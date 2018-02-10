@@ -71,7 +71,7 @@ public class ParkManager extends User implements Serializable {
 		LocalDate jobEndDate = theJob.getEndDate();
 
 		Period diff = Period.between(jobStartDate, jobEndDate);
-		int daysDifference = diff.getDays();
+		int daysDifference = diff.getDays() + 1;
 
 		if (daysDifference > MAX_JOB_LENGTH) {
 			return false;
