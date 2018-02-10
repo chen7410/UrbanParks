@@ -288,10 +288,9 @@ public class UrbanParkUI {
 
 			Job job = new Job(jobStartDate, jobEndDate, parkName, myParkManager, jobLocation, jobDescription);
 			System.out.println(job);
-			System.out.println();
 
 			if (!myParkManager.isJobEndsWithinMaxDays(job) || !myParkManager.isJobWithinMaxDays(job)) {
-				System.out.println("We cannot submit this job:");
+				System.out.println("This job cannot be submitted:");
 				if (!myParkManager.isJobWithinMaxDays(job)) {
 					System.out.println("Your job takes more than " + myParkManager.getMaxJobLength() + " days.");
 				}
@@ -578,7 +577,7 @@ public class UrbanParkUI {
 			System.out.println(">>> Here are your upcoming jobs:");
 			List<Integer> jobIDList = myVolunteer.getJobList();
 			for (int i = 1; i <= jobIDList.size(); i++) {
-				System.out.println("    " + i + ". " + myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
+				System.out.println("        " + i + ". " + myJobs.getJob(jobIDList.get(i - 1)).getJobSummary());
 			}
 
 			if (jobIDList.size() == 0) {
@@ -636,7 +635,7 @@ public class UrbanParkUI {
 	}
 
 	/**
-	 * Checks if the job conlicts with any job a volunteer current has.
+	 * Checks if the job conflicts with any job a volunteer current has.
 	 * @param theCandidateJob
 	 * 					the job to check
 	 * @return true if there are conflicts, false otherwise
