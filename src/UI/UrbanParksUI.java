@@ -560,7 +560,7 @@ public class UrbanParksUI {
 					Job job = validJobs.get(selection - 1);
 					jobSignUpVerification(job);
 					printVolunteerSignedUpJobs(false);
-					System.out.println(">>> \nWould you like to sign up for"
+					System.out.println("\n>>> Would you like to sign up for"
 										+ " another job?");
 					System.out.println(YES_OR_NO_MESSAGE);
 					boolean isExit = false;
