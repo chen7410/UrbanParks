@@ -36,7 +36,7 @@ public class UrbanParksUI {
 								">>> Please enter a valid option.\n";
 
 	private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
-	
+
 	private static final String SELECT_A_NUMBER_MESSAGE = "    "
 									+ "(Please select a number)";
 
@@ -89,6 +89,7 @@ public class UrbanParksUI {
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
+	
 
 	/**
 	 * Prints out the welcome statements and lets user choose what to
