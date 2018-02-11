@@ -105,7 +105,7 @@ public class UrbanParksUI {
 			System.out.println(">>> Urban Parks is a system where you"
 								+ " can sign up for volunteering jobs"
 								+ "\n    or create new volunteering"
-								+ " job.\n");
+								+ " jobs.\n");
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
 			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			System.out.println("        1. Log in");
