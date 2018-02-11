@@ -178,17 +178,19 @@ public class UrbanParksUI {
 		boolean isExit = false;
 		while (!isExit) {
 			welcomeUserMessage();
-			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
-			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			String[] message = { ". Submit a new job",
 					". View all your submitted jobs",
-					". Log out\n\n" };
+					". Log out\n" };
 			int index = 0;
 			int choiceModifier = 0;
 			if (!myParkManager.isLessThanMaxJobs(myJobs)) {
 				index = 1;
 				choiceModifier = 1;
+				System.out.println(">>> The system currently has the maximum number of jobs.");
+				System.out.println("    New jobs cannot be added.");
 			}
+			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
+			System.out.println(SELECT_A_NUMBER_MESSAGE);
 			for (int i = 1; index < message.length; i++, index++) {
 				System.out.println("        " + i + message[index]);
 			}
@@ -325,29 +327,33 @@ public class UrbanParksUI {
 				jobDetailsVerification(job);
 				printParkManagerSubmittedJobs(false);
 			}
-
-			System.out.println(">>> Would you like to submit another"
-								+ " job?");
-			System.out.println(YES_OR_NO_MESSAGE);
-
-			isExit = false;
-			while (!isExit) {
-				System.out.print(USER_INPUT_MESSAGE);
-				switch (myScanner.nextLine().toLowerCase()) {
-				case "yes":
-					System.out.println();
-					isExit = true;
-					break;
-				case "no":
-					System.out.println();
-					isExit = true;
-					isFillOutJob = false;
-					break;
-				default:
-					System.out.println(INVALID_INPUT_MESSAGE);
-					break;
+			if (myParkManager.isLessThanMaxJobs(myJobs)) {
+				System.out.println(">>> Would you like to submit another"
+						+ " job?");
+				System.out.println(YES_OR_NO_MESSAGE);
+			
+				isExit = false;
+				while (!isExit) {
+					System.out.print(USER_INPUT_MESSAGE);
+					switch (myScanner.nextLine().toLowerCase()) {
+					case "yes":
+						System.out.println();
+						isExit = true;
+						break;
+					case "no":
+						System.out.println();
+						isExit = true;
+						isFillOutJob = false;
+						break;
+					default:
+						System.out.println(INVALID_INPUT_MESSAGE);
+						break;
+					}
 				}
+			} else {
+				isFillOutJob = false;
 			}
+			
 		}
 	}
 
