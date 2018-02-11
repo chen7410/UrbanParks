@@ -4,7 +4,7 @@
  * Urban Parks Project
  */
 
-package UI;
+package ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -65,7 +65,7 @@ public class UrbanParksUI {
 
 	private static Volunteer myVolunteer;
 
-	public static void main(final String[] theArgs) {
+	public static void main(final String[] theArgs) {		
 		init();
 		while (welcome()) {
 			if (myCurrentUser instanceof ParkManager) {
