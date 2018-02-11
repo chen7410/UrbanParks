@@ -29,6 +29,7 @@ public class ParkManager extends User implements Serializable {
 
 	private static final int MAX_JOB_LENGTH = 3;
 
+	/** The system cannot add jobs that goes beyond the maximum end date*/
 	private static final int MAX_END_DAY = 75;
 	
 	/** List of job IDs this Park manager manages.*/

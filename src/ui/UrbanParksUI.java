@@ -36,7 +36,7 @@ public class UrbanParksUI {
 								">>> Please enter a valid option.\n";
 
 	private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
-
+	
 	private static final String SELECT_A_NUMBER_MESSAGE = "    "
 									+ "(Please select a number)";
 
@@ -65,7 +65,7 @@ public class UrbanParksUI {
 
 	private static Volunteer myVolunteer;
 
-	public static void main(final String[] theArgs) {		
+	public static void main(final String[] theArgs) {
 		init();
 		while (welcome()) {
 			if (myCurrentUser instanceof ParkManager) {
@@ -79,7 +79,7 @@ public class UrbanParksUI {
 	}
 
 	/** Initializing all the fields and loading in necessary data.*/
-	private static void init() {
+	private static void init() {		
 		myJobs = new JobMap();
 		myUsers = new UserMap();
 		
@@ -313,7 +313,7 @@ public class UrbanParksUI {
 					!myParkManager.isJobWithinMaxDays(job)) {
 				System.out.println("This job cannot be submitted:");
 				if (!myParkManager.isJobWithinMaxDays(job)) {
-					System.out.println("Your job takes more than "
+					System.out.println("The job takes more than "
 										+ myParkManager.getMaxJobLength()
 										+ " days.");
 				}
