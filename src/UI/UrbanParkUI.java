@@ -78,7 +78,7 @@ public class UrbanParkUI {
 	private static void init() {
 		myJobs = new JobMap();
 		myUsers = new UserMap();
-
+		
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		myUsers.loadUserMap(USERS_DATA_FILE);
 
