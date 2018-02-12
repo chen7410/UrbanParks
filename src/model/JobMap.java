@@ -32,7 +32,7 @@ public class JobMap {
 
 	/**
 	 * Pre-condition: theJob must pass all business rules before being added.
-	 * Post-condition:theJob is added myJobs JobMap.
+	 * Post-condition:theJob is added to myJobs JobMap.
 	 * 
 	 * @param theJob
 	 */
@@ -42,6 +42,7 @@ public class JobMap {
 
 	/**
 	 * Store Job maps on local file system. File type must be a .ser.
+	 * 
 	 * @param theFilename
 	 */
 	public void storeJobMap(final String theFilename) {
@@ -59,6 +60,7 @@ public class JobMap {
 
 	/**
 	 * Load Job map from the local file system.
+	 * 
 	 * The file must be create by the storeJobMap method.
 	 * @param theFilename
 	 */

@@ -79,6 +79,9 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
+	 * Checks if theCandidateJob is overlapping with 
+	 * the other jobs signed up for.
+	 * 
 	 * @param theCandidateJob
 	 * @return true when jobs overlap otherwise return false.
 	 * 
@@ -104,7 +107,8 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 	
 	/**
-	 * @return format the job details. 
+	 * @return String summary of the job in the following format:
+	 * 		   Park Name: Start Date - End Date 
 	 */
 	public String getJobSummary() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
