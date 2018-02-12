@@ -50,7 +50,7 @@ public class UrbanParksUI {
 	private static final String YES_OR_NO_MESSAGE = "    "
 									+ "(Please enter Yes or No)\n";
 
-	private static User myCurrentUser;
+	private static User myCurrentUser; 
 
 	private static JobMap myJobs;
 
