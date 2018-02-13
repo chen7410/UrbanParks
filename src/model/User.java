@@ -20,6 +20,8 @@ public abstract class User implements Serializable {
      */
 	private static final long serialVersionUID = 1L;
 	
+	private static final int MIN_NUM_DAYS_IN_THE_FUTURE = 3;
+	
 	private String myUserName;
 	private String myFirstName;
 	private String myLastName;
@@ -57,6 +59,10 @@ public abstract class User implements Serializable {
 
 	public String getUserType() {
 		return myUserType;
+	}
+	
+	public int getMinDaysInTheFuture() {
+		return MIN_NUM_DAYS_IN_THE_FUTURE;
 	}
 
 	/**
