@@ -94,13 +94,19 @@ public class ParkManager extends User implements Serializable {
 	 * @param theJob The job to check
 	 * @return True if end date is MAX_END_DAY days or less from now.
 	 */
-	public boolean isJobEndsWithinMaxDays (final Job theJob) {
+	public boolean isJobEndsWithinMaxDays(final Job theJob) {
 		return theJob.getEndDate().isBefore(LocalDate.now().plusDays
 													(MAX_END_DAY + 1));
 	}
 	
-	public void removeJob(final Job theJob) {
-		myJobs.remove(theJob);
+	public boolean removeJob(final Job theJob) {
+		Period difference = Period.between(theJob.getStartDate(), LocalDate.now().plusDays(1));
+		int daysDifference = difference.getDays();
+		
+		if (daysDifference >= this.getMinDaysInTheFuture()) {
+			return myJobs.remove(theJob);
+		}
+		return false;
 	}
 	
 	public int getMaxJobAmount() {
