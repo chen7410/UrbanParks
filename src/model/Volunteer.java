@@ -6,7 +6,6 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class Volunteer extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
-	
-	private final static int JOB_START_DATE_IS_MIN_DAYS_AWAY= 3;
 	
 	/**
 	 * List of jobs this volunteer has signed up for.
@@ -44,17 +41,18 @@ public class Volunteer extends User implements Serializable {
 	 * @param theJob the specified that being removed from the list.
 	 * @return true if the job remove from the list. otherwise, throw exception.
 	 * @exception IllegalArgumentException when try to cancel a job that is 
-	 * less than the minimum days from current date.
+	 * less than the minimum days from the current date.
 	 */
 	public boolean cancelJob(final Job theJob) {
 		LocalDate allowedDate = 
-				LocalDate.now().plusDays(JOB_START_DATE_IS_MIN_DAYS_AWAY);
+				LocalDate.now().plusDays(getMinDaysInTheFuture());
 		if (!theJob.getStartDate().isBefore(allowedDate)) {
-			return myJobs.remove(theJob);
+			
+			return myJobs.remove((Integer)theJob.getJobID());
 		} else {
 			throw new IllegalArgumentException("Can not cancel a"
 					+ " job that is less than " + 
-					JOB_START_DATE_IS_MIN_DAYS_AWAY + "days "
+					getMinDaysInTheFuture() + "days "
 							+ "from current date.");
 		}
 	}
