@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package test;
 
 import static org.junit.Assert.*;
@@ -11,8 +15,7 @@ import model.ParkManager;
 /**
  * JUnit to test the business rules for ParkManager.java
  * 
- * @author Tuan
- * @author Hasnah
+ * @author Group 7
  * @version 2/4/2018
  */
 public class ParkManagerTest {

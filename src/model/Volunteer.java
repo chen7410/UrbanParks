@@ -58,10 +58,9 @@ public class Volunteer extends User implements Serializable {
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
 		boolean result = false;
-		final Period period = LocalDate.now().until(theJob
-													.getStartDate());
-		final int dayDifferent = period.getDays();
-		if (dayDifferent >= MAX_DAYS_TO_SIGN_UP) {
+		LocalDate date = LocalDate.now().plusDays(MAX_DAYS_TO_SIGN_UP);
+		
+		if (!date.isAfter(theJob.getStartDate())) {
 			result = true;
 		}
 		return result;

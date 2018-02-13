@@ -187,7 +187,7 @@ public class UrbanParksUI {
 			if (!myParkManager.isLessThanMaxJobs(myJobs)) {
 				index = 1;
 				choiceModifier = 1;
-				System.out.println(">>> The system currently has the maximum number of jobs.");
+				System.out.println(">>> The system currently has the maximum number of jobs." + myJobs.size());
 				System.out.println("    New jobs cannot be added.");
 			}
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
