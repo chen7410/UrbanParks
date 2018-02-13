@@ -32,17 +32,17 @@ public class VolunteerTest {
 	private static final LocalDate myFirstJobStartDate = 
 			LocalDate.now().plusDays(10);
 	private static final LocalDate myFirstJobEndDate = 
-			myFirstJobStartDate.plusDays(2);;
+			myFirstJobStartDate.plusDays(3);;
 	
 	private static final LocalDate mySecondJobStartDate = 
 			LocalDate.now().plusDays(16);
 	private static final LocalDate mySecondJobEndDate = 
-			mySecondJobStartDate.plusDays(2);
+			mySecondJobStartDate.plusDays(3);
 	
 	private static final LocalDate myFirstJobCandidateStartDate = 
 			LocalDate.now().plusDays(14);
 	private static final LocalDate myFirstJobCandidateEndDate = 
-			myFirstJobCandidateStartDate.plusDays(2);
+			myFirstJobCandidateStartDate.plusDays(3);
 	
 	private static final LocalDate mySecondJobCandidateStartDate = 
 			LocalDate.now().plusDays(18);
@@ -58,7 +58,7 @@ public class VolunteerTest {
 			LocalDate.now().plusDays(1);
 	
 	private static final LocalDate myJobStartDateTwoDaysAway = 
-			LocalDate.now().plusDays(2);
+			LocalDate.now().plusDays(3);
 	
 	private static final LocalDate myJobStartDateMoreThanTwoDaysAway = 
 			LocalDate.now().plusDays(20);
