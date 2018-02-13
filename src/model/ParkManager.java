@@ -104,7 +104,7 @@ public class ParkManager extends User implements Serializable {
 		int daysDifference = difference.getDays();
 		
 		if (daysDifference >= this.getMinDaysInTheFuture()) {
-			return myJobs.remove(theJob);
+			return myJobs.remove((Integer) theJob.getJobID());
 		}
 		return false;
 	}
