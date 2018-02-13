@@ -23,6 +23,8 @@ public class Volunteer extends User implements Serializable {
 	
 	private final static int MAX_DAYS_TO_SIGN_UP = 2;
 	
+	private final static int JOB_START_DATE_IS_MIN_DAYS_AWAY= 3;
+	
 	/**
 	 * List of jobs this volunteer has signed up for.
 	 */
@@ -33,6 +35,28 @@ public class Volunteer extends User implements Serializable {
 		super(theUserName, theFirstName, theLastName);
 		myJobs = new ArrayList<>();
 		this.setUserType("Volunteer");
+	}
+	
+	/**
+	 * Cancel the specified job from a Volunteer job list.
+	 * Precondition: the specified job must be in a volunteer job list.
+	 * Postcondition: the specified job remove from a volunteer job list.
+	 * @param theJob the specified that being removed from the list.
+	 * @return true if the job remove from the list. otherwise, throw exception.
+	 * @exception IllegalArgumentException when try to cancel a job that is 
+	 * less than the minimum days from current date.
+	 */
+	public boolean cancelJob(final Job theJob) {
+		LocalDate allowedDate = 
+				LocalDate.now().plusDays(JOB_START_DATE_IS_MIN_DAYS_AWAY);
+		if (!theJob.getStartDate().isBefore(allowedDate)) {
+			return myJobs.remove(theJob);
+		} else {
+			throw new IllegalArgumentException("Can not cancel a"
+					+ " job that is less than " + 
+					JOB_START_DATE_IS_MIN_DAYS_AWAY + "days "
+							+ "from current date.");
+		}
 	}
 	
 	/**
@@ -59,7 +83,6 @@ public class Volunteer extends User implements Serializable {
 	public boolean isAtLeastMinDays(final Job theJob) {
 		boolean result = false;
 		LocalDate date = LocalDate.now().plusDays(MAX_DAYS_TO_SIGN_UP);
-		
 		if (!date.isAfter(theJob.getStartDate())) {
 			result = true;
 		}

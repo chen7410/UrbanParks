@@ -50,7 +50,7 @@ public class UrbanParksUI {
 	private static final String YES_OR_NO_MESSAGE = "    "
 									+ "(Please enter Yes or No)\n";
 
-	private static User myCurrentUser;
+	private static User myCurrentUser; 
 
 	private static JobMap myJobs;
 
@@ -314,12 +314,12 @@ public class UrbanParksUI {
 					!myParkManager.isJobWithinMaxDays(job)) {
 				System.out.println("This job cannot be submitted:");
 				if (!myParkManager.isJobWithinMaxDays(job)) {
-					System.out.println("The job takes more than "
+					System.out.println("    The job takes more than "
 										+ myParkManager.getMaxJobLength()
-										+ " days.");
+										+ " days to complete.");
 				}
 				if (!myParkManager.isJobEndsWithinMaxDays(job)) {
-					System.out.println("Your job ends more than "
+					System.out.println("    The job's end date is more than  "
 										+ myParkManager.getMaxEndDay()
 										+ " days from today.");
 				}
