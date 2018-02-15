@@ -82,14 +82,11 @@ public class UrbanParksUI {
 	private static void init() {		
 		myJobs = new JobMap();
 		myUsers = new UserMap();
-		
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		myUsers.loadUserMap(USERS_DATA_FILE);
-
 		myScanner = new Scanner(System.in);
 		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 	}
-	
 
 	/**
 	 * Prints out the welcome statements and lets user choose what to
@@ -187,7 +184,7 @@ public class UrbanParksUI {
 			if (!myParkManager.isLessThanMaxJobs(myJobs)) {
 				index = 1;
 				choiceModifier = 1;
-				System.out.println(">>> The system currently has the maximum number of jobs." + myJobs.size());
+				System.out.println(">>> The system currently has the maximum number of jobs.");
 				System.out.println("    New jobs cannot be added.");
 			}
 			System.out.println(WHAT_WOULD_LIKE_TO_DO_MESSAGE);
@@ -315,12 +312,12 @@ public class UrbanParksUI {
 				System.out.println("This job cannot be submitted:");
 				if (!myParkManager.isJobWithinMaxDays(job)) {
 					System.out.println("    The job takes more than "
-										+ myParkManager.getMaxJobLength()
+										+ Job.MAX_JOB_LENGTH
 										+ " days to complete.");
 				}
 				if (!myParkManager.isJobEndsWithinMaxDays(job)) {
 					System.out.println("    The job's end date is more than  "
-										+ myParkManager.getMaxEndDay()
+										+ Job.MAX_END_DAY
 										+ " days from today.");
 				}
 				System.out.println();
@@ -404,10 +401,10 @@ public class UrbanParksUI {
 											theIsAbleToViewDetails) {
 		do {
 			System.out.println(">>> Here are your submitted jobs:");
-			List<Integer> jobIDList = myParkManager.getJobList();
+			List<Job> jobList = myParkManager.getJobList();
 			List<Job> sortedJobList = new ArrayList<>();
-			for (int i = 0; i < jobIDList.size(); i++) {
-				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
+			for (int i = 0; i < jobList.size(); i++) {
+				sortedJobList.add(jobList.get(i));
 			}
 			Collections.sort(sortedJobList);
 			
@@ -536,7 +533,7 @@ public class UrbanParksUI {
 			List<Job> validJobs = new ArrayList<>();
 			for (int i = 0; i < jobList.length; i++) {
 				if (myVolunteer.isAtLeastMinDays(jobList[i]) && 
-								!isSameDayConflictCheck(jobList[i])) {
+								!myVolunteer.isSameDayConflict(jobList[i])) {
 					validJobs.add(jobList[i]);
 				}
 			}
@@ -634,10 +631,10 @@ public class UrbanParksUI {
 											theIsAbleToViewDetails) {
 		do {
 			System.out.println(">>> Here are your upcoming jobs:");
-			List<Integer> jobIDList = myVolunteer.getJobList();
+			List<Job> jobList = myVolunteer.getJobList();
 			List<Job> sortedJobList = new ArrayList<>();
-			for (int i = 0; i < jobIDList.size(); i++) {
-				sortedJobList.add(myJobs.getJob(jobIDList.get(i)));
+			for (int i = 0; i < jobList.size(); i++) {
+				sortedJobList.add(jobList.get(i));
 			}
 			Collections.sort(sortedJobList);
 			
@@ -705,24 +702,6 @@ public class UrbanParksUI {
 
 			}
 		} while (theIsAbleToViewDetails);
-	}
-
-	/**
-	 * Checks if the job conflicts with any job a volunteer current
-	 * has.
-	 * 
-	 * @param theCandidateJob
-	 * 					the job to check
-	 * @return true if there are conflicts, false otherwise
-	 */
-	private static boolean isSameDayConflictCheck(final Job 
-													theCandidateJob) {
-		boolean result = false;
-		for (int jobID : myVolunteer.getJobList()) {
-			result = result || myVolunteer.isSameDayConflict(
-							theCandidateJob, myJobs.getJob(jobID));
-		}
-		return result;
 	}
 
 	private static void exitSystemMessage() {

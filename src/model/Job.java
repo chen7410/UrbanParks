@@ -22,6 +22,16 @@ public class Job implements Serializable, Comparable<Job> {
      * A generated serial version UID for object Serialization.
      */
 	private static final long serialVersionUID = 1L;
+	
+	public final static int MAX_DAYS_TO_SIGN_UP = 3;
+	
+	/** The maximum number of pending jobs in the system.*/
+	public static int MAX_JOB_AMOUNT = 10;
+
+	public static final int MAX_JOB_LENGTH = 4;
+
+	/** The system cannot add jobs that goes beyond the maximum end date*/
+	public static final int MAX_END_DAY = 60;
 
 	private final int myJobID;
 
@@ -77,34 +87,6 @@ public class Job implements Serializable, Comparable<Job> {
 	public String getDescription() {
 		return myDescription;
 	}
-
-	/**
-	 * Checks if theCandidateJob is overlapping with 
-	 * the other jobs signed up for.
-	 * 
-	 * @param theCandidateJob
-	 * @return true when jobs overlap otherwise return false.
-	 * 
-	 */
-	public boolean isOverLappingDay(Job theCandidateJob) {
-		boolean overlaps = false;
-
-		if (theCandidateJob.getStartDate().isAfter(myStartDate) 
-				&& theCandidateJob.getStartDate().isBefore(myEndDate)) {
-			overlaps = true;
-		} else if (theCandidateJob.getEndDate().isAfter(myStartDate)
-				&& theCandidateJob.getEndDate().isBefore(myEndDate)) {
-			overlaps = true;
-		} else if (theCandidateJob.getStartDate().isEqual(myStartDate)
-				|| theCandidateJob.getStartDate().isEqual(myEndDate)) {
-			overlaps = true;
-		} else if (theCandidateJob.getEndDate().isEqual(myStartDate)
-				|| theCandidateJob.getEndDate().isEqual(myEndDate)) {
-			overlaps = true;
-		}
-
-		return overlaps;
-	}
 	
 	/**
 	 * @return String summary of the job in the following format:
@@ -141,7 +123,7 @@ public class Job implements Serializable, Comparable<Job> {
 			return -1;
 		} else if (myStartDate.isAfter(o.getStartDate())) {
 			return 1;
-		} else  {
+		} else {
 			return 0;
 		}
 	}

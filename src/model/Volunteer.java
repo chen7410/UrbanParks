@@ -6,8 +6,6 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represents a volunteer.
@@ -19,19 +17,11 @@ public class Volunteer extends User implements Serializable {
 
 	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
-	
-	private final static int MAX_DAYS_TO_SIGN_UP = 3;
-	
-	/**
-	 * List of jobs this volunteer has signed up for.
-	 */
-	private List<Integer> myJobs;
-	
+
 	public Volunteer(final String theUserName, final String theFirstName,
 						final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		myJobs = new ArrayList<>();
-		this.setUserType("Volunteer");
+		setUserType("Volunteer");
 	}
 	
 	/**
@@ -66,7 +56,7 @@ public class Volunteer extends User implements Serializable {
 	 * 			the job a volunteer want to sign up.
 	 */
 	public void signup(final Job theJob) {
-		myJobs.add(theJob.getJobID());
+		myJobs.add(theJob);
 	}
 	
 	/**
@@ -80,7 +70,7 @@ public class Volunteer extends User implements Serializable {
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
 		boolean result = false;
-		LocalDate date = LocalDate.now().plusDays(MAX_DAYS_TO_SIGN_UP);
+		LocalDate date = LocalDate.now().plusDays(Job.MAX_DAYS_TO_SIGN_UP);
 		if (!date.isAfter(theJob.getStartDate())) {
 			result = true;
 		}
@@ -98,29 +88,24 @@ public class Volunteer extends User implements Serializable {
 	 * @return true if the candidate job does not conflict with the
 	 * 			job has already signed up; false otherwise.
 	 */
-	public boolean isSameDayConflict(final Job theCandidateJob,
-										final Job theCurrentJob) {
+	public boolean isSameDayConflict(final Job theCandidateJob) {
 		boolean overlaps = false;
-		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob)
-					|| overlaps;
+		for (int i = 0; i < myJobs.size(); i++) {
+			Job currentJob = myJobs.get(i);
+			overlaps = overlaps
+					|| theCandidateJob.getStartDate().isEqual(currentJob.getStartDate())
+					|| theCandidateJob.getStartDate().isEqual(currentJob.getEndDate())
+					|| theCandidateJob.getEndDate().isEqual(currentJob.getStartDate())
+					|| theCandidateJob.getEndDate().isEqual(currentJob.getEndDate())
+					|| theCandidateJob.getEndDate().isAfter(currentJob.getStartDate())
+					&& theCandidateJob.getEndDate().isBefore(currentJob.getEndDate())
+					|| theCandidateJob.getStartDate().isAfter(currentJob.getStartDate())
+					&& theCandidateJob.getStartDate().isBefore(currentJob.getEndDate());
+			if (overlaps) {
+				i = myJobs.size();
+			}
+		}
+		
 		return overlaps;
-	}
-	
-	/**
-	 * Return the minimums days from today that allow to signed up.
-	 * 
-	 * @return the minimums days from today that allow to signed up.
-	 */
-	public int getMaxDaysToSignUp() {
-		return MAX_DAYS_TO_SIGN_UP;
-	}
-	
-	/**
-	 * Return a list of job ID that a volunteer has signed up.
-	 * 
-	 * @return a list of job ID that a volunteer has signed up.
-	 */
-	public List<Integer> getJobList() {
-		return myJobs;
 	}
 }

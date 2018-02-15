@@ -24,84 +24,40 @@ public class ParkManagerTest {
 	private ParkManager myPM;
 
 	private Job myJobEndsInFewerDaysThanMaxDays;
-	
 	private Job myJobEndInMaxDays;
-	
 	private Job myJobEndsInOneMoreDayThanMaxDays;
-	
 	private Job myJobTakesOneDayLessThanMax;
-	
-	private LocalDate myJobOneLessDayStartDate; 
-	
-	private LocalDate myJobOneLessDayEndDate;
-
 	private Job myJobTakesExactlyMaxDays;
-	
-	private LocalDate myJobExactlyMaxStartDate;
-	
-	private LocalDate myJobExactlyMaxEndDate; 
-
 	private Job myJobTakesOneDayMoreThanMax;
-	
-	private LocalDate myJobOneMoreDayStartDate;
-	
-	private LocalDate myJobOneMoreDayEndDate;
 
 	@Before
 	public void setUp() throws Exception {
 		myPM = new ParkManager("hasnahsaid", "Hasnah", "Said");
-		int random = (int) (Math.random() * myPM.getMaxEndDay() );
+		int random = (int) (Math.random() * Job.MAX_END_DAY);
 		myJobEndsInFewerDaysThanMaxDays = new Job(LocalDate.now(), 
 				LocalDate.now().plusDays(random), "Cal Anderson", myPM, 
 				"Seattle, WA", "Pick up leaves");
 		myJobEndInMaxDays = new Job(LocalDate.now(), 
-				LocalDate.now().plusDays(myPM.getMaxEndDay()), 
+				LocalDate.now().plusDays(Job.MAX_END_DAY), 
 				"Gas Works Park", myPM, "Seattle, WA", "Pick up leaves");
 		
 		myJobEndsInOneMoreDayThanMaxDays = new Job(LocalDate.now(),
-				LocalDate.now().plusDays(myPM.getMaxEndDay() + 1), 
+				LocalDate.now().plusDays(Job.MAX_END_DAY + 1), 
 				"Cal Anderson", myPM, "Seattle, WA", "Pick up leaves");
 	
 		// A job that takes one less day than max.
-		 myJobOneLessDayStartDate = LocalDate.of(2018, 02, 01);
-		 myJobOneLessDayEndDate = LocalDate.of(2018, 02, 03);
-		 myJobTakesOneDayLessThanMax = new Job(myJobOneLessDayStartDate,
-				 myJobOneLessDayEndDate, "Cal Anderson",
+		 myJobTakesOneDayLessThanMax = new Job(LocalDate.now(),
+				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH - 1), "Cal Anderson",
 				 myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes exactly the max days.
-		 myJobExactlyMaxStartDate = LocalDate.of(2018, 02, 10);
-		 myJobExactlyMaxEndDate = LocalDate.of(2018, 02, 12);
-		 myJobTakesExactlyMaxDays = new Job(myJobExactlyMaxStartDate, 
-				 myJobExactlyMaxEndDate, "Gas Works Park", 
+		 myJobTakesExactlyMaxDays = new Job(LocalDate.now(), 
+				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH), "Gas Works Park", 
 				 myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes one more than max days.
-		myJobOneMoreDayStartDate = LocalDate.of(2018, 02, 20);
-		myJobOneMoreDayEndDate = LocalDate.of(2018, 02, 24);
-		myJobTakesOneDayMoreThanMax = new Job(myJobOneMoreDayStartDate, 
-				myJobOneMoreDayEndDate, "Volunteer Park", 
-				myPM, "Seattle, WA", "Pick up leaves");
-		
-		// A job that takes one day less than max
-		myJobOneLessDayStartDate = LocalDate.of(2018, 02, 01);
-		myJobOneLessDayEndDate = LocalDate.of(2018, 02, 03);
-		myJobTakesOneDayLessThanMax = new Job(myJobOneLessDayStartDate, 
-				myJobOneLessDayEndDate, "Cal Anderson", 
-				myPM, "Seattle, WA", "Pick up leaves");
-
-		// A job that takes exactly max days
-		myJobExactlyMaxStartDate = LocalDate.of(2018, 02, 10);
-		myJobExactlyMaxEndDate = LocalDate.of(2018, 02, 12);
-		myJobTakesExactlyMaxDays = new Job(myJobExactlyMaxStartDate, 
-				myJobExactlyMaxEndDate, "Gas Works Park", 
-				myPM, "Seattle, WA", "Pick up leaves");
-
-		// A job that takes one day more than max
-		myJobOneMoreDayStartDate = LocalDate.of(2018, 02, 20);
-		myJobOneMoreDayEndDate = LocalDate.of(2018, 02, 24);
-		myJobTakesOneDayMoreThanMax = new Job(myJobOneMoreDayStartDate, 
-				myJobOneMoreDayEndDate, "Volunteer Park", 
+		myJobTakesOneDayMoreThanMax = new Job(LocalDate.now(), 
+				LocalDate.now().plusDays(Job.MAX_JOB_LENGTH + 1), "Volunteer Park", 
 				myPM, "Seattle, WA", "Pick up leaves");
 	}
 
@@ -140,6 +96,4 @@ public class ParkManagerTest {
 		assertFalse("The job takes one day more than the maximum days.", 
 					myPM.isJobWithinMaxDays(myJobTakesOneDayMoreThanMax));
 	}
-
-	
 }

@@ -7,10 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.time.temporal.ChronoUnit;
 /**
  * This class represents a park manager.
  * 
@@ -23,23 +20,11 @@ public class ParkManager extends User implements Serializable {
      * A generated serial version UID for object Serialization.
      */
 	private static final long serialVersionUID = 1L;
-	
-	/** The maximum number of pending jobs in the system.*/
-	private static final int MAX_JOB_AMOUNT = 10;
-
-	private static final int MAX_JOB_LENGTH = 3;
-
-	/** The system cannot add jobs that goes beyond the maximum end date*/
-	private static final int MAX_END_DAY = 60;
-	
-	/** List of job IDs this Park manager manages.*/
-	private List<Integer> myJobs;
 
 	public ParkManager(final String theUserName, final String
 						theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		this.setUserType("Park Manager");
-		myJobs = new ArrayList<>();
+		setUserType("Park Manager");
 	}
 
 	/**
@@ -49,7 +34,7 @@ public class ParkManager extends User implements Serializable {
 	 * @param theJob the job that is being submitted.
 	 */
 	public void createJob(final Job theJob) {
-		myJobs.add(theJob.getJobID());
+		myJobs.add(theJob);
 	}
 
 	/**
@@ -61,7 +46,7 @@ public class ParkManager extends User implements Serializable {
 	 * 			than the maximum number allowed and false otherwise.
 	 */
 	public boolean isLessThanMaxJobs(final JobMap theJobList) {
-		return theJobList.size() < MAX_JOB_AMOUNT;
+		return theJobList.size() < Job.MAX_JOB_AMOUNT;
 	}
 	
 	/**
@@ -73,17 +58,12 @@ public class ParkManager extends User implements Serializable {
 	 */
 	public boolean isJobWithinMaxDays(final Job theJob) {
 		boolean withinMaxDays = true;
+		Long daysDifference = ChronoUnit.DAYS.between(theJob.getStartDate(),
+													theJob.getEndDate());
 
-		LocalDate jobStartDate = theJob.getStartDate();
-		LocalDate jobEndDate = theJob.getEndDate();
-
-		Period diff = Period.between(jobStartDate, jobEndDate);
-		int daysDifference = diff.getDays() + 1;
-
-		if (daysDifference > MAX_JOB_LENGTH) {
+		if (daysDifference > Job.MAX_JOB_LENGTH) {
 			return false;
 		}
-
 		return withinMaxDays;
 	}
 
@@ -96,37 +76,6 @@ public class ParkManager extends User implements Serializable {
 	 */
 	public boolean isJobEndsWithinMaxDays(final Job theJob) {
 		return theJob.getEndDate().isBefore(LocalDate.now().plusDays
-													(MAX_END_DAY + 1));
-	}
-	
-	public boolean removeJob(final Job theJob) {
-		Period difference = Period.between(theJob.getStartDate(), LocalDate.now().plusDays(1));
-		int daysDifference = difference.getDays();
-		
-		if (daysDifference >= this.getMinDaysInTheFuture()) {
-			return myJobs.remove((Integer) theJob.getJobID());
-		}
-		return false;
-	}
-	
-	public int getMaxJobAmount() {
-		return MAX_JOB_AMOUNT;
-	}
-	
-	public int getMaxJobLength() {
-		return MAX_JOB_LENGTH;
-	}
-	
-	public int getMaxEndDay() {
-		return MAX_END_DAY;
-	}
-	
-	/**
-	 * Returns a list of job ID of a park manager's pending job.
-	 * 
-	 * @return a list of job ID of a park manager's pending job.
-	 */
-	public List<Integer> getJobList() {
-		return myJobs;
+													(Job.MAX_END_DAY + 1));
 	}
 }
