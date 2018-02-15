@@ -25,12 +25,12 @@ public class ParkManager extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/** The maximum number of pending jobs in the system.*/
-	private static final int MAX_JOB_AMOUNT = 20;
+	private static final int MAX_JOB_AMOUNT = 10;
 
 	private static final int MAX_JOB_LENGTH = 3;
 
 	/** The system cannot add jobs that goes beyond the maximum end date*/
-	private static final int MAX_END_DAY = 75;
+	private static final int MAX_END_DAY = 60;
 	
 	/** List of job IDs this Park manager manages.*/
 	private List<Integer> myJobs;
