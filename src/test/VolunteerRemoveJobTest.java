@@ -1,7 +1,10 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package test;
 
 import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 
 import org.junit.Before;
@@ -10,14 +13,23 @@ import org.junit.Test;
 import model.Job;
 import model.ParkManager;
 import model.Volunteer;
-
+/**
+ * JUnit tests for volunteer.
+ * 
+ * @author Minqing Chen
+ * @version February 12, 2018
+ */
 public class VolunteerRemoveJobTest {
 
 	private LocalDate myJobStartDateIsToday;
-	
 	private LocalDate myJobStartDateIsYesterday;
-	
 	private LocalDate myJobStartDateIs20DaysAway;
+	private final int TWENTY = 20;
+	private final int TWO = 2;
+	private final int  MINUS_ONE= -1;
+	private final int ONE = 1;
+	
+	
 	
 	private Volunteer anyVolunteer;
 	private ParkManager myParkManager;
@@ -30,13 +42,13 @@ public class VolunteerRemoveJobTest {
 	public void setUp() throws Exception {
 		anyVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
 		myJobStartDateIsToday =
-				LocalDate.now().plusDays(1);
+				LocalDate.now().plusDays(ONE);
 		myJobStartDateIsYesterday = 
-				LocalDate.now().plusDays(-1);
+				LocalDate.now().plusDays(MINUS_ONE);
 		myJobStartDateIs20DaysAway = 
-				LocalDate.now().plusDays(20);
+				LocalDate.now().plusDays(TWENTY);
 		myCancelJobIsYesterday = new Job(myJobStartDateIsYesterday, 
-				myJobStartDateIsYesterday.plusDays(2), "Discover Park",
+				myJobStartDateIsYesterday.plusDays(TWO), "Discover Park",
 						myParkManager, "Seattle, WA",
 						"Pick up leaves");
 		myCancelJobIsToday = new Job(myJobStartDateIsToday,
