@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Job class holds information relating to a job which then would be added t
@@ -23,7 +24,7 @@ public class Job implements Serializable, Comparable<Job> {
      */
 	private static final long serialVersionUID = 1L;
 	
-	public final static int MAX_DAYS_TO_SIGN_UP = 3;
+	public final static int MIN_DAYS_TO_SIGN_UP = 3;
 	
 	/** The maximum number of pending jobs in the system.*/
 	public static int MAX_JOB_AMOUNT = 10;
@@ -102,6 +103,60 @@ public class Job implements Serializable, Comparable<Job> {
 		return sb.toString();
 	}
 
+	public boolean isAtLeastMinDays(final int theMinimumDaysToSignUp) {
+        LocalDate minimumDate = LocalDate.now().plusDays(theMinimumDaysToSignUp);
+	    return !myStartDate.isBefore(minimumDate);
+    }
+	
+	public boolean isSameDayConflict(final Job theJob) {
+		boolean overlaps = false;
+		overlaps = overlaps
+				|| getStartDate().isEqual(theJob.getStartDate())
+				|| getStartDate().isEqual(theJob.getEndDate())
+				|| getEndDate().isEqual(theJob.getStartDate())
+				|| getEndDate().isEqual(theJob.getEndDate())
+				|| getEndDate().isAfter(theJob.getStartDate())
+				&& getEndDate().isBefore(theJob.getEndDate())
+				|| getStartDate().isAfter(theJob.getStartDate())
+				&& getStartDate().isBefore(theJob.getEndDate());
+		return overlaps;
+	}
+	
+	public boolean isJobRemovable() {
+		LocalDate minimumDate = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
+		return myStartDate.isEqual(minimumDate)
+				|| myEndDate.isAfter(minimumDate);
+	}
+	
+	/**
+	 * Check if the job is not more than the max days.
+	 * 
+	 * @return true if theJob is within the maximum number of pending
+	 * 			jobs in the system false otherwise.
+	 */
+	public boolean isJobWithinMaxDays() {
+		boolean withinMaxDays = true;
+		Long daysDifference = ChronoUnit.DAYS.between(myStartDate,
+													myEndDate);
+
+		if (daysDifference > Job.MAX_JOB_LENGTH) {
+			return false;
+		}
+		return withinMaxDays;
+	}
+
+	/**
+	 * Test if the job end date is less than or equal MAX_END_DAY
+	 * days from now.
+	 * 
+	 * @param theJob The job to check
+	 * @return True if end date is MAX_END_DAY days or less from now.
+	 */
+	public boolean isJobEndsWithinMaxDays() {
+		return myEndDate.isBefore(LocalDate.now().plusDays
+													(Job.MAX_END_DAY + 1));
+	}
+	
 	@Override
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
