@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
@@ -17,6 +18,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 	public VolunteerSignUpDetailsPanel() {
 		myPanel = new JPanel(new BorderLayout());
 		init();
+		myPanel.setPreferredSize(new Dimension(800, 600));
 	}
 	
 	public JPanel getPanel() {
@@ -28,8 +30,8 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 	}
 	
 	private void createButton() {
-		myButtons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 50));
-		JButton backButton = new JButton(new AbstractAction() {
+		myButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 50));
+		JButton backButton = new JButton(new AbstractAction("Back") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -42,8 +44,8 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 				
 			}
 		});
-		
-		JButton signupButton = new JButton(new AbstractAction() {
+		backButton.setPreferredSize(new Dimension(200, 50));
+		JButton signupButton = new JButton(new AbstractAction("Sign up") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -56,7 +58,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 				
 			}
 		});
-		
+		signupButton.setPreferredSize(new Dimension(200, 50));
 		myButtons.add(backButton);
 		myButtons.add(signupButton);
 		myPanel.add(myButtons, BorderLayout.SOUTH);
