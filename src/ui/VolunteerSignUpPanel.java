@@ -31,7 +31,8 @@ public class VolunteerSignUpPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/**The size of the panel.*/
-	private static final Dimension PANEL_SIZE = new Dimension(800, 600);
+	public static final Dimension PANEL_SIZE = new Dimension(800, 600);
+	
 	
 	
 	private Volunteer myVolunteer;
