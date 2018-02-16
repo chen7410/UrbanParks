@@ -8,11 +8,12 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
 /**
  * This class represents a park manager.
  * 
  * @author Group 7
- * @version February 12, 2018
+ * @version March 5, 2018
  */
 public class ParkManager extends User implements Serializable {
 
