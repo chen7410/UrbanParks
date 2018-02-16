@@ -33,18 +33,8 @@ public class Volunteer extends User implements Serializable {
 	 * @exception IllegalArgumentException when try to cancel a job that is 
 	 * less than the minimum days from the current date.
 	 */
-	public boolean cancelJob(final Job theJob) {
-		LocalDate allowedDate = 
-				LocalDate.now().plusDays(getMinDaysInTheFuture());
-		if (!theJob.getStartDate().isBefore(allowedDate)) {
-			
-			return myJobs.remove((Integer)theJob.getJobID());
-		} else {
-			throw new IllegalArgumentException("Can not cancel a"
-					+ " job that is less than " + 
-					getMinDaysInTheFuture() + "days "
-							+ "from current date.");
-		}
+	public void cancelJob(final Job theJob) {
+		myJobs.remove(theJob);
 	}
 	
 	/**
@@ -69,12 +59,7 @@ public class Volunteer extends User implements Serializable {
 	 * 			minimum day current date and false otherwise.
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
-		boolean result = false;
-		LocalDate date = LocalDate.now().plusDays(Job.MAX_DAYS_TO_SIGN_UP);
-		if (!date.isAfter(theJob.getStartDate())) {
-			result = true;
-		}
-		return result;
+	    return theJob.isAtLeastMinDays(Job.MIN_DAYS_TO_SIGN_UP);
 	}
 	
 	/**
@@ -91,21 +76,8 @@ public class Volunteer extends User implements Serializable {
 	public boolean isSameDayConflict(final Job theCandidateJob) {
 		boolean overlaps = false;
 		for (int i = 0; i < myJobs.size(); i++) {
-			Job currentJob = myJobs.get(i);
-			overlaps = overlaps
-					|| theCandidateJob.getStartDate().isEqual(currentJob.getStartDate())
-					|| theCandidateJob.getStartDate().isEqual(currentJob.getEndDate())
-					|| theCandidateJob.getEndDate().isEqual(currentJob.getStartDate())
-					|| theCandidateJob.getEndDate().isEqual(currentJob.getEndDate())
-					|| theCandidateJob.getEndDate().isAfter(currentJob.getStartDate())
-					&& theCandidateJob.getEndDate().isBefore(currentJob.getEndDate())
-					|| theCandidateJob.getStartDate().isAfter(currentJob.getStartDate())
-					&& theCandidateJob.getStartDate().isBefore(currentJob.getEndDate());
-			if (overlaps) {
-				i = myJobs.size();
-			}
+			overlaps = overlaps || theCandidateJob.isSameDayConflict(myJobs.get(i));
 		}
-		
 		return overlaps;
 	}
 }

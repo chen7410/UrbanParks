@@ -52,11 +52,11 @@ public class ParkManagerRemoveTest {
 		myStartDateStartsPriorToCurrentDay = LocalDate.now().minusDays(1);
 		myEndDateEndsPastCurrentDay = myStartDateStartsPriorToCurrentDay.plusDays(2);
 		
-		myStartDateStartsMoreThanMinDaysAway = LocalDate.now().plusDays(myPM.getMinDaysInTheFuture() + 3);
+		myStartDateStartsMoreThanMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 3);
 		myEndDateEndsMoreThanMinDaysAway = myStartDateStartsMoreThanMinDaysAway;
 		
 																					// *** Should there be a plus one in here??? ***
-		myStartDateStartsExactlyMinDaysAway = LocalDate.now().plusDays(myPM.getMinDaysInTheFuture() + 1);
+		myStartDateStartsExactlyMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 1);
 		myEndDateEndsExactlyMinDaysAway = myStartDateStartsExactlyMinDaysAway.plusDays(1);
 		
 		myJobStartsOnCurrentDay = new Job(myStartDateStartsOnCurrentDay,
@@ -81,23 +81,23 @@ public class ParkManagerRemoveTest {
 		myPM.createJob(myJobStartsExactlyMinDaysAway);
 	}
 	
-	@Test
-	public void removeJob_JobStartsOnCurrentDay_False() {
-		assertFalse(myPM.isJobRemovable(myJobStartsOnCurrentDay));
-	}
-	
-	@Test
-	public void removeJob_JobStartsPriorToCurrentDay_False() {
-		assertFalse(myPM.isJobRemovable(myJobStartsPriorToCurrentDay));
-	}
-	
-	@Test
-	public void removeJob_JobStartsMoreThanMinDaysAway_True() {
-		assertTrue(myPM.isJobRemovable(myJobStartsMoreThanMinDaysAway));
-	}
-	
-	@Test
-	public void removeJob_JobStartsExactlyMinDaysAway_True() {
-		assertTrue(myPM.isJobRemovable(myJobStartsExactlyMinDaysAway));
-	}
+//	@Test
+//	public void removeJob_JobStartsOnCurrentDay_False() {
+//		assertFalse(myPM.isJobRemovable(myJobStartsOnCurrentDay));
+//	}
+//	
+//	@Test
+//	public void removeJob_JobStartsPriorToCurrentDay_False() {
+//		assertFalse(myPM.isJobRemovable(myJobStartsPriorToCurrentDay));
+//	}
+//	
+//	@Test
+//	public void removeJob_JobStartsMoreThanMinDaysAway_True() {
+//		assertTrue(myPM.isJobRemovable(myJobStartsMoreThanMinDaysAway));
+//	}
+//	
+//	@Test
+//	public void removeJob_JobStartsExactlyMinDaysAway_True() {
+//		assertTrue(myPM.isJobRemovable(myJobStartsExactlyMinDaysAway));
+//	}
 }
