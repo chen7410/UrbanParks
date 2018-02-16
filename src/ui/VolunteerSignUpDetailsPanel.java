@@ -44,7 +44,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 				
 			}
 		});
-		backButton.setPreferredSize(new Dimension(200, 50));
+		backButton.setPreferredSize(new Dimension(150, 40));
 		JButton signupButton = new JButton(new AbstractAction("Sign up") {
 			
 			/**
@@ -58,7 +58,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 				
 			}
 		});
-		signupButton.setPreferredSize(new Dimension(200, 50));
+		signupButton.setPreferredSize(new Dimension(150, 40));
 		myButtons.add(backButton);
 		myButtons.add(signupButton);
 		myPanel.add(myButtons, BorderLayout.SOUTH);

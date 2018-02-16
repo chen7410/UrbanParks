@@ -51,7 +51,7 @@ public class VolunteerSignUpPanelTest {
 		myUsers.loadUserMap(USERS_DATA_FILE);
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		
-		myVolunteer = new Volunteer("matt", "Matthew", "Chen");
+		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
 		System.out.println(myVolunteer.getJobList().size());
 		//System.out.println(myJobs.getSortedJobsArray()[0].toString());
 		myVolunteerSignUpPanel = new VolunteerSignUpPanel(myVolunteer, myJobs.getEligibleJobs(myVolunteer));
