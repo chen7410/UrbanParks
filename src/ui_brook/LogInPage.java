@@ -27,12 +27,14 @@ public class LogInPage extends JPanel {
 		
 		setLayout(new BorderLayout());
 		
-		JPanel north = new JPanel();
+//		JPanel north = new JPanel();
 		welcome = new JLabel("Welcome to Urban Parks");
-		north.setLayout(new BorderLayout());
-		north.add(welcome, BorderLayout.CENTER);
+//		north.setLayout(new BorderLayout());
+//		north.add(welcome);
 		
-		add(north, BorderLayout.NORTH);
+		// add(north, BorderLayout.NORTH);
+		
+		add(welcome, BorderLayout.CENTER);
 		setPreferredSize(DEFAULT_SIZE);
 		setBackground(BACKGROUND_COLOR);
 	}

@@ -24,7 +24,7 @@ public class GUI {
 		guiFrame.add(new LogInPage());
 		
 		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		guiFrame.setSize(600, 400);
+		guiFrame.setSize(800, 600);
 		guiFrame.setLocationRelativeTo(null);
 		guiFrame.setResizable(false);
 		guiFrame.setVisible(true);
