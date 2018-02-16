@@ -6,6 +6,9 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a single user in the system.
@@ -28,6 +31,11 @@ public abstract class User implements Serializable {
 	private String myUserType;
 	
 	/**
+	 * List of jobs this volunteer has signed up for.
+	 */
+	protected List<Job> myJobs;
+	
+	/**
 	 * initialize fields.
 	 * 
 	 * @param theUserName
@@ -37,12 +45,13 @@ public abstract class User implements Serializable {
 	 * @param theLastName
 	 *            the specified last name.
 	 */
-	public User(final String theUserName, final String theFirstName,
+	protected User(final String theUserName, final String theFirstName,
 			final String theLastName) {
 		myUserName = theUserName;
 		myFirstName = theFirstName;
 		myLastName = theLastName;
 		myUserType = "undefined";
+		myJobs = new ArrayList<>();
 	}
 
 	public String getUserName() {
@@ -64,6 +73,12 @@ public abstract class User implements Serializable {
 	public int getMinDaysInTheFuture() {
 		return MIN_NUM_DAYS_IN_THE_FUTURE;
 	}
+	
+	public boolean isJobRemovable(final Job theJob) {
+		LocalDate minimumDate = LocalDate.now().plusDays(Job.MAX_DAYS_TO_SIGN_UP);
+		return theJob.getStartDate().isEqual(minimumDate)
+				|| theJob.getStartDate().isAfter(minimumDate);
+	}
 
 	/**
 	 * This method is called from subclass, should never be overridden.
@@ -72,7 +87,17 @@ public abstract class User implements Serializable {
 	 *            the specified user type.
 	 */
 	public final void setUserType(final String theUserType) {
-		this.myUserType = theUserType;
+		myUserType = theUserType;
+	}
+	
+	/**
+	 * Returns a list of job belongs to this user.
+	 * This list can be empty but not null.
+	 * 
+	 * @return a list of job belongs to this user.
+	 */
+	public List<Job> getJobList() {
+		return myJobs;
 	}
 
 	/**

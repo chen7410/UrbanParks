@@ -7,6 +7,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,17 +33,17 @@ public class VolunteerTest {
 	private static final LocalDate myFirstJobStartDate = 
 			LocalDate.now().plusDays(10);
 	private static final LocalDate myFirstJobEndDate = 
-			myFirstJobStartDate.plusDays(2);;
+			myFirstJobStartDate.plusDays(3);;
 	
 	private static final LocalDate mySecondJobStartDate = 
 			LocalDate.now().plusDays(16);
 	private static final LocalDate mySecondJobEndDate = 
-			mySecondJobStartDate.plusDays(2);
+			mySecondJobStartDate.plusDays(3);
 	
 	private static final LocalDate myFirstJobCandidateStartDate = 
 			LocalDate.now().plusDays(14);
 	private static final LocalDate myFirstJobCandidateEndDate = 
-			myFirstJobCandidateStartDate.plusDays(2);
+			myFirstJobCandidateStartDate.plusDays(3);
 	
 	private static final LocalDate mySecondJobCandidateStartDate = 
 			LocalDate.now().plusDays(18);
@@ -58,7 +59,7 @@ public class VolunteerTest {
 			LocalDate.now().plusDays(1);
 	
 	private static final LocalDate myJobStartDateTwoDaysAway = 
-			LocalDate.now().plusDays(2);
+			LocalDate.now().plusDays(3);
 	
 	private static final LocalDate myJobStartDateMoreThanTwoDaysAway = 
 			LocalDate.now().plusDays(20);
@@ -135,10 +136,7 @@ public class VolunteerTest {
 	 */
 	@Test
 	public void isSameDayConflict_VolunteerHasNoCurrentJobs_False() {
-		for (int jobID : myVolunteer.getJobList()) {
-			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, 
-					myJobMap.getJob(jobID)));
-		}
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate));
 	}
 	
 	/**
@@ -148,7 +146,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_VolunteerHasCurrentJobsButNotConflicting_False() {
 		myVolunteer.signup(myFirstJob);
-		assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate, myFirstJob));
+		assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate));
 	}
 	
 	/**
@@ -158,8 +156,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobStartsSameDayAsEndOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate,
-													mySecondJob));
+		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate));
 	}
 	
 	/**
@@ -169,8 +166,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobEndSameDayAsStartOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate,
-												mySecondJob));
+		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate));
 	}
 	
 	/**

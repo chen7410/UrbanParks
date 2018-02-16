@@ -6,9 +6,6 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represents a volunteer.
@@ -20,19 +17,34 @@ public class Volunteer extends User implements Serializable {
 
 	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
-	
-	private final static int MAX_DAYS_TO_SIGN_UP = 2;
-	
-	/**
-	 * List of jobs this volunteer has signed up for.
-	 */
-	private List<Integer> myJobs;
-	
+
 	public Volunteer(final String theUserName, final String theFirstName,
 						final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		myJobs = new ArrayList<>();
-		this.setUserType("Volunteer");
+		setUserType("Volunteer");
+	}
+	
+	/**
+	 * Cancel the specified job from a Volunteer job list.
+	 * Precondition: the specified job must be in a volunteer job list.
+	 * Postcondition: the specified job remove from a volunteer job list.
+	 * @param theJob the specified that being removed from the list.
+	 * @return true if the job remove from the list. otherwise, throw exception.
+	 * @exception IllegalArgumentException when try to cancel a job that is 
+	 * less than the minimum days from the current date.
+	 */
+	public boolean cancelJob(final Job theJob) {
+		LocalDate allowedDate = 
+				LocalDate.now().plusDays(getMinDaysInTheFuture());
+		if (!theJob.getStartDate().isBefore(allowedDate)) {
+			
+			return myJobs.remove((Integer)theJob.getJobID());
+		} else {
+			throw new IllegalArgumentException("Can not cancel a"
+					+ " job that is less than " + 
+					getMinDaysInTheFuture() + "days "
+							+ "from current date.");
+		}
 	}
 	
 	/**
@@ -44,7 +56,7 @@ public class Volunteer extends User implements Serializable {
 	 * 			the job a volunteer want to sign up.
 	 */
 	public void signup(final Job theJob) {
-		myJobs.add(theJob.getJobID());
+		myJobs.add(theJob);
 	}
 	
 	/**
@@ -58,10 +70,8 @@ public class Volunteer extends User implements Serializable {
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
 		boolean result = false;
-		final Period period = LocalDate.now().until(theJob
-													.getStartDate());
-		final int dayDifferent = period.getDays();
-		if (dayDifferent >= MAX_DAYS_TO_SIGN_UP) {
+		LocalDate date = LocalDate.now().plusDays(Job.MAX_DAYS_TO_SIGN_UP);
+		if (!date.isAfter(theJob.getStartDate())) {
 			result = true;
 		}
 		return result;
@@ -78,29 +88,24 @@ public class Volunteer extends User implements Serializable {
 	 * @return true if the candidate job does not conflict with the
 	 * 			job has already signed up; false otherwise.
 	 */
-	public boolean isSameDayConflict(final Job theCandidateJob,
-										final Job theCurrentJob) {
+	public boolean isSameDayConflict(final Job theCandidateJob) {
 		boolean overlaps = false;
-		overlaps = theCurrentJob.isOverLappingDay(theCandidateJob)
-					|| overlaps;
+		for (int i = 0; i < myJobs.size(); i++) {
+			Job currentJob = myJobs.get(i);
+			overlaps = overlaps
+					|| theCandidateJob.getStartDate().isEqual(currentJob.getStartDate())
+					|| theCandidateJob.getStartDate().isEqual(currentJob.getEndDate())
+					|| theCandidateJob.getEndDate().isEqual(currentJob.getStartDate())
+					|| theCandidateJob.getEndDate().isEqual(currentJob.getEndDate())
+					|| theCandidateJob.getEndDate().isAfter(currentJob.getStartDate())
+					&& theCandidateJob.getEndDate().isBefore(currentJob.getEndDate())
+					|| theCandidateJob.getStartDate().isAfter(currentJob.getStartDate())
+					&& theCandidateJob.getStartDate().isBefore(currentJob.getEndDate());
+			if (overlaps) {
+				i = myJobs.size();
+			}
+		}
+		
 		return overlaps;
-	}
-	
-	/**
-	 * Return the minimums days from today that allow to signed up.
-	 * 
-	 * @return the minimums days from today that allow to signed up.
-	 */
-	public int getMaxDaysToSignUp() {
-		return MAX_DAYS_TO_SIGN_UP;
-	}
-	
-	/**
-	 * Return a list of job ID that a volunteer has signed up.
-	 * 
-	 * @return a list of job ID that a volunteer has signed up.
-	 */
-	public List<Integer> getJobList() {
-		return myJobs;
 	}
 }

@@ -83,21 +83,21 @@ public class ParkManagerRemoveTest {
 	
 	@Test
 	public void removeJob_JobStartsOnCurrentDay_False() {
-		assertFalse(myPM.removeJob(myJobStartsOnCurrentDay));
+		assertFalse(myPM.isJobRemovable(myJobStartsOnCurrentDay));
 	}
 	
 	@Test
 	public void removeJob_JobStartsPriorToCurrentDay_False() {
-		assertFalse(myPM.removeJob(myJobStartsPriorToCurrentDay));
+		assertFalse(myPM.isJobRemovable(myJobStartsPriorToCurrentDay));
 	}
 	
 	@Test
 	public void removeJob_JobStartsMoreThanMinDaysAway_True() {
-		assertTrue(myPM.removeJob(myJobStartsMoreThanMinDaysAway));
+		assertTrue(myPM.isJobRemovable(myJobStartsMoreThanMinDaysAway));
 	}
 	
 	@Test
 	public void removeJob_JobStartsExactlyMinDaysAway_True() {
-		assertTrue(myPM.removeJob(myJobStartsExactlyMinDaysAway));
+		assertTrue(myPM.isJobRemovable(myJobStartsExactlyMinDaysAway));
 	}
 }
