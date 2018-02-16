@@ -2,14 +2,17 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
+
 package ui;
 
 /**
  * A wrapper class for fire button signal between user interface..
+ * 
  * @author Group 7
- * @version February 14, 2018
+ * @version March 5, 2018
  */
 public class ButtonSignal {
+	
 	private String myButtonName;
 	private int myJobID;
 	
