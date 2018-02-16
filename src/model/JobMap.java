@@ -58,6 +58,18 @@ public class JobMap {
 		}
 	}
 
+	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
+	    Job[] jobs = getSortedJobsArray();
+	    List<Job> eligibleJobs = new ArrayList<>();
+	    for (int i = 0; i < jobs.length; i++) {
+	        if(!theVolunteer.isSameDayConflict(jobs[i])
+                    && theVolunteer.isAtLeastMinDays(jobs[i])) {
+	            eligibleJobs.add(jobs[i]);
+            }
+        }
+	    return eligibleJobs;
+    }
+
 	/**
 	 * Load Job map from the local file system.
 	 * 
@@ -85,6 +97,14 @@ public class JobMap {
 
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
+	}
+	
+	public void remove(final Job theJob) {
+		myJobs.remove(theJob.getJobID());
+	}
+	
+	public boolean isLessMaxAmountJobs() {
+		return size() < Job.MAX_JOB_AMOUNT;
 	}
 
 	public int size() {

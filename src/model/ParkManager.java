@@ -36,46 +36,4 @@ public class ParkManager extends User implements Serializable {
 	public void createJob(final Job theJob) {
 		myJobs.add(theJob);
 	}
-
-	/**
-	 * Check whether the pending jobs is less than the maximum number
-	 * allowed by the system.
-	 * 
-	 * @param theJobList the job map that is being checked.
-	 * @return true if the current number of pending jobs is less
-	 * 			than the maximum number allowed and false otherwise.
-	 */
-	public boolean isLessThanMaxJobs(final JobMap theJobList) {
-		return theJobList.size() < Job.MAX_JOB_AMOUNT;
-	}
-	
-	/**
-	 * Check if the job is not more than the max days.
-	 * 
-	 * @param theJob calculate the length of theJob
-	 * @return true if theJob is within the maximum number of pending
-	 * 			jobs in the system false otherwise.
-	 */
-	public boolean isJobWithinMaxDays(final Job theJob) {
-		boolean withinMaxDays = true;
-		Long daysDifference = ChronoUnit.DAYS.between(theJob.getStartDate(),
-													theJob.getEndDate());
-
-		if (daysDifference > Job.MAX_JOB_LENGTH) {
-			return false;
-		}
-		return withinMaxDays;
-	}
-
-	/**
-	 * Test if the job end date is less than or equal MAX_END_DAY
-	 * days from now.
-	 * 
-	 * @param theJob The job to check
-	 * @return True if end date is MAX_END_DAY days or less from now.
-	 */
-	public boolean isJobEndsWithinMaxDays(final Job theJob) {
-		return theJob.getEndDate().isBefore(LocalDate.now().plusDays
-													(Job.MAX_END_DAY + 1));
-	}
 }
