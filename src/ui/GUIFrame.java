@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.border.Border;
@@ -19,6 +20,9 @@ public class GUIFrame {
 	public static final int BUTTON_GAP_HEIGHT = 50;
 	
 	/** The empty border of VolunteerSignUpPanel. */
-	public static final Border VOLUNTEER_SIGNUP_PANEL_BORDER= new EmptyBorder(50, 100, 0, 0);
+	public static final Border VOLUNTEER_SIGNUP_PANEL_BORDER= new EmptyBorder(50, 100, 50, 100);
+	
+	/** The background color. */
+    public static final Color VOLUNTEER_SIGNUP_PANEL_BGCOLOR = new Color(153, 217, 234);  
 
 }
