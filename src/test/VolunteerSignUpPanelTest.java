@@ -1,16 +1,11 @@
 package test;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-import model.Job;
 import model.JobMap;
 import model.UserMap;
 import model.Volunteer;

@@ -16,13 +16,13 @@ import javax.swing.JPanel;
 
 import model.Job;
 
-public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
+public class VolunteerSignedUpDetailsPanel extends Observable implements Observer{
 	
 	JPanel myPanel;
 	List<Job> myEligibleJobs;
 	Job myJob;
 	
-	public VolunteerSignUpDetailsPanel(final List<Job> theEligibleJobs) {
+	public VolunteerSignedUpDetailsPanel(final List<Job> theEligibleJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myEligibleJobs = theEligibleJobs;
 		init();
@@ -55,7 +55,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 			}
 		});
 		backButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
-		JButton signupButton = new JButton(new AbstractAction("Sign up") {
+		JButton signupButton = new JButton(new AbstractAction("Remove") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -64,7 +64,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				notifyObservers(new ButtonSignal("submit", 0));
+				notifyObservers(new ButtonSignal("remove", 0));
 				
 			}
 		});
@@ -92,11 +92,9 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 			jobDetailsPanel.add(label);
 		}
 		JPanel cover0 = new JPanel(new BorderLayout());
-		cover0.add(jobDetailsPanel, BorderLayout.EAST);
+		cover0.add(jobDetailsPanel, BorderLayout.NORTH);
 		JPanel cover1 = new JPanel(new BorderLayout());
-		cover1.add(cover0, BorderLayout.NORTH);
-//		JPanel cover2 = new JPanel(new BorderLayout());
-//		cover2.add(cover1, BorderLayout.EAST);
+		cover1.add(cover0, BorderLayout.EAST);
 		
 		myPanel.add(cover1);
 	}

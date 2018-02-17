@@ -13,6 +13,10 @@ public class GUIFrame {
 	/** The size of all buttons. */
 	public static final Dimension BUTTON_SIZE = new Dimension(150, 40);
 	
+	public static final Dimension JLABEL_SHORT_TEXT = new Dimension (750, 30);
+	
+	public static final Dimension JLABEL_LONG_TEXT = new Dimension (750, 55);
+	
 	/** The gap between two button. */
 	public static final int BUTTON_GAP_WIDTH = 100;
 	
@@ -23,6 +27,6 @@ public class GUIFrame {
 	public static final Border VOLUNTEER_SIGNUP_PANEL_BORDER= new EmptyBorder(50, 100, 50, 100);
 	
 	/** The background color. */
-    public static final Color VOLUNTEER_SIGNUP_PANEL_BGCOLOR = new Color(153, 217, 234);  
+    public static final Color VOLUNTEER_SIGNUP_PANEL_BGCOLOR = new Color(153, 217, 234);
 
 }
