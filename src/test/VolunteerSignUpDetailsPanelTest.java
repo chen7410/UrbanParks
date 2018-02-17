@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -50,12 +51,9 @@ public class VolunteerSignUpDetailsPanelTest {
 		myUsers = new UserMap();
 		myUsers.loadUserMap(USERS_DATA_FILE);
 		myJobs.loadJobMap(JOBS_DATA_FILE);
-		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
-		myPanel = new VolunteerSignUpDetailsPanel();
-		
-		
-		//System.out.println(myVolunteerSignUpPanel.getComponentCount());
+		List<Job> eligibleJobs = myJobs.getEligibleJobs(myVolunteer);
+		myPanel = new VolunteerSignUpDetailsPanel(eligibleJobs);
 		myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

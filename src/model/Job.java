@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Job class holds information relating to a job which then would be added t
@@ -88,20 +90,6 @@ public class Job implements Serializable, Comparable<Job> {
 	public String getDescription() {
 		return myDescription;
 	}
-	
-	/**
-	 * @return String summary of the job in the following format:
-	 * 		   Park Name: Start Date - End Date 
-	 */
-	public String getJobSummary() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
-		StringBuilder sb = new StringBuilder(100);
-		sb.append(getParkName() + ": ");
-		sb.append(myStartDate.format(formatter));
-		sb.append(" - ");
-		sb.append(myEndDate.format(formatter));
-		return sb.toString();
-	}
 
 	public boolean isAtLeastMinDays(final int theMinimumDaysToSignUp) {
         LocalDate minimumDate = LocalDate.now().plusDays(theMinimumDaysToSignUp);
@@ -157,15 +145,41 @@ public class Job implements Serializable, Comparable<Job> {
 													(Job.MAX_END_DAY + 1));
 	}
 	
+	/**
+	 * @return String summary of the job in the following format:
+	 * 		   Park Name: Start Date - End Date 
+	 */
+	public String getJobSummary() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		StringBuilder sb = new StringBuilder(100);
+		sb.append(getParkName() + ": ");
+		sb.append(myStartDate.format(formatter));
+		sb.append(" - ");
+		sb.append(myEndDate.format(formatter));
+		return sb.toString();
+	}
+	
+	public List<String> getJobDetailsList() {
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		List<String> details = new ArrayList<>();
+		details.add("Park name: " + myParkName);
+		details.add("Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName());
+		details.add("Park location: " + myLocation);
+		details.add("Job start date: " + myStartDate.format(dateFormatter));
+		details.add("Job end date: " + myEndDate.format(dateFormatter));
+		details.add("Job description: " + myDescription);
+		return details;
+	}
+	
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(">>> Park name: " + myParkName + '\n');
 		sb.append("    Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName() + '\n');
 		sb.append("    Park location: " + myLocation + '\n');
-		sb.append("    Job start date: " + myStartDate.format(formatter) + '\n');
-		sb.append("    Job end date: " + myEndDate.format(formatter) + '\n');
+		sb.append("    Job start date: " + myStartDate.format(dateFormatter) + '\n');
+		sb.append("    Job end date: " + myEndDate.format(dateFormatter) + '\n');
 		sb.append("    Job description: " + myDescription + "\n");
 		return sb.toString();
 	}
