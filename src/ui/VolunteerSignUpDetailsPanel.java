@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -71,6 +72,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		signupButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(signupButton);
+		buttonsPanel.setBackground(Color.WHITE);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
@@ -95,9 +97,9 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		cover0.add(jobDetailsPanel, BorderLayout.EAST);
 		JPanel cover1 = new JPanel(new BorderLayout());
 		cover1.add(cover0, BorderLayout.NORTH);
-//		JPanel cover2 = new JPanel(new BorderLayout());
-//		cover2.add(cover1, BorderLayout.EAST);
-		
+		jobDetailsPanel.setBackground(Color.WHITE);
+		cover0.setBackground(Color.WHITE);
+		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
 	}
 	

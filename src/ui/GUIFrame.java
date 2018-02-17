@@ -13,8 +13,10 @@ public class GUIFrame {
 	/** The size of all buttons. */
 	public static final Dimension BUTTON_SIZE = new Dimension(150, 40);
 	
+	/** The size for label with short text*/
 	public static final Dimension JLABEL_SHORT_TEXT = new Dimension (750, 30);
 	
+	/** The size for label with long text that needs to be wrapped*/
 	public static final Dimension JLABEL_LONG_TEXT = new Dimension (750, 55);
 	
 	/** The gap between two button. */
