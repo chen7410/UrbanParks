@@ -17,7 +17,14 @@ import javax.swing.JPanel;
 
 import model.Job;
 
-public class VolunteerSignedUpDetailsPanel extends Observable implements Observer{
+/**
+ * Panel for when a volunteer views the details of a job they have
+ * signed up for. It will notify Observers when a button is pressed.
+ * 
+ * @author Tuan Dinh
+ * @version February 18, 2018
+ */
+public class VolunteerSignedUpDetailsPanel extends Observable implements Observer {
 	
 	JPanel myPanel;
 	List<Job> myEligibleJobs;
@@ -86,15 +93,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable implements Observe
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
 			JLabel label = new JLabel(formattedDetail, JLabel.LEFT);
-			
-//			JLabel label = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
-//			label.setFont(new Font(null, Font.PLAIN, 20));
-			if(detail.length() > 80) {
-				label.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
-			} else {
-				label.setPreferredSize(GUIFrame.JLABEL_SHORT_TEXT);
-			}
-			
+			label.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
 			jobDetailsPanel.add(label);
 		}
 		JPanel cover0 = new JPanel(new BorderLayout());

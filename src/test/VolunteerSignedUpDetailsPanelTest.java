@@ -11,6 +11,12 @@ import model.UserMap;
 import model.Volunteer;
 import ui.VolunteerSignedUpDetailsPanel;
 
+/**
+ * Tests for VolunteerSignedUpDetailsPanel.
+ * 
+ * @author Tuan Dinh
+ * @version February 17, 2018
+ */
 public class VolunteerSignedUpDetailsPanelTest {
 	/** The main window. */
     private static JFrame myFrame;

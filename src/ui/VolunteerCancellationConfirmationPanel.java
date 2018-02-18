@@ -24,6 +24,13 @@ import javax.swing.JPanel;
 
 import model.Job;
 
+/**
+ * This panel is used to confirm a volunteer that they have cancelled
+ * a job successfully. It will notify observers when a button is pressed.
+ * 
+ * @author Hasnah Said
+ * @version February 18, 2018
+ */
 public class VolunteerCancellationConfirmationPanel {
 
 	private JPanel myVolunteerCancellationPanel;
@@ -92,14 +99,7 @@ public class VolunteerCancellationConfirmationPanel {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
 			JLabel detailLabel = new JLabel(formattedDetail, JLabel.LEFT);
-			
-//			JLabel detailLabel = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
-//			detailLabel.setFont(new Font(null, Font.PLAIN, 20));
-			if (detail.length() > 80) {
-				detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
-			} else {
-				detailLabel.setPreferredSize(GUIFrame.JLABEL_SHORT_TEXT);
-			}
+			detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
 			jobCancellationDetails.add(detailLabel);
 		}
 		

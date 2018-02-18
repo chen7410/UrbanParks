@@ -18,9 +18,11 @@ import javax.swing.JPanel;
 import model.Job;
 
 /**
- * A JPanal that will show job sign up confirmation.
- * @author Group 7
- * @version February 17, 2018
+ * This panel is used to confirm a volunteer that they have signed up for
+ * a job successfully. It will notify observers when a button is pressed.
+ * 
+ * @author Hasnah Said
+ * @version February 18, 2018
  */
 
 public class VolunteerSignUpConfirmationPanel {
@@ -92,14 +94,7 @@ public class VolunteerSignUpConfirmationPanel {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";
 			JLabel detailLabel = new JLabel(formattedDetail, JLabel.LEFT);
-
-//			JLabel detailLabel = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
-//			detailLabel.setFont(new Font(null, Font.PLAIN, 20));
-			if (detail.length() > 80) {
-				detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
-			} else {
-				detailLabel.setPreferredSize(GUIFrame.JLABEL_SHORT_TEXT);
-			}
+			detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
 			jobConfirmationDetails.add(detailLabel);
 		}
 		
