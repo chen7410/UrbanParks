@@ -31,8 +31,8 @@ public class JobMap {
 	}
 
 	/**
-	 * Pre-condition: theJob must pass all business rules before being added.
-	 * Post-condition:theJob is added to myJobs JobMap.
+	 * Precondition: theJob must pass all business rules before being added.
+	 * Postcondition: theJob is added to a JobMap.
 	 * 
 	 * @param theJob
 	 */
@@ -58,6 +58,11 @@ public class JobMap {
 		}
 	}
 
+	/**
+	 * 
+	 * @param theVolunteer the specified volunteer.
+	 * @return a list of eligible jobs of the specified volunteer.
+	 */
 	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
 	    Job[] jobs = getSortedJobsArray();
 	    List<Job> eligibleJobs = new ArrayList<>();

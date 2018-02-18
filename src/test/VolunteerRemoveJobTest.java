@@ -4,7 +4,6 @@
  */
 package test;
 
-import static org.junit.Assert.*;
 import java.time.LocalDate;
 
 import org.junit.Before;
@@ -90,25 +89,25 @@ public class VolunteerRemoveJobTest {
 		anyVolunteer.cancelJob(myCancelJobIsYesterday);
 	}
 	
-//	/**
-//	 * Test Volunteer unvolunteers for a job that starts more than the 
-//	 * minimum number of days in the future
-//	 */
-//	@Test
-//	public void cancelJob_VolunteerCancelJobMoreThanMinDay_True() {
-//		assertTrue("Volunteer cancels job fail", 
-//				anyVolunteer.cancelJob(myCancelJobIs20DaysAway));
-//	}
-//	
-//	/**
-//	 * Volunteer unvolunteers for a job that starts exactly the minimum 
-//	 * number of days in the future
-//	 */
-//	@Test
-//	public void cancelJob_VolunteerCancelJobExactMinDay_True() {
-//		assertTrue("Volunteer cancels job fail", 
-//				anyVolunteer.cancelJob(myCancelJobIsExactMinDaysAway));
-//	}
+	/**
+	 * Test Volunteer unvolunteers for a job that starts more than the 
+	 * minimum number of days in the future
+	 */
+	@Test
+	public void cancelJob_VolunteerCancelJobMoreThanMinDay_True() {
+		assertTrue("Volunteer cancels job fail", 
+				job.(myCancelJobIs20DaysAway));
+	}
+	
+	/**
+	 * Volunteer unvolunteers for a job that starts exactly the minimum 
+	 * number of days in the future
+	 */
+	@Test
+	public void cancelJob_VolunteerCancelJobExactMinDay_True() {
+		assertTrue("Volunteer cancels job fail", 
+				anyVolunteer.cancelJob(myCancelJobIsExactMinDaysAway));
+	}
 	
 
 }

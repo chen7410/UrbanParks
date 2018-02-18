@@ -91,11 +91,21 @@ public class Job implements Serializable, Comparable<Job> {
 		return myDescription;
 	}
 
+	/**
+	 * 
+	 * @param theMinimumDaysToSignUp must be positive.
+	 * @return
+	 */
 	public boolean isAtLeastMinDays(final int theMinimumDaysToSignUp) {
         LocalDate minimumDate = LocalDate.now().plusDays(theMinimumDaysToSignUp);
 	    return !myStartDate.isBefore(minimumDate);
     }
 	
+	/**
+	 * Precondition: the job must not be null.
+	 * @param theJob 
+	 * @return true if there is conflict; false otherwise.
+	 */
 	public boolean isSameDayConflict(final Job theJob) {
 		boolean overlaps = false;
 		overlaps = overlaps
@@ -110,6 +120,10 @@ public class Job implements Serializable, Comparable<Job> {
 		return overlaps;
 	}
 	
+	/**
+	 * check if the job is able to remove from user's job list.
+	 * @return true if the job is removable; false otherwise.
+	 */
 	public boolean isJobRemovable() {
 		LocalDate minimumDate = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
 		return myStartDate.isEqual(minimumDate)

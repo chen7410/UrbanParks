@@ -5,12 +5,9 @@
 
 package test;
 
-import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import model.Job;
 import model.ParkManager;

@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import model.JobMap;
 import model.UserMap;
 import model.Volunteer;
-import ui.VolunteerSignUpPanel;
 import ui.VolunteerViewAllUpCommingJobPanel;
 
 /**

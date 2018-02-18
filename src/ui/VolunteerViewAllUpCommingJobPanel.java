@@ -50,7 +50,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 		JButton homeButton = makeHomeButton();
 		JButton jobDetailButton = makeViewJobDetailButton();
 		
-		JLabel topLabel = new JLabel("All Upcomming Jobs");
+		JLabel topLabel = makeTopJlabel();
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(topLabel);
 		
@@ -100,6 +100,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
+	
 	/**
 	 * Set up Home button.
 	 * Home button will fire a button signal which contains
