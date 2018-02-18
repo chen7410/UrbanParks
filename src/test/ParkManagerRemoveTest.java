@@ -5,12 +5,9 @@
 
 package test;
 
-import static org.junit.Assert.*;
-
 import java.time.LocalDate;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import model.Job;
 import model.ParkManager;
@@ -55,7 +52,6 @@ public class ParkManagerRemoveTest {
 		myStartDateStartsMoreThanMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 3);
 		myEndDateEndsMoreThanMinDaysAway = myStartDateStartsMoreThanMinDaysAway;
 		
-																					// *** Should there be a plus one in here??? ***
 		myStartDateStartsExactlyMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 1);
 		myEndDateEndsExactlyMinDaysAway = myStartDateStartsExactlyMinDaysAway.plusDays(1);
 		

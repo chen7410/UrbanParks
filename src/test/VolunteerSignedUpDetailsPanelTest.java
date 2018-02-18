@@ -2,20 +2,22 @@ package test;
 
 import java.awt.BorderLayout;
 import java.util.List;
+
 import javax.swing.JFrame;
+
 import model.Job;
 import model.JobMap;
 import model.UserMap;
 import model.Volunteer;
-import ui.VolunteerSignUpDetailsPanel;
+import ui.VolunteerSignedUpDetailsPanel;
 
 /**
- * Tests for VolunteerSignUpDetailsPanel.
+ * Tests for VolunteerSignedUpDetailsPanel.
  * 
  * @author Tuan Dinh
  * @version February 17, 2018
  */
-public class VolunteerSignUpDetailsPanelTest {
+public class VolunteerSignedUpDetailsPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -25,7 +27,7 @@ public class VolunteerSignUpDetailsPanelTest {
     private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
     
     private static Volunteer myVolunteer;
-    private static VolunteerSignUpDetailsPanel myPanel;
+    private static VolunteerSignedUpDetailsPanel myPanel;
     
     
     public void setup() {
@@ -41,7 +43,7 @@ public class VolunteerSignUpDetailsPanelTest {
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
 		List<Job> eligibleJobs = myJobs.getEligibleJobs(myVolunteer);
-		myPanel = new VolunteerSignUpDetailsPanel(eligibleJobs);
+		myPanel = new VolunteerSignedUpDetailsPanel(eligibleJobs);
 		myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,5 +52,4 @@ public class VolunteerSignUpDetailsPanelTest {
         myFrame.setVisible(true);
     	
     }
-    
 }

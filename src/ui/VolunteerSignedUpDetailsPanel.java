@@ -16,20 +16,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Job;
+
 /**
- * Panel for when a volunteer views the details of a job they want
- * to sign up for. It will notify Observers when a button is pressed.
+ * Panel for when a volunteer views the details of a job they have
+ * signed up for. It will notify Observers when a button is pressed.
  * 
  * @author Tuan Dinh
  * @version February 18, 2018
  */
-public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
+public class VolunteerSignedUpDetailsPanel extends Observable implements Observer {
 	
 	JPanel myPanel;
 	List<Job> myEligibleJobs;
 	Job myJob;
 	
-	public VolunteerSignUpDetailsPanel(final List<Job> theEligibleJobs) {
+	public VolunteerSignedUpDetailsPanel(final List<Job> theEligibleJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myEligibleJobs = theEligibleJobs;
 		init();
@@ -62,9 +63,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 			}
 		});
 		backButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
-		
-		
-		JButton signupButton = new JButton(new AbstractAction("Sign up") {
+		JButton signupButton = new JButton(new AbstractAction("Remove") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -73,7 +72,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				notifyObservers(new ButtonSignal("submit", 0));
+				notifyObservers(new ButtonSignal("remove", 0));
 				
 			}
 		});

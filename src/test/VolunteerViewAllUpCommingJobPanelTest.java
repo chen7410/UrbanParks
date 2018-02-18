@@ -1,21 +1,23 @@
 package test;
 
 import java.awt.BorderLayout;
-import java.util.List;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
-import model.Job;
+
 import model.JobMap;
 import model.UserMap;
 import model.Volunteer;
-import ui.VolunteerSignUpDetailsPanel;
+import ui.VolunteerViewAllUpCommingJobPanel;
 
 /**
- * Tests for VolunteerSignUpDetailsPanel.
+ * Tests for VolunteerSignUpPanel.
  * 
- * @author Tuan Dinh
+ * @author Minqing Chen
  * @version February 17, 2018
  */
-public class VolunteerSignUpDetailsPanelTest {
+public class VolunteerViewAllUpCommingJobPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -25,12 +27,9 @@ public class VolunteerSignUpDetailsPanelTest {
     private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
     
     private static Volunteer myVolunteer;
-    private static VolunteerSignUpDetailsPanel myPanel;
     
+    private static VolunteerViewAllUpCommingJobPanel myUpCommingJobPanelPanel;
     
-    public void setup() {
-    	
-    }
     
     public static void main(final String[] theArgs) {
     	myFrame = new JFrame("UrbanParks");
@@ -39,16 +38,18 @@ public class VolunteerSignUpDetailsPanelTest {
 		myUsers = new UserMap();
 		myUsers.loadUserMap(USERS_DATA_FILE);
 		myJobs.loadJobMap(JOBS_DATA_FILE);
+		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
-		List<Job> eligibleJobs = myJobs.getEligibleJobs(myVolunteer);
-		myPanel = new VolunteerSignUpDetailsPanel(eligibleJobs);
-		myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
+		myUpCommingJobPanelPanel = new VolunteerViewAllUpCommingJobPanel(
+				myJobs.getEligibleJobs(myVolunteer));
+		
+		
+		
+		myFrame.add(myUpCommingJobPanelPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	myFrame.setResizable(false);
     	myFrame.setLocationRelativeTo(null);
         myFrame.setVisible(true);
     	
     }
-    
 }
