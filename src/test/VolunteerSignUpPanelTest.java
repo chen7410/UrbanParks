@@ -15,7 +15,7 @@ import ui.VolunteerSignUpPanel;
  * Tests for VolunteerSignUpPanel.
  * 
  * @author Minqing Chen
- * @version February 14, 2018
+ * @version February 17, 2018
  */
 public class VolunteerSignUpPanelTest {
 	/** The main window. */
@@ -33,10 +33,7 @@ public class VolunteerSignUpPanelTest {
     
     private static VolunteerSignUpPanel myVolunteerSignUpPanel;
     
-    
-    public void setup() {
-    	
-    }
+
     
     public static void main(final String[] theArgs) {
     	myFrame = new JFrame("UrbanParks");
@@ -47,12 +44,7 @@ public class VolunteerSignUpPanelTest {
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
-		System.out.println(myVolunteer.getJobList().size());
-		//System.out.println(myJobs.getSortedJobsArray()[0].toString());
 		myVolunteerSignUpPanel = new VolunteerSignUpPanel(myJobs.getEligibleJobs(myVolunteer));
-		
-		
-		//System.out.println(myVolunteerSignUpPanel.getComponentCount());
 		
 		myFrame.add(myVolunteerSignUpPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();

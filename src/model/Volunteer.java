@@ -26,8 +26,8 @@ public class Volunteer extends User implements Serializable {
 	
 	/**
 	 * Cancel the specified job from a Volunteer job list.
-	 * Precondition: the specified job must be in a volunteer job list.
-	 * Postcondition: the specified job remove from a volunteer job list.
+	 * Precondition: the specified job must be checked.
+	 * Postcondition: the specified job removed from a volunteer job list.
 	 * @param theJob the specified that being removed from the list.
 	 * @return true if the job remove from the list. otherwise, throw exception.
 	 * @exception IllegalArgumentException when try to cancel a job that is 

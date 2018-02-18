@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -100,7 +99,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 		JLabel topLabel = new JLabel("All Upcomming Jobs");
 		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
 		return topLabel;
-		
 	}
 	/**
 	 * Set up Home button.

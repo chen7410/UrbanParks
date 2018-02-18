@@ -9,13 +9,10 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -26,7 +23,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 import model.Job;
-import model.Volunteer;
 /**
  * A JPanal that showing all jobs a volunteer can sign up.
  * @author Group 7

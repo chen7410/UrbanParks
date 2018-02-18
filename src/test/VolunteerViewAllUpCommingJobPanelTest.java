@@ -12,6 +12,12 @@ import model.Volunteer;
 import ui.VolunteerSignUpPanel;
 import ui.VolunteerViewAllUpCommingJobPanel;
 
+/**
+ * Tests for VolunteerSignUpPanel.
+ * 
+ * @author Minqing Chen
+ * @version February 17, 2018
+ */
 public class VolunteerViewAllUpCommingJobPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
@@ -29,10 +35,6 @@ public class VolunteerViewAllUpCommingJobPanelTest {
     private static VolunteerViewAllUpCommingJobPanel myUpCommingJobPanelPanel;
     
     
-    public void setup() {
-    	
-    }
-    
     public static void main(final String[] theArgs) {
     	myFrame = new JFrame("UrbanParks");
     	
@@ -42,7 +44,6 @@ public class VolunteerViewAllUpCommingJobPanelTest {
 		myJobs.loadJobMap(JOBS_DATA_FILE);
 		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
-		System.out.println(myVolunteer.getJobList().size());
 		myUpCommingJobPanelPanel = new VolunteerViewAllUpCommingJobPanel(
 				myJobs.getEligibleJobs(myVolunteer));
 		
