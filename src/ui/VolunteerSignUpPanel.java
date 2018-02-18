@@ -25,7 +25,7 @@ import javax.swing.border.EtchedBorder;
 import model.Job;
 /**
  * A JPanal that showing all jobs a volunteer can sign up.
- * @author Group 7
+ * @author Minqing Chen
  * @version February 17, 2018
  */
 public class VolunteerSignUpPanel extends Observable {

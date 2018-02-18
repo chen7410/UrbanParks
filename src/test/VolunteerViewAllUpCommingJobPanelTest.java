@@ -26,9 +26,6 @@ public class VolunteerViewAllUpCommingJobPanelTest {
     private static final String USERS_DATA_FILE = "UsersInformations.ser";
     private static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
     
-    private static final Toolkit KIT = Toolkit.getDefaultToolkit();
-    private static final Dimension SCREEN_SIZE = KIT.getScreenSize(); 
-    
     private static Volunteer myVolunteer;
     
     private static VolunteerViewAllUpCommingJobPanel myUpCommingJobPanelPanel;
@@ -51,8 +48,7 @@ public class VolunteerViewAllUpCommingJobPanelTest {
 		myFrame.add(myUpCommingJobPanelPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.setLocation(SCREEN_SIZE.width / 2 - myFrame.getWidth() / 2, 
-                            SCREEN_SIZE.height / 2 - myFrame.getHeight() / 2);
+    	myFrame.setLocationRelativeTo(null);
         myFrame.setVisible(true);
     	
     }
