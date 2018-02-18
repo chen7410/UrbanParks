@@ -10,14 +10,9 @@ import model.JobMap;
 import model.UserMap;
 import model.Volunteer;
 import ui.VolunteerSignUpPanel;
+import ui.VolunteerViewAllUpCommingJobPanel;
 
-/**
- * Tests for VolunteerSignUpPanel.
- * 
- * @author Minqing Chen
- * @version February 14, 2018
- */
-public class VolunteerSignUpPanelTest {
+public class VolunteerViewAllUpCommingJobPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -31,7 +26,7 @@ public class VolunteerSignUpPanelTest {
     
     private static Volunteer myVolunteer;
     
-    private static VolunteerSignUpPanel myVolunteerSignUpPanel;
+    private static VolunteerViewAllUpCommingJobPanel myUpCommingJobPanelPanel;
     
     
     public void setup() {
@@ -48,13 +43,12 @@ public class VolunteerSignUpPanelTest {
 		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
 		System.out.println(myVolunteer.getJobList().size());
-		//System.out.println(myJobs.getSortedJobsArray()[0].toString());
-		myVolunteerSignUpPanel = new VolunteerSignUpPanel(myJobs.getEligibleJobs(myVolunteer));
+		myUpCommingJobPanelPanel = new VolunteerViewAllUpCommingJobPanel(
+				myJobs.getEligibleJobs(myVolunteer));
 		
 		
-		//System.out.println(myVolunteerSignUpPanel.getComponentCount());
 		
-		myFrame.add(myVolunteerSignUpPanel.getPanel(), BorderLayout.CENTER);
+		myFrame.add(myUpCommingJobPanelPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setLocation(SCREEN_SIZE.width / 2 - myFrame.getWidth() / 2, 
@@ -62,5 +56,4 @@ public class VolunteerSignUpPanelTest {
         myFrame.setVisible(true);
     	
     }
-    
 }

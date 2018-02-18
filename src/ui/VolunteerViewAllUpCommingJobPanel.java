@@ -1,7 +1,3 @@
-/*
- * TCSS 360 - Winter 2018
- * Urban Parks Project
- */
 package ui;
 
 import java.awt.BorderLayout;
@@ -9,16 +5,14 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -26,33 +20,27 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 import model.Job;
-import model.Volunteer;
-/**
- * A JPanal that showing all jobs a volunteer can sign up.
- * @author Group 7
- * @version February 17, 2018
- */
-public class VolunteerSignUpPanel extends Observable {
 
+public class VolunteerViewAllUpCommingJobPanel extends Observable{
 	/**
 	 * A generated serial version UID for object Serialization.
 	 */
 	private static final long serialVersionUID = 1L;
  
-	private List<Job> myEligibleJobs;
-	private JPanel myVolunteerSignUpPanel;
+	private List<Job> myAllUpCommingJobs;
+	private JPanel myVolunteerViewAllUpCommingJobPanel;
 	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all eligible jobs of a volunteer.
+	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerSignUpPanel(final List<Job> theEligibleJobs) {
-		myVolunteerSignUpPanel = new JPanel(new BorderLayout());
-		myEligibleJobs = theEligibleJobs;
-		myVolunteerSignUpPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
-		myVolunteerSignUpPanel.setBackground(Color.WHITE);
+	public VolunteerViewAllUpCommingJobPanel(final List<Job> theAllUpCommingJobs) {
+		myVolunteerViewAllUpCommingJobPanel = new JPanel(new BorderLayout());
+		myAllUpCommingJobs = theAllUpCommingJobs;
+		myVolunteerViewAllUpCommingJobPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myVolunteerViewAllUpCommingJobPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
@@ -63,6 +51,10 @@ public class VolunteerSignUpPanel extends Observable {
 		JButton homeButton = makeHomeButton();
 		JButton jobDetailButton = makeViewJobDetailButton();
 		
+		JLabel topLabel = new JLabel("All Upcomming Jobs");
+		JPanel topLabelPanel = new JPanel();
+		topLabelPanel.add(topLabel);
+		
 		//radio button panel
 		JPanel radioPanel = new JPanel(new GridLayout(0,1));
 		radioPanel.setBackground(Color.WHITE);
@@ -70,19 +62,19 @@ public class VolunteerSignUpPanel extends Observable {
 		
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
-		int size = myEligibleJobs.size();
+		int size = myAllUpCommingJobs.size();
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
 			//System.out.println(b.toString());
-			JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
+			JRadioButton b = makeRadioButton(myAllUpCommingJobs.get(i));
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);
-				mySelectedJobID = myEligibleJobs.get(i).getJobID();
+				mySelectedJobID = myAllUpCommingJobs.get(i).getJobID();
 			}
 		}
 		
@@ -99,10 +91,17 @@ public class VolunteerSignUpPanel extends Observable {
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
-		myVolunteerSignUpPanel.add(radioScrollPane, BorderLayout.CENTER);
-		myVolunteerSignUpPanel.add(buttonPanel, BorderLayout.SOUTH);
+		myVolunteerViewAllUpCommingJobPanel.add(topLabelPanel, BorderLayout.NORTH);
+		myVolunteerViewAllUpCommingJobPanel.add(radioScrollPane, BorderLayout.CENTER);
+		myVolunteerViewAllUpCommingJobPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
+	private JLabel makeTopJlabel() {
+		JLabel topLabel = new JLabel("All Upcomming Jobs");
+		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
+		return topLabel;
+		
+	}
 	/**
 	 * Set up Home button.
 	 * Home button will fire a button signal which contains
@@ -175,7 +174,7 @@ public class VolunteerSignUpPanel extends Observable {
 	 * @return a VolunteerSignUpPanel.
 	 */
 	public JPanel getPanel() {
-		return myVolunteerSignUpPanel;
+		return myVolunteerViewAllUpCommingJobPanel;
 	}
 
 
