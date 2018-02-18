@@ -19,7 +19,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 import model.Job;
-
+/**
+ * A JPanal that showing all upcoming jobs for a volunteer.
+ * @author Group 7
+ * @version February 17, 2018
+ */
 public class VolunteerViewAllUpCommingJobPanel extends Observable{
 	/**
 	 * A generated serial version UID for object Serialization.
