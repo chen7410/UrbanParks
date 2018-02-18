@@ -76,7 +76,7 @@ public class VolunteerSignUpConfirmationPanel {
 		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
 		buttonPanel.add(homeButton);
 		
-		buttonPanel.setBackground(Color.WHITE);
+		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR );
 		myVolunteerConfirmationPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 	

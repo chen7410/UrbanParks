@@ -74,7 +74,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		signupButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(signupButton);
-		buttonsPanel.setBackground(Color.WHITE);
+		buttonsPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
@@ -85,8 +85,12 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		jobDetailsPanel.add(l);
 		myJob = myEligibleJobs.get(2);
 		for (String detail : myJob.getJobDetailsList()) {
-			JLabel label = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
-			label.setFont(new Font(null, Font.PLAIN, 20));
+			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
+					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
+			JLabel label = new JLabel(formattedDetail, JLabel.LEFT);
+			
+//			JLabel label = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
+//			label.setFont(new Font(null, Font.PLAIN, 20));
 			if(detail.length() > 80) {
 				label.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
 			} else {
