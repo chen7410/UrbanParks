@@ -56,6 +56,8 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 			}
 		});
 		backButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		
+		
 		JButton signupButton = new JButton(new AbstractAction("Sign up") {
 			
 			/**
@@ -81,7 +83,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		JLabel l = new JLabel("Job Details");
 		l.setFont(new Font(null, Font.BOLD, 30));
 		jobDetailsPanel.add(l);
-		myJob = myEligibleJobs.get(0);
+		myJob = myEligibleJobs.get(2);
 		for (String detail : myJob.getJobDetailsList()) {
 			JLabel label = new JLabel("<html>" + detail + "</html>", JLabel.LEFT);
 			label.setFont(new Font(null, Font.PLAIN, 20));
