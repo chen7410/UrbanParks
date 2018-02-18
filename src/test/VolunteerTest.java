@@ -20,7 +20,7 @@ import model.Volunteer;
  * JUnit tests for volunteer.
  * 
  * @author Group 7
- * @version February 12, 2018
+ * @version February 17, 2018
  */
 public class VolunteerTest {
 	
