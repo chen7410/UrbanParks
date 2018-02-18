@@ -3,6 +3,8 @@
  */
 package ui_brook;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,7 +23,7 @@ public class GUI {
 		JPanel mainPanel = new JPanel();
 		
 		
-		guiFrame.add(new LogInPage());
+		guiFrame.add(new LogInPage(), BorderLayout.CENTER);
 		
 		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guiFrame.setSize(800, 600);
