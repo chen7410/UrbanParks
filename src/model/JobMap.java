@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -114,6 +115,29 @@ public class JobMap {
 
 	public int size() {
 		return myJobs.size();
+	}
+	
+	/**
+	 * Returns a list of jobs between two given dates, inclusive.
+	 * 
+	 * @param theStartDate the beginning the period.
+	 * @param theEndDate the end of the period.
+	 * @return jobsWithinPeriod that contains  jobs between theStartDate and theEndDate.
+	 */
+	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
+		Job[] sortedJobs = getSortedJobsArray();
+		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
+		for (Job job: sortedJobs) {
+			if ((job.getStartDate()).isEqual(theStartDate) 
+					||( (job.getStartDate()).isBefore(theEndDate) 
+							&& job.getStartDate().isAfter(theStartDate)
+							&& job.getEndDate().isBefore(theEndDate)
+							&& !job.getEndDate().isBefore(job.getStartDate()))
+					|| (job.getEndDate()).isEqual(theEndDate) ) {
+				jobsWithinPeriod.add(job);
+			}
+		}
+		return jobsWithinPeriod;
 	}
 	
 	/**

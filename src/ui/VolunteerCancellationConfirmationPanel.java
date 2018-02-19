@@ -16,12 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * A JPanal that will show job sign up confirmation.
- * @author Group 7
- * @version February 17, 2018
- */
-
 import model.Job;
 
 /**
