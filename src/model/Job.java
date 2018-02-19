@@ -121,13 +121,16 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 	
 	/**
-	 * check if the job is able to remove from user's job list.
+	 * Check if the job is able to be removed from user's job list.
+	 * 
 	 * @return true if the job is removable; false otherwise.
 	 */
 	public boolean isJobRemovable() {
-		LocalDate minimumDate = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
+		LocalDate minimumDate = LocalDate.now()
+								.plusDays(Job.MIN_DAYS_TO_SIGN_UP);
+		
 		return myStartDate.isEqual(minimumDate)
-				|| myEndDate.isAfter(minimumDate);
+								|| myEndDate.isAfter(minimumDate);
 	}
 	
 	/**

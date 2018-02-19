@@ -35,7 +35,9 @@ public class Volunteer extends User implements Serializable {
 	 *                days from the current date.
 	 */
 	public void cancelJob(final Job theJob) {
-		myJobs.remove(theJob);
+		if (theJob.isJobRemovable()) {
+			myJobs.remove(theJob);
+		}
 	}
 
 	/**

@@ -35,4 +35,8 @@ public class ParkManager extends User implements Serializable {
 	public void createJob(final Job theJob) {
 		myJobs.add(theJob);
 	}
+	
+	public void removeJob() {
+		
+	}
 }
