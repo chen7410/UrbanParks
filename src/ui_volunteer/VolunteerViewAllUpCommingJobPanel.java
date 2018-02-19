@@ -1,4 +1,4 @@
-package ui;
+package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
+
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -17,21 +18,18 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-
 import model.Job;
+import ui.ButtonSignal;
+import ui.GUIFrame;
 /**
  * A JPanal that showing all upcoming jobs for a volunteer.
  * @author Group 7
  * @version February 17, 2018
  */
-public class VolunteerViewAllUpCommingJobPanel extends Observable{
-	/**
-	 * A generated serial version UID for object Serialization.
-	 */
-	private static final long serialVersionUID = 1L;
+public class VolunteerViewAllUpCommingJobPanel extends Observable {
  
 	private List<Job> myAllUpCommingJobs;
-	private JPanel myVolunteerViewAllUpCommingJobPanel;
+	private JPanel myPanel;
 	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
@@ -40,10 +38,10 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 	 * @param theAllJobs all the jobs in the system.
 	 */
 	public VolunteerViewAllUpCommingJobPanel(final List<Job> theAllUpCommingJobs) {
-		myVolunteerViewAllUpCommingJobPanel = new JPanel(new BorderLayout());
+		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theAllUpCommingJobs;
-		myVolunteerViewAllUpCommingJobPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
-		myVolunteerViewAllUpCommingJobPanel.setBackground(Color.WHITE);
+		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
@@ -94,9 +92,9 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
-		myVolunteerViewAllUpCommingJobPanel.add(topLabelPanel, BorderLayout.NORTH);
-		myVolunteerViewAllUpCommingJobPanel.add(radioScrollPane, BorderLayout.CENTER);
-		myVolunteerViewAllUpCommingJobPanel.add(buttonPanel, BorderLayout.SOUTH);
+		myPanel.add(topLabelPanel, BorderLayout.NORTH);
+		myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 	private JLabel makeTopJlabel() {
@@ -177,7 +175,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable{
 	 * @return a VolunteerSignUpPanel.
 	 */
 	public JPanel getPanel() {
-		return myVolunteerViewAllUpCommingJobPanel;
+		return myPanel;
 	}
 
 

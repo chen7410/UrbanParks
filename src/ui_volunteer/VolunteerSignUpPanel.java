@@ -2,7 +2,7 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
-package ui;
+package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,22 +21,18 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-
 import model.Job;
+import ui.ButtonSignal;
+import ui.GUIFrame;
 /**
  * A JPanal that showing all jobs a volunteer can sign up.
  * @author Minqing Chen
  * @version February 17, 2018
  */
 public class VolunteerSignUpPanel extends Observable {
-
-	/**
-	 * A generated serial version UID for object Serialization.
-	 */
-	private static final long serialVersionUID = 1L;
  
 	private List<Job> myEligibleJobs;
-	private JPanel myVolunteerSignUpPanel;
+	private JPanel myPanel;
 	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
@@ -45,10 +41,10 @@ public class VolunteerSignUpPanel extends Observable {
 	 * @param theAllJobs all eligible jobs of a volunteer.
 	 */
 	public VolunteerSignUpPanel(final List<Job> theEligibleJobs) {
-		myVolunteerSignUpPanel = new JPanel(new BorderLayout());
+		myPanel = new JPanel(new BorderLayout());
 		myEligibleJobs = theEligibleJobs;
-		myVolunteerSignUpPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
-		myVolunteerSignUpPanel.setBackground(Color.WHITE);
+		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
@@ -56,8 +52,8 @@ public class VolunteerSignUpPanel extends Observable {
 	 * Set up this VolunteerSignUpPanel.
 	 */
 	private void setup() {
-		JButton homeButton = makeHomeButton();
-		JButton jobDetailButton = makeViewJobDetailButton();
+		JButton homeButton = makeActionButton("Home");
+		JButton jobDetailButton = makeActionButton("View Job Details");
 		
 		//radio button panel
 		JPanel radioPanel = new JPanel(new GridLayout(0,1));
@@ -95,54 +91,31 @@ public class VolunteerSignUpPanel extends Observable {
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
-		myVolunteerSignUpPanel.add(radioScrollPane, BorderLayout.CENTER);
-		myVolunteerSignUpPanel.add(buttonPanel, BorderLayout.SOUTH);
+		myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 	/**
-	 * Set up Home button.
-	 * Home button will fire a button signal which contains
+	 * Set up an action button.
+	 * Action button will fire a button signal which contains
 	 * the name of this button and the selected job id the 
 	 * and notify other observers.
 	 * 
 	 * @return the Home button.
 	 */
-	private JButton makeHomeButton() {
-		JButton homeButton = new JButton(new AbstractAction("Home") {
+	private JButton makeActionButton(final String theButtonName) {
+		JButton homeButton = new JButton(new AbstractAction(theButtonName) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				setChanged();
-				notifyObservers(new ButtonSignal("Home", mySelectedJobID));
-				System.out.println("Home Selected Job ID " + mySelectedJobID);
+				notifyObservers(new ButtonSignal(theButtonName, mySelectedJobID));
 			}
 			
 		});
 		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
 		return homeButton;
-	}
-	
-	/**
-	 * Set up the View job detail button.
-	 * View job detail button will fire a button signal which contains 
-	 * the selected job id and the name of this button and notify other observers.
-	 * 
-	 * @return the view job detail button.
-	 */
-	private JButton makeViewJobDetailButton() {
-		JButton jobDetailButton = new JButton(new AbstractAction("View Job Detail") {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent theEvent) {
-				setChanged();
-				notifyObservers(new ButtonSignal("View Job Detail", mySelectedJobID));
-				System.out.println("View Job Detail Selected Job ID " + mySelectedJobID);
-			}
-		});
-		jobDetailButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
-		return jobDetailButton;
 	}
 
 	/**
@@ -161,7 +134,6 @@ public class VolunteerSignUpPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				mySelectedJobID = theEligibleJob.getJobID();
-				System.out.println("Radio button Selected Job ID " + theEligibleJob.getJobID());
 			}
 		});
 		return button;
@@ -171,7 +143,7 @@ public class VolunteerSignUpPanel extends Observable {
 	 * @return a VolunteerSignUpPanel.
 	 */
 	public JPanel getPanel() {
-		return myVolunteerSignUpPanel;
+		return myPanel;
 	}
 
 

@@ -37,9 +37,7 @@ public class Staff extends User {
 	 */
 	public ArrayList<Job> getJobsInPeriod (final LocalDate theStartDate, 
 					final LocalDate theEndDate, final JobMap theJobs) {
-		ArrayList<Job> jobList = theJobs.getJobsInPeriod(theStartDate, theEndDate);
-		
-		return jobList;
+		return theJobs.getJobsInPeriod(theStartDate, theEndDate);
 	}
 
 }

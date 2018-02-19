@@ -24,7 +24,9 @@ import java.util.List;
  * @version February 12, 2018
  */
 public class JobMap {
-
+	
+	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
+	
 	private HashMap<Integer, Job> myJobs;
 
 	public JobMap() {
@@ -82,11 +84,12 @@ public class JobMap {
 	 * The file must be create by the storeJobMap method.
 	 * @param theFilename
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadJobMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			myJobs = (HashMap) in.readObject();
+			myJobs = (HashMap<Integer, Job>) in.readObject();
 			in.close();
 			file.close();
 		} catch (FileNotFoundException theFileNotFoundException) {
@@ -128,12 +131,7 @@ public class JobMap {
 		Job[] sortedJobs = getSortedJobsArray();
 		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
 		for (Job job: sortedJobs) {
-			if ((job.getStartDate()).isEqual(theStartDate) 
-					||( (job.getStartDate()).isBefore(theEndDate) 
-							&& job.getStartDate().isAfter(theStartDate)
-							&& job.getEndDate().isBefore(theEndDate)
-							&& !job.getEndDate().isBefore(job.getStartDate()))
-					|| (job.getEndDate()).isEqual(theEndDate) ) {
+			if (job.isJobWithinDates(theStartDate, theEndDate) ) {
 				jobsWithinPeriod.add(job);
 			}
 		}

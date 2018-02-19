@@ -80,11 +80,12 @@ public class UserMap {
 	 *            The file name from where the user informations
 	 *            should be gathered.
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadUserMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			myUsers = (HashMap) in.readObject();
+			myUsers = (HashMap<String, User>) in.readObject();
 			in.close();
 			file.close();
 		} catch (FileNotFoundException theFileNotFoundException) {
