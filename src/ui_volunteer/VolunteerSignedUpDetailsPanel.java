@@ -1,4 +1,4 @@
-package ui;
+package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,14 +8,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import model.Job;
+import ui.ButtonSignal;
+import ui.GUIFrame;
 
 /**
  * Panel for when a volunteer views the details of a job they have
@@ -24,11 +23,11 @@ import model.Job;
  * @author Tuan Dinh
  * @version February 18, 2018
  */
-public class VolunteerSignedUpDetailsPanel extends Observable implements Observer {
+public class VolunteerSignedUpDetailsPanel extends Observable {
 	
-	JPanel myPanel;
-	List<Job> myEligibleJobs;
-	Job myJob;
+	private JPanel myPanel;
+	private List<Job> myEligibleJobs;
+	private Job myJob;
 	
 	public VolunteerSignedUpDetailsPanel(final List<Job> theEligibleJobs) {
 		myPanel = new JPanel(new BorderLayout());
@@ -104,11 +103,5 @@ public class VolunteerSignedUpDetailsPanel extends Observable implements Observe
 		cover0.setBackground(Color.WHITE);
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
-	}
-	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 }

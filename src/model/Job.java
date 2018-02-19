@@ -162,6 +162,12 @@ public class Job implements Serializable, Comparable<Job> {
 													(Job.MAX_END_DAY + 1));
 	}
 	
+	public boolean isJobWithinDates(final LocalDate theStartDate,
+									final LocalDate theEndDate) {
+		return !myStartDate.isBefore(theStartDate)
+				&& !myEndDate.isAfter(theEndDate);
+	}
+	
 	/**
 	 * @return String summary of the job in the following format:
 	 * 		   Park Name: Start Date - End Date 

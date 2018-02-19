@@ -16,7 +16,10 @@ import java.util.List;
  * @version February 12, 2018
  */
 public abstract class User implements Serializable {
-
+	
+	
+	public static final String USERS_DATA_FILE = "UsersInformations.ser";
+	
 	/**
      * A generated serial version UID for object Serialization.
      */

@@ -1,4 +1,4 @@
-package ui;
+package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,16 +6,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import model.Job;
+import ui.ButtonSignal;
+import ui.GUIFrame;
 /**
  * Panel for when a volunteer views the details of a job they want
  * to sign up for. It will notify Observers when a button is pressed.
@@ -23,15 +22,14 @@ import model.Job;
  * @author Tuan Dinh
  * @version February 18, 2018
  */
-public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
+public class VolunteerSignUpDetailsPanel extends Observable {
 	
-	JPanel myPanel;
-	List<Job> myEligibleJobs;
-	Job myJob;
+	private JPanel myPanel;
+	private Job myJob;
 	
-	public VolunteerSignUpDetailsPanel(final List<Job> theEligibleJobs) {
+	public VolunteerSignUpDetailsPanel(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
-		myEligibleJobs = theEligibleJobs;
+		myJob = theJob;
 		init();
 		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
 	}
@@ -58,6 +56,7 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setChanged();
 				notifyObservers(new ButtonSignal("back", 0));
 			}
 		});
@@ -73,7 +72,8 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				notifyObservers(new ButtonSignal("submit", 0));
+				setChanged();
+				notifyObservers(new ButtonSignal("submit", myJob.getJobID()));
 				
 			}
 		});
@@ -89,7 +89,6 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		JLabel l = new JLabel("Job Details");
 		l.setFont(new Font(null, Font.BOLD, 30));
 		jobDetailsPanel.add(l);
-		myJob = myEligibleJobs.get(0);
 		for (String detail : myJob.getJobDetailsList()) {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
@@ -105,11 +104,5 @@ public class VolunteerSignUpDetailsPanel extends Observable implements Observer{
 		cover0.setBackground(Color.WHITE);
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
-	}
-	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 }

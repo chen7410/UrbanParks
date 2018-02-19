@@ -2,7 +2,7 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
-package ui;
+package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -10,20 +10,14 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.Observable;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-/**
- * A JPanal that will show job sign up confirmation.
- * @author Group 7
- * @version February 17, 2018
- */
-
 import model.Job;
-
+import ui.GUIFrame;
 /**
  * This panel is used to confirm a volunteer that they have cancelled
  * a job successfully. It will notify observers when a button is pressed.
@@ -31,20 +25,20 @@ import model.Job;
  * @author Hasnah Said
  * @version February 18, 2018
  */
-public class VolunteerCancellationConfirmationPanel {
+public class VolunteerCancellationConfirmationPanel extends Observable {
 
-	private JPanel myVolunteerCancellationPanel;
+	private JPanel myPanel;
 	private Job myJob;
 	
 	public VolunteerCancellationConfirmationPanel(final Job theJob) {
-		myVolunteerCancellationPanel = new JPanel(new BorderLayout());
+		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		setUp();
 	}
 	
 	public void setUp() {
-		myVolunteerCancellationPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
-		myVolunteerCancellationPanel.setBackground(Color.WHITE);
+		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setBackground(Color.WHITE);
 		createButtons();
 		createCancellationConfirmation();
 	}
@@ -84,7 +78,7 @@ public class VolunteerCancellationConfirmationPanel {
 		buttonPanel.add(homeButton);
 		
 		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR );
-		myVolunteerCancellationPanel.add(buttonPanel, BorderLayout.SOUTH);
+		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
 	public void createCancellationConfirmation() {
@@ -111,11 +105,11 @@ public class VolunteerCancellationConfirmationPanel {
 		northPanel.add(eastPanel, BorderLayout.NORTH);
 		northPanel.setBackground(Color.WHITE);
 		
-		myVolunteerCancellationPanel.add(northPanel, BorderLayout.CENTER);
+		myPanel.add(northPanel, BorderLayout.CENTER);
 	}
 	
-	public JPanel getCancellationPanel() {
-		return myVolunteerCancellationPanel;
+	public JPanel getPanel() {
+		return myPanel;
 	}
 	
 }

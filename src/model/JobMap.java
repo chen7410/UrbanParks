@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +24,9 @@ import java.util.List;
  * @version February 12, 2018
  */
 public class JobMap {
-
+	
+	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
+	
 	private HashMap<Integer, Job> myJobs;
 
 	public JobMap() {
@@ -81,11 +84,12 @@ public class JobMap {
 	 * The file must be create by the storeJobMap method.
 	 * @param theFilename
 	 */
+	@SuppressWarnings("unchecked")
 	public void loadJobMap(final String theFilename) {
 		try {
 			FileInputStream file = new FileInputStream(theFilename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			myJobs = (HashMap) in.readObject();
+			myJobs = (HashMap<Integer, Job>) in.readObject();
 			in.close();
 			file.close();
 		} catch (FileNotFoundException theFileNotFoundException) {
@@ -114,6 +118,24 @@ public class JobMap {
 
 	public int size() {
 		return myJobs.size();
+	}
+	
+	/**
+	 * Returns a list of jobs between two given dates, inclusive.
+	 * 
+	 * @param theStartDate the beginning the period.
+	 * @param theEndDate the end of the period.
+	 * @return jobsWithinPeriod that contains  jobs between theStartDate and theEndDate.
+	 */
+	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
+		Job[] sortedJobs = getSortedJobsArray();
+		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
+		for (Job job: sortedJobs) {
+			if (job.isJobWithinDates(theStartDate, theEndDate) ) {
+				jobsWithinPeriod.add(job);
+			}
+		}
+		return jobsWithinPeriod;
 	}
 	
 	/**
