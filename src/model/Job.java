@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Job class holds information relating to a job which then would be added t
- * JobMap if it satisfies all the requirements.
+ * Job class holds information relating to a job which then would be
+ * added to the JobMap if it satisfies all the requirements.
  * 
  * @author Group 7
  * @version February 12, 2018

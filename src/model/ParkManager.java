@@ -28,7 +28,8 @@ public class ParkManager extends User implements Serializable {
 
 	/**
 	 * Submit a new job to the system.
-	 * Per-condition: the job must be checked before submit.
+	 * 
+	 * Pre-condition: the job must be checked before submit.
 	 * Post-condition: the job add to the park manager job list.
 	 * @param theJob the job that is being submitted.
 	 */
@@ -36,7 +37,22 @@ public class ParkManager extends User implements Serializable {
 		myJobs.add(theJob);
 	}
 	
-	public void removeJob() {
-		
+	/**
+	 * Removes a job only removed from the Park Manager's list and
+	 * not from the JobMap.
+	 * 
+	 * @param theJob The given job to be removed.
+	 * @return true if the job is able to be removed depending on if
+	 * 				the minimum number of days business rule is satisfied
+	 * 				and it was removed was successfully.
+	 * 		false if it is not able to be removed because it fails to
+	 * 				satisfied the minimum number of days business rule
+	 * 				or there is an issue removing it from the list.
+	 */
+	public boolean removeJob(final Job theJob) {
+		if (theJob.isJobRemovable()) {
+			return myJobs.remove(theJob);
+		}
+		return false;
 	}
 }

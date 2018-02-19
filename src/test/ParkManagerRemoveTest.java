@@ -8,29 +8,20 @@ package test;
 import java.time.LocalDate;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import model.Job;
 import model.ParkManager;
 
+import static org.junit.Assert.*;
+
 /**
+ * Testing the removeJob method in the Park Managers class.
  * 
- * 
- * @author Group 7
+ * @author Brook Negussie
  * @version February 21, 2018
  */
 public class ParkManagerRemoveTest {
-	
-	private LocalDate myStartDateStartsOnCurrentDay;
-	private LocalDate myEndDateEndsOnCurrentDay;
-	
-	private LocalDate myStartDateStartsPriorToCurrentDay;
-	private LocalDate myEndDateEndsPastCurrentDay;
-	
-	private LocalDate myStartDateStartsMoreThanMinDaysAway;
-	private LocalDate myEndDateEndsMoreThanMinDaysAway;
-	
-	private LocalDate myStartDateStartsExactlyMinDaysAway;
-	private LocalDate myEndDateEndsExactlyMinDaysAway;
 	
 	private Job myJobStartsOnCurrentDay;
 	private Job myJobStartsPriorToCurrentDay;
@@ -43,57 +34,68 @@ public class ParkManagerRemoveTest {
 	public void setUp() throws Exception {
 		myPM = new ParkManager("brook", "Brook", "Negussie");
 		
-		myStartDateStartsOnCurrentDay = LocalDate.now();
-		myEndDateEndsOnCurrentDay = myStartDateStartsOnCurrentDay;
+		LocalDate myDateIsPriorToCurrentDay = LocalDate.now().minusDays(1);
+		LocalDate myDateIsMoreThanMinDaysAway = LocalDate.now()
+				.plusDays(Job.MIN_DAYS_TO_SIGN_UP + Job.MIN_DAYS_TO_SIGN_UP);
+		LocalDate myDateIsExactlyMinDaysAway = LocalDate.now()
+				.plusDays(Job.MIN_DAYS_TO_SIGN_UP);
 		
-		myStartDateStartsPriorToCurrentDay = LocalDate.now().minusDays(1);
-		myEndDateEndsPastCurrentDay = myStartDateStartsPriorToCurrentDay.plusDays(2);
-		
-		myStartDateStartsMoreThanMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 3);
-		myEndDateEndsMoreThanMinDaysAway = myStartDateStartsMoreThanMinDaysAway;
-		
-		myStartDateStartsExactlyMinDaysAway = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 1);
-		myEndDateEndsExactlyMinDaysAway = myStartDateStartsExactlyMinDaysAway.plusDays(1);
-		
-		myJobStartsOnCurrentDay = new Job(myStartDateStartsOnCurrentDay,
-				myEndDateEndsOnCurrentDay, "Discovery Park", myPM,
+		myJobStartsOnCurrentDay = new Job(LocalDate.now(),
+				LocalDate.now(), "Discovery Park", myPM,
 				"Seattle", "Pick up leaves");
 		
-		myJobStartsPriorToCurrentDay = new Job(myStartDateStartsPriorToCurrentDay,
-				myEndDateEndsPastCurrentDay, "Seward Park", myPM,
+		myJobStartsPriorToCurrentDay = new Job(myDateIsPriorToCurrentDay,
+				myDateIsPriorToCurrentDay.plusDays(2), "Seward Park", myPM,
 				"Seattle", "Pick up leaves");
 		
-		myJobStartsMoreThanMinDaysAway = new Job(myStartDateStartsMoreThanMinDaysAway,
-				myEndDateEndsMoreThanMinDaysAway, "Volunteer Park", myPM,
+		myJobStartsMoreThanMinDaysAway = new Job(myDateIsMoreThanMinDaysAway,
+				myDateIsMoreThanMinDaysAway, "Volunteer Park", myPM,
 				"Seattle", "Pick up leaves");
 		
-		myJobStartsExactlyMinDaysAway = new Job(myStartDateStartsExactlyMinDaysAway,
-				myEndDateEndsExactlyMinDaysAway, "Gas Works Park", myPM, 
+		myJobStartsExactlyMinDaysAway = new Job(myDateIsExactlyMinDaysAway,
+				myDateIsExactlyMinDaysAway.plusDays(1), "Gas Works Park", myPM, 
 				"Seattle", "Pick up leaves");
 		
 		myPM.createJob(myJobStartsOnCurrentDay);
 		myPM.createJob(myJobStartsPriorToCurrentDay);
 		myPM.createJob(myJobStartsMoreThanMinDaysAway);
 		myPM.createJob(myJobStartsExactlyMinDaysAway);
+
 	}
 	
-//	@Test
-//	public void removeJob_JobStartsOnCurrentDay_False() {
-//		assertFalse(myPM.isJobRemovable(myJobStartsOnCurrentDay));
-//	}
-//	
-//	@Test
-//	public void removeJob_JobStartsPriorToCurrentDay_False() {
-//		assertFalse(myPM.isJobRemovable(myJobStartsPriorToCurrentDay));
-//	}
-//	
-//	@Test
-//	public void removeJob_JobStartsMoreThanMinDaysAway_True() {
-//		assertTrue(myPM.isJobRemovable(myJobStartsMoreThanMinDaysAway));
-//	}
-//	
-//	@Test
-//	public void removeJob_JobStartsExactlyMinDaysAway_True() {
-//		assertTrue(myPM.isJobRemovable(myJobStartsExactlyMinDaysAway));
-//	}
+	/**
+	 * Tests to see if a job which starts on the current day can be
+	 * removed from the Park Manager's list.
+	 */
+	@Test
+	public void removeJob_JobStartsOnCurrentDay_False() {
+		assertFalse(myPM.removeJob(myJobStartsOnCurrentDay));
+	}
+	
+	/**
+	 * Tests to see if a job which started yesterday can be removed
+	 * from the Park Manager's list.
+	 */
+	@Test
+	public void removeJob_JobStartsPriorToCurrentDay_False() {
+		assertFalse(myPM.removeJob(myJobStartsPriorToCurrentDay));
+	}
+	
+	/**
+	 * Tests to see if a job which more than the minimum number of
+	 * days away can be removed from the Park Manager's list.
+	 */
+	@Test
+	public void removeJob_JobStartsMoreThanMinDaysAway_True() {
+		assertTrue(myPM.removeJob(myJobStartsMoreThanMinDaysAway));
+	}
+	
+	/**
+	 * Tests to see if a job which starts exactly the minimum number
+	 * of days away can be removed from the Park Manager's list.
+	 */
+	@Test
+	public void removeJob_JobStartsExactlyMinDaysAway_True() {
+		assertTrue(myPM.removeJob(myJobStartsExactlyMinDaysAway));
+	}
 }

@@ -46,7 +46,7 @@ public abstract class User implements Serializable {
 	 *            the specified last name.
 	 */
 	protected User(final String theUserName, final String theFirstName,
-			final String theLastName) {
+					final String theLastName) {
 		myUserName = theUserName;
 		myFirstName = theFirstName;
 		myLastName = theLastName;
