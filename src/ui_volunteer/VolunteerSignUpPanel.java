@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -55,6 +56,10 @@ public class VolunteerSignUpPanel extends Observable {
 		JButton homeButton = makeActionButton("Home");
 		JButton jobDetailButton = makeActionButton("View Job Details");
 		
+		JLabel topLabel = makeTopJlabel();
+		JPanel topLabelPanel = new JPanel();
+		topLabelPanel.add(topLabel);
+		
 		//radio button panel
 		JPanel radioPanel = new JPanel(new GridLayout(0,1));
 		radioPanel.setBackground(Color.WHITE);
@@ -91,8 +96,19 @@ public class VolunteerSignUpPanel extends Observable {
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
+		myPanel.add(topLabelPanel, BorderLayout.NORTH);
 		myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
+	}
+	
+	/**
+	 * Set up top label.
+	 * @return return a label.
+	 */
+	private JLabel makeTopJlabel() {
+		JLabel topLabel = new JLabel("Sign Up A Job");
+		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
+		return topLabel;
 	}
 
 	/**
@@ -101,7 +117,7 @@ public class VolunteerSignUpPanel extends Observable {
 	 * the name of this button and the selected job id the 
 	 * and notify other observers.
 	 * 
-	 * @return the Home button.
+	 * @return the a button.
 	 */
 	private JButton makeActionButton(final String theButtonName) {
 		JButton homeButton = new JButton(new AbstractAction(theButtonName) {

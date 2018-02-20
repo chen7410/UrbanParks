@@ -97,6 +97,10 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Set up top label.
+	 * @return return a label.
+	 */
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("All Upcomming Jobs");
 		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
