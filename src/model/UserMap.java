@@ -11,7 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This class represents all user in the system.
@@ -99,4 +101,13 @@ public class UserMap {
 			theClassNotFoundException.printStackTrace();
 		}
 	}	
+	
+	public List<String> getAllUserNames() {
+		List<String> users = new ArrayList<>(myUsers.keySet());
+		List<String> userList = new ArrayList<>();
+		for (int i = 0; i < users.size(); i++) {
+			userList.add(users.get(i));
+		}
+		return userList;
+	}
 }
