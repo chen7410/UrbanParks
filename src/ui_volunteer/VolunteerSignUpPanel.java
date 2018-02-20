@@ -117,7 +117,7 @@ public class VolunteerSignUpPanel extends Observable {
 	 * the name of this button and the selected job id the 
 	 * and notify other observers.
 	 * 
-	 * @return the Home button.
+	 * @return the a button.
 	 */
 	private JButton makeActionButton(final String theButtonName) {
 		JButton homeButton = new JButton(new AbstractAction(theButtonName) {
