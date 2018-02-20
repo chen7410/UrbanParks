@@ -23,21 +23,21 @@ public class Volunteer extends User implements Serializable {
 	}
 
 	/**
-	 * Cancel the specified job from a Volunteer job list. Precondition: the
-	 * specified job must be checked. Postcondition: the specified job removed
-	 * from a volunteer job list.
+	 * Cancel the specified job in a Volunteer job list. If the job is not
+	 * in the job list. The list remain unchanged and return false.
+	 * Precondition: the specified job must be in the job list. 
+	 * Postcondition: the specified job removed from a volunteer job list.
 	 * 
 	 * @param theJob
 	 *            the specified that being removed from the list.
-	 * @return true if the job remove from the list. otherwise, throw exception.
-	 * @exception IllegalArgumentException
-	 *                when try to cancel a job that is less than the minimum
-	 *                days from the current date.
+	 * @return true if the job remove from the list; false otherwise.
+	 * 
 	 */
-	public void cancelJob(final Job theJob) {
+	public boolean cancelJob(final Job theJob) {
 		if (theJob.isJobRemovable()) {
-			myJobs.remove(theJob);
+			return myJobs.remove(theJob);
 		}
+		return false;
 	}
 
 	/**

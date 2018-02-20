@@ -121,7 +121,7 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 	
 	/**
-	 * Check if the job is able to be removed from user's job list.
+	 * Check if a job is able to be removed.
 	 * 
 	 * @return true if the job is removable; false otherwise.
 	 */

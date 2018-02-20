@@ -39,7 +39,8 @@ public class ParkManager extends User implements Serializable {
 	
 	/**
 	 * Removes a job only removed from the Park Manager's list and
-	 * not from the JobMap.
+	 * not from the JobMap. If the job is not in the job list. 
+	 * The list remain unchanged and return false.
 	 * 
 	 * @param theJob The given job to be removed.
 	 * @return true if the job is able to be removed depending on if
