@@ -47,13 +47,15 @@ public class VolunteerLoginPanel {
 		JTextField userName = new JTextField("User name", 15);
 		JButton logInButton = new JButton(new AbstractAction("LogIn") {
 
+			/** */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent theArg) {
 				String givenUserName = userName.getText();
 				if (myUsers.contains(givenUserName)) {
-					// Proceed to the next page.
+					// Proceed to the next panel.
 				} else {
-					System.out.println(myUsers.contains(givenUserName));
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Please enter a valid user name.",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
@@ -62,6 +64,9 @@ public class VolunteerLoginPanel {
 		});
 		
 		JButton exitButton = new JButton(new AbstractAction("Exit") {
+
+			/** */
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

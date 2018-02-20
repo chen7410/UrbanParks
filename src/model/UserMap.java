@@ -102,6 +102,11 @@ public class UserMap {
 		}
 	}	
 	
+	/**
+	 * Provides only the user names in a list.
+	 * 
+	 * @return The list of user names.
+	 */
 	public List<String> getAllUserNames() {
 		List<String> users = new ArrayList<>(myUsers.keySet());
 		List<String> userList = new ArrayList<>();
