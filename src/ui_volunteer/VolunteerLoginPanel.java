@@ -42,8 +42,10 @@ public class VolunteerLoginPanel {
 	
 	private void setup() {
 		JLabel welcome = new JLabel("Welcome to Urban Parks");
+		welcome.setSize(GUIFrame.JLABEL_SHORT_TEXT);
 		JLabel slogan = new JLabel("Where you can sign up or create a"
 									+ " volunteering job"); 
+		slogan.setSize(GUIFrame.JLABEL_LONG_TEXT);
 		JTextField userName = new JTextField("User name", 15);
 		JButton logInButton = new JButton(new AbstractAction("LogIn") {
 
@@ -62,6 +64,7 @@ public class VolunteerLoginPanel {
 				}
 			}
 		});
+		logInButton.setSize(GUIFrame.BUTTON_SIZE);
 		
 		JButton exitButton = new JButton(new AbstractAction("Exit") {
 
@@ -73,6 +76,7 @@ public class VolunteerLoginPanel {
 				System.exit(0);
 			}
 		});
+		exitButton.setSize(GUIFrame.BUTTON_SIZE);
 		
 		JPanel input = new JPanel(new FlowLayout());
 		input.add(userName);
