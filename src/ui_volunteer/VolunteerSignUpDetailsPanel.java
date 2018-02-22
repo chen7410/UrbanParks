@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Job;
 import ui.ButtonSignal;
-import ui.GUIFrame;
+import ui.GUI;
 /**
  * Panel for when a volunteer views the details of a job they want
  * to sign up for. It will notify Observers when a button is pressed.
@@ -31,7 +31,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 	}
 	
 	public JPanel getPanel() {
@@ -45,8 +45,8 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 	
 	private void createButton() {
 		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
-				GUIFrame.BUTTON_GAP_WIDTH,
-				GUIFrame.BUTTON_GAP_HEIGHT));
+				GUI.BUTTON_GAP_WIDTH,
+				GUI.BUTTON_GAP_HEIGHT));
 		JButton backButton = new JButton(new AbstractAction("Back") {
 			
 			/**
@@ -60,7 +60,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 				notifyObservers(new ButtonSignal("back", 0));
 			}
 		});
-		backButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		backButton.setPreferredSize(GUI.BUTTON_SIZE);
 		
 		
 		JButton signupButton = new JButton(new AbstractAction("Sign up") {
@@ -77,10 +77,10 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 				
 			}
 		});
-		signupButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		signupButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(signupButton);
-		buttonsPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+		buttonsPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
@@ -93,7 +93,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
 			JLabel label = new JLabel(formattedDetail, JLabel.LEFT);
-			label.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
+			label.setPreferredSize(GUI.JLABEL_LONG_TEXT);
 			jobDetailsPanel.add(label);
 		}
 		JPanel cover0 = new JPanel(new BorderLayout());

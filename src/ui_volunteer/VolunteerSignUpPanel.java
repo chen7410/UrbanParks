@@ -24,7 +24,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import model.Job;
 import ui.ButtonSignal;
-import ui.GUIFrame;
+import ui.GUI;
 /**
  * A JPanal that showing all jobs a volunteer can sign up.
  * @author Minqing Chen
@@ -44,7 +44,7 @@ public class VolunteerSignUpPanel extends Observable {
 	public VolunteerSignUpPanel(final List<Job> theEligibleJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myEligibleJobs = theEligibleJobs;
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
@@ -53,8 +53,8 @@ public class VolunteerSignUpPanel extends Observable {
 	 * Set up this VolunteerSignUpPanel.
 	 */
 	private void setup() {
-		JButton homeButton = makeActionButton("Home");
-		JButton jobDetailButton = makeActionButton("View Job Details");
+		JButton homeButton = makeHomeButton();
+		JButton jobDetailButton = makeViewJobDetailButton();
 		
 		JLabel topLabel = makeTopJlabel();
 		JPanel topLabelPanel = new JPanel();
@@ -63,7 +63,7 @@ public class VolunteerSignUpPanel extends Observable {
 		//radio button panel
 		JPanel radioPanel = new JPanel(new GridLayout(0,1));
 		radioPanel.setBackground(Color.WHITE);
-		radioPanel.setBorder(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BORDER);
+		radioPanel.setBorder(GUI.VOLUNTEER_SIGNUP_PANEL_BORDER);
 		
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
@@ -85,8 +85,8 @@ public class VolunteerSignUpPanel extends Observable {
 		
 		//button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout(
-				FlowLayout.CENTER, GUIFrame.BUTTON_GAP_WIDTH, GUIFrame.BUTTON_GAP_HEIGHT));
-		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
+		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
 		buttonPanel.add(homeButton);
 		buttonPanel.add(jobDetailButton);
 
@@ -107,31 +107,55 @@ public class VolunteerSignUpPanel extends Observable {
 	 */
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("Sign Up A Job");
-		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
+		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
-
+	
 	/**
-	 * Set up an action button.
-	 * Action button will fire a button signal which contains
+	 * Set up Home button.
+	 * Home button will fire a button signal which contains
 	 * the name of this button and the selected job id the 
 	 * and notify other observers.
 	 * 
-	 * @return the a button.
+	 * @return the Home button.
 	 */
-	private JButton makeActionButton(final String theButtonName) {
-		JButton homeButton = new JButton(new AbstractAction(theButtonName) {
+	private JButton makeHomeButton() {
+		JButton homeButton = new JButton(new AbstractAction("Home") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				setChanged();
-				notifyObservers(new ButtonSignal(theButtonName, mySelectedJobID));
+				notifyObservers(new ButtonSignal("Home", mySelectedJobID));
 			}
 			
 		});
-		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		return homeButton;
+	}
+	
+	/**
+	 * Set up the View job detail button.
+	 * View job detail button will fire a button signal which contains 
+	 * the selected job id and the name of this button and notify other observers.
+	 * 
+	 * @return the view job detail button.
+	 */
+	private JButton makeViewJobDetailButton() {
+		JButton jobDetailButton = new JButton(new AbstractAction("View Job Details") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent theEvent) {
+				setChanged();
+				notifyObservers(new ButtonSignal("view job details", mySelectedJobID));
+			}
+		});
+		jobDetailButton.setPreferredSize(GUI.BUTTON_SIZE);
+		if(myEligibleJobs.isEmpty()) {
+			jobDetailButton.setEnabled(false);
+		}
+		return jobDetailButton;
 	}
 
 	/**

@@ -5,6 +5,8 @@
 
 package ui;
 
+import model.User;
+
 /**
  * A wrapper class for fire button signal between user interface..
  * 
@@ -15,11 +17,17 @@ public class ButtonSignal {
 	
 	private String myButtonName;
 	private int myJobID;
+	private User myUser;
 	
 	
 	public ButtonSignal(final String theButtonName, final int theJobID) {
 		myButtonName = theButtonName;
 		myJobID = theJobID;
+	}
+	
+	public ButtonSignal(final String theButtonName, final User theUser) {
+		myButtonName = theButtonName;
+		myUser = theUser;
 	}
 	
 	public String getButtonName() {
@@ -28,5 +36,9 @@ public class ButtonSignal {
 	
 	public int getJobID() {
 		return myJobID;
+	}
+	
+	public User getUser() {
+		return myUser;
 	}
 }

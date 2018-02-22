@@ -37,7 +37,7 @@ public class VolunteerViewAllUpCommingJobPanelTest {
 		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
 		myUpCommingJobPanelPanel = new VolunteerViewAllUpCommingJobPanel(
-				myJobs.getEligibleJobs(myVolunteer));
+				myVolunteer);
 		
 		
 		

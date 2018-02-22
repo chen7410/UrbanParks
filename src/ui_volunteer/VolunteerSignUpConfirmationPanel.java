@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Job;
 import ui.ButtonSignal;
-import ui.GUIFrame;
+import ui.GUI;
 
 /**
  * This panel is used to confirm a volunteer that they have signed up for a job
@@ -40,7 +40,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	}
 
 	public void setUp() {
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		createButtons();
 		createSignUpConfirmation();
@@ -48,7 +48,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 
 	public void createButtons() {
 		JPanel buttonPanel = new JPanel(
-				new FlowLayout(FlowLayout.CENTER, GUIFrame.BUTTON_GAP_WIDTH, GUIFrame.BUTTON_GAP_HEIGHT));
+				new FlowLayout(FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 
 		JButton viewUpcomingJobsButton = new JButton(new AbstractAction("Upcoming Jobs") {
 
@@ -63,7 +63,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming jobs", 0));
 			}
 		});
-		viewUpcomingJobsButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		viewUpcomingJobsButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(viewUpcomingJobsButton);
 
 		JButton homeButton = new JButton(new AbstractAction("Home") {
@@ -79,10 +79,10 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 				notifyObservers(new ButtonSignal("home", 0));
 			}
 		});
-		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(homeButton);
 
-		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
@@ -98,7 +98,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" + detail.split(":")[0]
 					+ ": </span>" + detail.split(":")[1] + "</html>";
 			JLabel detailLabel = new JLabel(formattedDetail, JLabel.LEFT);
-			detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
+			detailLabel.setPreferredSize(GUI.JLABEL_LONG_TEXT);
 			jobConfirmationDetails.add(detailLabel);
 		}
 

@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.List;
+import java.util.Observable;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -19,8 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import model.Job;
-import ui.GUIFrame;
+import model.Volunteer;
+import ui.ButtonSignal;
+import ui.GUI;
 
 /**
  * 
@@ -28,15 +29,15 @@ import ui.GUIFrame;
  * @author Brook Negussie
  * @version February 21, 2018
  */
-public class VolunteerHomePanel {
+public class VolunteerHomePanel extends Observable {
 	
 	private JPanel myPanel;
-	private List<Job> myJobs;
+	private Volunteer myVolunteer;
 	
-	public VolunteerHomePanel(final List<Job> theJobs) {
-		myJobs = theJobs;
+	public VolunteerHomePanel(final Volunteer theVolunteer) {
+		myVolunteer = theVolunteer;
 		myPanel = new JPanel(new BorderLayout());
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);
 		setup();
 	}
@@ -49,11 +50,12 @@ public class VolunteerHomePanel {
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
-				// TODO We need to display the LoginPanel
+				setChanged();
+				notifyObservers(new ButtonSignal("logout", 0));
 
 			}
 		});
-		logOut.setSize(GUIFrame.BUTTON_SIZE);
+		logOut.setSize(GUI.BUTTON_SIZE);
 		JPanel logOutPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		logOutPanel.add(logOut);
 		
@@ -76,22 +78,22 @@ public class VolunteerHomePanel {
 				
 			}
 		});
-		viewJobDetailsButton.setSize(GUIFrame.BUTTON_SIZE);
+		viewJobDetailsButton.setSize(GUI.BUTTON_SIZE);
 		
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		int index = 0;
-		while (index < myJobs.size() && index < 5) {
+		while (index < myVolunteer.getJobList().size() && index < 5) {
 			
 			JRadioButton radioButton = new JRadioButton(new
-					AbstractAction(myJobs.get(index).getJobSummary()) {
+					AbstractAction(myVolunteer.getJobList().get(index).getJobSummary()) {
 
 				/** */
 				private static final long serialVersionUID = 1L;
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
+					// TODO
 					
 				}
 				
@@ -120,11 +122,11 @@ public class VolunteerHomePanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Have it display the SignUp panel.
-				
+				setChanged();
+				notifyObservers(new ButtonSignal("signup", 0));
 			}
 		});
-		signUpButton.setSize(GUIFrame.BUTTON_SIZE);
+		signUpButton.setSize(GUI.BUTTON_SIZE);
 		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
 				new AbstractAction("View all your upcomming jobs") {
@@ -134,11 +136,12 @@ public class VolunteerHomePanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Display VolunteerViewAllUpcommingJobsPanel.
+				setChanged();
+				notifyObservers(new ButtonSignal("upcoming", 0));
 				
 			}
 		});
-		viewAllYourUpcommingJobsButton.setSize(GUIFrame.BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setSize(GUI.BUTTON_SIZE);
 		
 		generalButtons.add(signUpButton);
 		generalButtons.add(viewAllYourUpcommingJobsButton);

@@ -175,10 +175,10 @@ public class Job implements Serializable, Comparable<Job> {
 	public String getJobSummary() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 		StringBuilder sb = new StringBuilder(100);
-		sb.append(getParkName() + ": ");
 		sb.append(myStartDate.format(formatter));
 		sb.append(" - ");
-		sb.append(myEndDate.format(formatter));
+		sb.append(myEndDate.format(formatter) + ": ");
+		sb.append(getParkName());
 		return sb.toString();
 	}
 	

@@ -11,8 +11,7 @@ import javax.swing.JFrame;
 
 import model.User;
 import model.UserMap;
-import model.Volunteer;
-import ui_volunteer.VolunteerLoginPanel;
+import ui.LoginPanel;
 
 /**
  * 
@@ -28,9 +27,8 @@ public class VolunteerLoginPanelTest {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
 		UserMap users = new UserMap();
-		Volunteer anyVolunteer = new Volunteer("matthew", "Minqing", "Chen");
 		users.loadUserMap(User.USERS_DATA_FILE);
-		VolunteerLoginPanel currentPanel = new VolunteerLoginPanel(users.getAllUserNames());
+		LoginPanel currentPanel = new LoginPanel(users);
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		frame.pack();
