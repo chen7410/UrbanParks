@@ -19,8 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import model.Job;
+import model.Volunteer;
 import ui.ButtonSignal;
-import ui.GUIFrame;
+import ui.GUI;
 /**
  * A JPanal that showing all upcoming jobs for a volunteer.
  * @author Group 7
@@ -37,10 +38,10 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerViewAllUpCommingJobPanel(final List<Job> theAllUpCommingJobs) {
+	public VolunteerViewAllUpCommingJobPanel(final Volunteer theVolunteer) {
 		myPanel = new JPanel(new BorderLayout());
-		myAllUpCommingJobs = theAllUpCommingJobs;
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myAllUpCommingJobs = theVolunteer.getJobList();
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
@@ -59,7 +60,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button panel
 		JPanel radioPanel = new JPanel(new GridLayout(0,1));
 		radioPanel.setBackground(Color.WHITE);
-		radioPanel.setBorder(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BORDER);
+		radioPanel.setBorder(GUI.VOLUNTEER_SIGNUP_PANEL_BORDER);
 		
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
@@ -81,8 +82,8 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		
 		//button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout(
-				FlowLayout.CENTER, GUIFrame.BUTTON_GAP_WIDTH, GUIFrame.BUTTON_GAP_HEIGHT));
-		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
+		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
 		buttonPanel.add(homeButton);
 		buttonPanel.add(jobDetailButton);
 
@@ -103,7 +104,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	 */
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("All Upcomming Jobs");
-		topLabel.setSize(GUIFrame.JLABEL_SHORT_TEXT);
+		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
 	
@@ -123,11 +124,10 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 			public void actionPerformed(ActionEvent theEvent) {
 				setChanged();
 				notifyObservers(new ButtonSignal("Home", mySelectedJobID));
-				System.out.println("Home Selected Job ID " + mySelectedJobID);
 			}
 			
 		});
-		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		return homeButton;
 	}
 	
@@ -139,17 +139,19 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	 * @return the view job detail button.
 	 */
 	private JButton makeViewJobDetailButton() {
-		JButton jobDetailButton = new JButton(new AbstractAction("View Job Detail") {
+		JButton jobDetailButton = new JButton(new AbstractAction("View Job Details") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				setChanged();
-				notifyObservers(new ButtonSignal("View Job Detail", mySelectedJobID));
-				System.out.println("View Job Detail Selected Job ID " + mySelectedJobID);
+				notifyObservers(new ButtonSignal("view job details", mySelectedJobID));
 			}
 		});
-		jobDetailButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		jobDetailButton.setPreferredSize(GUI.BUTTON_SIZE);
+		if(myAllUpCommingJobs.isEmpty()) {
+			jobDetailButton.setEnabled(false);
+		}
 		return jobDetailButton;
 	}
 

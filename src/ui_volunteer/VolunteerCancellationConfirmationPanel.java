@@ -17,7 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Job;
-import ui.GUIFrame;
+import ui.ButtonSignal;
+import ui.GUI;
 /**
  * This panel is used to confirm a volunteer that they have cancelled
  * a job successfully. It will notify observers when a button is pressed.
@@ -37,7 +38,7 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 	}
 	
 	public void setUp() {
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		createButtons();
 		createCancellationConfirmation();
@@ -45,7 +46,7 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 	
 	public void createButtons() {
 		JPanel buttonPanel = new JPanel (new FlowLayout(FlowLayout.CENTER, 
-				GUIFrame.BUTTON_GAP_WIDTH, GUIFrame.BUTTON_GAP_HEIGHT));
+				GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 		JButton viewUpcomingButton = new JButton (new AbstractAction("Upcoming Jobs") {
 
 			/**
@@ -55,10 +56,11 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				setChanged();
+				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewUpcomingButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		viewUpcomingButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(viewUpcomingButton);
 		
 		JButton homeButton = new JButton(new AbstractAction("Home") {
@@ -70,14 +72,15 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				setChanged();
+				notifyObservers(new ButtonSignal("home", 0));
 				
 			}
 		});
-		homeButton.setPreferredSize(GUIFrame.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(homeButton);
 		
-		buttonPanel.setBackground(GUIFrame.VOLUNTEER_SIGNUP_PANEL_BGCOLOR );
+		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR );
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
@@ -93,7 +96,7 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
 			JLabel detailLabel = new JLabel(formattedDetail, JLabel.LEFT);
-			detailLabel.setPreferredSize(GUIFrame.JLABEL_LONG_TEXT);
+			detailLabel.setPreferredSize(GUI.JLABEL_LONG_TEXT);
 			jobCancellationDetails.add(detailLabel);
 		}
 		

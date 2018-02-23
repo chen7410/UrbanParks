@@ -3,14 +3,13 @@
  * Urban Parks Project
  */
 
-package ui_volunteer;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.List;
-
+import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +18,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ui.GUIFrame;
+import model.User;
+import model.UserMap;
 
 /**
  * 
@@ -27,25 +27,25 @@ import ui.GUIFrame;
  * @author Brook Negussie
  * @version February 21, 2018
  */
-public class VolunteerLoginPanel {
+public class LoginPanel extends Observable {
 	
 	private JPanel myPanel;
-	private List<String> myUsers;
+	private UserMap myUsers;
 	
-	public VolunteerLoginPanel(final List<String> theUserList) {
-		myUsers = theUserList;
+	public LoginPanel(final UserMap theUserMap) {
+		myUsers = theUserMap;
 		myPanel = new JPanel(new BorderLayout());
-		myPanel.setPreferredSize(GUIFrame.PANEL_SIZE);
+		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 	
 	private void setup() {
 		JLabel welcome = new JLabel("Welcome to Urban Parks");
-		welcome.setSize(GUIFrame.JLABEL_SHORT_TEXT);
+		welcome.setSize(GUI.JLABEL_SHORT_TEXT);
 		JLabel slogan = new JLabel("Where you can sign up or create a"
 									+ " volunteering job"); 
-		slogan.setSize(GUIFrame.JLABEL_LONG_TEXT);
+		slogan.setSize(GUI.JLABEL_LONG_TEXT);
 		JTextField userName = new JTextField("User name", 15);
 		JButton logInButton = new JButton(new AbstractAction("LogIn") {
 
@@ -55,8 +55,10 @@ public class VolunteerLoginPanel {
 			@Override
 			public void actionPerformed(ActionEvent theArg) {
 				String givenUserName = userName.getText();
-				if (myUsers.contains(givenUserName)) {
-					// Proceed to the next panel.
+				User user = myUsers.getUser(givenUserName);
+				if (myUsers.getUser(givenUserName) != null) {
+					setChanged();
+					notifyObservers(new ButtonSignal("login", user));
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Please enter a valid user name.",
@@ -64,7 +66,7 @@ public class VolunteerLoginPanel {
 				}
 			}
 		});
-		logInButton.setSize(GUIFrame.BUTTON_SIZE);
+		logInButton.setSize(GUI.BUTTON_SIZE);
 		
 		JButton exitButton = new JButton(new AbstractAction("Exit") {
 
@@ -76,7 +78,7 @@ public class VolunteerLoginPanel {
 				System.exit(0);
 			}
 		});
-		exitButton.setSize(GUIFrame.BUTTON_SIZE);
+		exitButton.setSize(GUI.BUTTON_SIZE);
 		
 		JPanel input = new JPanel(new FlowLayout());
 		input.add(userName);

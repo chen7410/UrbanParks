@@ -36,7 +36,7 @@ public class VolunteerSignedUpDetailsPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");
 		List<Job> eligibleJobs = myJobs.getEligibleJobs(myVolunteer);
-		myPanel = new VolunteerSignedUpDetailsPanel(eligibleJobs);
+		myPanel = new VolunteerSignedUpDetailsPanel(eligibleJobs.get(0));
 		myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

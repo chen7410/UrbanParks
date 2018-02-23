@@ -28,7 +28,7 @@ public class VolunteerHomePanelTest {
 		JFrame frame = new JFrame("UrbanParks");
 		Volunteer currentVolunteer = new Volunteer("tuan", "Tuan",
 													"Dinh");
-		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer.getJobList());
+		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer);
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		
