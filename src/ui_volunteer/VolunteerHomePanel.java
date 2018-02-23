@@ -145,8 +145,16 @@ public class VolunteerHomePanel {
 		
 		
 		myPanel.add(logOutPanel, BorderLayout.NORTH);
-		myPanel.add(yourUpcommingJobsPanel, BorderLayout.CENTER);
+		myPanel.add(yourUpcommingJobsPanel, BorderLayout.WEST);
 		myPanel.add(generalButtons, BorderLayout.EAST);
+		
+		// JPane
+		
+		
+		
+		// double width = GUIFrame.PANEL_SIZE.getWidth();
+		
+		// generalButtons.setMinimumSize(GUIFrame.PANEL_SIZE);
 	}
 	
 	public JPanel getPanel() {
