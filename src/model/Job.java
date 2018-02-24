@@ -29,7 +29,7 @@ public class Job implements Serializable, Comparable<Job> {
 	public final static int MIN_DAYS_TO_SIGN_UP = 3;
 	
 	/** The maximum number of pending jobs in the system.*/
-	public static int MAX_JOB_AMOUNT = 10;
+	public static int MAX_JOB_AMOUNT = 10;/// globe variable??????????/ staff
 
 	public static final int MAX_JOB_LENGTH = 4;
 
