@@ -6,10 +6,7 @@
 package test_ui;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
-
-import model.User;
 import model.UserMap;
 import ui.LoginPanel;
 
@@ -27,7 +24,7 @@ public class VolunteerLoginPanelTest {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
 		UserMap users = new UserMap();
-		users.loadUserMap(User.USERS_DATA_FILE);
+		users.loadUserMap(UserMap.USERS_DATA_FILE);
 		LoginPanel currentPanel = new LoginPanel(users);
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);

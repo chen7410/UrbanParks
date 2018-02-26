@@ -155,7 +155,7 @@ public class VolunteerTest {
 	 */
 	@Test
 	public void isSameDayConflict_VolunteerHasNoCurrentJobs_False() {
-			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate));
+			assertFalse(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap));
 	}
 	
 	/**
@@ -165,7 +165,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_VolunteerHasCurrentJobsButNotConflicting_False() {
 		myVolunteer.signup(myFirstJob);
-		assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate));
+		assertFalse(myVolunteer.isSameDayConflict(myThirdJobCandidate, myJobMap));
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobStartsSameDayAsEndOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate));
+		assertTrue(myVolunteer.isSameDayConflict(mySecondJobCandidate, myJobMap));
 	}
 	
 	/**
@@ -185,7 +185,7 @@ public class VolunteerTest {
 	@Test
 	public void isSameDayConflict_ConflictingJobEndSameDayAsStartOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
-		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate));
+		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap));
 	}
 	
 	/**

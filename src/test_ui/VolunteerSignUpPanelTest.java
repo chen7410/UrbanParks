@@ -3,7 +3,6 @@ package test_ui;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import model.JobMap;
-import model.User;
 import model.UserMap;
 import model.Volunteer;
 import ui_volunteer.VolunteerSignUpPanel;
@@ -31,7 +30,7 @@ public class VolunteerSignUpPanelTest {
     	
     	myJobs = new JobMap();
 		myUsers = new UserMap();
-		myUsers.loadUserMap(User.USERS_DATA_FILE);
+		myUsers.loadUserMap(UserMap.USERS_DATA_FILE);
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myVolunteer = (Volunteer) myUsers.getUser("hasnah");

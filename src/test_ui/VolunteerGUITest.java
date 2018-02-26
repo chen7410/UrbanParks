@@ -74,7 +74,7 @@ public class VolunteerGUITest {
 		private void init() {
 			myJobs = new JobMap();
 			myUsers = new UserMap();
-			myUsers.loadUserMap(User.USERS_DATA_FILE);
+			myUsers.loadUserMap(UserMap.USERS_DATA_FILE);
 			myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 			createLoginPanel();
 		}
@@ -89,7 +89,7 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerHomePanel() {
 			remove(myCurrentPanel);
-			VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer);
+			VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getJobList(myJobs));
 			myCurrentPanel = homePanel.getPanel();
 			homePanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
@@ -126,7 +126,7 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerViewAllUpCommingJobPanel() {
 			remove(myCurrentPanel);
-			VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer);
+			VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getJobList(myJobs));
 			myCurrentPanel = upcomingPanel.getPanel();
 			upcomingPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
