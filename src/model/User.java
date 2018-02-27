@@ -23,26 +23,26 @@ public abstract class User implements Serializable {
 	private String myLastName;
 	private String myUserType;
 	protected List<Integer> myJobs;
-	
+
 	/**
-	 * Initialize fields.
+	 * Constructs a user with the given username, first name, and last name;
+	 * initializes a collection of job ID belongs to this user.
 	 * 
 	 * Pre-condition: The given parameters must not be null nor empty.
-	 * @throws IllegalArgumentException If the given parameters are
-	 * 										either null or empty.
+	 * 
 	 * @param theUserName
-	 *            the specified user name.
+	 *            the username of this user.
 	 * @param theFirstName
-	 *            the specified first name.
+	 *            the first name of this user.
 	 * @param theLastName
-	 *            the specified last name.
+	 *            the last name of this user.
+	 * @throws IllegalArgumentException
+	 *             if any of the given parameters are either null or empty.
 	 */
-	protected User(final String theUserName, final String theFirstName,
-					final String theLastName) {
-		
-		if (theUserName == null || theFirstName == null ||
-				theLastName == null || theUserName.isEmpty() ||
-				theFirstName.isEmpty() || theLastName.isEmpty()) {
+	protected User(final String theUserName, final String theFirstName, final String theLastName) {
+
+		if (theUserName == null || theFirstName == null || theLastName == null || theUserName.isEmpty()
+				|| theFirstName.isEmpty() || theLastName.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 		myUserName = theUserName;
@@ -93,12 +93,17 @@ public abstract class User implements Serializable {
 
 	/**
 	 * Returns a list of job belongs to this user. This list can be empty but not
-	 * null.
+	 * null. The job collection argument cannot be null.
 	 * 
-	 * @param theJobList a collection of 
+	 * @param theJobList
+	 *            a collection of all the jobs in the system.
 	 * @return a list of job belongs to this user.
+	 * @throws IllegalArgumentException if theJobList is null
 	 */
 	public List<Job> getJobList(final JobMap theJobList) {
+		if(theJobList == null) {
+			throw new IllegalArgumentException("The job collection cannot be null");
+		}
 		List<Job> jobList = new ArrayList<>();
 		for (int jobID : myJobs) {
 			Job j = theJobList.getJob(jobID);
