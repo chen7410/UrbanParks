@@ -13,104 +13,104 @@ import java.util.List;
  * This class represents a single user in the system.
  * 
  * @author Group 7
- * @version February 12, 2018
+ * @version February 26, 2018
  */
 public abstract class User implements Serializable {
-	
-	/**
-     * A generated serial version UID for object Serialization.
-     */
+
 	private static final long serialVersionUID = 1L;
-	
 	private String myUserName;
 	private String myFirstName;
 	private String myLastName;
 	private String myUserType;
-	
-	/**
-	 * List of jobs this volunteer has signed up for.
-	 */
 	protected List<Integer> myJobs;
-	
+
 	/**
-	 * Initialize fields.
+	 * Constructs a user with the given username, first name, and last name;
+	 * initializes a collection of job ID belongs to this user.
 	 * 
 	 * Pre-condition: The given parameters must not be null nor empty.
-	 * @throws IllegalArgumentException If the given parameters are
-	 * 										either null or empty.
+	 * 
 	 * @param theUserName
-	 *            the specified user name.
+	 *            the username of this user.
 	 * @param theFirstName
-	 *            the specified first name.
+	 *            the first name of this user.
 	 * @param theLastName
-	 *            the specified last name.
+	 *            the last name of this user.
+	 * @throws IllegalArgumentException
+	 *             if any of the given parameters are either null or empty.
 	 */
-	protected User(final String theUserName, final String theFirstName,
-					final String theLastName) {
-		
-		if (theUserName == null || theFirstName == null ||
-				theLastName == null || theUserName.isEmpty() ||
-				theFirstName.isEmpty() || theLastName.isEmpty()) {
+	protected User(final String theUserName, final String theFirstName, final String theLastName) {
+
+		if (theUserName == null || theFirstName == null || theLastName == null || theUserName.isEmpty()
+				|| theFirstName.isEmpty() || theLastName.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
-		
 		myUserName = theUserName;
 		myFirstName = theFirstName;
 		myLastName = theLastName;
-		myUserType = "undefined";
 		myJobs = new ArrayList<>();
 	}
 
+	/**
+	 * Returns the username of this user. This username is a non-null string.
+	 * 
+	 * @return the username of this user.
+	 */
 	public String getUserName() {
 		return myUserName;
 	}
 
+	/**
+	 * Returns the first name of this user. This first name is a non-null string.
+	 * 
+	 * @return the first name of this user.
+	 */
 	public String getFirstName() {
 		return myFirstName;
 	}
 
+	/**
+	 * Returns the last name of this user. This last name is a non-null string.
+	 * 
+	 * @return the last name of this user.
+	 */
 	public String getLastName() {
 		return myLastName;
 	}
 
+	/**
+	 * Returns the user type of this user. This user type is a non-null string.
+	 * 
+	 * @return the user type of this user.
+	 */
 	public String getUserType() {
 		return myUserType;
 	}
 
-	/**
-	 * This method is called from subclass, should never be overridden.
-	 * 
-	 * @param theUserType
-	 *            the specified user type.
-	 */
-	public final void setUserType(final String theUserType) {
+	protected final void setUserType(final String theUserType) {
 		myUserType = theUserType;
 	}
-	
+
 	/**
-	 * Returns a list of job belongs to this user.
-	 * This list can be empty but not null.
+	 * Returns a list of job belongs to this user. This list can be empty but not
+	 * null. The job collection argument cannot be null.
 	 * 
+	 * @param theJobList
+	 *            a collection of all the jobs in the system.
 	 * @return a list of job belongs to this user.
+	 * @throws IllegalArgumentException if theJobList is null
 	 */
 	public List<Job> getJobList(final JobMap theJobList) {
+		if(theJobList == null) {
+			throw new IllegalArgumentException("The job collection cannot be null");
+		}
 		List<Job> jobList = new ArrayList<>();
 		for (int jobID : myJobs) {
 			Job j = theJobList.getJob(jobID);
-			if(j != null) {
+			if (j != null) {
 				jobList.add(j);
 			}
 		}
 		return jobList;
-	}
-
-	/**
-	 * Display an user's information, for testing.
-	 */
-	@Override
-	public String toString() {
-		return "| User type: " + myUserType + " | User name: "
-				+ myUserName + " | First name: " + myFirstName
-				+ " | Last name: " + myLastName;
 	}
 }
