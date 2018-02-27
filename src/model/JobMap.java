@@ -200,16 +200,11 @@ public class JobMap {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * Returns a sorted Job array. The job with the earliest 
 	 * start date will be at index = 0. The job with the latest 
 	 * start date will be at index = array.length-1. If two jobs 
 	 * have the same start date, the job that ends first will be 
 	 * placed first.
-=======
-	 * Return a sorted job array that prioritizing job that starts first, or when
-	 * they starts the same date, job that ends first.
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	 * 
 	 * @return an array with sorted jobs.
 	 */
