@@ -29,6 +29,9 @@ public class JobMap {
 	 * TODO I don't think we need this. Just make it a private variable.
 	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
+	
+	/** The maximum number of pending jobs in the system.*/
+	private static int MAX_JOB_AMOUNT = 10;
 
 	private HashMap<Integer, Job> myJobs;
 
@@ -39,6 +42,22 @@ public class JobMap {
 		myJobs = new HashMap<Integer, Job>();
 	}
 
+	public int getMaxJobAmount() {
+		return MAX_JOB_AMOUNT;
+	}
+	
+	/**
+	 * 
+	 * @param theMaxJobA
+	 * @throws IllegalArgumentException if theJobAmount <= 0.
+	 */
+	public void setMaxJobAmount(int theMaxJobAmount) {
+		if (theMaxJobAmount <= 0) {
+			throw new IllegalArgumentException("Illegal job amount: " + theMaxJobAmount);
+		}
+		MAX_JOB_AMOUNT = theMaxJobAmount;
+	}
+	
 	/**
 	 * Precondition: theJob must pass all business rules before being added.
 	 * Postcondition: theJob is added to a JobMap.
@@ -120,7 +139,7 @@ public class JobMap {
 	}
 
 	public boolean isLessMaxAmountJobs() {
-		return size() < Job.MAX_JOB_AMOUNT;
+		return size() < MAX_JOB_AMOUNT;
 	}
 
 	public int size() {

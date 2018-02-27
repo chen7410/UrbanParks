@@ -87,10 +87,6 @@ public abstract class User implements Serializable {
 		return myUserType;
 	}
 
-	protected final void setUserType(final String theUserType) {
-		myUserType = theUserType;
-	}
-
 	/**
 	 * Returns a list of job belongs to this user. This list can be empty but not
 	 * null. The job collection argument cannot be null.

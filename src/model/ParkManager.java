@@ -24,7 +24,6 @@ public class ParkManager extends User implements Serializable {
 	public ParkManager(final String theUserName, final String
 						theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		setUserType("Park Manager");
 	}
 
 	/**
