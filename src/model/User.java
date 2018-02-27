@@ -23,10 +23,27 @@ public abstract class User implements Serializable {
 	private String myLastName;
 	private String myUserType;
 	protected List<Integer> myJobs;
-
-	protected User(final String theUserName, final String theFirstName, final String theLastName) {
-		if (theUserName == null || theFirstName == null || theLastName == null) {
-			throw new NullPointerException();
+	
+	/**
+	 * Initialize fields.
+	 * 
+	 * Pre-condition: The given parameters must not be null nor empty.
+	 * @throws IllegalArgumentException If the given parameters are
+	 * 										either null or empty.
+	 * @param theUserName
+	 *            the specified user name.
+	 * @param theFirstName
+	 *            the specified first name.
+	 * @param theLastName
+	 *            the specified last name.
+	 */
+	protected User(final String theUserName, final String theFirstName,
+					final String theLastName) {
+		
+		if (theUserName == null || theFirstName == null ||
+				theLastName == null || theUserName.isEmpty() ||
+				theFirstName.isEmpty() || theLastName.isEmpty()) {
+			throw new IllegalArgumentException();
 		}
 		myUserName = theUserName;
 		myFirstName = theFirstName;

@@ -15,11 +15,12 @@ import java.io.Serializable;
  */
 public class ParkManager extends User implements Serializable {
 
-	/**
-     * A generated serial version UID for object Serialization.
-     */
+	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * {@inheritDoc}}
+	 */
 	public ParkManager(final String theUserName, final String
 						theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
@@ -39,9 +40,10 @@ public class ParkManager extends User implements Serializable {
 	
 	/**
 	 * Removes a job only removed from the Park Manager's list and
-	 * not from the JobMap. If the job is not in the job list. 
-	 * The list remain unchanged and return false.
+	 * not from the JobMap.
 	 * 
+	 * Pre-condition: The job passed in is in the ParkManager's
+	 * 					job list. 
 	 * @param theJob The given job to be removed.
 	 * @return true if the job is able to be removed depending on if
 	 * 				the minimum number of days business rule is satisfied
