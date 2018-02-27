@@ -34,7 +34,14 @@ public class Volunteer extends User implements Serializable {
 	 * 
 	 */
 	public boolean cancelJob(final Job theJob) {
+<<<<<<< HEAD
 		return myJobs.remove(theJob);
+=======
+		if (theJob.isJobRemovable()) {
+			return myJobs.remove(Integer.valueOf(theJob.getJobID()));
+		}
+		return false;
+>>>>>>> c2724cf91b828584e8e0f545f0ae3fd85d0a8488
 	}
 
 	/**
@@ -45,7 +52,7 @@ public class Volunteer extends User implements Serializable {
 	 *            the job a volunteer want to sign up.
 	 */
 	public void signup(final Job theJob) {
-		myJobs.add(theJob);
+		myJobs.add(theJob.getJobID());
 	}
 
 	/**
@@ -72,10 +79,10 @@ public class Volunteer extends User implements Serializable {
 	 * @return true if the candidate job does not conflict with the job has
 	 *         already signed up; false otherwise.
 	 */
-	public boolean isSameDayConflict(final Job theCandidateJob) {
+	public boolean isSameDayConflict(final Job theCandidateJob, final JobMap theJobList) {
 		boolean overlaps = false;
 		for (int i = 0; i < myJobs.size(); i++) {
-			overlaps = overlaps || theCandidateJob.isSameDayConflict(myJobs.get(i));
+			overlaps = overlaps || theCandidateJob.isSameDayConflict(theJobList.getJob(myJobs.get(i)));
 		}
 		return overlaps;
 	}

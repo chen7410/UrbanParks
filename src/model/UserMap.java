@@ -23,6 +23,8 @@ import java.util.List;
  */
 public class UserMap {
 	
+	public static final String USERS_DATA_FILE = "UsersInformations.ser";
+	
 	/** A map that stores all users. key: user name value: user object.*/
 	private HashMap<String, User> myUsers;
 	

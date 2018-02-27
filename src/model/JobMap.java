@@ -70,7 +70,7 @@ public class JobMap {
 	    Job[] jobs = getSortedJobsArray();
 	    List<Job> eligibleJobs = new ArrayList<>();
 	    for (int i = 0; i < jobs.length; i++) {
-	        if(!theVolunteer.isSameDayConflict(jobs[i])
+	        if(!theVolunteer.isSameDayConflict(jobs[i], this)
                     && theVolunteer.isAtLeastMinDays(jobs[i])) {
 	            eligibleJobs.add(jobs[i]);
             }

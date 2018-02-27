@@ -34,7 +34,7 @@ public class ParkManager extends User implements Serializable {
 	 * @param theJob the job that is being submitted.
 	 */
 	public void createJob(final Job theJob) {
-		myJobs.add(theJob);
+		myJobs.add(theJob.getJobID());
 	}
 	
 	/**
@@ -51,6 +51,13 @@ public class ParkManager extends User implements Serializable {
 	 * 				or there is an issue removing it from the list.
 	 */
 	public boolean removeJob(final Job theJob) {
+<<<<<<< HEAD
 		return myJobs.remove(theJob);
+=======
+		if (theJob.isJobRemovable()) {
+			return myJobs.remove(Integer.valueOf(theJob.getJobID()));
+		}
+		return false;
+>>>>>>> c2724cf91b828584e8e0f545f0ae3fd85d0a8488
 	}
 }

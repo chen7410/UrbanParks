@@ -17,9 +17,6 @@ import java.util.List;
  */
 public abstract class User implements Serializable {
 	
-	
-	public static final String USERS_DATA_FILE = "UsersInformations.ser";
-	
 	/**
      * A generated serial version UID for object Serialization.
      */
@@ -33,7 +30,7 @@ public abstract class User implements Serializable {
 	/**
 	 * List of jobs this volunteer has signed up for.
 	 */
-	protected List<Job> myJobs;
+	protected List<Integer> myJobs;
 	
 	/**
 	 * initialize fields.
@@ -86,8 +83,15 @@ public abstract class User implements Serializable {
 	 * 
 	 * @return a list of job belongs to this user.
 	 */
-	public List<Job> getJobList() {
-		return myJobs;
+	public List<Job> getJobList(final JobMap theJobList) {
+		List<Job> jobList = new ArrayList<>();
+		for (int jobID : myJobs) {
+			Job j = theJobList.getJob(jobID);
+			if(j != null) {
+				jobList.add(j);
+			}
+		}
+		return jobList;
 	}
 
 	/**
