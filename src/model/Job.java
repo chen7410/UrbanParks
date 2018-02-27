@@ -48,7 +48,7 @@ public class Job implements Serializable, Comparable<Job> {
 	private String myDescription;
 
 	/**
-	 * No null or empty fields during construction.
+	 * No null or empty parameters during construction.
 	 * @param theStartDate
 	 * @param theEndDate
 	 * @param theParkName
