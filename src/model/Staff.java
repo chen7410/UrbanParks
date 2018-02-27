@@ -45,12 +45,34 @@ public class Staff extends User {
 	 * 
 	 * @param theStartDate Beginning of the period.
 	 * @param theEndDate  End of the period.
-	 * @param theJobs List of all jobs in the system.
+	 * @param theJobMap List of all jobs in the system.
 	 * @return jobList A list of all the jobs within the period specified.
+	 * @throws IllegalArgumentException theStartDate or theEndDate or 
+	 * theJobMap == null; or if Start date after end date or 
+	 * End date before start date
 	 */
 	public ArrayList<Job> getJobsInPeriod (final LocalDate theStartDate, 
-					final LocalDate theEndDate, final JobMap theJobs) {
-		return theJobs.getJobsInPeriod(theStartDate, theEndDate);
+					final LocalDate theEndDate, final JobMap theJobMap) {
+		if (theStartDate == null) {
+			throw new IllegalArgumentException("Start date cannot be null");
+		}
+		
+		if (theEndDate == null) {
+			throw new IllegalArgumentException("End date cannot be null");
+		}
+		
+		if (theJobMap == null) {
+			throw new IllegalArgumentException("Job map cannot be null");
+		}
+		
+		if (theStartDate.isAfter(theEndDate)) {
+			throw new IllegalArgumentException("Start date cannot after end date");
+		}
+		
+		if (theEndDate.isBefore(theStartDate)) {
+			throw new IllegalArgumentException("End date cannot before start date");
+		}
+		return theJobMap.getJobsInPeriod(theStartDate, theEndDate);
 	}
 
 }

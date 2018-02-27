@@ -1,4 +1,4 @@
-package ui_volunteer;
+package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,11 +21,11 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * A JPanal that showing all upcoming jobs for a volunteer.
+ * A JPanal that showing all upcoming jobs for a park manager.
  * @author Group 7
  * @version February 17, 2018
  */
-public class VolunteerViewAllUpCommingJobPanel extends Observable {
+public class ParkManagerViewAllUpCommingJobPanel extends Observable {
  
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
@@ -35,7 +35,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerViewAllUpCommingJobPanel(final List<Job> theJobList) {
+	public ParkManagerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
@@ -44,7 +44,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	}
 
 	/**
-	 * Set up this VolunteerViewAllUpCommingJobPanel.
+	 * Set up this ParkManagerViewAllUpCommingJobPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -62,8 +62,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
-		System.out.print(size);//---------------
-		//int size = 0;
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
@@ -99,7 +97,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 			radioPanel.add(new JLabel("No upcomming jobs."));
 			myPanel.add(radioPanel, BorderLayout.CENTER);
 		}
-		
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
@@ -183,7 +180,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	}
 
 	/**
-	 * @return a VolunteerSignUpPanel.
+	 * @return a ParkManagerViewAllUpCommingJobPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;
