@@ -28,16 +28,10 @@ import java.util.List;
  * @see     HashMap
  */
 public class JobMap {
-<<<<<<< HEAD
-	
-	/**
-	 * The default name of the serialized file where all 
-	 * jobs' data are loaded/stored.
-=======
+
 
 	/*
 	 * TODO I don't think we need this. Just make it a private variable.
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
 	
@@ -45,18 +39,7 @@ public class JobMap {
 	private static int MAX_JOB_AMOUNT = 10;
 
 	private HashMap<Integer, Job> myJobs;
-<<<<<<< HEAD
-	
-	
-	/**
-	 * Constructs an empty JobMap. The key is an Integer and the
-	 * value is a Job object.
-=======
 
-	/**
-	 * 
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
-	 */
 	public JobMap() {
 		myJobs = new HashMap<Integer, Job>();
 	}
@@ -110,36 +93,11 @@ public class JobMap {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * Load Job map from the local file system.
-	 * 
-	 * The file must be create by the storeJobMap method.
-	 * @param theFilename The name of the serialized file where jobs'
-	 *                    data are written to.
-=======
-	 * 
-	 * @param theVolunteer
-	 *            the specified volunteer.
-	 * @return a list of eligible jobs of the specified volunteer.
-	 */
-	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
-		Job[] jobs = getSortedJobsArray();
-		List<Job> eligibleJobs = new ArrayList<>();
-		for (int i = 0; i < jobs.length; i++) {
-			if (!theVolunteer.isSameDayConflict(jobs[i], this) && theVolunteer.isAtLeastMinDays(jobs[i])) {
-				eligibleJobs.add(jobs[i]);
-			}
-		}
-		return eligibleJobs;
-	}
-
-	/**
 	 * Load Job map from the local file system.
 	 * 
 	 * The file must be create by the storeJobMap method.
 	 * 
 	 * @param theFilename
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	 */
 	@SuppressWarnings("unchecked")
 	public void loadJobMap(final String theFilename) {
@@ -170,7 +128,6 @@ public class JobMap {
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * Returns the number of jobs in the system.
@@ -212,53 +169,24 @@ public class JobMap {
         }
 	    return eligibleJobs;
     }
-	
-	/**
-	 * Returns true if this JobMap has less than the maximum number of
-	 * pending jobs allowed in the system (specified in Job class:
-	 * MAX_JOB_AMOUNT). 
-	 * 
-	 * @return true if number of pending jobs in this JobMap is less than
-	 *         the specified maximum job amount in the Job class.
-	 */
-=======
 
-	public void remove(final Job theJob) {
-		myJobs.remove(theJob.getJobID());
-	}
-
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	public boolean isLessMaxAmountJobs() {
 		return size() < MAX_JOB_AMOUNT;
 	}
-<<<<<<< HEAD
 	
-=======
 
-	public int size() {
-		return myJobs.size();
-	}
-
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	/**
 	 * Searches this JobMap for jobs that start on the specified
 	 * start date and end on the specified end date, and all the 
 	 * jobs that fall in between the two dates. These jobs are added
 	 * to an ArrayList that is returned to this method caller.
 	 * 
-<<<<<<< HEAD
-	 * @param  theStartDate     the beginning the period.
-	 * @param  theEndDate       the end of the period.
-	 * @return jobsWithinPeriod that contains jobs between 
-	 *                          theStartDate and theEndDate, inclusive.
-=======
 	 * @param theStartDate
 	 *            the beginning the period.
 	 * @param theEndDate
 	 *            the end of the period.
 	 * @return jobsWithinPeriod that contains jobs between theStartDate and
 	 *         theEndDate.
->>>>>>> 22a60a6bf90955e7a9909aeb8b297473209266b9
 	 */
 	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
 		Job[] sortedJobs = getSortedJobsArray();
