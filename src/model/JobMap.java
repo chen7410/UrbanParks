@@ -24,11 +24,17 @@ import java.util.List;
  * @version February 12, 2018
  */
 public class JobMap {
-	
+
+	/*
+	 * TODO I don't think we need this. Just make it a private variable.
+	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
-	
+
 	private HashMap<Integer, Job> myJobs;
 
+	/**
+	 * 
+	 */
 	public JobMap() {
 		myJobs = new HashMap<Integer, Job>();
 	}
@@ -63,25 +69,26 @@ public class JobMap {
 
 	/**
 	 * 
-	 * @param theVolunteer the specified volunteer.
+	 * @param theVolunteer
+	 *            the specified volunteer.
 	 * @return a list of eligible jobs of the specified volunteer.
 	 */
 	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
-	    Job[] jobs = getSortedJobsArray();
-	    List<Job> eligibleJobs = new ArrayList<>();
-	    for (int i = 0; i < jobs.length; i++) {
-	        if(!theVolunteer.isSameDayConflict(jobs[i], this)
-                    && theVolunteer.isAtLeastMinDays(jobs[i])) {
-	            eligibleJobs.add(jobs[i]);
-            }
-        }
-	    return eligibleJobs;
-    }
+		Job[] jobs = getSortedJobsArray();
+		List<Job> eligibleJobs = new ArrayList<>();
+		for (int i = 0; i < jobs.length; i++) {
+			if (!theVolunteer.isSameDayConflict(jobs[i], this) && theVolunteer.isAtLeastMinDays(jobs[i])) {
+				eligibleJobs.add(jobs[i]);
+			}
+		}
+		return eligibleJobs;
+	}
 
 	/**
 	 * Load Job map from the local file system.
 	 * 
 	 * The file must be create by the storeJobMap method.
+	 * 
 	 * @param theFilename
 	 */
 	@SuppressWarnings("unchecked")
@@ -107,11 +114,11 @@ public class JobMap {
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
-	
+
 	public void remove(final Job theJob) {
 		myJobs.remove(theJob.getJobID());
 	}
-	
+
 	public boolean isLessMaxAmountJobs() {
 		return size() < Job.MAX_JOB_AMOUNT;
 	}
@@ -119,28 +126,31 @@ public class JobMap {
 	public int size() {
 		return myJobs.size();
 	}
-	
+
 	/**
 	 * Returns a list of jobs between two given dates, inclusive.
 	 * 
-	 * @param theStartDate the beginning the period.
-	 * @param theEndDate the end of the period.
-	 * @return jobsWithinPeriod that contains  jobs between theStartDate and theEndDate.
+	 * @param theStartDate
+	 *            the beginning the period.
+	 * @param theEndDate
+	 *            the end of the period.
+	 * @return jobsWithinPeriod that contains jobs between theStartDate and
+	 *         theEndDate.
 	 */
 	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
 		Job[] sortedJobs = getSortedJobsArray();
 		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
-		for (Job job: sortedJobs) {
-			if (job.isJobWithinDates(theStartDate, theEndDate) ) {
+		for (Job job : sortedJobs) {
+			if (job.isJobWithinDates(theStartDate, theEndDate)) {
 				jobsWithinPeriod.add(job);
 			}
 		}
 		return jobsWithinPeriod;
 	}
-	
+
 	/**
-	 * Return a sorted job array that prioritizing job that starts first,
-	 * or when they starts the same date, job that ends first.
+	 * Return a sorted job array that prioritizing job that starts first, or when
+	 * they starts the same date, job that ends first.
 	 * 
 	 * @return sorted array of jobs
 	 */
