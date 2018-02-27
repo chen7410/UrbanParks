@@ -242,6 +242,37 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 
+	
+	
+	/**************************Park Manager*******************************/
+	
+	/*
+	private void ParkManagerSignUpPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			createVolunteerSignUpDetailsPanel(theSignal.getJobID());
+		} else if(theSignal.getButtonName().toLowerCase().equals("home")){
+			createVolunteerHomePanel();
+		}
+	}
+	*/
+	
+	private void ParkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			//createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
+			System.out.println("create Park manager job detail panel.");
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			//createVolunteerHomePanel();
+			System.out.println("back to park manager home.");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	private void parkManagerPanelsCases(final Observable theObservable, final Object theMessage) {
 
 	}

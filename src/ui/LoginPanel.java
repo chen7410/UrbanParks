@@ -46,7 +46,7 @@ public class LoginPanel extends Observable {
 		JLabel slogan = new JLabel("Where you can sign up or create a"
 									+ " volunteering job"); 
 		slogan.setSize(GUI.JLABEL_LONG_TEXT);
-		JTextField userName = new JTextField("User name", 15);
+		JTextField userName = new JTextField("", 15);
 		JButton logInButton = new JButton(new AbstractAction("LogIn") {
 
 			/** */

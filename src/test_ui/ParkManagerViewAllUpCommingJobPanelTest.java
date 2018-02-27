@@ -37,6 +37,7 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
 		myUpCommingJobPanelPanel = new ParkManagerViewAllUpCommingJobPanel(
 				myVolunteer.getJobList(myJobs));
 		
+		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		
 		myFrame.setTitle("Urban Parks - Park Manager");
 		myFrame.add(myUpCommingJobPanelPanel.getPanel(), BorderLayout.CENTER);
