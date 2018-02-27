@@ -14,10 +14,10 @@ import java.util.List;
 
 /**
  * Job class holds information relating to a job which then would be
- * added to the JobMap if it satisfies all the requirements.
+ * added to the JobMap.
  * 
  * @author Group 7
- * @version February 12, 2018
+ * @version March 5, 2018
  */
 public class Job implements Serializable, Comparable<Job> {
 
@@ -28,8 +28,7 @@ public class Job implements Serializable, Comparable<Job> {
 	
 	public final static int MIN_DAYS_TO_SIGN_UP = 3;
 	
-	/** The maximum number of pending jobs in the system.*/
-	public static int MAX_JOB_AMOUNT = 10;
+	
 
 	public static final int MAX_JOB_LENGTH = 4;
 
@@ -54,6 +53,9 @@ public class Job implements Serializable, Comparable<Job> {
 			final String theParkName, final ParkManager thePM, 
 			final String theLocation, final String theDescription) {
 		
+		checkArgumentException(theStartDate, theEndDate, theParkName, thePM, 
+				theLocation, theDescription);
+		
 		myStartDate = theStartDate;
 		myEndDate = theEndDate;
 		myParkName = theParkName;
@@ -63,6 +65,43 @@ public class Job implements Serializable, Comparable<Job> {
 		myDescription = theDescription;
 	}
 
+	/**
+	 * Check whether a Job has valid arguments during construction.
+	 * @param theStartDate
+	 * @param theEndDate
+	 * @param theParkName
+	 * @param thePM
+	 * @param theLocation
+	 * @param theDescription
+	 * @throws IllegalArgumentException if theStartDate == null or 
+	 * theEndDate == null or theParkName == null || theParkName.isEmpty()
+	 * or thePM == null or theLocation == null || theLocation.isEmpty()
+	 * or theDescription == null || theDescription.isEmpty().
+	 */
+	private void checkArgumentException(final LocalDate theStartDate, final LocalDate theEndDate, 
+			final String theParkName, final ParkManager thePM, 
+			final String theLocation, final String theDescription) {
+		if (theStartDate == null) {
+			throw new IllegalArgumentException("Start date cannot be null");
+		}
+		if (theEndDate == null) {
+			throw new IllegalArgumentException("End date cannot be null");
+		}
+		if (theParkName == null || theParkName.isEmpty()) {
+			throw new IllegalArgumentException("Park name cannot be null or empty");
+		}
+		if (thePM == null) {
+			throw new IllegalArgumentException("Park manager cannot be null");
+		}
+		if (theLocation == null || theLocation.isEmpty()) {
+			throw new IllegalArgumentException("Location cannot be null");
+		}
+		if (theDescription == null || theDescription.isEmpty()) {
+			throw new IllegalArgumentException("Description cannot be null");
+		}
+		
+	}
+	
 	public int getJobID() {
 		return myJobID;
 	}
@@ -123,7 +162,7 @@ public class Job implements Serializable, Comparable<Job> {
 	/**
 	 * Check if a job is able to be removed.
 	 * 
-	 * @return true if the job is removable; false otherwise.
+	 * @return true if a job is removable; false otherwise.
 	 */
 	public boolean isJobRemovable() {
 		LocalDate minimumDate = LocalDate.now()
@@ -219,4 +258,5 @@ public class Job implements Serializable, Comparable<Job> {
 			return 0;
 		}
 	}
+	
 }

@@ -150,7 +150,7 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 
-	private void loginPanelAction(final ButtonSignal theSignal) {
+	private void loginPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("login")) {
 			User user = theSignal.getUser();
 			if (user instanceof Volunteer) {
@@ -224,7 +224,7 @@ public class GUI extends JFrame implements Observer {
 	private void volunteerPanelsCases(final Observable theObservable, final Object theMessage) {
 		ButtonSignal signal = (ButtonSignal) theMessage;
 		if (theObservable instanceof LoginPanel) {
-			loginPanelAction(signal);
+			loginPanelActions(signal);
 		} else if (theObservable instanceof VolunteerHomePanel) {
 			volunteerHomePanelActions(signal);
 		} else if (theObservable instanceof VolunteerSignUpPanel) {
