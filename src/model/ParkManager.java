@@ -30,11 +30,16 @@ public class ParkManager extends User implements Serializable {
 	/**
 	 * Submit a new job to the system.
 	 * 
-	 * Pre-condition: the job must be checked before submit.
+	 * Pre-condition: the job must be checked before submit and given
+	 * 					job must not be null.
+	 * @throws IllegalArgumentException If the given job is null.
 	 * Post-condition: the job add to the park manager job list.
 	 * @param theJob the job that is being submitted.
 	 */
 	public void createJob(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		myJobs.add(theJob.getJobID());
 	}
 	
@@ -42,8 +47,9 @@ public class ParkManager extends User implements Serializable {
 	 * Removes a job only removed from the Park Manager's list and
 	 * not from the JobMap.
 	 * 
-	 * Pre-condition: The job passed in is in the ParkManager's
-	 * 					job list. 
+	 * Pre-condition: The given job is not null and is in the
+	 * 					ParkManager's job list. 
+	 * @throws IllegalArgumentException If the given job is null.
 	 * @param theJob The given job to be removed.
 	 * @return true if the job is able to be removed depending on if
 	 * 				the minimum number of days business rule is satisfied
@@ -53,6 +59,9 @@ public class ParkManager extends User implements Serializable {
 	 * 				or there is an issue removing it from the list.
 	 */
 	public boolean removeJob(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		if (theJob.isJobRemovable()) {
 			return myJobs.remove(Integer.valueOf(theJob.getJobID()));
 		}

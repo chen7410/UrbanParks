@@ -30,7 +30,9 @@ public class Volunteer extends User implements Serializable {
 	 * Cancels the specified job in the Volunteer's job list. If the job is not
 	 * in the job list. The list remain unchanged and return false.
 	 * 
-	 * Pre-condition: The specified job must be in the job list.
+	 * Pre-condition: The specified job not be null and must be in the
+	 * 					job list.
+	 * @throws IllegalArgumentException If the given job is null.
 	 * Post-condition: The specified job is removed from the volunteer's
 	 * 					job list.
 	 * @param theJob
@@ -38,6 +40,9 @@ public class Volunteer extends User implements Serializable {
 	 * @return true if the job is removed from the list; false otherwise.
 	 */
 	public boolean cancelJob(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		if (theJob.isJobRemovable()) {
 			return myJobs.remove(Integer.valueOf(theJob.getJobID()));
 		}
@@ -47,13 +52,17 @@ public class Volunteer extends User implements Serializable {
 	/**
 	 * Signing up for a new job.
 	 * 
-	 * Per-condition: The job must be checked before this method is
-	 * 					called.
+	 * Per-condition: The given job must not be null and must be
+	 * 					checked before this method is called.
+	 * @throws IllegalArgumentException If the given job is null.
 	 * Post-condition: The job is added to the volunteer's job list.
 	 * @param theJob
 	 *            The job a volunteer wants to sign up for.
 	 */
 	public void signup(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		myJobs.add(theJob.getJobID());
 	}
 
@@ -62,12 +71,16 @@ public class Volunteer extends User implements Serializable {
 	 * the minimum day from the current date.
 	 * 
 	 * Pre-condition: The Job has been initialized with a non-null values.
+	 * @throws IllegalArgumentException If the given job is null.
 	 * @param theJob
 	 *            the job that being check.
 	 * @return true if the stated date of the job is greater than the
 	 *         minimum day current date and false otherwise.
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		return theJob.isAtLeastMinDays(Job.MIN_DAYS_TO_SIGN_UP);
 	}
 
@@ -76,6 +89,8 @@ public class Volunteer extends User implements Serializable {
 	 * have already signed up for.
 	 * 
 	 * Pre-condition: The Job has been initialized with a non-null values.
+	 * @throws IllegalArgumentException If the given Job or the JobMap
+	 * 										are null.
 	 * @param theCandidateJob
 	 *            the candidate job.
 	 * @param theCurrentJob
@@ -85,6 +100,9 @@ public class Volunteer extends User implements Serializable {
 	 */
 	public boolean isSameDayConflict(final Job theCandidateJob,
 										final JobMap theJobList) {
+		if (theCandidateJob == null || theJobList == null) {
+			throw new IllegalArgumentException();
+		}
 		boolean overlaps = false;
 		for (int i = 0; i < myJobs.size(); i++) {
 			overlaps = overlaps || theCandidateJob.isSameDayConflict
