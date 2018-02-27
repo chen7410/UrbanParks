@@ -9,8 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -18,8 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
-import model.Volunteer;
+import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -32,10 +31,10 @@ import ui.GUI;
 public class VolunteerHomePanel extends Observable {
 	
 	private JPanel myPanel;
-	private Volunteer myVolunteer;
+	private List<Job> myAllUpCommingJobs;
 	
-	public VolunteerHomePanel(final Volunteer theVolunteer) {
-		myVolunteer = theVolunteer;
+	public VolunteerHomePanel(final List<Job> theJobList) {
+		myAllUpCommingJobs = theJobList;
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);
@@ -83,10 +82,10 @@ public class VolunteerHomePanel extends Observable {
 		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		int index = 0;
-		while (index < myVolunteer.getJobList().size() && index < 5) {
+		while (index < myAllUpCommingJobs.size() && index < 5) {
 			
 			JRadioButton radioButton = new JRadioButton(new
-					AbstractAction(myVolunteer.getJobList().get(index).getJobSummary()) {
+					AbstractAction(myAllUpCommingJobs.get(index).getJobSummary()) {
 
 				/** */
 				private static final long serialVersionUID = 1L;

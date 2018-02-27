@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -19,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import model.Job;
-import model.Volunteer;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
@@ -31,16 +29,15 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
  
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
 
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerViewAllUpCommingJobPanel(final Volunteer theVolunteer) {
+	public VolunteerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
-		myAllUpCommingJobs = theVolunteer.getJobList();
+		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
