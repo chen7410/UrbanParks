@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,8 +48,8 @@ public class LoginPanel extends Observable {
 									+ " volunteering job"); 
 		slogan.setSize(GUI.JLABEL_LONG_TEXT);
 		JTextField userName = new JTextField("", 15);
-		JButton logInButton = new JButton(new AbstractAction("LogIn") {
-
+		
+		Action logInAction = new AbstractAction("LogIn") {
 			/** */
 			private static final long serialVersionUID = 1L;
 
@@ -65,8 +66,13 @@ public class LoginPanel extends Observable {
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		});
+		};
+		
+		JButton logInButton = new JButton("LogIn");
+		logInButton.setAction(logInAction);
 		logInButton.setSize(GUI.BUTTON_SIZE);
+		
+		userName.addActionListener(logInAction);
 		
 		JButton exitButton = new JButton(new AbstractAction("Exit") {
 
