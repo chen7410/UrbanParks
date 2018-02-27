@@ -67,15 +67,15 @@ public abstract class User implements Serializable {
 		return myUserType;
 	}
 
-	/**
-	 * This method is called from subclass, should never be overridden.
-	 * 
-	 * @param theUserType
-	 *            the specified user type.
-	 */
-	public final void setUserType(final String theUserType) {
-		myUserType = theUserType;
-	}
+//	/**
+//	 * This method is called from subclass, should never be overridden.
+//	 * 
+//	 * @param theUserType
+//	 *            the specified user type.
+//	 */
+//	public final void setUserType(final String theUserType) {
+//		myUserType = theUserType;
+//	}
 	
 	/**
 	 * Returns a list of job belongs to this user.
