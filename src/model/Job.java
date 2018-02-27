@@ -216,11 +216,11 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * Check whether a Job is within theStartDate and theEndDate].
+	 * Check whether a Job is within theStartDate and theEndDate, inclusive.
 	 * 
 	 * @param theStartDate
 	 * @param theEndDate
-	 * @return
+	 * @return true if it is; false otherwise.
 	 */
 	public boolean isJobWithinDates(final LocalDate theStartDate, final LocalDate theEndDate) {
 		return !myStartDate.isBefore(theStartDate) && !myEndDate.isAfter(theEndDate);
@@ -242,7 +242,7 @@ public class Job implements Serializable, Comparable<Job> {
 
 	/**
 	 * 
-	 * @return this Job detail as a list.
+	 * @return the detail of this job.
 	 */
 	public List<String> getJobDetailsList() {
 		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");

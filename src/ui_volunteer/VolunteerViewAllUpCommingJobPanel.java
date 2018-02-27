@@ -44,7 +44,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	}
 
 	/**
-	 * Set up this VolunteerSignUpPanel.
+	 * Set up this VolunteerViewAllUpCommingJobPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -62,6 +62,8 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
+		System.out.print(size);//---------------
+		//int size = 0;
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
@@ -91,7 +93,13 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
-		myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		if (size != 0) {
+			myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		} else {
+			radioPanel.add(new JLabel("No upcomming jobs."));
+			myPanel.add(radioPanel, BorderLayout.CENTER);
+		}
+		
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
