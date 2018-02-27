@@ -51,9 +51,6 @@ public class ParkManager extends User implements Serializable {
 	 * 				or there is an issue removing it from the list.
 	 */
 	public boolean removeJob(final Job theJob) {
-		if (theJob.isJobRemovable()) {
-			return myJobs.remove(theJob);
-		}
-		return false;
+		return myJobs.remove(theJob);
 	}
 }

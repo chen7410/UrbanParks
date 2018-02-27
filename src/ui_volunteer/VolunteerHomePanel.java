@@ -7,6 +7,7 @@ package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
@@ -146,12 +147,16 @@ public class VolunteerHomePanel extends Observable {
 		generalButtons.add(signUpButton);
 		generalButtons.add(viewAllYourUpcommingJobsButton);
 		
+		JPanel emptyCenterPanel = new JPanel();
+		emptyCenterPanel.setMaximumSize(new Dimension(0, 0));
 		
 		myPanel.add(logOutPanel, BorderLayout.NORTH);
+		myPanel.add(emptyCenterPanel, BorderLayout.CENTER);
 		myPanel.add(yourUpcommingJobsPanel, BorderLayout.WEST);
 		myPanel.add(generalButtons, BorderLayout.EAST);
 		
-		// JPane
+		
+		
 		
 		
 		

@@ -34,10 +34,7 @@ public class Volunteer extends User implements Serializable {
 	 * 
 	 */
 	public boolean cancelJob(final Job theJob) {
-		if (theJob.isJobRemovable()) {
-			return myJobs.remove(theJob);
-		}
-		return false;
+		return myJobs.remove(theJob);
 	}
 
 	/**
