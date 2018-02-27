@@ -17,7 +17,7 @@ import java.util.List;
  * added to the JobMap.
  * 
  * @author Group 7
- * @version February 12, 2018
+ * @version March 5, 2018
  */
 public class Job implements Serializable, Comparable<Job> {
 
