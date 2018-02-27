@@ -32,12 +32,12 @@ public class Volunteer extends User implements Serializable {
 	 * 
 	 * Pre-condition: The specified job not be null and must be in the
 	 * 					job list.
-	 * @throws IllegalArgumentException If the given job is null.
 	 * Post-condition: The specified job is removed from the volunteer's
 	 * 					job list.
 	 * @param theJob
 	 *            The specified job that is being removed from the list.
 	 * @return true if the job is removed from the list; false otherwise.
+	 * @throws IllegalArgumentException If the given job is null.
 	 */
 	public boolean cancelJob(final Job theJob) {
 		if (theJob == null) {
@@ -54,10 +54,10 @@ public class Volunteer extends User implements Serializable {
 	 * 
 	 * Per-condition: The given job must not be null and must be
 	 * 					checked before this method is called.
-	 * @throws IllegalArgumentException If the given job is null.
 	 * Post-condition: The job is added to the volunteer's job list.
 	 * @param theJob
 	 *            The job a volunteer wants to sign up for.
+	 * @throws IllegalArgumentException If the given job is null.
 	 */
 	public void signup(final Job theJob) {
 		if (theJob == null) {
@@ -71,11 +71,11 @@ public class Volunteer extends User implements Serializable {
 	 * the minimum day from the current date.
 	 * 
 	 * Pre-condition: The Job has been initialized with a non-null values.
-	 * @throws IllegalArgumentException If the given job is null.
 	 * @param theJob
 	 *            the job that being check.
 	 * @return true if the stated date of the job is greater than the
 	 *         minimum day current date and false otherwise.
+	 * @throws IllegalArgumentException If the given job is null.
 	 */
 	public boolean isAtLeastMinDays(final Job theJob) {
 		if (theJob == null) {
@@ -89,14 +89,14 @@ public class Volunteer extends User implements Serializable {
 	 * have already signed up for.
 	 * 
 	 * Pre-condition: The Job has been initialized with a non-null values.
-	 * @throws IllegalArgumentException If the given Job or the JobMap
-	 * 										are null.
 	 * @param theCandidateJob
 	 *            the candidate job.
 	 * @param theCurrentJob
 	 *            the job has already signed up.
 	 * @return true if the candidate job does not conflict with the
 	 *         			job has already signed up; false otherwise.
+	 * @throws IllegalArgumentException If the given job or JobMap
+	 * 										are null.
 	 */
 	public boolean isSameDayConflict(final Job theCandidateJob,
 										final JobMap theJobList) {
