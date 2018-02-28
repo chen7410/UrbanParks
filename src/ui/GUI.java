@@ -43,12 +43,18 @@ public class GUI extends JFrame implements Observer {
 
 	/** The space added below a button. */
 	public static final int BUTTON_GAP_HEIGHT = 50;
+	
+	/**
+	 * The number of jobs which will be displayed by the Upcoming
+	 * Jobs list for both the Park Managers and the Volunteers.
+	 * */
+	public static final int UPCOMING_JOBS_MAX_NUM_DISPLAY = 5;
 
 	/** The empty border of VolunteerSignUpPanel. */
 	public static final Border VOLUNTEER_SIGNUP_PANEL_BORDER = new EmptyBorder(50, 100, 50, 100);
 
 	/** The background color. */
-	public static final Color VOLUNTEER_SIGNUP_PANEL_BGCOLOR = new Color(153, 217, 234);
+	public static final Color VOLUNTEER_PANELS_BGCOLOR = new Color(153, 217, 234);
 
 	/**
 	 * 

@@ -35,7 +35,7 @@ import model.UserMap;
  * 
  * 
  * @author Brook Negussie
- * @version February 21, 2018
+ * @version March 5, 2018
  */
 public class LoginPanel extends Observable {
 	
@@ -69,14 +69,12 @@ public class LoginPanel extends Observable {
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		welcomeLabel.setFont(font.deriveFont(attributes));
 		
-		
 		welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		
 		JLabel slogan = new JLabel("Where you can sign up or create a"
 									+ " volunteering job.", SwingConstants.CENTER); 
-		slogan.setFont(new Font(welcomeLabel.getName(), Font.PLAIN, 20));
-		
-		//slogan.setSize(GUI.JLABEL_LONG_TEXT);
+		slogan.setFont(new Font(slogan.getName(), Font.PLAIN, 20));
 		slogan.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		// Adding the labels to the center panel.
@@ -137,17 +135,6 @@ public class LoginPanel extends Observable {
 		
 		// Adding the inputPanel with all the content to the center panel.
 		centerPanel.add(inputPanel);
-		
-		
-//		JPanel welcomeTitle = new JPanel(new FlowLayout());
-//		welcomeTitle.add(welcome);
-		
-//		JPanel sloganTitle = new JPanel(new FlowLayout());
-//		sloganTitle.add(slogan);
-		
-//		myPanel.add(welcomeTitle, BorderLayout.NORTH);
-//		myPanel.add(sloganTitle, BorderLayout.CENTER);
-//		myPanel.add(inputPanel, BorderLayout.SOUTH);
 		
 		myPanel.add(centerPanel, BorderLayout.CENTER);
 	}

@@ -82,7 +82,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout(
 				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
-		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		buttonPanel.add(homeButton);
 		buttonPanel.add(jobDetailButton);
 

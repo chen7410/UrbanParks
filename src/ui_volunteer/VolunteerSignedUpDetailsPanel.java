@@ -81,7 +81,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 		removeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(removeButton);
-		buttonsPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
