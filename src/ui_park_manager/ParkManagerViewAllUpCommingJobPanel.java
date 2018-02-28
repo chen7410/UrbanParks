@@ -1,8 +1,4 @@
-/*
- * TCSS 360 - Winter 2018
- * Urban Parks Project
- */
-package ui_volunteer;
+package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -26,31 +21,30 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * A JPanal that showing all jobs a volunteer can sign up.
- * @author Minqing Chen
+ * A JPanal that showing all upcoming jobs for a park manager.
+ * @author Group 7
  * @version February 17, 2018
  */
-public class VolunteerSignUpPanel extends Observable {
+public class ParkManagerViewAllUpCommingJobPanel extends Observable {
  
-	private List<Job> myEligibleJobs;
+	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all eligible jobs of a volunteer.
+	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerSignUpPanel(final List<Job> theEligibleJobs) {
+	public ParkManagerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
-		myEligibleJobs = theEligibleJobs;
+		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
 	/**
-	 * Set up this VolunteerSignUpPanel.
+	 * Set up this ParkManagerViewAllUpCommingJobPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -67,19 +61,19 @@ public class VolunteerSignUpPanel extends Observable {
 		
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
-		int size = myEligibleJobs.size();
+		int size = myAllUpCommingJobs.size();
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
 			//System.out.println(b.toString());
-			JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
+			JRadioButton b = makeRadioButton(myAllUpCommingJobs.get(i));
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);
-				mySelectedJobID = myEligibleJobs.get(i).getJobID();
+				mySelectedJobID = myAllUpCommingJobs.get(i).getJobID();
 			}
 		}
 		
@@ -97,16 +91,21 @@ public class VolunteerSignUpPanel extends Observable {
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
-		myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		if (size != 0) {
+			myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		} else {
+			radioPanel.add(new JLabel("No upcomming jobs."));
+			myPanel.add(radioPanel, BorderLayout.CENTER);
+		}
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
-	
+
 	/**
 	 * Set up top label.
 	 * @return return a label.
 	 */
 	private JLabel makeTopJlabel() {
-		JLabel topLabel = new JLabel("Sign Up A Job");
+		JLabel topLabel = new JLabel("All Upcomming Jobs");
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
@@ -152,7 +151,7 @@ public class VolunteerSignUpPanel extends Observable {
 			}
 		});
 		jobDetailButton.setPreferredSize(GUI.BUTTON_SIZE);
-		if(myEligibleJobs.isEmpty()) {
+		if(myAllUpCommingJobs.isEmpty()) {
 			jobDetailButton.setEnabled(false);
 		}
 		return jobDetailButton;
@@ -174,13 +173,14 @@ public class VolunteerSignUpPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				mySelectedJobID = theEligibleJob.getJobID();
+				System.out.println("Radio button Selected Job ID " + theEligibleJob.getJobID());
 			}
 		});
 		return button;
 	}
 
 	/**
-	 * @return a VolunteerSignUpPanel.
+	 * @return a ParkManagerViewAllUpCommingJobPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

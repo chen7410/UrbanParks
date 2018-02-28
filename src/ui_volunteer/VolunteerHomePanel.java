@@ -7,19 +7,27 @@ package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
 
-import model.Volunteer;
+import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -27,15 +35,15 @@ import ui.GUI;
  * 
  * 
  * @author Brook Negussie
- * @version February 21, 2018
+ * @version March 5, 2018
  */
 public class VolunteerHomePanel extends Observable {
 	
 	private JPanel myPanel;
-	private Volunteer myVolunteer;
+	private List<Job> myAllUpcomingJobs;
 	
-	public VolunteerHomePanel(final Volunteer theVolunteer) {
-		myVolunteer = theVolunteer;
+	public VolunteerHomePanel(final List<Job> theJobList) {
+		myAllUpcomingJobs = theJobList;
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);
@@ -43,78 +51,84 @@ public class VolunteerHomePanel extends Observable {
 	}
 	
 	private void setup() {
-		JButton logOut = new JButton(new AbstractAction("Log Out") {
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-			/** */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent theEvent) {
-				setChanged();
-				notifyObservers(new ButtonSignal("logout", 0));
-
-			}
-		});
-		logOut.setSize(GUI.BUTTON_SIZE);
-		JPanel logOutPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		logOutPanel.add(logOut);
+		// Panel on the left side of the overall home panel.		
+		JPanel upcomingJobsPanel = new JPanel(new BorderLayout());
+		upcomingJobsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		upcomingJobsPanel.setBorder(BorderFactory.createTitledBorder("Your Upcomming Jobs"));
+		
+		// Radio buttons panel
+		JPanel radioButtonsPanel = new JPanel(new GridLayout(0, 1));
+		radioButtonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		radioButtonsPanel.setBorder(BorderFactory.createEmptyBorder());
 		
 		
 		
-		JPanel centerSidePanel = new JPanel();
 		
-		JPanel yourUpcommingJobsPanel = new JPanel();
-		yourUpcommingJobsPanel.setLayout((new BoxLayout(yourUpcommingJobsPanel, BoxLayout.Y_AXIS)));
-		yourUpcommingJobsPanel.setBackground(Color.WHITE);
+		int upcomingJobSize = myAllUpcomingJobs.size();
 		
-		JButton viewJobDetailsButton = new JButton(new AbstractAction("View job details") {
-
-			/** */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Display VolunteerSignUpPanel.
-				
-			}
-		});
-		viewJobDetailsButton.setSize(GUI.BUTTON_SIZE);
-		
-		
-		ButtonGroup buttonGroup = new ButtonGroup();
-		int index = 0;
-		while (index < myVolunteer.getJobList().size() && index < 5) {
+		if (upcomingJobSize == 0) {
+			/*
+			 * This is for when the volunteer does not have any jobs
+			 * signed up for.
+			 */
+			JLabel noCurrentJobsAvailableLabel = new JLabel("You do not have any upcoming jobs.", SwingConstants.CENTER);
+			noCurrentJobsAvailableLabel.setFont(new Font(noCurrentJobsAvailableLabel.getName(), Font.PLAIN, 20));
 			
-			JRadioButton radioButton = new JRadioButton(new
-					AbstractAction(myVolunteer.getJobList().get(index).getJobSummary()) {
-
-				/** */
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO
-					
-				}
+			upcomingJobsPanel.add(noCurrentJobsAvailableLabel, BorderLayout.CENTER);
+		} else {
+			/*
+			 * This case is for displaying the volunteer's upcoming
+			 * jobs, up the UPCOMING_JOBS_MAX_NUM_DISPLAY value.
+			 */
+			int index = 0;
+			while (index < upcomingJobSize && index < GUI.UPCOMING_JOBS_MAX_NUM_DISPLAY) {
+				JRadioButton radioButton = new JRadioButton(
+						myAllUpcomingJobs.get(index).getJobSummary());
+				radioButton.setBackground(Color.WHITE);
+				radioButtonsPanel.add(radioButton);
 				
-			});
-			buttonGroup.add(radioButton);
-			yourUpcommingJobsPanel.add(radioButton);
-			
-			index++;
+				index++;
+			}
+			upcomingJobsPanel.add(radioButtonsPanel, BorderLayout.CENTER);
 		}
 		
-		JLabel upcommingJobs = new JLabel("Your upcomming Jobs");
-		yourUpcommingJobsPanel.add(upcommingJobs);
+		// The button to view the selected job from the radio buttons from above.
+		JButton viewSelectedJobButton = new JButton(new AbstractAction("View Selected Job") {
 
-		centerSidePanel.add(yourUpcommingJobsPanel, BorderLayout.CENTER);
-		centerSidePanel.add(viewJobDetailsButton, BorderLayout.SOUTH);
-		
+			/** */
+			private static final long serialVersionUID = 1L;
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		viewSelectedJobButton.setSize(GUI.BUTTON_SIZE);
+		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
-		JPanel generalButtons = new JPanel();
-		generalButtons.setLayout(new BoxLayout(generalButtons, BoxLayout.Y_AXIS));
+		// The panel which simple has the viewSelectedJobButton.
+		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout());
+		viewSelectedJobPanel.add(viewSelectedJobButton);
 		
+		if (upcomingJobSize > 0) {
+			upcomingJobsPanel.add(viewSelectedJobPanel, BorderLayout.SOUTH);
+		}
+		
+		
+		
+		// Panel on the right side of the overall home panel.
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		buttonsPanel.setBorder(BorderFactory.createSoftBevelBorder(1));
+		BoxLayout buttonPanelLayout = new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS);
+		buttonsPanel.setLayout(buttonPanelLayout);
+		
+		
+		// Buttons to go on the buttonPanel.
 		JButton signUpButton = new JButton(new AbstractAction("SignUp") {
 
 			/** */
@@ -127,6 +141,8 @@ public class VolunteerHomePanel extends Observable {
 			}
 		});
 		signUpButton.setSize(GUI.BUTTON_SIZE);
+		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
 				new AbstractAction("View all your upcomming jobs") {
@@ -142,14 +158,46 @@ public class VolunteerHomePanel extends Observable {
 			}
 		});
 		viewAllYourUpcommingJobsButton.setSize(GUI.BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		generalButtons.add(signUpButton);
-		generalButtons.add(viewAllYourUpcommingJobsButton);
+		JButton logOut = new JButton(new AbstractAction("Log Out") {
+
+			/** */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent theEvent) {
+				setChanged();
+				notifyObservers(new ButtonSignal("logout", 0));
+
+			}
+		});
+		logOut.setSize(GUI.BUTTON_SIZE);
+		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		myPanel.add(logOutPanel, BorderLayout.NORTH);
-		myPanel.add(yourUpcommingJobsPanel, BorderLayout.CENTER);
-		myPanel.add(generalButtons, BorderLayout.EAST);
+		// Adding the buttons onto the buttonsPanel.
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
+		buttonsPanel.add(signUpButton);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+		buttonsPanel.add(viewAllYourUpcommingJobsButton);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+		buttonsPanel.add(logOut);
+		
+		
+		
+		// Adding panels to the SplitPane
+		splitPane.setLeftComponent(upcomingJobsPanel);
+		splitPane.setRightComponent(buttonsPanel);
+		
+		
+		// Display specifics of the SplitPane
+		splitPane.setResizeWeight(0.5);
+		splitPane.setEnabled(false);
+		
+		
+		// Adding SplitPane to main panel
+		myPanel.add(splitPane, BorderLayout.CENTER);
 	}
 	
 	public JPanel getPanel() {

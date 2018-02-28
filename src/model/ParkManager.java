@@ -15,33 +15,39 @@ import java.io.Serializable;
  */
 public class ParkManager extends User implements Serializable {
 
-	/**
-     * A generated serial version UID for object Serialization.
-     */
+	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * {@inheritDoc}}
+	 */
 	public ParkManager(final String theUserName, final String
 						theFirstName, final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
-		setUserType("Park Manager");
 	}
 
 	/**
 	 * Submit a new job to the system.
 	 * 
-	 * Pre-condition: the job must be checked before submit.
+	 * Pre-condition: the job must be checked before submit and given
+	 * 					job must not be null.
 	 * Post-condition: the job add to the park manager job list.
 	 * @param theJob the job that is being submitted.
+	 * @throws IllegalArgumentException If the given job is null.
 	 */
 	public void createJob(final Job theJob) {
-		myJobs.add(theJob);
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
+		myJobs.add(theJob.getJobID());
 	}
 	
 	/**
 	 * Removes a job only removed from the Park Manager's list and
-	 * not from the JobMap. If the job is not in the job list. 
-	 * The list remain unchanged and return false.
+	 * not from the JobMap.
 	 * 
+	 * Pre-condition: The given job is not null and is in the
+	 * 					ParkManager's job list.
 	 * @param theJob The given job to be removed.
 	 * @return true if the job is able to be removed depending on if
 	 * 				the minimum number of days business rule is satisfied
@@ -49,10 +55,14 @@ public class ParkManager extends User implements Serializable {
 	 * 		false if it is not able to be removed because it fails to
 	 * 				satisfied the minimum number of days business rule
 	 * 				or there is an issue removing it from the list.
+	 * @throws IllegalArgumentException If the given job is null.
 	 */
 	public boolean removeJob(final Job theJob) {
+		if (theJob == null) {
+			throw new IllegalArgumentException();
+		}
 		if (theJob.isJobRemovable()) {
-			return myJobs.remove(theJob);
+			return myJobs.remove(Integer.valueOf(theJob.getJobID()));
 		}
 		return false;
 	}

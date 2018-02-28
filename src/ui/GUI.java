@@ -43,12 +43,18 @@ public class GUI extends JFrame implements Observer {
 
 	/** The space added below a button. */
 	public static final int BUTTON_GAP_HEIGHT = 50;
+	
+	/**
+	 * The number of jobs which will be displayed by the Upcoming
+	 * Jobs list for both the Park Managers and the Volunteers.
+	 * */
+	public static final int UPCOMING_JOBS_MAX_NUM_DISPLAY = 5;
 
 	/** The empty border of VolunteerSignUpPanel. */
 	public static final Border VOLUNTEER_SIGNUP_PANEL_BORDER = new EmptyBorder(50, 100, 50, 100);
 
 	/** The background color. */
-	public static final Color VOLUNTEER_SIGNUP_PANEL_BGCOLOR = new Color(153, 217, 234);
+	public static final Color VOLUNTEER_PANELS_BGCOLOR = new Color(153, 217, 234);
 
 	/**
 	 * 
@@ -71,7 +77,7 @@ public class GUI extends JFrame implements Observer {
 	private void init() {
 		myJobs = new JobMap();
 		myUsers = new UserMap();
-		myUsers.loadUserMap(User.USERS_DATA_FILE);
+		myUsers.loadUserMap(UserMap.USERS_DATA_FILE);
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		createLoginPanel();
 	}
@@ -86,7 +92,7 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerHomePanel() {
 		remove(myCurrentPanel);
-		VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer);
+		VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getJobList(myJobs));
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -124,7 +130,7 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer);
+		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -150,7 +156,7 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 
-	private void loginPanelAction(final ButtonSignal theSignal) {
+	private void loginPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("login")) {
 			User user = theSignal.getUser();
 			if (user instanceof Volunteer) {
@@ -224,7 +230,7 @@ public class GUI extends JFrame implements Observer {
 	private void volunteerPanelsCases(final Observable theObservable, final Object theMessage) {
 		ButtonSignal signal = (ButtonSignal) theMessage;
 		if (theObservable instanceof LoginPanel) {
-			loginPanelAction(signal);
+			loginPanelActions(signal);
 		} else if (theObservable instanceof VolunteerHomePanel) {
 			volunteerHomePanelActions(signal);
 		} else if (theObservable instanceof VolunteerSignUpPanel) {
@@ -242,6 +248,37 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 
+	
+	
+	/**************************Park Manager*******************************/
+	
+	/*
+	private void ParkManagerSignUpPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			createVolunteerSignUpDetailsPanel(theSignal.getJobID());
+		} else if(theSignal.getButtonName().toLowerCase().equals("home")){
+			createVolunteerHomePanel();
+		}
+	}
+	*/
+	
+	private void ParkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			//createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
+			System.out.println("create Park manager job detail panel.");
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			//createVolunteerHomePanel();
+			System.out.println("back to park manager home.");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	private void parkManagerPanelsCases(final Observable theObservable, final Object theMessage) {
 
 	}

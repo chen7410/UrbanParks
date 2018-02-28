@@ -16,50 +16,40 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * This class represents all user in the system.
+ * A class that will be our User collection. This class is implemented using 
+ * HashMap. The key of this collection is a String object which will be the 
+ * user's name, the value will be a User object.
  * 
- * @author Group 7
+ * @author  Group 7
  * @version February 12, 2018
+ * @see     Collection
+ * @see     HashMap
  */
 public class UserMap {
+		
+	/**
+	 * The default name of the serialized file where all users' data are loaded/stored.
+	 */
+	public static final String USERS_DATA_FILE = "UsersInformations.ser";
 	
-	/** A map that stores all users. key: user name value: user object.*/
 	private HashMap<String, User> myUsers;
+		
 	
+	/**
+	 * Constructs an empty UserMap. The key is an String and the value is a User object.
+	 */
 	public UserMap() {
 		myUsers = new HashMap<String, User>();
 	}
-	
-	/**
-	 * Add a user to the UserMap.
-	 * 
-	 * @param theUser
-	 *            the User that being added to an UserMap.
-	 */
-	public void addUser(final User theUser) {
-		myUsers.put(theUser.getUserName(), theUser);
-	}
-	
-	/**
-	 * Retrieves a user from an UserMap.
-	 * 
-	 * @param theUser the User that being retrieved from an UserMap.
-	 * @return a user or null if the user doesn't exist.
-	 */
-	public User getUser(final String theUsername) {
-		if (myUsers.containsKey(theUsername)) {
-			return myUsers.get(theUsername);
-		}
-		return null;
-	}
-	
-	/**
-	 * Outputting all users information into a file specified by the
-	 * given file name. File type must be a .ser.
+
+	 /** 
+	 * Stores users' data into a serialized file on the local machine. 
+	 * File type must be a .ser.
 	 * 
 	 * @param theFilename
-	 *            The name of the file where the user informations
-	 *            should be placed.
+	 *            The name of the serialized file where users' data
+	 *            are written to.
+	 * @throws IOException when an I/O exception (either failed or interrupted) occurs.
 	 */
 	public void storeUserMap(final String theFilename) {
 		try {
@@ -75,12 +65,13 @@ public class UserMap {
 	}
 	
 	/**
-	 * Loading user information from a file, using the given file name,
+	 * Loads user information from a file, using the given file name,
 	 * into the UserMap. The file must be create by the storeUserMap method.
 	 * 
 	 * @param theFilename
-	 *            The file name from where the user informations
-	 *            should be gathered.
+	 *            The serialized file name from where users' data
+	 *            are loaded from and put in this UserMap.
+	 * @throws IOException when an I/O exception (either failed or interrupted) occurs.          
 	 */
 	@SuppressWarnings("unchecked")
 	public void loadUserMap(final String theFilename) {
@@ -100,12 +91,35 @@ public class UserMap {
 			System.out.println("Class not found exception");
 			theClassNotFoundException.printStackTrace();
 		}
-	}	
+	}
 	
 	/**
-	 * Provides only the user names in a list.
+	 * Adds a user to this UserMap.
 	 * 
-	 * @return The list of user names.
+	 * @param theUser user that is being added to this UserMap.
+	 * 		  		  null will be added if theUser is null. 
+	 */
+	public void addUser(final User theUser) {
+		myUsers.put(theUser.getUserName(), theUser);
+	}
+	
+	/**
+	 * Retrieves a user from this UserMap.
+	 * 
+	 * @param theUser the User that being retrieved from an UserMap.
+	 * @return a user object or null if the user doesn't exist.
+	 */
+	public User getUser(final String theUsername) {
+		if (myUsers.containsKey(theUsername)) {
+			return myUsers.get(theUsername);
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns a list of the names of all the users in the system.
+	 * 
+	 * @return an ArrayList of all the users' names.
 	 */
 	public List<String> getAllUserNames() {
 		List<String> users = new ArrayList<>(myUsers.keySet());

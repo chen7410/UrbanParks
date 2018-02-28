@@ -6,10 +6,9 @@
 package test_ui;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
-
 import model.JobMap;
+import model.UserMap;
 import model.Volunteer;
 import ui_volunteer.VolunteerHomePanel;
 
@@ -26,9 +25,12 @@ public class VolunteerHomePanelTest {
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
-		Volunteer currentVolunteer = new Volunteer("tuan", "Tuan",
-													"Dinh");
-		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer);
+		UserMap users = new UserMap();
+		JobMap jobs = new JobMap();
+		users.loadUserMap(UserMap.USERS_DATA_FILE);
+		jobs.loadJobMap(JobMap.JOBS_DATA_FILE);
+		Volunteer currentVolunteer = (Volunteer) users.getUser("tuan");
+		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer.getJobList(jobs));
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		

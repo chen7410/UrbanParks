@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -19,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import model.Job;
-import model.Volunteer;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
@@ -31,23 +29,22 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
  
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	
 	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
 
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public VolunteerViewAllUpCommingJobPanel(final Volunteer theVolunteer) {
+	public VolunteerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
-		myAllUpCommingJobs = theVolunteer.getJobList();
+		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
 	/**
-	 * Set up this VolunteerSignUpPanel.
+	 * Set up this VolunteerViewAllUpCommingJobPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -65,6 +62,8 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
+		System.out.print(size);//---------------
+		//int size = 0;
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
@@ -83,7 +82,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout(
 				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
-		buttonPanel.setBackground(GUI.VOLUNTEER_SIGNUP_PANEL_BGCOLOR);
+		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		buttonPanel.add(homeButton);
 		buttonPanel.add(jobDetailButton);
 
@@ -94,7 +93,13 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
-		myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		if (size != 0) {
+			myPanel.add(radioScrollPane, BorderLayout.CENTER);
+		} else {
+			radioPanel.add(new JLabel("No upcomming jobs."));
+			myPanel.add(radioPanel, BorderLayout.CENTER);
+		}
+		
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 

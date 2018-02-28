@@ -18,35 +18,66 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * JobMap class is a HashMap that will hold all jobs and their IDs.
+ * A class that will be our Job collection. This class is implemented
+ * using HashMap. The key of this collection is an Integer which will
+ * be the job's ID, the value will be a Job object.
  * 
- * @author Group 7
+ * @author  Group 7
  * @version February 12, 2018
+ * @see     Collection
+ * @see     HashMap
  */
 public class JobMap {
-	
+
+
+	/*
+	 * TODO I don't think we need this. Just make it a private variable.
+	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
 	
+	/** The maximum number of pending jobs in the system.*/
+	private static int MAX_JOB_AMOUNT = 10;
+
 	private HashMap<Integer, Job> myJobs;
 
 	public JobMap() {
 		myJobs = new HashMap<Integer, Job>();
 	}
 
+	public int getMaxJobAmount() {
+		return MAX_JOB_AMOUNT;
+	}
+	
 	/**
-	 * Precondition: theJob must pass all business rules before being added.
-	 * Postcondition: theJob is added to a JobMap.
 	 * 
-	 * @param theJob
+	 * @param theMaxJobA
+	 * @throws IllegalArgumentException if theJobAmount <= 0.
+	 */
+	public void setMaxJobAmount(int theMaxJobAmount) {
+		if (theMaxJobAmount <= 0) {
+			throw new IllegalArgumentException("Illegal job amount: " + theMaxJobAmount);
+		}
+		MAX_JOB_AMOUNT = theMaxJobAmount;
+	}
+	
+	/**
+	 * Adds a job to this JobMap. Key is theJob ID, value is theJob.
+	 * 
+	 * @param theJob job that is being added to an JobMap.
+	 * 		  		 null will be added if theJob is null. 
 	 */
 	public void addJob(final Job theJob) {
 		myJobs.put(theJob.getJobID(), theJob);
 	}
 
 	/**
-	 * Store Job maps on local file system. File type must be a .ser.
+	 * Stores jobs' data into a serialized file on the local machine. 
+	 * File type must be a .ser.
 	 * 
-	 * @param theFilename
+	 * @param theFilename The name of the serialized file where jobs' 
+	 *                    data are written to.
+	 * @throws IOException when an I/O exception 
+	 *                     (either failed or interrupted) occurs.
 	 */
 	public void storeJobMap(final String theFilename) {
 		try {
@@ -62,26 +93,10 @@ public class JobMap {
 	}
 
 	/**
-	 * 
-	 * @param theVolunteer the specified volunteer.
-	 * @return a list of eligible jobs of the specified volunteer.
-	 */
-	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
-	    Job[] jobs = getSortedJobsArray();
-	    List<Job> eligibleJobs = new ArrayList<>();
-	    for (int i = 0; i < jobs.length; i++) {
-	        if(!theVolunteer.isSameDayConflict(jobs[i])
-                    && theVolunteer.isAtLeastMinDays(jobs[i])) {
-	            eligibleJobs.add(jobs[i]);
-            }
-        }
-	    return eligibleJobs;
-    }
-
-	/**
 	 * Load Job map from the local file system.
 	 * 
 	 * The file must be create by the storeJobMap method.
+	 * 
 	 * @param theFilename
 	 */
 	@SuppressWarnings("unchecked")
@@ -103,46 +118,95 @@ public class JobMap {
 			theClassNotFoundException.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Retrieves a job from this JobMap.
+	 * 
+	 * @param  theJob the Job being retrieved from this JobMap.
+	 * @return a job object or null if the job doesn't exist.
+	 */
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
 	}
 	
-	public void remove(final Job theJob) {
-		myJobs.remove(theJob.getJobID());
-	}
-	
-	public boolean isLessMaxAmountJobs() {
-		return size() < Job.MAX_JOB_AMOUNT;
-	}
-
+	/**
+	 * Returns the number of jobs in the system.
+	 * 
+	 * @return the size of this JobMap.
+	 */
 	public int size() {
 		return myJobs.size();
 	}
 	
 	/**
-	 * Returns a list of jobs between two given dates, inclusive.
+	 * Removes a job from this JobMap.
 	 * 
-	 * @param theStartDate the beginning the period.
-	 * @param theEndDate the end of the period.
-	 * @return jobsWithinPeriod that contains  jobs between theStartDate and theEndDate.
+	 * @param theJob the job that is being removed from this JobMap.
+	 */
+	public void remove(final Job theJob) {
+		myJobs.remove(theJob.getJobID());
+	}
+	
+	/**
+	 * Adds all the eligible jobs that a volunteer can sign up for to an
+	 * ArrayList. An eligible job has to satisfy all of the following:
+	 *    1. a job that begins at least the minimum number of days
+	 *       (specified in Job class:MIN_DAYS_TO_SIGN_UP) after the 
+	 *       current date. 
+	 *    2. a job that does NOT extend any particular calendar day.
+	 *
+	 * @param  theVolunteer the volunteer specified.
+	 * @return a list of eligible jobs of the specified volunteer.
+	 */
+	public List<Job> getEligibleJobs(final Volunteer theVolunteer) {
+	    Job[] jobs = getSortedJobsArray();
+	    List<Job> eligibleJobs = new ArrayList<>();
+	    for (int i = 0; i < jobs.length; i++) {
+	        if(!theVolunteer.isSameDayConflict(jobs[i], this)
+                    && theVolunteer.isAtLeastMinDays(jobs[i])) {
+	            eligibleJobs.add(jobs[i]);
+            }
+        }
+	    return eligibleJobs;
+    }
+
+	public boolean isLessMaxAmountJobs() {
+		return size() < MAX_JOB_AMOUNT;
+	}
+	
+
+	/**
+	 * Searches this JobMap for jobs that start on the specified
+	 * start date and end on the specified end date, and all the 
+	 * jobs that fall in between the two dates. These jobs are added
+	 * to an ArrayList that is returned to this method caller.
+	 * 
+	 * @param theStartDate
+	 *            the beginning the period.
+	 * @param theEndDate
+	 *            the end of the period.
+	 * @return jobsWithinPeriod that contains jobs between theStartDate and
+	 *         theEndDate.
 	 */
 	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
 		Job[] sortedJobs = getSortedJobsArray();
 		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
-		for (Job job: sortedJobs) {
-			if (job.isJobWithinDates(theStartDate, theEndDate) ) {
+		for (Job job : sortedJobs) {
+			if (job.isJobWithinDates(theStartDate, theEndDate)) {
 				jobsWithinPeriod.add(job);
 			}
 		}
 		return jobsWithinPeriod;
 	}
-	
+
 	/**
-	 * Return a sorted job array that prioritizing job that starts first,
-	 * or when they starts the same date, job that ends first.
+	 * Returns a sorted Job array. The job with the earliest 
+	 * start date will be at index = 0. The job with the latest 
+	 * start date will be at index = array.length-1. If two jobs 
+	 * have the same start date, the job that ends first will be 
+	 * placed first.
 	 * 
-	 * @return sorted array of jobs
+	 * @return an array with sorted jobs.
 	 */
 	public Job[] getSortedJobsArray() {
 		List<Job> valuesList = new ArrayList<>(myJobs.values());
@@ -153,7 +217,10 @@ public class JobMap {
 		}
 		return jobList;
 	}
-
+	
+	/**
+	 * Displays all the jobs in this JobMap in the console. 
+	 */
 	public void displayJobs() {
 		System.out.println(myJobs.values().toString());
 	}

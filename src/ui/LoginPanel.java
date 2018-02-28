@@ -7,16 +7,26 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import java.util.Observable;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import model.User;
 import model.UserMap;
@@ -25,7 +35,7 @@ import model.UserMap;
  * 
  * 
  * @author Brook Negussie
- * @version February 21, 2018
+ * @version March 5, 2018
  */
 public class LoginPanel extends Observable {
 	
@@ -41,14 +51,46 @@ public class LoginPanel extends Observable {
 	}
 	
 	private void setup() {
-		JLabel welcome = new JLabel("Welcome to Urban Parks");
-		welcome.setSize(GUI.JLABEL_SHORT_TEXT);
+		
+		// The main panel in the center.
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBackground(Color.GREEN);
+		centerPanel.setBorder(BorderFactory.createTitledBorder("Urban Parks"));
+		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
+		centerPanel.setLayout(layout);
+		
+		
+		JLabel welcomeLabel = new JLabel("Welcome to Urban Parks");
+		welcomeLabel.setFont(new Font(welcomeLabel.getName(), Font.PLAIN, 40));
+		
+		// Writing the code to underline the welcome label.
+		Font font = welcomeLabel.getFont();
+		Map attributes = font.getAttributes();
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		welcomeLabel.setFont(font.deriveFont(attributes));
+		
+		welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		
 		JLabel slogan = new JLabel("Where you can sign up or create a"
-									+ " volunteering job"); 
-		slogan.setSize(GUI.JLABEL_LONG_TEXT);
-		JTextField userName = new JTextField("User name", 15);
-		JButton logInButton = new JButton(new AbstractAction("LogIn") {
-
+									+ " volunteering job.", SwingConstants.CENTER); 
+		slogan.setFont(new Font(slogan.getName(), Font.PLAIN, 20));
+		slogan.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		// Adding the labels to the center panel.
+		
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		centerPanel.add(welcomeLabel);
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		centerPanel.add(slogan);
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+		
+		
+		JTextField userName = new JTextField("", 15);
+		
+		JButton logInButton = new JButton("LogIn");
+		Action logInAction = new AbstractAction("LogIn") {
+			
 			/** */
 			private static final long serialVersionUID = 1L;
 
@@ -65,8 +107,12 @@ public class LoginPanel extends Observable {
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		});
+		};
+		
+		logInButton.setAction(logInAction);
 		logInButton.setSize(GUI.BUTTON_SIZE);
+		
+		userName.addActionListener(logInAction);
 		
 		JButton exitButton = new JButton(new AbstractAction("Exit") {
 
@@ -79,21 +125,18 @@ public class LoginPanel extends Observable {
 			}
 		});
 		exitButton.setSize(GUI.BUTTON_SIZE);
+		exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
-		JPanel input = new JPanel(new FlowLayout());
-		input.add(userName);
-		input.add(logInButton);
-		input.add(exitButton);
+		JPanel inputPanel = new JPanel(new FlowLayout());
+		inputPanel.setBackground(Color.GREEN);
+		inputPanel.add(userName);
+		inputPanel.add(logInButton);
+		inputPanel.add(exitButton);
 		
-		JPanel welcomeTitle = new JPanel(new FlowLayout());
-		welcomeTitle.add(welcome);
+		// Adding the inputPanel with all the content to the center panel.
+		centerPanel.add(inputPanel);
 		
-		JPanel sloganTitle = new JPanel(new FlowLayout());
-		sloganTitle.add(slogan);
-		
-		myPanel.add(welcomeTitle, BorderLayout.NORTH);
-		myPanel.add(sloganTitle, BorderLayout.CENTER);
-		myPanel.add(input, BorderLayout.SOUTH);
+		myPanel.add(centerPanel, BorderLayout.CENTER);
 	}
 	
 	public JPanel getPanel() {
