@@ -7,17 +7,21 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import model.User;
 import model.UserMap;
@@ -42,14 +46,35 @@ public class LoginPanel extends Observable {
 	}
 	
 	private void setup() {
+		
+		// The main panel in the center.
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBackground(Color.GREEN);
+		centerPanel.setBorder(BorderFactory.createTitledBorder("Urban Parks"));
+		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
+		centerPanel.setLayout(layout);
+		
+		
 		JLabel welcome = new JLabel("Welcome to Urban Parks");
 		welcome.setSize(GUI.JLABEL_SHORT_TEXT);
+		welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		JLabel slogan = new JLabel("Where you can sign up or create a"
-									+ " volunteering job"); 
+									+ " volunteering job", SwingConstants.CENTER); 
 		slogan.setSize(GUI.JLABEL_LONG_TEXT);
+		slogan.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		// Adding the labels to the center panel.
+		centerPanel.add(welcome);
+		centerPanel.add(slogan);
+		
+		
+		
 		JTextField userName = new JTextField("", 15);
 		
+		JButton logInButton = new JButton("LogIn");
 		Action logInAction = new AbstractAction("LogIn") {
+			
 			/** */
 			private static final long serialVersionUID = 1L;
 
@@ -68,7 +93,6 @@ public class LoginPanel extends Observable {
 			}
 		};
 		
-		JButton logInButton = new JButton("LogIn");
 		logInButton.setAction(logInAction);
 		logInButton.setSize(GUI.BUTTON_SIZE);
 		
@@ -85,21 +109,29 @@ public class LoginPanel extends Observable {
 			}
 		});
 		exitButton.setSize(GUI.BUTTON_SIZE);
+		exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
-		JPanel input = new JPanel(new FlowLayout());
-		input.add(userName);
-		input.add(logInButton);
-		input.add(exitButton);
+		JPanel inputPanel = new JPanel(new FlowLayout());
+		inputPanel.setBackground(Color.GREEN);
+		inputPanel.add(userName);
+		inputPanel.add(logInButton);
+		inputPanel.add(exitButton);
 		
-		JPanel welcomeTitle = new JPanel(new FlowLayout());
-		welcomeTitle.add(welcome);
+		// Adding the inputPanel with all the content to the center panel.
+		centerPanel.add(inputPanel);
 		
-		JPanel sloganTitle = new JPanel(new FlowLayout());
-		sloganTitle.add(slogan);
 		
-		myPanel.add(welcomeTitle, BorderLayout.NORTH);
-		myPanel.add(sloganTitle, BorderLayout.CENTER);
-		myPanel.add(input, BorderLayout.SOUTH);
+//		JPanel welcomeTitle = new JPanel(new FlowLayout());
+//		welcomeTitle.add(welcome);
+		
+//		JPanel sloganTitle = new JPanel(new FlowLayout());
+//		sloganTitle.add(slogan);
+		
+//		myPanel.add(welcomeTitle, BorderLayout.NORTH);
+//		myPanel.add(sloganTitle, BorderLayout.CENTER);
+//		myPanel.add(inputPanel, BorderLayout.SOUTH);
+		
+		myPanel.add(centerPanel, BorderLayout.CENTER);
 	}
 	
 	public JPanel getPanel() {
