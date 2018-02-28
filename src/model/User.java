@@ -98,13 +98,16 @@ public abstract class User implements Serializable {
 	 */
 	public List<Job> getJobList(final JobMap theJobList) {
 		if(theJobList == null) {
-			throw new IllegalArgumentException("The job collection cannot be null");
+			throw new IllegalArgumentException("The job collection cannot be null.");
 		}
 		List<Job> jobList = new ArrayList<>();
-		for (int jobID : myJobs) {
-			Job j = theJobList.getJob(jobID);
+		for (int i = 0; i < myJobs.size(); i++) {
+			Job j = theJobList.getJob(myJobs.get(i));
 			if (j != null) {
 				jobList.add(j);
+			} else {
+				myJobs.remove(i);
+				i--;
 			}
 		}
 		return jobList;

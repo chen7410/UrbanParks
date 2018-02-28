@@ -1,4 +1,4 @@
-package ui_volunteer;
+package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
-
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,19 +14,12 @@ import javax.swing.JPanel;
 import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
-/**
- * Panel for when a volunteer views the details of a job they want
- * to sign up for. It will notify Observers when a button is pressed.
- * 
- * @author Tuan Dinh
- * @version February 18, 2018
- */
-public class VolunteerSignUpDetailsPanel extends Observable {
-	
+
+public class UrbanParksStaffJobDetails extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
-	public VolunteerSignUpDetailsPanel(final Job theJob) {
+	public UrbanParksStaffJobDetails(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
@@ -39,7 +31,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 	}
 	
 	public String getPanelName() {
-		return "Sign Up";
+		return "Job Details";
 	}
 	
 	private void init() {
@@ -51,7 +43,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
 				GUI.BUTTON_GAP_WIDTH,
 				GUI.BUTTON_GAP_HEIGHT));
-		JButton backButton = new JButton(new AbstractAction("Back") {
+		JButton backButton = new JButton(new AbstractAction("Home") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -61,13 +53,13 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("back", 0));
+				notifyObservers(new ButtonSignal("home", 0));
 			}
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
 		
 		
-		JButton signupButton = new JButton(new AbstractAction("Sign up") {
+		JButton signupButton = new JButton(new AbstractAction("Back") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -77,7 +69,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("submit", myJob.getJobID()));
+				notifyObservers(new ButtonSignal("back", myJob.getJobID()));
 				
 			}
 		});
