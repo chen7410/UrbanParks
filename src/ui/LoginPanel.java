@@ -8,12 +8,17 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,19 +60,32 @@ public class LoginPanel extends Observable {
 		centerPanel.setLayout(layout);
 		
 		
-		JLabel welcome = new JLabel("Welcome to Urban Parks");
-		welcome.setSize(GUI.JLABEL_SHORT_TEXT);
-		welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JLabel welcomeLabel = new JLabel("Welcome to Urban Parks");
+		welcomeLabel.setFont(new Font(welcomeLabel.getName(), Font.PLAIN, 40));
+		
+		// Writing the code to underline the welcome label.
+		Font font = welcomeLabel.getFont();
+		Map attributes = font.getAttributes();
+		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		welcomeLabel.setFont(font.deriveFont(attributes));
+		
+		
+		welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JLabel slogan = new JLabel("Where you can sign up or create a"
-									+ " volunteering job", SwingConstants.CENTER); 
-		slogan.setSize(GUI.JLABEL_LONG_TEXT);
+									+ " volunteering job.", SwingConstants.CENTER); 
+		slogan.setFont(new Font(welcomeLabel.getName(), Font.PLAIN, 20));
+		
+		//slogan.setSize(GUI.JLABEL_LONG_TEXT);
 		slogan.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		// Adding the labels to the center panel.
-		centerPanel.add(welcome);
-		centerPanel.add(slogan);
 		
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		centerPanel.add(welcomeLabel);
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		centerPanel.add(slogan);
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		
 		
 		JTextField userName = new JTextField("", 15);
