@@ -384,15 +384,15 @@ public class GUI extends JFrame implements Observer {
 //	}
 
 	
-//	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
-//		remove(myCurrentPanel);
-//		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
-//				theJob, myParkManager.getJobList(myJobs));
-//		myCurrentPanel = submitConfirmationPanel.getPanel();
-//		submitConfirmationPanel.addObserver(this);
-//		add(myCurrentPanel, BorderLayout.CENTER);
-//		pack();
-//	}
+	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
+				theJob, myParkManager.getJobList(myJobs));
+		myCurrentPanel = submitConfirmationPanel.getPanel();
+		submitConfirmationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
 	
 	private void parkManagerHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("logout")) {
@@ -407,15 +407,15 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 	
-//	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
-//		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
-//			//TODO needs park manager add job method
-//		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("submit")) {
-//			myParkManager.createJob(theButton.getJob());
-//			myJobs.addJob(theButton.getJob());
-//			createParkManagerSubmitConfirmationPanel(theButton.getJob());
-//		}
-//	}
+	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
+		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
+			//TODO needs park manager add job method
+		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("submit")) {
+			myParkManager.createJob(theButton.getJob());
+			myJobs.addJob(theButton.getJob());
+			createParkManagerSubmitConfirmationPanel(theButton.getJob());
+		}
+	}
 	
 	private void parkManagerRemoveVerificationActions(final ButtonSignal theButton) {
 		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
