@@ -10,6 +10,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -107,9 +109,14 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		endDatePanel.add(myEndDateTf);
 		endDatePanel.add(endDateFormat);
 		
-		JPanel jobDescriptionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		jobDescriptionPanel.add(jobDescription);
-		jobDescriptionPanel.add(myJobDescriptionTa);
+		//text area
+		JPanel jobDescriptionPanel = new JPanel(new BorderLayout());
+		JScrollPane textAreaScrollPane = new JScrollPane(myJobDescriptionTa,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		//jlabel miss
+		jobDescriptionPanel.add(jobDescription, BorderLayout.NORTH);
+		jobDescriptionPanel.add(textAreaScrollPane, BorderLayout.CENTER);
 		
 		BoxLayout box = new BoxLayout(myCenterPanel, BoxLayout.Y_AXIS);
 		myCenterPanel.setLayout(box);
@@ -117,7 +124,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		myCenterPanel.add(endDatePanel);
 		myCenterPanel.add(parkNamePanel);
 		myCenterPanel.add(locationPanel);
-		myCenterPanel.add(jobDescriptionPanel);
+		myCenterPanel.add(textAreaScrollPane);
 		
 
 		//Button
