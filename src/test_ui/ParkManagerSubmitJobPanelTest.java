@@ -6,6 +6,7 @@ import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
 import model.Volunteer;
+import ui_park_manager.ParkManagerSubmitJobPanel;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
 import ui_volunteer.VolunteerViewAllUpCommingJobPanel;
 
@@ -15,7 +16,7 @@ import ui_volunteer.VolunteerViewAllUpCommingJobPanel;
  * @author Minqing Chen
  * @version February 17, 2018
  */
-public class ParkManagerViewAllUpCommingJobPanelTest {
+public class ParkManagerSubmitJobPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -23,7 +24,7 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
     private static JobMap myJobs;
     private static ParkManager myParkManager;
     
-    private static ParkManagerViewAllUpCommingJobPanel myUpCommingJobPanel;
+    private static ParkManagerSubmitJobPanel mySubmitJobPanel;
     
     
     public static void main(final String[] theArgs) {
@@ -35,13 +36,12 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
-		myUpCommingJobPanel = new ParkManagerViewAllUpCommingJobPanel(
-				myParkManager.getJobList(myJobs));
+		mySubmitJobPanel = new ParkManagerSubmitJobPanel(myParkManager);
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		
 		myFrame.setTitle("Urban Parks - Park Manager - " + myParkManager.getLastName());
-		myFrame.add(myUpCommingJobPanel.getPanel(), BorderLayout.CENTER);
+		myFrame.add(mySubmitJobPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	myFrame.setLocationRelativeTo(null);

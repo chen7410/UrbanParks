@@ -17,13 +17,17 @@ public class Staff extends User {
 
 	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * {@inheritDoc}}
+	 */
 	public Staff(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
 	}
 	
 	/**
 	 * Set the maximum pending jobs allowed by the system.
+	 * 
 	 * @param theMaxJobAmount
 	 * @param theJobmap
 	 * @throws IllegalArgumentException if theJobAmount <= 0 or theJobmap == null.
@@ -48,8 +52,8 @@ public class Staff extends User {
 	 * @param theJobMap List of all jobs in the system.
 	 * @return jobList A list of all the jobs within the period specified.
 	 * @throws IllegalArgumentException theStartDate or theEndDate or 
-	 * theJobMap == null; or if Start date after end date or 
-	 * End date before start date
+	 * 			theJobMap == null; or if Start date after end date or 
+	 * 			End date before start date
 	 */
 	public ArrayList<Job> getJobsInPeriod (final LocalDate theStartDate, 
 					final LocalDate theEndDate, final JobMap theJobMap) {
@@ -74,5 +78,4 @@ public class Staff extends User {
 		}
 		return theJobMap.getJobsInPeriod(theStartDate, theEndDate);
 	}
-
 }

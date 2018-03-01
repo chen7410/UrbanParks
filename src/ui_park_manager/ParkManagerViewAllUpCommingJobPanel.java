@@ -2,6 +2,7 @@ package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -55,7 +58,8 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 		topLabelPanel.add(topLabel);
 		
 		//radio button panel
-		JPanel radioPanel = new JPanel(new GridLayout(0,1));
+		JPanel radioPanel = new JPanel();
+		radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS));
 		radioPanel.setBackground(Color.WHITE);
 		radioPanel.setBorder(GUI.VOLUNTEER_SIGNUP_PANEL_BORDER);
 		
@@ -70,6 +74,7 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
+			radioPanel.add(Box.createRigidArea(new Dimension(5, 15)));
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);

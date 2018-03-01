@@ -1,21 +1,16 @@
 package test_ui;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+
 import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
-import model.Volunteer;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
-import ui_volunteer.VolunteerViewAllUpCommingJobPanel;
+import ui_staff.UrbanParksStaffViewJobPanel;
 
-/**
- * Tests for VolunteerSignUpPanel.
- * 
- * @author Minqing Chen
- * @version February 17, 2018
- */
-public class ParkManagerViewAllUpCommingJobPanelTest {
+public class UrbanParksStaffViewJobPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -23,7 +18,7 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
     private static JobMap myJobs;
     private static ParkManager myParkManager;
     
-    private static ParkManagerViewAllUpCommingJobPanel myUpCommingJobPanel;
+    private static UrbanParksStaffViewJobPanel myStaffViewJobPanel;
     
     
     public static void main(final String[] theArgs) {
@@ -35,13 +30,13 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
-		myUpCommingJobPanel = new ParkManagerViewAllUpCommingJobPanel(
+		myStaffViewJobPanel = new UrbanParksStaffViewJobPanel(
 				myParkManager.getJobList(myJobs));
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		
-		myFrame.setTitle("Urban Parks - Park Manager - " + myParkManager.getLastName());
-		myFrame.add(myUpCommingJobPanel.getPanel(), BorderLayout.CENTER);
+		myFrame.setTitle("Urban Parks - Staff - " + "Someone");
+		myFrame.add(myStaffViewJobPanel.getPanel(), BorderLayout.CENTER);
 		myFrame.pack();
     	myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	myFrame.setLocationRelativeTo(null);
