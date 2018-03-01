@@ -69,7 +69,7 @@ public class UrbanParksStaffJobDetails extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("back", myJob.getJobID()));
+				notifyObservers(new ButtonSignal("back", 0));
 				
 			}
 		});
