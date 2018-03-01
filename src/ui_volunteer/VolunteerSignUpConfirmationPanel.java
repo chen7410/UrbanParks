@@ -51,7 +51,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		setUp();
 	}
 
-	public void setUp() {
+	private void setUp() {
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		createButtons();
@@ -61,7 +61,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	/**
 	 * 
 	 */
-	public void createButtons() {
+	private void createButtons() {
 		JPanel buttonPanel = new JPanel(
 				new FlowLayout(FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 		
@@ -105,7 +105,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	/**
 	 * 
 	 */
-	public void createSignUpConfirmation() {
+	private void createSignUpConfirmation() {
 		JPanel jobConfirmationDetails = new JPanel(new GridLayout(0, 1));
 		jobConfirmationDetails.setBackground(Color.WHITE);
 		
@@ -116,7 +116,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		jobConfirmationDetails.add(confirmationLabel);
 		
 		//display the new sign up job
-		String detail = "    • " + myJob.getJobSummary();
+		String detail = "      " + myJob.getJobSummary();
 		JLabel jobDetailSummary = new JLabel(detail, JLabel.LEFT);
 		jobDetailSummary.setFont(new Font(null, Font.PLAIN, 15));
 		jobDetailSummary.setPreferredSize(GUI.JLABEL_LONG_TEXT);
@@ -124,8 +124,9 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 
 		JPanel jobScrollPanel = new JPanel(new GridLayout(0, 1));
 		jobScrollPanel.setBackground(Color.WHITE);
+		
 		for (Job job: myJobs) {
-			detail = "• " + job.getJobSummary();
+			detail = "  " + job.getJobSummary();
 			
 			JLabel jobLabel = new JLabel(detail, JLabel.LEFT);
 			jobLabel.setFont(new Font(null, Font.PLAIN, 15));
@@ -134,6 +135,8 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		}
 
 		Border lower = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		
+		
 		JScrollPane jobScrollPane = new JScrollPane(jobScrollPanel);
 		jobScrollPane.setBackground(Color.WHITE);
 		jobScrollPane.setBorder(BorderFactory.createTitledBorder(
