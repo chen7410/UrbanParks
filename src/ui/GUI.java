@@ -121,7 +121,7 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerSignUpConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(
-				myJobs.getJob(theJobID));
+				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -149,7 +149,7 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerCancellationConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(
-				myJobs.getJob(theJobID));
+				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -198,7 +198,7 @@ public class GUI extends JFrame implements Observer {
 		if (theSignal.getButtonName().toLowerCase().equals("home")) {
 			createVolunteerHomePanel();
 		} else {
-			createVolunteerViewAllUpCommingJobPanel();
+			createVolunteerSignUpPanel();
 		}
 	}
 
@@ -212,8 +212,10 @@ public class GUI extends JFrame implements Observer {
 
 	private void volunteerSignedUpDetailsPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("remove")) {
+			
 			myVolunteer.cancelJob(myJobs.getJob(theSignal.getJobID()));
 			createVolunteerCancellationConfirmationPanel(theSignal.getJobID());
+			
 		} else if (theSignal.getButtonName().toLowerCase().equals("back")) {
 			createVolunteerViewAllUpCommingJobPanel();
 		}
@@ -222,9 +224,10 @@ public class GUI extends JFrame implements Observer {
 	private void volunteerCancellationConfirmationPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("home")) {
 			createVolunteerHomePanel();
-		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
-			createVolunteerViewAllUpCommingJobPanel();
-		}
+		} 
+//		else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
+//			createVolunteerViewAllUpCommingJobPanel();
+//		}
 	}
 
 	private void volunteerPanelsCases(final Observable theObservable, final Object theMessage) {

@@ -117,7 +117,8 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerSignUpConfirmationPanel(final int theJobID) {
 			remove(myCurrentPanel);
-			VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(myJobs.getJob(theJobID));
+			VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(myJobs.getJob(theJobID), 
+					myVolunteer.getJobList(myJobs));
 			myCurrentPanel = confirmationPanel.getPanel();
 			confirmationPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
@@ -144,7 +145,8 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerCancellationConfirmationPanel(final int theJobID) {
 			remove(myCurrentPanel);
-			VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(myJobs.getJob(theJobID));
+			VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(
+					myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
 			myCurrentPanel = confirmationPanel.getPanel();
 			confirmationPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);

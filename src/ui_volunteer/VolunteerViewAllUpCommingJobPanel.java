@@ -88,11 +88,13 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 
 		//radio button scroll pane
 		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		
 		JScrollPane radioScrollPane = new JScrollPane(radioPanel);
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
+		
 		if (size != 0) {
 			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		} else {
