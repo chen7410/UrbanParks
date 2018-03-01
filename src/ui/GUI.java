@@ -28,6 +28,7 @@ import ui_park_manager.ParkManagerHomePanel;
 import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
+import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
 import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
@@ -110,6 +111,9 @@ public class GUI extends JFrame implements Observer {
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
+	
+	/**************************Volunteer*******************************/
+
 
 	private void createVolunteerHomePanel() {
 		remove(myCurrentPanel);
@@ -341,6 +345,16 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
+	private void createParkMaagerUnsubmitConfirmationPanel(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
+				theJob, myParkManager.getJobList(myJobs));
+		myCurrentPanel = submitConfirmationPanel.getPanel();
+		submitConfirmationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
 	private void parkManagerHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("logout")) {
 			remove(myCurrentPanel);
@@ -362,12 +376,18 @@ public class GUI extends JFrame implements Observer {
 		
 	}
 	
-	private void parkManagerSubmitConfirmationActions(final ButtonSignal theButton) {
-		
+	private void parkManagerSubmitConfirmationActions(final ButtonSignal theButtonSignal) {
+		if (theButtonSignal.getButtonName().toLowerCase().equals("home")) {
+			createParkManagerHomePanel();
+		} else {
+			
+		}
 	}
 	
-	private void parkManagerUnsubmitConfirmationActions(final ButtonSignal theButton) {
-		
+	private void parkManagerUnsubmitConfirmationActions(final ButtonSignal theButtonSignal) {
+		if (theButtonSignal.getButtonName().toLowerCase().equals("home")) {
+			createParkManagerHomePanel();
+		}
 	}
 
 	private void parkManagerPanelsCases(final Observable theObservable, final Object theMessage) {
