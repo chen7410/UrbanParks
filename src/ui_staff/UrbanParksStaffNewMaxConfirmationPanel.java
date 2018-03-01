@@ -65,9 +65,9 @@ public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {
 		confirmationLabel.setFont(new Font(null, Font.BOLD, 20));
 		confirmationPanel.add(confirmationLabel);
 		
-		JLabel newNumLabel = new JLabel("The new number of pending jobs is " + 
+		JLabel newNumLabel = new JLabel("The new number of Maxiumum of pending jobs: " + 
 				myJobs.getMaxJobAmount());
-		newNumLabel.setFont(new Font(null, Font.BOLD, 20));
+		newNumLabel.setFont(new Font(null, Font.PLAIN, 20));
 		confirmationPanel.add(newNumLabel);
 		
 		

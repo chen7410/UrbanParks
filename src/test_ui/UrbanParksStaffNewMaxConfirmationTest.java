@@ -9,7 +9,7 @@ import model.UserMap;
 import ui_staff.UrbanParksStaffChangeMaxJobAmountPanel;
 import ui_staff.UrbanParksStaffNewMaxConfirmationPanel;
 
-public class StaffNewMaxConfirmationTest {
+public class UrbanParksStaffNewMaxConfirmationTest {
 	
 	
 	/** The main window. */
@@ -38,6 +38,4 @@ public class StaffNewMaxConfirmationTest {
         myFrame.setVisible(true);
     	
     }
-
-
 }

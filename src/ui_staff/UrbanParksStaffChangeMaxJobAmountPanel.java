@@ -65,6 +65,8 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	private void createChangeNumberPanel() {
 		JPanel changeNumberPanel = new JPanel(new GridLayout(0, 1));
 		changeNumberPanel.setBackground(Color.WHITE);
+		
+		
 		JLabel currentMaxLabel = new JLabel("Current number of maximum pending jobs: "
 				+ myCurrentNumOfPendingJobs);
 		currentMaxLabel.setFont(new Font(null, Font.BOLD, 20));
