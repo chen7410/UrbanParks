@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -55,7 +56,8 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		topLabelPanel.add(topLabel);
 		
 		//radio button panel
-		JPanel radioPanel = new JPanel(new GridLayout(0,1));
+		JPanel radioPanel = new JPanel();
+		radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.Y_AXIS));
 		radioPanel.setBackground(Color.WHITE);
 		radioPanel.setBorder(GUI.VOLUNTEER_SIGNUP_PANEL_BORDER);
 		

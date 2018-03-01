@@ -77,6 +77,7 @@ public class GUI extends JFrame implements Observer {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		//setResizable(true);
 	}
 
 	private void init() {
@@ -267,15 +268,25 @@ public class GUI extends JFrame implements Observer {
 	
 	/**************************Park Manager*******************************/
 	
-	/*
+	
 	private void ParkManagerSignUpPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			createVolunteerSignUpDetailsPanel(theSignal.getJobID());
+			//createVolunteerSignUpDetailsPanel(theSignal.getJobID());
 		} else if(theSignal.getButtonName().toLowerCase().equals("home")){
-			createVolunteerHomePanel();
+			//createVolunteerHomePanel();
 		}
 	}
-	*/
+	
+	
+	private void parkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			//createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
+			System.out.println("create Park manager job detail panel.");
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			//createVolunteerHomePanel();
+			System.out.println("back to park manager home.");
+		}
+	}
 	
 	private void createParkManagerRemoveVerification(final Job theJob) {
 		remove(myCurrentPanel);
@@ -295,15 +306,6 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-	private void parkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
-		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			//createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
-			System.out.println("create Park manager job detail panel.");
-		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
-			//createVolunteerHomePanel();
-			System.out.println("back to park manager home.");
-		}
-	}
 	
 	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
 		

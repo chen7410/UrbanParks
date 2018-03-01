@@ -191,8 +191,8 @@ public class Job implements Serializable, Comparable<Job> {
 	/**
 	 * Check if the job is not more than the max days.
 	 * 
-	 * @return true if theJob is within the maximum number of pending jobs in
-	 *         the system false otherwise.
+	 * @return true if theJob is within Job.MAX_JOB_LENGTH inclusive,
+	 * 		 false otherwise.
 	 */
 	public boolean isJobWithinMaxDays() {
 		boolean withinMaxDays = true;
