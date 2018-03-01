@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import ui_staff.StaffHomePanel;
+import ui_staff.UrbanParksStaffHomePanel;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class UrbanParksStaffHomePanelTest {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
 		
-		StaffHomePanel currentPanel = new StaffHomePanel(); 
+		UrbanParksStaffHomePanel currentPanel = new UrbanParksStaffHomePanel(); 
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		
