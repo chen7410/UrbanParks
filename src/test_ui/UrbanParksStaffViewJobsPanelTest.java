@@ -29,8 +29,9 @@ public class UrbanParksStaffViewJobsPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
-		myStaffViewJobPanel = new StaffViewJobsPanel(
-				myParkManager.getJobList(myJobs), "03/03", "04/04");
+//		LocalDate startDate = new 
+//		myStaffViewJobPanel = new StaffViewJobsPanel(
+//				myParkManager.getJobList(myJobs), "03/03/18", "04/04");
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		

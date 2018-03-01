@@ -41,15 +41,15 @@ import ui.GUI;
 public class StaffViewJobsPanel extends Observable {
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	private String myStartDate;
-	private String myEndDate;
+	private LocalDate myStartDate;
+	private LocalDate myEndDate;
 	private int mySelectedJobID;
 
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
 	public StaffViewJobsPanel(final List<Job> theJobList, 
-			final String theStartDate, final String theEndDate) {
+			final LocalDate theStartDate, final LocalDate theEndDate) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
 		myStartDate = theStartDate;
@@ -115,7 +115,9 @@ public class StaffViewJobsPanel extends Observable {
 		if (size != 0) {
 			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		} else {
-			radioPanel.add(new JLabel("No jobs between: " + myStartDate + " - " + myEndDate));
+			radioPanel.add(new JLabel("No jobs between: " + 
+					myStartDate.format(GUI.DATE_FORMATTER) + 
+					" - " + myEndDate.format(GUI.DATE_FORMATTER)));
 			myPanel.add(radioPanel, BorderLayout.CENTER);
 		}
 		
