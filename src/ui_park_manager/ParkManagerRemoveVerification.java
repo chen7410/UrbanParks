@@ -61,7 +61,7 @@ public class ParkManagerRemoveVerification extends Observable {
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
 		
 		
-		JButton signupButton = new JButton(new AbstractAction("Submit") {
+		JButton removeButton = new JButton(new AbstractAction("Remove") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -71,13 +71,15 @@ public class ParkManagerRemoveVerification extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("submit", myJob.getJobID()));
-				
+				notifyObservers(new ButtonSignal("remove", myJob));
 			}
 		});
-		signupButton.setPreferredSize(GUI.BUTTON_SIZE);
+		if (!myJob.isJobRemovable()) {
+			removeButton.setEnabled(false);
+		}
+		removeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
-		buttonsPanel.add(signupButton);
+		buttonsPanel.add(removeButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
