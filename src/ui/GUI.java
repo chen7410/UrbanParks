@@ -26,6 +26,7 @@ import model.UserMap;
 import model.Volunteer;
 import ui_park_manager.ParkManagerHomePanel;
 import ui_park_manager.ParkManagerRemoveVerification;
+import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
@@ -48,8 +49,8 @@ public class GUI extends JFrame implements Observer {
 	public static final Dimension PANEL_SIZE = new Dimension(800, 600);
 
 	/** The size of all buttons. */
-	public static final Dimension BUTTON_SIZE = new Dimension(150, 40);
-
+	public static final Dimension BUTTON_SIZE = new Dimension(170, 40);
+	
 	/** The size for label with short text */
 	public static final Dimension JLABEL_SHORT_TEXT = new Dimension(750, 30);
 
@@ -330,6 +331,16 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
+	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
+				theJob, myParkManager.getJobList(myJobs));
+		myCurrentPanel = submitConfirmationPanel.getPanel();
+		submitConfirmationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
 	private void parkManagerHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("logout")) {
 			remove(myCurrentPanel);
@@ -348,6 +359,14 @@ public class GUI extends JFrame implements Observer {
 	}
 	
 	private void parkManagerRemoveVerificationActions(final ButtonSignal theButton) {
+		
+	}
+	
+	private void parkManagerSubmitConfirmationActions(final ButtonSignal theButton) {
+		
+	}
+	
+	private void parkManagerUnsubmitConfirmationActions(final ButtonSignal theButton) {
 		
 	}
 

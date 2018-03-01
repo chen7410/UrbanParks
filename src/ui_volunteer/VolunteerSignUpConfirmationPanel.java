@@ -32,7 +32,7 @@ import ui.GUI;
  * This panel is used to confirm a volunteer that they have signed up for a job
  * successfully. It will notify observers when a button is pressed.
  * 
- * @author Hasnah Said
+ * @author Group 7
  * @version February 18, 2018
  */
 
@@ -41,7 +41,12 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	private List<Job> myJobs;
-
+	
+	/**
+	 * 
+	 * @param theJob
+	 * @param theVolunteerJobList
+	 */
 	public VolunteerSignUpConfirmationPanel(final Job theJob,
 			final List<Job> theVolunteerJobList) {
 		myPanel = new JPanel(new BorderLayout());
@@ -58,9 +63,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		createSignUpConfirmation();
 	}
 
-	/**
-	 * 
-	 */
+
 	private void createButtons() {
 		JPanel buttonPanel = new JPanel(
 				new FlowLayout(FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
@@ -83,9 +86,6 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		
 		JButton signupAgainButton = new JButton(new AbstractAction("Sign up for another job") {
 
-			/**
-			 * Default serial number.
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -93,30 +93,24 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 				setChanged();
 				notifyObservers(new ButtonSignal("signup", 0));
 			}});
-		signupAgainButton.setPreferredSize(new Dimension(170, 50));
+		signupAgainButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(signupAgainButton);
 		
-		//add button panel to myPanel
 		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
-	
-	/**
-	 * 
-	 */
+
 	private void createSignUpConfirmation() {
 		JPanel jobConfirmationDetails = new JPanel(new GridLayout(0, 1));
 		jobConfirmationDetails.setBackground(Color.WHITE);
 		
-		//confirmaiton message
 		JLabel confirmationLabel = new JLabel(
 				" You have successfully signed up for:");
 		confirmationLabel.setFont(new Font(null, Font.BOLD, 30));
 		jobConfirmationDetails.add(confirmationLabel);
 		
-		//display the new sign up job
-		String detail = "      " + myJob.getJobSummary();
+				String detail = "      " + myJob.getJobSummary();
 		JLabel jobDetailSummary = new JLabel(detail, JLabel.LEFT);
 		jobDetailSummary.setFont(new Font(null, Font.PLAIN, 15));
 		jobDetailSummary.setPreferredSize(GUI.JLABEL_LONG_TEXT);
