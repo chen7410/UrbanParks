@@ -69,8 +69,7 @@ public class ParkManagerSubmitVerification extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("submit", myJob.getJobID()));
-				
+				notifyObservers(new ButtonSignal("submit", myJob));
 			}
 		});
 		signupButton.setPreferredSize(GUI.BUTTON_SIZE);

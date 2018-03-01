@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -122,6 +123,20 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
+	private void loginPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("login")) {
+			User user = theSignal.getUser();
+			if (user instanceof Volunteer) {
+				myVolunteer = (Volunteer) user;
+				createVolunteerHomePanel();
+			} else if(user instanceof ParkManager) {
+				myParkManager = (ParkManager) user;
+			} else if (user instanceof Staff) {
+				myStaff = (Staff) user;
+			}
+		}
+	}
+	
 	/**************************Volunteer*******************************/
 
 
@@ -189,22 +204,6 @@ public class GUI extends JFrame implements Observer {
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
-	}
-	
-	private void loginPanelActions(final ButtonSignal theSignal) {
-		if (theSignal.getButtonName().toLowerCase().equals("login")) {
-			User user = theSignal.getUser();
-			if (user instanceof Volunteer) {
-				myVolunteer = (Volunteer) user;
-				createVolunteerHomePanel();
-			} else if(user instanceof ParkManager) {
-				myParkManager = (ParkManager) user;
-				//create park manager home panel
-			} else if (user instanceof Staff) {
-				myStaff = (Staff) user;
-				//create staff home panel
-			}
-		}
 	}
 
 	private void volunteerHomePanelActions(final ButtonSignal theSignal) {
@@ -383,6 +382,17 @@ public class GUI extends JFrame implements Observer {
 //		add(myCurrentPanel, BorderLayout.CENTER);
 //		pack();
 //	}
+
+	
+//	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
+//		remove(myCurrentPanel);
+//		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
+//				theJob, myParkManager.getJobList(myJobs));
+//		myCurrentPanel = submitConfirmationPanel.getPanel();
+//		submitConfirmationPanel.addObserver(this);
+//		add(myCurrentPanel, BorderLayout.CENTER);
+//		pack();
+//	}
 	
 	private void parkManagerHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("logout")) {
@@ -397,12 +407,24 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 	
-	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
-		
-	}
+//	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
+//		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
+//			//TODO needs park manager add job method
+//		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("submit")) {
+//			myParkManager.createJob(theButton.getJob());
+//			myJobs.addJob(theButton.getJob());
+//			createParkManagerSubmitConfirmationPanel(theButton.getJob());
+//		}
+//	}
 	
 	private void parkManagerRemoveVerificationActions(final ButtonSignal theButton) {
-		
+		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
+			//TODO needs park manager view jobs method
+		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("remove")) {
+			myParkManager.removeJob(theButton.getJob());
+			myJobs.remove(theButton.getJob());
+			createParkManagerUnsubmitConfirmationPanel(myJobs.getJob(theButton.getJobID()));
+		}
 	}
 	
 	private void parkManagerSubmitConfirmationActions(final ButtonSignal theButtonSignal) {
@@ -480,7 +502,11 @@ public class GUI extends JFrame implements Observer {
 	}
 	
 	private void urbanParksStaffJobDetailsActions(final ButtonSignal theButton) {
-		
+		if (theButton.getButtonName().toLowerCase(Locale.US).equals("home")) {
+			createUrbanParksStaffHomePanel();
+		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
+			//TODO needs search result method
+		}
 	}
 	
 	private void urbanParksStaffChangePendingNumberPanel(final ButtonSignal theSignal) {

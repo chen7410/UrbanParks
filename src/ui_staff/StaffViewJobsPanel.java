@@ -38,7 +38,7 @@ import ui.GUI;
  * @version February 28, 2018
  */
 
-public class StaffViewJobsPanel extends Observable{
+public class StaffViewJobsPanel extends Observable {
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
 	private String myStartDate;
