@@ -370,33 +370,23 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-//	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
-//		remove(myCurrentPanel);
-//		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
-//				theJob, myParkManager.getJobList(myJobs));
-//		myCurrentPanel = submitConfirmationPanel.getPanel();
-//		submitConfirmationPanel.addObserver(this);
-//		add(myCurrentPanel, BorderLayout.CENTER);
-//		pack();
-//	}
-//	
-//	private void createParkMaagerUnsubmitConfirmationPanel(final Job theJob) {
-//		remove(myCurrentPanel);
-//		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
-//				theJob, myParkManager.getJobList(myJobs));
-//		myCurrentPanel = submitConfirmationPanel.getPanel();
-//		submitConfirmationPanel.addObserver(this);
-//		add(myCurrentPanel, BorderLayout.CENTER);
-//		pack();
-//	}
+	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
+				theJob, myParkManager.getJobList(myJobs));
+		myCurrentPanel = submitConfirmationPanel.getPanel();
+		submitConfirmationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
 
 	
 	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
-		ParkManagerUnsubmitConfirmationPanel submitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
+		ParkManagerUnsubmitConfirmationPanel unSubmitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
 				theJob, myParkManager.getJobList(myJobs));
-		myCurrentPanel = submitConfirmationPanel.getPanel();
-		submitConfirmationPanel.addObserver(this);
+		myCurrentPanel = unSubmitConfirmationPanel.getPanel();
+		unSubmitConfirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
@@ -438,7 +428,7 @@ public class GUI extends JFrame implements Observer {
 		if (theButtonSignal.getButtonName().toLowerCase().equals("home")) {
 			createParkManagerHomePanel();
 		} else {
-			
+			createParkManagerSubmitJobPanel();
 		}
 	}
 	
@@ -504,7 +494,7 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-	private void createUrbanParksStaffChangeMaxJobAmount() {
+	private void createUrbanParksStaffChangeMaxJobAmountPanel() {
 		remove(myCurrentPanel);
 		UrbanParksStaffChangeMaxJobAmountPanel changePanel = new 
 				UrbanParksStaffChangeMaxJobAmountPanel(myJobs);
