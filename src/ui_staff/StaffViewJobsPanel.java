@@ -1,13 +1,18 @@
-package ui_park_manager;
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
+package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Observable;
+
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -18,36 +23,44 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+
 import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
+
 /**
- * A JPanal that showing all upcoming jobs for a park manager.
- * @author Group 7
- * @version February 17, 2018
+ * A JPanal for Urban parks staff to view all jobs between certain dates.
+ * 
+ * @author  Group 7
+ * @version February 28, 2018
  */
-public class ParkManagerViewAllUpCommingJobPanel extends Observable {
- 
+
+public class StaffViewJobsPanel extends Observable {
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	/**The job ID of the corresponding job of radio button. */
+	private LocalDate myStartDate;
+	private LocalDate myEndDate;
 	private int mySelectedJobID;
 
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public ParkManagerViewAllUpCommingJobPanel(final List<Job> theJobList) {
+	public StaffViewJobsPanel(final List<Job> theJobList, 
+			final LocalDate theStartDate, final LocalDate theEndDate) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
+		myStartDate = theStartDate;
+		myEndDate = theEndDate;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
 	/**
-	 * Set up this ParkManagerViewAllUpCommingJobPanel.
+	 * Set up this UrbanParksStaffViewJobsPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -66,6 +79,7 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
+		//int size = 0;
 		for (int i = 0; i < size; i++) {
 
 			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
@@ -91,17 +105,22 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 
 		//radio button scroll pane
 		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		
 		JScrollPane radioScrollPane = new JScrollPane(radioPanel);
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
+		
 		if (size != 0) {
 			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		} else {
-			radioPanel.add(new JLabel("No upcomming jobs."));
+			radioPanel.add(new JLabel("No jobs between: " + 
+					myStartDate.format(GUI.DATE_FORMATTER) + 
+					" - " + myEndDate.format(GUI.DATE_FORMATTER)));
 			myPanel.add(radioPanel, BorderLayout.CENTER);
 		}
+		
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
@@ -110,7 +129,7 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 	 * @return return a label.
 	 */
 	private JLabel makeTopJlabel() {
-		JLabel topLabel = new JLabel("All Upcomming Jobs");
+		JLabel topLabel = new JLabel("Between: " + myStartDate + " - " + myEndDate);
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
@@ -185,11 +204,9 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 	}
 
 	/**
-	 * @return a ParkManagerViewAllUpCommingJobPanel.
+	 * @return a UrbanParksStaffViewJobPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}
-
-
 }

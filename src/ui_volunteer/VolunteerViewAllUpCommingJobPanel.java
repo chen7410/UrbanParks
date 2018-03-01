@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Observable;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -73,6 +74,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
+			radioPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);

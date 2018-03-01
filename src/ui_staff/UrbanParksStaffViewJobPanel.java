@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Observable;
 
@@ -43,7 +44,8 @@ public class UrbanParksStaffViewJobPanel extends Observable{
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public UrbanParksStaffViewJobPanel(final List<Job> theJobList) {
+	public UrbanParksStaffViewJobPanel(final List<Job> theJobList, 
+			final LocalDate theStartDate, final LocalDate theEndDate) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);

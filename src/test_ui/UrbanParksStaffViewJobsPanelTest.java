@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
-import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
-import ui_staff.UrbanParksStaffViewJobPanel;
+import ui_staff.StaffViewJobsPanel;
 
-public class UrbanParksStaffViewJobPanelTest {
+public class UrbanParksStaffViewJobsPanelTest {
 	/** The main window. */
     private static JFrame myFrame;
     
@@ -18,7 +17,7 @@ public class UrbanParksStaffViewJobPanelTest {
     private static JobMap myJobs;
     private static ParkManager myParkManager;
     
-    private static UrbanParksStaffViewJobPanel myStaffViewJobPanel;
+    private static StaffViewJobsPanel myStaffViewJobPanel;
     
     
     public static void main(final String[] theArgs) {
@@ -30,8 +29,9 @@ public class UrbanParksStaffViewJobPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
-		myStaffViewJobPanel = new UrbanParksStaffViewJobPanel(
-				myParkManager.getJobList(myJobs));
+//		LocalDate startDate = new 
+//		myStaffViewJobPanel = new StaffViewJobsPanel(
+//				myParkManager.getJobList(myJobs), "03/03/18", "04/04");
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		
