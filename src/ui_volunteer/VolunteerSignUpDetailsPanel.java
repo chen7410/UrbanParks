@@ -38,6 +38,10 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 		return myPanel;
 	}
 	
+	public String getPanelName() {
+		return "Sign Up";
+	}
+	
 	private void init() {
 		createButton();
 		createJobDetails();
@@ -87,8 +91,11 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 	private void createJobDetails() {
 		JPanel jobDetailsPanel = new JPanel(new GridLayout(0, 1));
 		JLabel l = new JLabel("Job Details");
+		
 		l.setFont(new Font(null, Font.BOLD, 30));
 		jobDetailsPanel.add(l);
+		
+		
 		for (String detail : myJob.getJobDetailsList()) {
 			String formattedDetail = "<html><span style=\"font-weight:bold;font-size:15px;\">" 
 					+ detail.split(":")[0] + ": </span>"+ detail.split(":")[1] + "</html>";	
@@ -96,6 +103,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 			label.setPreferredSize(GUI.JLABEL_LONG_TEXT);
 			jobDetailsPanel.add(label);
 		}
+		
 		JPanel cover0 = new JPanel(new BorderLayout());
 		cover0.add(jobDetailsPanel, BorderLayout.EAST);
 		JPanel cover1 = new JPanel(new BorderLayout());

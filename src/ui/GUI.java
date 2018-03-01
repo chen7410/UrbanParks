@@ -14,9 +14,14 @@ import javax.swing.border.EmptyBorder;
 
 import model.Job;
 import model.JobMap;
+import model.ParkManager;
+import model.Staff;
 import model.User;
 import model.UserMap;
 import model.Volunteer;
+import ui_park_manager.ParkManagerRemoveVerification;
+import ui_park_manager.ParkManagerSubmitVerification;
+import ui_staff.UrbanParksStaffJobDetails;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
 import ui_volunteer.VolunteerHomePanel;
 import ui_volunteer.VolunteerSignUpConfirmationPanel;
@@ -56,15 +61,15 @@ public class GUI extends JFrame implements Observer {
 	/** The background color. */
 	public static final Color VOLUNTEER_PANELS_BGCOLOR = new Color(153, 217, 234);
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	private UserMap myUsers;
 	private JobMap myJobs;
 	private Volunteer myVolunteer;
+	private ParkManager myParkManager;
+	private Staff myStaff;
 	private JPanel myCurrentPanel;
-
+	
 	public GUI() {
 		super("Urban Parks");
 		init();
@@ -83,6 +88,7 @@ public class GUI extends JFrame implements Observer {
 	}
 
 	private void createLoginPanel() {
+		setTitle("Urban Parks - Log In");
 		LoginPanel loginPanel = new LoginPanel(myUsers);
 		myCurrentPanel = loginPanel.getPanel();
 		loginPanel.addObserver(this);
@@ -121,7 +127,7 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerSignUpConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(
-				myJobs.getJob(theJobID));
+				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -149,19 +155,25 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerCancellationConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(
-				myJobs.getJob(theJobID));
+				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
-
+	
 	private void loginPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("login")) {
 			User user = theSignal.getUser();
 			if (user instanceof Volunteer) {
 				myVolunteer = (Volunteer) user;
 				createVolunteerHomePanel();
+			} else if(user instanceof ParkManager) {
+				myParkManager = (ParkManager) user;
+				//create park manager home panel
+			} else if (user instanceof Staff) {
+				myStaff = (Staff) user;
+				//create staff home panel
 			}
 		}
 	}
@@ -200,7 +212,7 @@ public class GUI extends JFrame implements Observer {
 		if (theSignal.getButtonName().toLowerCase().equals("home")) {
 			createVolunteerHomePanel();
 		} else {
-			createVolunteerViewAllUpCommingJobPanel();
+			createVolunteerSignUpPanel();
 		}
 	}
 
@@ -214,8 +226,10 @@ public class GUI extends JFrame implements Observer {
 
 	private void volunteerSignedUpDetailsPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("remove")) {
+			
 			myVolunteer.cancelJob(myJobs.getJob(theSignal.getJobID()));
 			createVolunteerCancellationConfirmationPanel(theSignal.getJobID());
+			
 		} else if (theSignal.getButtonName().toLowerCase().equals("back")) {
 			createVolunteerViewAllUpCommingJobPanel();
 		}
@@ -224,29 +238,30 @@ public class GUI extends JFrame implements Observer {
 	private void volunteerCancellationConfirmationPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("home")) {
 			createVolunteerHomePanel();
-		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
-			createVolunteerViewAllUpCommingJobPanel();
-		}
+		} 
+//		else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
+//			createVolunteerViewAllUpCommingJobPanel();
+//		}
 	}
 
 	private void volunteerPanelsCases(final Observable theObservable, final Object theMessage) {
-		ButtonSignal signal = (ButtonSignal) theMessage;
+		ButtonSignal button = (ButtonSignal) theMessage;
 		if (theObservable instanceof LoginPanel) {
-			loginPanelActions(signal);
+			loginPanelActions(button);
 		} else if (theObservable instanceof VolunteerHomePanel) {
-			volunteerHomePanelActions(signal);
+			volunteerHomePanelActions(button);
 		} else if (theObservable instanceof VolunteerSignUpPanel) {
-			volunteerSignUpPanelActions(signal);
+			volunteerSignUpPanelActions(button);
 		} else if (theObservable instanceof VolunteerSignUpDetailsPanel) {
-			volunteerSignUpDetailsPanelActions(signal);
+			volunteerSignUpDetailsPanelActions(button);
 		} else if (theObservable instanceof VolunteerSignUpConfirmationPanel) {
-			volunteerSignUpConfirmationPanelActions(signal);
+			volunteerSignUpConfirmationPanelActions(button);
 		} else if (theObservable instanceof VolunteerViewAllUpCommingJobPanel) {
-			volunteerViewAllUpCommingJobPanelActions(signal);
+			volunteerViewAllUpCommingJobPanelActions(button);
 		} else if (theObservable instanceof VolunteerSignedUpDetailsPanel) {
-			volunteerSignedUpDetailsPanelActions(signal);
+			volunteerSignedUpDetailsPanelActions(button);
 		} else if (theObservable instanceof VolunteerCancellationConfirmationPanel) {
-			volunteerCancellationConfirmationPanelActions(signal);
+			volunteerCancellationConfirmationPanelActions(button);
 		}
 	}
 
@@ -264,7 +279,25 @@ public class GUI extends JFrame implements Observer {
 	}
 	*/
 	
-	private void ParkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
+	private void createParkManagerRemoveVerification(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerRemoveVerification verificationPanel = new ParkManagerRemoveVerification(theJob);
+		myCurrentPanel = verificationPanel.getPanel();
+		verificationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
+	private void createParkManagerSubmitVerification(final Job theJob) {
+		remove(myCurrentPanel);
+		ParkManagerSubmitVerification verificationPanel = new ParkManagerSubmitVerification(theJob);
+		myCurrentPanel = verificationPanel.getPanel();
+		verificationPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
+	private void parkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
 			//createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
 			System.out.println("create Park manager job detail panel.");
@@ -274,21 +307,50 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 	
+	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	private void parkManagerPanelsCases(final Observable theObservable, final Object theMessage) {
-
+	private void parkManagerRemoveVerificationActions(final ButtonSignal theButton) {
+		
 	}
 
+	private void parkManagerPanelsCases(final Observable theObservable, final Object theMessage) {
+		ButtonSignal button = (ButtonSignal) theMessage;
+		if (theObservable instanceof ParkManagerSubmitVerification) {
+			parkManagerSubmitVerificationActions(button);
+		} else if (theObservable instanceof ParkManagerRemoveVerification) {
+			parkManagerRemoveVerificationActions(button);
+		}
+	}
+	
+	/**************************Staff*******************************/
+	
+	private void createUrbanParksStaffJobDetails(final int theJobID) {
+		remove(myCurrentPanel);
+		UrbanParksStaffJobDetails detailsPanel = new UrbanParksStaffJobDetails(myJobs.getJob(theJobID));
+		myCurrentPanel = detailsPanel.getPanel();
+		detailsPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
+	private void urbanParksStaffJobDetailsActions(final ButtonSignal theButton) {
+		
+	}
+	
+	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
+		ButtonSignal button = (ButtonSignal) theMessage;
+		if (theObservable instanceof UrbanParksStaffJobDetails) {
+			urbanParksStaffJobDetailsActions(button);
+		}
+	}
+	
 	@Override
 	public void update(final Observable theObservable, final Object theMessage) {
 		volunteerPanelsCases(theObservable, theMessage);
 		parkManagerPanelsCases(theObservable, theMessage);
+		staffPanelsCases(theObservable, theMessage);
 	}
 
 }

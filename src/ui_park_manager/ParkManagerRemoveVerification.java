@@ -1,4 +1,4 @@
-package ui_volunteer;
+package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,27 +7,21 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
+
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
-/**
- * Panel for when a volunteer views the details of a job they have
- * signed up for. It will notify Observers when a button is pressed.
- * 
- * @author Tuan Dinh
- * @version February 18, 2018
- */
-public class VolunteerSignedUpDetailsPanel extends Observable {
-	
+public class ParkManagerRemoveVerification extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
-	public VolunteerSignedUpDetailsPanel(final Job theJob) {
+	public ParkManagerRemoveVerification(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
@@ -39,7 +33,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 	}
 	
 	public String getPanelName() {
-		return "Job Details";
+		return "Remove A Job";
 	}
 	
 	private void init() {
@@ -65,7 +59,9 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			}
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
-		JButton removeButton = new JButton(new AbstractAction("Remove") {
+		
+		
+		JButton signupButton = new JButton(new AbstractAction("Submit") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -75,16 +71,13 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("remove", myJob.getJobID()));
+				notifyObservers(new ButtonSignal("submit", myJob.getJobID()));
 				
 			}
 		});
-		if (!myJob.isJobRemovable()) {
-			removeButton.setEnabled(false);
-		}
-		removeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		signupButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
-		buttonsPanel.add(removeButton);
+		buttonsPanel.add(signupButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}

@@ -133,7 +133,7 @@ public class VolunteerHomePanel extends Observable {
 		
 		
 		// Buttons to go on the buttonPanel.
-		JButton signUpButton = new JButton(new AbstractAction("SignUp") {
+		JButton signUpButton = new JButton(new AbstractAction("Sign up") {
 
 			/** */
 			private static final long serialVersionUID = 1L;

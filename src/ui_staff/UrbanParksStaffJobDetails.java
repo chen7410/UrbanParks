@@ -1,4 +1,4 @@
-package ui_volunteer;
+package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,19 +15,11 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
-/**
- * Panel for when a volunteer views the details of a job they have
- * signed up for. It will notify Observers when a button is pressed.
- * 
- * @author Tuan Dinh
- * @version February 18, 2018
- */
-public class VolunteerSignedUpDetailsPanel extends Observable {
-	
+public class UrbanParksStaffJobDetails extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
-	public VolunteerSignedUpDetailsPanel(final Job theJob) {
+	public UrbanParksStaffJobDetails(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
@@ -51,7 +43,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
 				GUI.BUTTON_GAP_WIDTH,
 				GUI.BUTTON_GAP_HEIGHT));
-		JButton backButton = new JButton(new AbstractAction("Back") {
+		JButton backButton = new JButton(new AbstractAction("Home") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -61,11 +53,13 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("back", 0));
+				notifyObservers(new ButtonSignal("home", 0));
 			}
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
-		JButton removeButton = new JButton(new AbstractAction("Remove") {
+		
+		
+		JButton signupButton = new JButton(new AbstractAction("Back") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
@@ -75,16 +69,13 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setChanged();
-				notifyObservers(new ButtonSignal("remove", myJob.getJobID()));
+				notifyObservers(new ButtonSignal("back", myJob.getJobID()));
 				
 			}
 		});
-		if (!myJob.isJobRemovable()) {
-			removeButton.setEnabled(false);
-		}
-		removeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		signupButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
-		buttonsPanel.add(removeButton);
+		buttonsPanel.add(signupButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}

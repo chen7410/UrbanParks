@@ -41,7 +41,7 @@ public class VolunteerSignUpConfirmationTest {
     	myVolunteer = (Volunteer) myUsers.getUser("hasnah");
     	List<Job> jobs = myJobs.getEligibleJobs(myVolunteer);
     	myJob = (Job) jobs.get(0);
-    	myPanel = new VolunteerSignUpConfirmationPanel(myJob);
+    	myPanel = new VolunteerSignUpConfirmationPanel(myJob, myVolunteer.getJobList(myJobs));
     	
     	myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
     	myFrame.pack();

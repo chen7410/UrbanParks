@@ -54,7 +54,7 @@ public class LoginPanel extends Observable {
 		
 		// The main panel in the center.
 		JPanel centerPanel = new JPanel();
-		centerPanel.setBackground(Color.GREEN);
+		centerPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		centerPanel.setBorder(BorderFactory.createTitledBorder("Log in"));
 		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
 		centerPanel.setLayout(layout);
@@ -89,8 +89,8 @@ public class LoginPanel extends Observable {
 		
 		JTextField userName = new JTextField("", 15);
 		
-		JButton logInButton = new JButton("LogIn");
-		Action logInAction = new AbstractAction("LogIn") {
+		JButton logInButton = new JButton("Log in");
+		Action logInAction = new AbstractAction("Log in") {
 			
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -129,7 +129,7 @@ public class LoginPanel extends Observable {
 		exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		JPanel inputPanel = new JPanel(new FlowLayout());
-		inputPanel.setBackground(Color.GREEN);
+		inputPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		inputPanel.add(enterUserNameLabel);
 		inputPanel.add(userName);
 		inputPanel.add(logInButton);

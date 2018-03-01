@@ -5,6 +5,7 @@
 
 package ui;
 
+import model.Job;
 import model.User;
 
 /**
@@ -16,18 +17,11 @@ import model.User;
 public class ButtonSignal {
 	
 	private String myButtonName;
-	private int myJobID;
-	private User myUser;
+	private Object myObject;
 	
-	
-	public ButtonSignal(final String theButtonName, final int theJobID) {
+	public ButtonSignal(final String theButtonName, final Object theObject) {
 		myButtonName = theButtonName;
-		myJobID = theJobID;
-	}
-	
-	public ButtonSignal(final String theButtonName, final User theUser) {
-		myButtonName = theButtonName;
-		myUser = theUser;
+		myObject = theObject;
 	}
 	
 	public String getButtonName() {
@@ -35,10 +29,14 @@ public class ButtonSignal {
 	}
 	
 	public int getJobID() {
-		return myJobID;
+		return (int) myObject;
 	}
 	
 	public User getUser() {
-		return myUser;
+		return (User) myObject;
+	}
+	
+	public Job getJob() {
+		return (Job) myObject;
 	}
 }
