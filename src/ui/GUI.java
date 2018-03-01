@@ -434,6 +434,14 @@ public class GUI extends JFrame implements Observer {
 		
 	}
 	
+	private void urbanParksStaffChangePendingNumberPanel(final ButtonSignal theSignal) {
+		
+	}
+	
+	private void urbanParksStaffChangeMaxJobAmount(final ButtonSignal theSignal) {
+		
+	}
+	
 	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
 		ButtonSignal button = (ButtonSignal) theMessage;
 		if (theObservable instanceof UrbanParksStaffJobDetails) {
