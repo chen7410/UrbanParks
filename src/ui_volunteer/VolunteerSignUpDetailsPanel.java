@@ -38,6 +38,10 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 		return myPanel;
 	}
 	
+	public String getPanelName() {
+		return "Sign Up";
+	}
+	
 	private void init() {
 		createButton();
 		createJobDetails();

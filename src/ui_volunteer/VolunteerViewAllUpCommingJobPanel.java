@@ -62,7 +62,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
-		System.out.print(size);//---------------
 		//int size = 0;
 		for (int i = 0; i < size; i++) {
 
