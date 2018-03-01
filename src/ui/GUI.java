@@ -465,6 +465,7 @@ public class GUI extends JFrame implements Observer {
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
+		// TODO not tested
 	}
 	
 	
