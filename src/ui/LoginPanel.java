@@ -55,7 +55,7 @@ public class LoginPanel extends Observable {
 		// The main panel in the center.
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.GREEN);
-		centerPanel.setBorder(BorderFactory.createTitledBorder("Urban Parks"));
+		centerPanel.setBorder(BorderFactory.createTitledBorder("Log in"));
 		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
 		centerPanel.setLayout(layout);
 		
@@ -85,6 +85,7 @@ public class LoginPanel extends Observable {
 		centerPanel.add(slogan);
 		centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		
+		JLabel enterUserNameLabel = new JLabel("User Name: ");
 		
 		JTextField userName = new JTextField("", 15);
 		
@@ -129,6 +130,7 @@ public class LoginPanel extends Observable {
 		
 		JPanel inputPanel = new JPanel(new FlowLayout());
 		inputPanel.setBackground(Color.GREEN);
+		inputPanel.add(enterUserNameLabel);
 		inputPanel.add(userName);
 		inputPanel.add(logInButton);
 		inputPanel.add(exitButton);

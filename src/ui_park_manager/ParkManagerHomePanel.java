@@ -3,7 +3,7 @@
  * Urban Parks Project
  */
 
-package ui_volunteer;
+package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -37,13 +37,13 @@ import ui.GUI;
  * @author Brook Negussie
  * @version March 5, 2018
  */
-public class VolunteerHomePanel extends Observable {
+public class ParkManagerHomePanel extends Observable {
 	
 	private JPanel myPanel;
 	private int mySelectedJobID;
 	private List<Job> myAllUpcomingJobs;
 	
-	public VolunteerHomePanel(final List<Job> theJobList) {
+	public ParkManagerHomePanel(final List<Job> theJobList) {
 		myAllUpcomingJobs = theJobList;
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
@@ -221,4 +221,5 @@ public class VolunteerHomePanel extends Observable {
 	public JPanel getPanel() {
 		return myPanel;
 	}
+
 }

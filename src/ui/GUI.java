@@ -174,6 +174,8 @@ public class GUI extends JFrame implements Observer {
 			createVolunteerSignUpPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
 			createVolunteerViewAllUpCommingJobPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			createVolunteerSignedUpDetailsPanel(theSignal.getJobID());
 		}
 	}
 
