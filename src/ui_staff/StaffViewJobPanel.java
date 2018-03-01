@@ -34,7 +34,7 @@ import ui.GUI;
  * @version February 28, 2018
  */
 
-public class UrbanParksStaffViewJobPanel extends Observable{
+public class StaffViewJobPanel extends Observable{
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
 	/**The job ID of the corresponding job of radio button. */
@@ -43,7 +43,7 @@ public class UrbanParksStaffViewJobPanel extends Observable{
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public UrbanParksStaffViewJobPanel(final List<Job> theJobList) {
+	public StaffViewJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);

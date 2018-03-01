@@ -8,7 +8,7 @@ import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
-import ui_staff.UrbanParksStaffViewJobPanel;
+import ui_staff.StaffViewJobPanel;
 
 public class UrbanParksStaffViewJobPanelTest {
 	/** The main window. */
@@ -18,7 +18,7 @@ public class UrbanParksStaffViewJobPanelTest {
     private static JobMap myJobs;
     private static ParkManager myParkManager;
     
-    private static UrbanParksStaffViewJobPanel myStaffViewJobPanel;
+    private static StaffViewJobPanel myStaffViewJobPanel;
     
     
     public static void main(final String[] theArgs) {
@@ -30,7 +30,7 @@ public class UrbanParksStaffViewJobPanelTest {
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
-		myStaffViewJobPanel = new UrbanParksStaffViewJobPanel(
+		myStaffViewJobPanel = new StaffViewJobPanel(
 				myParkManager.getJobList(myJobs));
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());

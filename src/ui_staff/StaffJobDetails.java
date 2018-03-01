@@ -15,11 +15,11 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
-public class UrbanParksStaffJobDetails extends Observable {
+public class StaffJobDetails extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
-	public UrbanParksStaffJobDetails(final Job theJob) {
+	public StaffJobDetails(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();

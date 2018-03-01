@@ -37,11 +37,11 @@ import ui.GUI;
  * @author Brook Negussie
  * @version March 5, 2018
  */
-public class UrbanParksStaffSearchJobsPanel extends Observable {
+public class StaffSearchJobsPanel extends Observable {
 	
 	private JPanel myPanel;
 	
-	public UrbanParksStaffSearchJobsPanel() {
+	public StaffSearchJobsPanel() {
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);

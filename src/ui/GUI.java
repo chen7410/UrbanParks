@@ -29,8 +29,8 @@ import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
-import ui_staff.UrbanParksStaffHomePanel;
-import ui_staff.UrbanParksStaffJobDetails;
+import ui_staff.StaffHomePanel;
+import ui_staff.StaffJobDetails;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
 import ui_volunteer.VolunteerHomePanel;
 import ui_volunteer.VolunteerSignUpConfirmationPanel;
@@ -403,7 +403,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createUrbanParksStaffHomePanel() {
 		remove(myCurrentPanel);
-		UrbanParksStaffHomePanel homePanel = new UrbanParksStaffHomePanel(); 
+		StaffHomePanel homePanel = new StaffHomePanel(); 
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -412,7 +412,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createUrbanParksStaffJobDetails(final int theJobID) {
 		remove(myCurrentPanel);
-		UrbanParksStaffJobDetails detailsPanel = new UrbanParksStaffJobDetails(myJobs.getJob(theJobID));
+		StaffJobDetails detailsPanel = new StaffJobDetails(myJobs.getJob(theJobID));
 		myCurrentPanel = detailsPanel.getPanel();
 		detailsPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -436,7 +436,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
 		ButtonSignal button = (ButtonSignal) theMessage;
-		if (theObservable instanceof UrbanParksStaffJobDetails) {
+		if (theObservable instanceof StaffJobDetails) {
 			urbanParksStaffJobDetailsActions(button);
 		}
 	}
