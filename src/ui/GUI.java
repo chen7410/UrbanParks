@@ -27,6 +27,7 @@ import model.Volunteer;
 import ui_park_manager.ParkManagerHomePanel;
 import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitVerification;
+import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
 import ui_volunteer.VolunteerHomePanel;
@@ -299,7 +300,7 @@ public class GUI extends JFrame implements Observer {
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
-	
+
 	private void createParkManagerRemoveVerification(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerRemoveVerification verificationPanel = new ParkManagerRemoveVerification(theJob);
@@ -360,6 +361,15 @@ public class GUI extends JFrame implements Observer {
 	
 	/**************************Staff*******************************/
 	
+	private void createUrbanParksStaffHomePanel() {
+		remove(myCurrentPanel);
+		UrbanParksStaffHomePanel homePanel = new UrbanParksStaffHomePanel(); 
+		myCurrentPanel = homePanel.getPanel();
+		homePanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
 	private void createUrbanParksStaffJobDetails(final int theJobID) {
 		remove(myCurrentPanel);
 		UrbanParksStaffJobDetails detailsPanel = new UrbanParksStaffJobDetails(myJobs.getJob(theJobID));
@@ -367,6 +377,17 @@ public class GUI extends JFrame implements Observer {
 		detailsPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
+	}
+	
+	private void urbanParksStaffHomePanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("pending jobs size")) {
+			
+		} else if (theSignal.getButtonName().toLowerCase().equals("logout")) {
+			remove(myCurrentPanel);
+			createLoginPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("search jobs")) {
+			
+		}
 	}
 	
 	private void urbanParksStaffJobDetailsActions(final ButtonSignal theButton) {
@@ -386,5 +407,4 @@ public class GUI extends JFrame implements Observer {
 		parkManagerPanelsCases(theObservable, theMessage);
 		staffPanelsCases(theObservable, theMessage);
 	}
-
 }
