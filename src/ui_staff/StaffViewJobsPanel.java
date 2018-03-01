@@ -6,13 +6,16 @@ package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -20,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
@@ -34,25 +38,29 @@ import ui.GUI;
  * @version February 28, 2018
  */
 
-public class StaffViewJobPanel extends Observable{
+public class StaffViewJobsPanel extends Observable{
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
-	/**The job ID of the corresponding job of radio button. */
+	private String myStartDate;
+	private String myEndDate;
 	private int mySelectedJobID;
 
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public StaffViewJobPanel(final List<Job> theJobList) {
+	public StaffViewJobsPanel(final List<Job> theJobList, 
+			final String theStartDate, final String theEndDate) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
+		myStartDate = theStartDate;
+		myEndDate = theEndDate;
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.WHITE);
 		setup();
 	}
 
 	/**
-	 * Set up this UrbanParksStaffViewJobPanel.
+	 * Set up this UrbanParksStaffViewJobsPanel.
 	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
@@ -80,6 +88,7 @@ public class StaffViewJobPanel extends Observable{
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
+			radioPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);
@@ -106,7 +115,7 @@ public class StaffViewJobPanel extends Observable{
 		if (size != 0) {
 			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		} else {
-			radioPanel.add(new JLabel("No upcomming jobs."));
+			radioPanel.add(new JLabel("No jobs between: " + myStartDate + " - " + myEndDate));
 			myPanel.add(radioPanel, BorderLayout.CENTER);
 		}
 		
@@ -118,7 +127,7 @@ public class StaffViewJobPanel extends Observable{
 	 * @return return a label.
 	 */
 	private JLabel makeTopJlabel() {
-		JLabel topLabel = new JLabel("All Jobs between ?? - ??");
+		JLabel topLabel = new JLabel("Between: " + myStartDate + " - " + myEndDate);
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}

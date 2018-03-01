@@ -74,7 +74,7 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 			b.setBackground(Color.WHITE);
 			group.add(b);
 			radioPanel.add(b);
-			radioPanel.add(Box.createRigidArea(new Dimension(5, 15)));
+			radioPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
 			//set mySelectedJobID to the first job ID
 			if (i == 0) {
 				b.setSelected(true);

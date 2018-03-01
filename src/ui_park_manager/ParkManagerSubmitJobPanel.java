@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Observable;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -26,6 +27,7 @@ import javax.swing.JTextField;
 
 import model.Job;
 import model.ParkManager;
+import ui.ButtonSignal;
 import ui.GUI;
 
 /**
@@ -34,12 +36,12 @@ import ui.GUI;
  * @author  Group 7
  * @version February 28, 2018
  */
-public class ParkManagerSubmitJobPanel {
+public class ParkManagerSubmitJobPanel extends Observable {
 	private final JPanel myPanel;
 	private JPanel myCenterPanel;
-	private final int textFieldSize = 45;
+	private final int textFieldSize = 35;
 	private final int textAreaWidth = 20;
-	private final int textAreaHeight =50;
+	private final int textAreaHeight =42;
 	
 	private final JTextField myParkNameTf;
 	private final JTextField myLocationTf;
@@ -48,7 +50,6 @@ public class ParkManagerSubmitJobPanel {
 	private JTextArea myJobDescriptionTa;
 	
 	private final ParkManager myParkManager;
-	private final DateTimeFormatter myDateFormatter;
 	private Job mySubmittingJob;
 	
 	public ParkManagerSubmitJobPanel (final ParkManager theParkManager) {
@@ -60,7 +61,6 @@ public class ParkManagerSubmitJobPanel {
 		myStartDateTf = new JTextField(textFieldSize);
 		myEndDateTf = new JTextField(textFieldSize);
 		myJobDescriptionTa = new JTextArea(textAreaWidth, textAreaHeight);
-		myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
 		myParkManager = theParkManager;
 		mySubmittingJob = null;
 		setup();
@@ -75,34 +75,43 @@ public class ParkManagerSubmitJobPanel {
 		JPanel topLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		topLabelPanel.add(topLabel);
 		
-		JLabel parkName = new JLabel("Park name: ");
-		JLabel location = new JLabel("Location: ");
-		JLabel startDate = new JLabel("Start date: ");
-		JLabel endDate = new JLabel("End date: ");
-		JLabel jobDescription = new JLabel("Job description: ");
+		JLabel parkName = new JLabel(" Park name: ");
+		JLabel location = new JLabel("     Location: ");
+		JLabel startDate = new JLabel("  Start date: ");
+		JLabel endDate = new JLabel("    End date: ");
+		JLabel jobDescription = new JLabel("Description: ");
+		
+		JLabel startDateFormat = new JLabel("MM/DD/YY");
+		JLabel endDateFormat = new JLabel("MM/DD/YY");
+		JLabel invGap1 = new JLabel("                    ");
+		JLabel invGap2 = new JLabel("                    ");
 		
 		//pairs label and text field
 		JPanel parkNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		parkNamePanel.add(parkName);
 		parkNamePanel.add(myParkNameTf);
+		parkNamePanel.add(invGap1);
 		
 		JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		locationPanel.add(location);
 		locationPanel.add(myLocationTf);
+		locationPanel.add(invGap2);
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		startDatePanel.add(startDate);
 		startDatePanel.add(myStartDateTf);
+		startDatePanel.add(startDateFormat);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		endDatePanel.add(endDate);
 		endDatePanel.add(myEndDateTf);
+		endDatePanel.add(endDateFormat);
 		
 		JPanel jobDescriptionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		jobDescriptionPanel.add(jobDescription);
 		jobDescriptionPanel.add(myJobDescriptionTa);
 		
-		BoxLayout box = new BoxLayout(myCenterPanel, BoxLayout.PAGE_AXIS);
+		BoxLayout box = new BoxLayout(myCenterPanel, BoxLayout.Y_AXIS);
 		myCenterPanel.setLayout(box);
 		myCenterPanel.add(startDatePanel);
 		myCenterPanel.add(endDatePanel);
@@ -121,12 +130,10 @@ public class ParkManagerSubmitJobPanel {
 		buttonPanel.add(backButton);
 		buttonPanel.add(nextButton);
 		buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		//myCenterPanel.add(buttonPanel);
 		
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
 		myPanel.add(myCenterPanel, BorderLayout.CENTER);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
-//		myPanel.add(labelTextFielsPanel, BorderLayout.CENTER);		
 	}
 	
 	private JButton makeBackButton() {
@@ -158,6 +165,12 @@ public class ParkManagerSubmitJobPanel {
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
 				
+//				Job job = createCandidateJob(myStartDateTf.getText(),
+//				myEndDateTf.getText(), myParkNameTf.getText(),
+//				myParkManager, myLocationTf.getText(),
+//				myJobDescriptionTa.getText());
+//				mySubmittingJob = job;
+				
 				Job job = createCandidateJob(myStartDateTf.getText(),
 						myEndDateTf.getText(), myParkNameTf.getText(),
 						myParkManager, myLocationTf.getText(),
@@ -175,11 +188,15 @@ public class ParkManagerSubmitJobPanel {
 							"You cannot submit a job that is more than "
 							+ Job.MAX_END_DAY + " in the future",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				} else {
+				} 
+				else {
+					//send a job to observers
 					mySubmittingJob = job;
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Job created! Temporary popup message",
 							"", JOptionPane.OK_OPTION);
+					setChanged();
+					notifyObservers(new ButtonSignal("next", job));
 				}
 				
 			}
@@ -189,16 +206,27 @@ public class ParkManagerSubmitJobPanel {
 		return btn;
 	}
 	
+	/**
+	 * Create a candidate job without any checking.
+	 * The candidate job must be no more than Job.MAX_END_DAY in future
+	 * and no more than Job.MAX_JOB_LENGTH.
+	 * @param theStartDate
+	 * @param theEndDate
+	 * @param theParkName
+	 * @param thePM
+	 * @param theLocation
+	 * @param theDescription
+	 * @return a candidate Job.
+	 */
 	private Job createCandidateJob(final String theStartDate, 
 			final String theEndDate, final String theParkName,
 			final ParkManager thePM, final String theLocation, 
 			final String theDescription) {
 		
-		Job job = new Job(LocalDate.parse(theStartDate, myDateFormatter),
-				LocalDate.parse(theEndDate, myDateFormatter),
+		Job job = new Job(LocalDate.parse(theStartDate, GUI.DATE_FORMATTER),
+				LocalDate.parse(theEndDate, GUI.DATE_FORMATTER),
 				theParkName, thePM, theLocation, theDescription);
 		return job;
-		
 	}
 	
 	/**

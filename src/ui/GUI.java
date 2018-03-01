@@ -8,6 +8,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -75,6 +76,11 @@ public class GUI extends JFrame implements Observer {
 
 	/** The background color. */
 	public static final Color VOLUNTEER_PANELS_BGCOLOR = new Color(153, 217, 234);
+	
+	/** The start date and end date formatter. */
+	public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/uu");
+	
+	public static final Dimension RADIO_BUTTNON_RIGID_AREA= new Dimension(5, 15);
 
 	private static final long serialVersionUID = 1L;
 	
