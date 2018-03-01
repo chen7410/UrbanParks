@@ -28,11 +28,11 @@ import ui.GUI;
  * @author Brook Negussie
  * @version March 5, 2018
  */
-public class StaffHomePanel extends Observable{
+public class UrbanParksStaffHomePanel extends Observable{
 	
 	private JPanel myPanel;
 	
-	public StaffHomePanel() {
+	public UrbanParksStaffHomePanel() {
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);

@@ -30,8 +30,8 @@ import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
-import ui_staff.StaffHomePanel;
-import ui_staff.StaffJobDetails;
+import ui_staff.UrbanParksStaffHomePanel;
+import ui_staff.UrbanParksStaffJobDetails;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
 import ui_volunteer.VolunteerHomePanel;
 import ui_volunteer.VolunteerSignUpConfirmationPanel;
@@ -80,6 +80,7 @@ public class GUI extends JFrame implements Observer {
 	/** The start date and end date formatter. */
 	public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd/uu");
 	
+	/** The rigid area between radio buttons*/
 	public static final Dimension RADIO_BUTTNON_RIGID_AREA= new Dimension(5, 15);
 
 	private static final long serialVersionUID = 1L;
@@ -409,7 +410,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createUrbanParksStaffHomePanel() {
 		remove(myCurrentPanel);
-		StaffHomePanel homePanel = new StaffHomePanel(); 
+		UrbanParksStaffHomePanel homePanel = new UrbanParksStaffHomePanel(); 
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -418,7 +419,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createUrbanParksStaffJobDetails(final int theJobID) {
 		remove(myCurrentPanel);
-		StaffJobDetails detailsPanel = new StaffJobDetails(myJobs.getJob(theJobID));
+		UrbanParksStaffJobDetails detailsPanel = new UrbanParksStaffJobDetails(myJobs.getJob(theJobID));
 		myCurrentPanel = detailsPanel.getPanel();
 		detailsPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -440,9 +441,17 @@ public class GUI extends JFrame implements Observer {
 		
 	}
 	
+	private void urbanParksStaffChangePendingNumberPanel(final ButtonSignal theSignal) {
+		
+	}
+	
+	private void urbanParksStaffChangeMaxJobAmount(final ButtonSignal theSignal) {
+		
+	}
+	
 	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
 		ButtonSignal button = (ButtonSignal) theMessage;
-		if (theObservable instanceof StaffJobDetails) {
+		if (theObservable instanceof UrbanParksStaffJobDetails) {
 			urbanParksStaffJobDetailsActions(button);
 		}
 	}

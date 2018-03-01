@@ -137,6 +137,7 @@ public class JobMap {
 	public int size() {
 		return myJobs.size();
 	}
+		
 	
 	/**
 	 * Removes a job from this JobMap.
