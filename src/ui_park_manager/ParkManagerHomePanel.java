@@ -221,5 +221,4 @@ public class ParkManagerHomePanel extends Observable {
 	public JPanel getPanel() {
 		return myPanel;
 	}
-
 }

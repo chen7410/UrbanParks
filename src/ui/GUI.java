@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
+
 package ui;
 
 import java.awt.BorderLayout;
@@ -19,6 +24,7 @@ import model.Staff;
 import model.User;
 import model.UserMap;
 import model.Volunteer;
+import ui_park_manager.ParkManagerHomePanel;
 import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_staff.UrbanParksStaffJobDetails;
@@ -30,6 +36,12 @@ import ui_volunteer.VolunteerSignUpPanel;
 import ui_volunteer.VolunteerSignedUpDetailsPanel;
 import ui_volunteer.VolunteerViewAllUpCommingJobPanel;
 
+/**
+ * 
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class GUI extends JFrame implements Observer {
 	/** The size of all panels. */
 	public static final Dimension PANEL_SIZE = new Dimension(800, 600);
@@ -279,6 +291,15 @@ public class GUI extends JFrame implements Observer {
 	}
 	*/
 	
+	private void createParkManagerHomePanel() {
+		remove(myCurrentPanel);
+		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(myParkManager.getJobList(myJobs));
+		myCurrentPanel = homePanel.getPanel();
+		homePanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
 	private void createParkManagerRemoveVerification(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerRemoveVerification verificationPanel = new ParkManagerRemoveVerification(theJob);
@@ -295,6 +316,19 @@ public class GUI extends JFrame implements Observer {
 		verificationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
+	}
+	
+	private void parkManagerHomePanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("logout")) {
+			remove(myCurrentPanel);
+			createLoginPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("submit a job")) {
+			
+		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
+			
+		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
+			
+		}
 	}
 	
 	private void parkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
