@@ -83,18 +83,30 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String str = newNumberTextField.getText();
-				if (str.length() > 0) {
-					int newNumber = Integer.parseInt(str);
-					myJobs.setMaxJobAmount(newNumber);
-					setChanged();
-					notifyObservers(new ButtonSignal("submit change", 0));
-					
-				} else {
+				String str = null;
+				try {
+					str = newNumberTextField.getText();
+					if (str.length() > 0) {
+						int newNumber = Integer.parseInt(str);
+						myJobs.setMaxJobAmount(newNumber);
+						setChanged();
+						notifyObservers(new ButtonSignal("submit change", 0));
+						
+					} else {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Please enter a valid number.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (NumberFormatException theException) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Please enter a valid number.",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException theException) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a positive integer.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
+				
 			}
 		});
 		
