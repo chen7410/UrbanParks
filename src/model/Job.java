@@ -94,6 +94,12 @@ public class Job implements Serializable, Comparable<Job> {
 		if (theEndDate == null) {
 			throw new IllegalArgumentException("End date cannot be null");
 		}
+		if (!theStartDate.isBefore(theEndDate) && !theStartDate.isEqual(theEndDate)) {
+			throw new IllegalArgumentException("Start date cannot be after end date");
+		}
+		if (!theEndDate.isAfter(theStartDate) && !theEndDate.isEqual(theStartDate)) {
+			throw new IllegalArgumentException("End date cannot be before start date");
+		}
 		if (theParkName == null || theParkName.isEmpty()) {
 			throw new IllegalArgumentException("Park name cannot be null or empty");
 		}
@@ -106,10 +112,6 @@ public class Job implements Serializable, Comparable<Job> {
 		if (theDescription == null || theDescription.isEmpty()) {
 			throw new IllegalArgumentException("Description cannot be null");
 		}
-		/*
-		 * TODO not test
-		 */
-
 	}
 
 	public int getJobID() {
@@ -143,7 +145,7 @@ public class Job implements Serializable, Comparable<Job> {
 	/**
 	 * Check whether a Job is at least minimum days in future.
 	 * 
-	 * @param theMinimumDaysInFuture
+	 * @param theMinimumDaysInFuture 
 	 *            must be non-negative.
 	 * @return true if a Job is at least minimum days in future; false
 	 *         otherwise.
@@ -178,7 +180,7 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * Check if a job is able to be removed.
+	 * Check if a job is able to be removed. The removable job must be 
 	 * 
 	 * @return true if a job is removable; false otherwise.
 	 */
@@ -223,6 +225,18 @@ public class Job implements Serializable, Comparable<Job> {
 	 * @return true if it is; false otherwise.
 	 */
 	public boolean isJobWithinDates(final LocalDate theStartDate, final LocalDate theEndDate) {
+		if (theStartDate == null) {
+			throw new IllegalArgumentException("Start date cannot be null");
+		}
+		if (theEndDate == null) {
+			throw new IllegalArgumentException("End date cannot be null");
+		}
+		if (!theStartDate.isBefore(theEndDate) && !theStartDate.isEqual(theEndDate)) {
+			throw new IllegalArgumentException("Start date cannot be after end date");
+		}
+		if (!theEndDate.isAfter(theStartDate) && !theEndDate.isEqual(theStartDate)) {
+			throw new IllegalArgumentException("End date cannot be before start date");
+		}
 		return !myStartDate.isBefore(theStartDate) && !myEndDate.isAfter(theEndDate);
 	}
 
