@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -18,7 +20,11 @@ import model.Job;
 import model.JobMap;
 import ui.ButtonSignal;
 import ui.GUI;
-
+/**
+ * 
+ * @author Group 7
+ * @version March 1, 2018
+ */
 public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {
 
 	private JPanel myPanel;
@@ -57,23 +63,37 @@ public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {
 	}
 
 	private void createUnubmitConfirmation() {
-		JPanel confirmationPanel = new JPanel();
-		confirmationPanel.setBackground(Color.WHITE);
 		
-		JLabel confirmationLabel = new JLabel(
-				" You Have Successfully Changed the Number of Maxiumum Jobs.");
-		confirmationLabel.setFont(new Font(null, Font.BOLD, 20));
-		confirmationPanel.add(confirmationLabel);
+		JPanel successfulMessagePanel = new JPanel();
+		successfulMessagePanel.setBackground(Color.WHITE);
+		successfulMessagePanel.setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 		
-		JLabel newNumLabel = new JLabel("The new number of Maxiumum of pending jobs: " + 
-				myJobs.getMaxJobAmount());
-		newNumLabel.setFont(new Font(null, Font.PLAIN, 20));
-		confirmationPanel.add(newNumLabel);
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+		
+		successfulMessagePanel.add(new JLabel("<html><font size = 5><strong>You Have Successfully "
+				+ "Changed the Number of Maxiumum Jobs.<br> </strong><hr></font></html>"), gbc);
 		
 		
-		myPanel.add(confirmationPanel, BorderLayout.CENTER);
+		JPanel newNumberPanel = new JPanel();
+		newNumberPanel.setLayout(new GridBagLayout());
+		newNumberPanel.setBackground(Color.WHITE);
+		newNumberPanel.add(new JLabel("<html><font size = 5>The new number of maximum "
+				+ "allowed jobs: " + myJobs.getMaxJobAmount() +"</font></html>"), gbc);
+		JPanel labels = new JPanel(new GridBagLayout());
+		labels.add(successfulMessagePanel, gbc);
+		labels.add(newNumberPanel);
+		labels.setBackground(Color.WHITE);
+
+		myPanel.add(labels, BorderLayout.CENTER);
+		
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}
