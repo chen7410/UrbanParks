@@ -344,7 +344,7 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerHomePanel() {
 		remove(myCurrentPanel);
 		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(
-				myParkManager.getJobList(myJobs));
+				myParkManager.getJobList(myJobs), myJobs);
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);

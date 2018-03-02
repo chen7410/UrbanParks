@@ -28,6 +28,7 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 
 import model.Job;
+import model.JobMap;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -43,6 +44,7 @@ import ui.GUI;
 public class ParkManagerHomePanel extends Observable {
 	
 	private JPanel myPanel;
+	private JobMap myJobMap;
 	private int mySelectedJobID;
 	private List<Job> myAllUpcomingJobs;
 	
@@ -54,8 +56,9 @@ public class ParkManagerHomePanel extends Observable {
      * @param theJobList a list of all the jobs that belongs to 
      * 					 a certain park manager. 
      */
-	public ParkManagerHomePanel(final List<Job> theJobList) {
+	public ParkManagerHomePanel(final List<Job> theJobList, final JobMap theJobMap) {
 		myAllUpcomingJobs = theJobList;
+		myJobMap = theJobMap;
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);
@@ -147,17 +150,29 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		// Buttons to go on the buttonPanel.
-		JButton signUpButton = new JButton(new AbstractAction("Submit A Job") {
+		JButton signUpButton = new JButton("Submit A Job");
+		signUpButton.addActionListener(new AbstractAction("Submit A Job") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("myJobMap.isFull(): " + myJobMap.isFull());
+				
+				
+					
 				setChanged();
 				notifyObservers(new ButtonSignal("submit a job", 0));
 			}
 		});
+		
+		if (myJobMap.isFull()) {
+			signUpButton.setEnabled(false);
+		} else {
+			signUpButton.setEnabled(true);
+		}
+		
 		signUpButton.setSize(GUI.BUTTON_SIZE);
 		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		

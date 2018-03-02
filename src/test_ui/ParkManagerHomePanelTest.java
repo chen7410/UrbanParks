@@ -28,12 +28,12 @@ public class ParkManagerHomePanelTest {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
 		UserMap users  = new UserMap();
-		JobMap jobs = new JobMap();
+		JobMap jobMap = new JobMap();
 		users.loadUserMap(UserMap.USERS_DATA_FILE);
-		jobs.loadJobMap(JobMap.JOBS_DATA_FILE);
+		jobMap.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		ParkManager currentParkManager = (ParkManager) users.getUser("matthew");
-		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getJobList(jobs)); 
+		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getJobList(jobMap), jobMap); 
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		
