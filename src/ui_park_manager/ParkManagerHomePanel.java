@@ -62,6 +62,9 @@ public class ParkManagerHomePanel extends Observable {
 		setup();
 	}
 	
+	/**
+	 * Setting up this ParkManagerHomePanel.
+	 */
 	private void setup() {
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
