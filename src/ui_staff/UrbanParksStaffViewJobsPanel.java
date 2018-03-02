@@ -38,7 +38,7 @@ import ui.GUI;
  * @version February 28, 2018
  */
 
-public class StaffViewJobsPanel extends Observable {
+public class UrbanParksStaffViewJobsPanel extends Observable {
 	private List<Job> myAllUpCommingJobs;
 	private JPanel myPanel;
 	private LocalDate myStartDate;
@@ -48,7 +48,7 @@ public class StaffViewJobsPanel extends Observable {
 	/**
 	 * @param theAllJobs all the jobs in the system.
 	 */
-	public StaffViewJobsPanel(final List<Job> theJobList, 
+	public UrbanParksStaffViewJobsPanel(final List<Job> theJobList, 
 			final LocalDate theStartDate, final LocalDate theEndDate) {
 		myPanel = new JPanel(new BorderLayout());
 		myAllUpCommingJobs = theJobList;
