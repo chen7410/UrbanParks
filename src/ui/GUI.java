@@ -40,6 +40,7 @@ import ui_staff.UrbanParksStaffChangeMaxJobAmountPanel;
 import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
 import ui_staff.UrbanParksStaffNewMaxConfirmationPanel;
+import ui_staff.UrbanParksStaffSearchJobsPanel;
 import ui_staff.UrbanParksStaffViewJobsPanel;
 import ui_volunteer.VolunteerCancellationConfirmationPanel;
 import ui_volunteer.VolunteerHomePanel;
@@ -138,8 +139,12 @@ public class GUI extends JFrame implements Observer {
 				createVolunteerHomePanel();
 			} else if(user instanceof ParkManager) {
 				myParkManager = (ParkManager) user;
+				//TODO: this panel is not working correctly..
+				createParkManagerHomePanel();
+				System.out.println("PARK MANGER");
 			} else if (user instanceof Staff) {
 				myStaff = (Staff) user;
+				createUrbanParksStaffHomePanel();
 			}
 		}
 	}
@@ -345,7 +350,8 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createParkManagerHomePanel() {
 		remove(myCurrentPanel);
-		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(myParkManager.getJobList(myJobs));
+		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(
+				myParkManager.getJobList(myJobs));
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -450,6 +456,8 @@ public class GUI extends JFrame implements Observer {
 			parkManagerUnsubmitConfirmationActions(button);
 		} else if (theObservable instanceof ParkManagerSubmitJobPanel) {
 			ParkManagerSubmitJobActions(button);
+		} else if (theObservable instanceof ParkManagerHomePanel) {
+			parkManagerHomePanelActions(button);
 		}
 	}
 	
@@ -516,9 +524,19 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
+	private void createUrbanParksStaffSearchJobsPanel() {
+		remove(myCurrentPanel);
+		UrbanParksStaffSearchJobsPanel searchPanel = new UrbanParksStaffSearchJobsPanel();
+		myCurrentPanel = searchPanel.getPanel();
+		searchPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
+	
 	private void urbanParksStaffHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("pending jobs size")) {
-			
+			createUrbanParksStaffChangeMaxJobAmountPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("logout")) {
 			remove(myCurrentPanel);
 			createLoginPanel();
@@ -558,6 +576,8 @@ public class GUI extends JFrame implements Observer {
 			urbanParksStaffNewMaxConfirmationActions(button);
 		} else if (theObservable instanceof UrbanParksStaffViewJobsPanel) {
 			UrbanParksStaffViewJobsActions(button);
+		} else if (theObservable instanceof UrbanParksStaffHomePanel) {
+			urbanParksStaffHomePanelActions(button);
 		}
 	}
 	

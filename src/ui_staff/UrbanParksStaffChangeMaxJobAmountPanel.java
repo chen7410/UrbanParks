@@ -68,14 +68,14 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 		
 		JLabel currentNumberLabel = new JLabel("Current number of maximum pending jobs: "
 				 + myJobs.getMaxJobAmount());
-		currentNumberLabel.setFont(new Font(null, Font.PLAIN, 30));
+		currentNumberLabel.setFont(new Font(null, Font.PLAIN, 25));
 		currentNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JPanel textFieldPanel = new JPanel();
 		textFieldPanel.setBackground(Color.WHITE);
 		
-		JLabel newNumberLabel = new JLabel("Enter new maximum number: ");
-		newNumberLabel.setFont(new Font(null, Font.PLAIN, 20));
+		JLabel newNumberLabel = new JLabel("Enter the new maximum number: ");
+		newNumberLabel.setFont(new Font(null, Font.BOLD, 15));
 
 		JTextField newNumberTextField = new JTextField("", 20);
 		
