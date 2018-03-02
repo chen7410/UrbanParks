@@ -34,7 +34,7 @@ import ui.GUI;
 /**
  * 
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version March 5, 2018
  */
 public class VolunteerHomePanel extends Observable {

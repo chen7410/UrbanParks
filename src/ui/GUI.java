@@ -541,6 +541,16 @@ public class GUI extends JFrame implements Observer {
 		}
 	}
 	
+	public void urbanParksStaffSearchJobsPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("submit")) {
+			myStaffSearchStartDate = theSignal.getStartDate();
+			myStaffSearchEndDate = theSignal.getEndDate();
+			createUrbanParksStaffViewJobsPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			createUrbanParksStaffHomePanel();
+		}
+	}
+	
 	private void urbanParksStaffChangeMaxJobAmountActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("submit change")) {
 			createUrbanParksStaffNewMaxConfirmationPanel();
@@ -574,7 +584,9 @@ public class GUI extends JFrame implements Observer {
 			UrbanParksStaffViewJobsActions(button);
 		} else if (theObservable instanceof UrbanParksStaffHomePanel) {
 			urbanParksStaffHomePanelActions(button);
-		}
+		} else if (theObservable instanceof UrbanParksStaffSearchJobsPanel) {
+			urbanParksStaffSearchJobsPanelActions(button);
+		} 
 	}
 	
 	@Override

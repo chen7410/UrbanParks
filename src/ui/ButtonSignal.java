@@ -5,6 +5,8 @@
 
 package ui;
 
+import java.time.LocalDate;
+
 import model.Job;
 import model.User;
 
@@ -38,5 +40,13 @@ public class ButtonSignal {
 	
 	public Job getJob() {
 		return (Job) myObject;
+	}
+	
+	public LocalDate getStartDate() {
+		return (LocalDate) ((Object[])myObject)[0];
+	}
+	
+	public LocalDate getEndDate() {
+		return (LocalDate) ((Object[])myObject)[1];
 	}
 }

@@ -15,7 +15,12 @@ import java.awt.event.ActionEvent;
 import java.awt.font.TextAttribute;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Scanner;
@@ -25,18 +30,21 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
 /**
  * 
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version March 5, 2018
  */
 public class UrbanParksStaffSearchJobsPanel extends Observable {
@@ -58,7 +66,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		mainPanel.setLayout(buttonPanelLayout);
 		
 		JLabel searchJobsLabel = new JLabel("Search Jobs");
-		searchJobsLabel.setFont(new Font(searchJobsLabel.getName(), Font.PLAIN, 25));
+		searchJobsLabel.setFont(new Font(searchJobsLabel.getName(), Font.PLAIN, 40));
 		
 		// Writing the code to underline the welcome label.
 		Font font = searchJobsLabel.getFont();
@@ -70,21 +78,23 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout());
 		startDatePanel.setMaximumSize(new Dimension(800, 0));
-		startDatePanel.setBackground(Color.WHITE);
+		startDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout());
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
-		endDatePanel.setBackground(Color.WHITE);
+		endDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
-		JLabel startDateLabel = new JLabel("Start date (MM/dd/yyyy): ", SwingConstants.CENTER);
+		JLabel startDateLabel = new JLabel("Start date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("", 10);
 		
-		JLabel endDateLabel = new JLabel("End date (MM/dd/yyyy): ", SwingConstants.CENTER);
+		JLabel endDateLabel = new JLabel("End date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField endDateInputField = new JTextField("", 10);
 		
 		
 		// Panel for buttons at the south quadrant of the frame.
 		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
 		
 		JButton homeButton = new JButton(
 				new AbstractAction("Home") {
@@ -101,42 +111,56 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		homeButton.setSize(GUI.BUTTON_SIZE);
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		// Parsing the different values from the date input using a Scanner.
-		Scanner dateScanner = new Scanner(startDateInputField.getText());
-		dateScanner.useDelimiter("/");
 		
-		String startMonth = dateScanner.next();
-		int startMonthInt = Integer.parseInt(startMonth);
-		String startDay = dateScanner.next();
-		int startDayInt = Integer.parseInt(startDay);
-		String startYear = dateScanner.next();
-		int startYearInt = Integer.parseInt(startYear);
+		JButton submitButton = new JButton(new AbstractAction("Submit A Button") {
+
+			/** */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (startDateInputField.getText().isEmpty() || endDateInputField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a valid date.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} else {
+					
+					DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+					
+					LocalDate localStartDate = null;
+					LocalDate localEndDate = null;
+					
+					try {
+						localStartDate = LocalDate.parse(startDateInputField.getText(), myDateFormatter);
+						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
+						
+						
+						// TODO: check if the start date is before or the same day as the end date
+						
+						Object[] localDateArray = new LocalDate[2];
+						localDateArray[0] = localStartDate;
+						localDateArray[1] = localEndDate;
+						
+						setChanged();
+						notifyObservers(new ButtonSignal("submit", localDateArray));
+						
+					} catch (final DateTimeParseException theException) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Invalid date. Please "
+								+ "enter the dates using"
+								+ " MM/DD/YY format.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
+		submitButton.setSize(GUI.BUTTON_SIZE);
+		submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		@SuppressWarnings("deprecation")
-		Date startDate = new Date(startYearInt, startMonthInt, startDayInt);
 		
-		dateScanner.close();
-//		
-//		JButton submitButton = createRadioButton(startDate, endDate);
-//		
-//		buttonsPanel.add(homeButton);
-//		buttonsPanel.add(submitButton);
-		
-		
-		
-//		try {
-//			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//			Date startDate = dateFormat.parse(startDateInputField.getText());
-//			Date endDate = dateFormat.parse(endDateInputField.getText());
-//			
-//			JButton submitButton = createRadioButton(startDate, endDate);
-//			
-//			buttonsPanel.add(homeButton);
-//			buttonsPanel.add(submitButton);
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		buttonsPanel.add(homeButton);
+		buttonsPanel.add(submitButton);
+
 		
 		startDatePanel.add(startDateLabel);
 		startDatePanel.add(startDateInputField);
@@ -145,31 +169,14 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		endDatePanel.add(endDateInputField);
 		
 		
-		mainPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		mainPanel.add(Box.createRigidArea(new Dimension(0, 150)));
 		mainPanel.add(searchJobsLabel);
-		mainPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		mainPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		mainPanel.add(startDatePanel);
-		//mainPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		mainPanel.add(endDatePanel);
 		
 		myPanel.add(mainPanel, BorderLayout.CENTER);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
-	}
-	
-	public JButton createRadioButton(final Date theStartDate, final Date theEndDate) {
-		JButton button = new JButton(
-				new AbstractAction("Submit") {
-
-			/** */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setChanged();
-				notifyObservers(new ButtonSignal("submit", 0));
-			}
-		});
-		return button;
 	}
 	
 	public JPanel getPanel() {
