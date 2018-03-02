@@ -203,6 +203,14 @@ public class Job implements Serializable, Comparable<Job> {
 		}
 		return withinMaxDays;
 	}
+	
+	/**
+	 * Checks to see if the job is already passed by comparing the start date with today's date.
+	 * @return true is the job is already passed; false otherwise.
+	 */
+	public boolean isPassed() {
+		return myStartDate.isBefore(LocalDate.now());
+	}
 
 	/**
 	 * Test if the job end date is less than or equal MAX_END_DAY days from now.

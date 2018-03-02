@@ -103,11 +103,8 @@ public abstract class User implements Serializable {
 		List<Job> jobList = new ArrayList<>();
 		for (int i = 0; i < myJobs.size(); i++) {
 			Job j = theJobList.getJob(myJobs.get(i));
-			if (j != null) {
+			if (j != null && !j.isPassed()) {
 				jobList.add(j);
-			} else {
-				myJobs.remove(i);
-				i--;
 			}
 		}
 		return jobList;
