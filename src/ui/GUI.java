@@ -97,7 +97,7 @@ public class GUI extends JFrame implements Observer {
 	private JobMap myJobs;
 	private Volunteer myVolunteer;
 	private ParkManager myParkManager;
-	private Staff myStaff;
+//	private Staff myStaff;
 	private JPanel myCurrentPanel;
 	private LocalDate myStaffSearchStartDate;
 	private LocalDate myStaffSearchEndDate;
@@ -132,7 +132,7 @@ public class GUI extends JFrame implements Observer {
 	private void loginPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("login")) {
 			User user = theSignal.getUser();
-			setTitle("Urban Parks -" + user.getUserInformation());
+			setTitle("Urban Parks - " + user.getUserInformation());
 			if (user instanceof Volunteer) {
 				myVolunteer = (Volunteer) user;
 				createVolunteerHomePanel();
@@ -140,7 +140,7 @@ public class GUI extends JFrame implements Observer {
 				myParkManager = (ParkManager) user;
 				createParkManagerHomePanel();
 			} else if (user instanceof Staff) {
-				myStaff = (Staff) user;
+//				myStaff = (Staff) user;
 				createUrbanParksStaffHomePanel();
 			}
 		}
