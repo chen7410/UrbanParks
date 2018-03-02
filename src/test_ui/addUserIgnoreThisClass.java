@@ -24,7 +24,8 @@ public class addUserIgnoreThisClass {
 		System.out.println(myUsers.getAllUserNames().toString());
 		
 		//System.out.println(myJobs.getJobsInPeriod(myStartDate, myEndtDate));
-		List<Job> joblist = myJobs.getJobsInPeriod(myStartDate, myEndtDate);
+		//List<Job> joblist = myJobs.getJobsInPeriod(myStartDate, myEndtDate);
+		Job[] joblist = myJobs.getSortedJobsArray();
 		
 		for (Job j : joblist) {
 			System.out.println(j.toString());

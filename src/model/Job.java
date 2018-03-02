@@ -94,12 +94,6 @@ public class Job implements Serializable, Comparable<Job> {
 		if (theEndDate == null) {
 			throw new IllegalArgumentException("End date cannot be null");
 		}
-		if (!theStartDate.isBefore(theEndDate) && !theStartDate.isEqual(theEndDate)) {
-			throw new IllegalArgumentException("Start date cannot be after end date");
-		}
-		if (!theEndDate.isAfter(theStartDate) && !theEndDate.isEqual(theStartDate)) {
-			throw new IllegalArgumentException("End date cannot be before start date");
-		}
 		if (theParkName == null || theParkName.isEmpty()) {
 			throw new IllegalArgumentException("Park name cannot be null or empty");
 		}

@@ -212,25 +212,6 @@ public class JobTest {
 		Job job = new Job(myToday, myNullDate, myParkName, myPM, myParkLocation, myJobDescription);
 	}
 	
-	/**
-	 * Tests to see if a job throws IllegalArgumentException
-	 *  when a job start day is current date and end date is yesterday.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void JobConstructor_ConstructStartDateIsAfterEndDateJob_IllegalArgumentException() {
-		
-		Job job = new Job(myToday, myYesterday, myParkName, myPM, myParkLocation, myJobDescription);
-	}
-	
-	/**
-	 * Tests to see if a job throws IllegalArgumentException
-	 *  when a job end day is current date and start date is tomorrow.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void JobConstructor_ConstructEndDateIsBeforeStartDateJob_IllegalArgumentException() {
-		
-		Job job = new Job(myToday.plusDays(1), myToday, myParkName, myPM, myParkLocation, myJobDescription);
-	}
 	
 	/**
 	 * Tests to see if a job throws IllegalArgumentException

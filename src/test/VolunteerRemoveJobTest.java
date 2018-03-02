@@ -41,6 +41,7 @@ public class VolunteerRemoveJobTest {
 	@Before
 	public void setUp() throws Exception {
 		anyVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
+		myParkManager = new ParkManager("tom", "Tom", "Hanks");
 		myJobStartDateIsToday =
 				LocalDate.now();
 		myJobStartDateIsYesterday = 
