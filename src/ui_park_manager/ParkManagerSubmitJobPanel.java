@@ -144,12 +144,14 @@ public class ParkManagerSubmitJobPanel extends Observable {
 	}
 	
 	private JButton makeBackButton() {
-		JButton back = new JButton(new AbstractAction("Back"){
+		JButton back = new JButton(new AbstractAction("Home"){
+
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
-				// TODO Auto-generated method stub
-				
+				setChanged();
+				notifyObservers(new ButtonSignal("home", 0));
 			}
 			
 		});
@@ -159,6 +161,8 @@ public class ParkManagerSubmitJobPanel extends Observable {
 
 	private JButton makeNextButton() {
 		JButton btn = new JButton(new AbstractAction("Next") {
+			
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
@@ -171,7 +175,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 							"Please fill in all the needed information!",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
-				
+				//TODO Needs to check for date in wrong format
 //				Job job = createCandidateJob(myStartDateTf.getText(),
 //				myEndDateTf.getText(), myParkNameTf.getText(),
 //				myParkManager, myLocationTf.getText(),
