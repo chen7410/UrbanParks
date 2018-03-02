@@ -133,7 +133,7 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		// Buttons to go on the buttonPanel.
-		JButton signUpButton = new JButton(new AbstractAction("SignUp") {
+		JButton signUpButton = new JButton(new AbstractAction("Submit A Job") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -141,7 +141,7 @@ public class ParkManagerHomePanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setChanged();
-				notifyObservers(new ButtonSignal("signup", 0));
+				notifyObservers(new ButtonSignal("submit a job", 0));
 			}
 		});
 		signUpButton.setSize(GUI.BUTTON_SIZE);
