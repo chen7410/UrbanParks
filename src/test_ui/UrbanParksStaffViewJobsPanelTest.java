@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
-import ui_staff.StaffViewJobsPanel;
+import ui_staff.UrbanParksStaffViewJobsPanel;
 
 public class UrbanParksStaffViewJobsPanelTest {
 	/** The main window. */
@@ -17,7 +17,7 @@ public class UrbanParksStaffViewJobsPanelTest {
     private static JobMap myJobs;
     private static ParkManager myParkManager;
     
-    private static StaffViewJobsPanel myStaffViewJobPanel;
+    private static UrbanParksStaffViewJobsPanel myStaffViewJobPanel;
     
     
     public static void main(final String[] theArgs) {
