@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_park_manager;
 
 import java.awt.BorderLayout;
@@ -23,12 +27,25 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * @author  Group 7
+ * @version February 28, 2018
+ */
 public class ParkManagerUnsubmitConfirmationPanel extends Observable {
 	
 	private JPanel myPanel;
 	private Job myJob;
 	private List<Job> myJobs;
 	
+	
+	/**
+	 * Creates a new panel that confirms to the park manager
+	 * the specified job that has been removed.
+	 * 
+	 * @param theJob                the job that is being removed.
+	 * @param theParkManagerJobList the park manager's list of jobs.
+	 */
 	public ParkManagerUnsubmitConfirmationPanel(final Job theJob, 
 			final List<Job> theParkManagerJobList) {
 		myPanel = new JPanel(new BorderLayout());
@@ -111,8 +128,7 @@ public class ParkManagerUnsubmitConfirmationPanel extends Observable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return an instance of ParkManagerUnsubmitConfirmationPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

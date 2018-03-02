@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_staff;
 
 import java.awt.BorderLayout;
@@ -33,6 +37,12 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	private JPanel myPanel;
 	private JobMap myJobs;
 	
+	/**
+	 * Creates a new panel that will allow Urban Parks staffs to 
+	 * change the number of maximum pending jobs in the system.
+	 * 
+	 * @param theJobs a JobMap collection of all the jobs in the system.
+	 */
 	public UrbanParksStaffChangeMaxJobAmountPanel(final JobMap theJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myJobs = theJobs;
@@ -105,7 +115,10 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 		myPanel.add(centerPanel);
 		
 	}
-
+	
+	/**
+	 * @return an instance of UrbanParksStaffChangeMaxJobAmountPanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

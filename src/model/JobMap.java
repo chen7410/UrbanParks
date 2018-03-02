@@ -28,8 +28,6 @@ import java.util.List;
  * @see     HashMap
  */
 public class JobMap {
-
-
 	/*
 	 * TODO I don't think we need this. Just make it a private variable.
 	 */

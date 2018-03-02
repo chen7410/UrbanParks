@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_staff;
 
 import java.awt.BorderLayout;
@@ -15,23 +19,27 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class UrbanParksStaffJobDetails extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
+	/**
+	 * Creates a panel that will allow Urban Parks staff to view
+	 * the specified job's detail.
+	 *
+	 * @param theJob the details of this job will be displayed. 
+	 */
 	public UrbanParksStaffJobDetails(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
-	}
-	
-	public JPanel getPanel() {
-		return myPanel;
-	}
-	
-	public String getPanelName() {
-		return "Job Details";
 	}
 	
 	private void init() {
@@ -100,5 +108,12 @@ public class UrbanParksStaffJobDetails extends Observable {
 		cover0.setBackground(Color.WHITE);
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
+	}
+	
+	/**
+	 * @return an instance of UrbanParksStaffJobDetails.
+	 */
+	public JPanel getPanel() {
+		return myPanel;
 	}
 }

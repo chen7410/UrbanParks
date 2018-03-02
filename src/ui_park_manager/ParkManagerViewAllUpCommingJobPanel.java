@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_park_manager;
 
 import java.awt.BorderLayout;
@@ -23,8 +27,10 @@ import javax.swing.border.EtchedBorder;
 import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
+
 /**
- * A JPanal that showing all upcoming jobs for a park manager.
+ *
+ *
  * @author Group 7
  * @version February 17, 2018
  */
@@ -36,7 +42,10 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all the jobs in the system.
+	 * Creates a new panel that will allow a park manager to view
+	 * all of their specified upcoming job.
+	 * 
+	 * @param theParkManagerJobList the park manager's list of upcoming jobs.
 	 */
 	public ParkManagerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());

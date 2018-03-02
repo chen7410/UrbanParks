@@ -7,6 +7,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class GUIMain {
 
 	public static void main(String[] args) {		
+		
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 		} catch (final UnsupportedLookAndFeelException ex) {

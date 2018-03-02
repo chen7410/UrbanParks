@@ -56,8 +56,14 @@ public class ParkManagerSubmitJobPanel extends Observable {
 	private JTextArea myJobDescriptionTa;
 	
 	private final ParkManager myParkManager;
-	private Job mySubmittingJob;
 	
+	/**
+	 * Creates a new panel that allows the specified the park manager
+	 * to submit a new job.
+	 * 
+	 * @param theParkManager the park manager that is 
+	 *                       submitting a new job.
+	 */
 	public ParkManagerSubmitJobPanel (final ParkManager theParkManager) {
 		myPanel = new JPanel(new BorderLayout());
 		myCenterPanel = new JPanel();
@@ -68,7 +74,6 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		myEndDateTf = new JTextField(textFieldSize);
 		myJobDescriptionTa = new JTextArea(textAreaWidth, textAreaHeight);
 		myParkManager = theParkManager;
-		mySubmittingJob = null;
 		setup();
 	}
 	
@@ -265,7 +270,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 	}
 	
 	/**
-	 * @return a ParkManagerSubmitJobPanel.
+	 * @return an instance of ParkManagerSubmitJobPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;
