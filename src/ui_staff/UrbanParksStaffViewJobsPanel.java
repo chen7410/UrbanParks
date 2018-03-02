@@ -143,13 +143,13 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 	 * @return the Home button.
 	 */
 	private JButton makeHomeButton() {
-		JButton homeButton = new JButton(new AbstractAction("Home") {
+		JButton homeButton = new JButton(new AbstractAction("Back") {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				setChanged();
-				notifyObservers(new ButtonSignal("Home", mySelectedJobID));
+				notifyObservers(new ButtonSignal("back", mySelectedJobID));
 			}
 			
 		});

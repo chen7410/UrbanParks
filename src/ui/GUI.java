@@ -31,12 +31,10 @@ import ui_park_manager.ParkManagerHomePanel;
 import ui_park_manager.ParkManagerRemoveVerification;
 import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitJobPanel;
-//import ui_park_manager.ParkManagerSubmitConfirmationPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
 import ui_staff.UrbanParksStaffChangeMaxJobAmountPanel;
-//import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
 import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
 import ui_staff.UrbanParksStaffNewMaxConfirmationPanel;
@@ -316,16 +314,15 @@ public class GUI extends JFrame implements Observer {
 		submitJobPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
-		// TODO not tested
+		// TODO Needs to check for invalid date format
 	}
 	
 	private void ParkManagerSubmitJobActions(final ButtonSignal theSignal) {
-		if (theSignal.getButtonName().toLowerCase().equals("submit a job")) {
-			createParkManagerSubmitJobPanel();
+		if (theSignal.getButtonName().toLowerCase().equals("next")) {
+			createParkManagerSubmitVerification(theSignal.getJob());
 		} else if(theSignal.getButtonName().toLowerCase().equals("home")){
-			System.out.println("back to park manager home.");
+			createParkManagerHomePanel();
 		}
-		// TODO not tested
 	}
 	
 	private void createParkManagerViewAllUpCommingJobPanel() {
@@ -340,12 +337,10 @@ public class GUI extends JFrame implements Observer {
 	
 	private void parkManagerViewAllUpCommingJobPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			createParkManagerViewAllUpCommingJobPanel();
-			System.out.println("create Park manager job detail panel.");
+			createParkManagerRemoveVerification(theSignal.getJobID());
 		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
-			System.out.println("back to park manager home.");
+			createParkManagerHomePanel();
 		}
-		// TODO might be an issues when there is multiple "view job details" button signals
 	}
 	
 	private void createParkManagerHomePanel() {
@@ -358,9 +353,9 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 
-	private void createParkManagerRemoveVerification(final Job theJob) {
+	private void createParkManagerRemoveVerification(final int theJobID) {
 		remove(myCurrentPanel);
-		ParkManagerRemoveVerification verificationPanel = new ParkManagerRemoveVerification(theJob);
+		ParkManagerRemoveVerification verificationPanel = new ParkManagerRemoveVerification(myJobs.getJob(theJobID));
 		myCurrentPanel = verificationPanel.getPanel();
 		verificationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -412,17 +407,17 @@ public class GUI extends JFrame implements Observer {
 	
 	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
 		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
-			//TODO needs park manager add job method
+			createParkManagerSubmitJobPanel();
 		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("submit")) {
 			myParkManager.createJob(theButton.getJob());
 			myJobs.addJob(theButton.getJob());
-			//createParkManagerSubmitConfirmationPanel(theButton.getJob());
+			createParkManagerSubmitConfirmationPanel(theButton.getJob());
 		}
 	}
 	
 	private void parkManagerRemoveVerificationActions(final ButtonSignal theButton) {
 		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
-			//TODO needs park manager view jobs method
+			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("remove")) {
 			myParkManager.removeJob(theButton.getJob());
 			myJobs.remove(theButton.getJob());
@@ -458,6 +453,8 @@ public class GUI extends JFrame implements Observer {
 			ParkManagerSubmitJobActions(button);
 		} else if (theObservable instanceof ParkManagerHomePanel) {
 			parkManagerHomePanelActions(button);
+		} else if (theObservable instanceof ParkManagerViewAllUpCommingJobPanel) {
+			parkManagerViewAllUpCommingJobPanelActions(button);
 		}
 	}
 	
@@ -472,18 +469,15 @@ public class GUI extends JFrame implements Observer {
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
-		// TODO not tested
 	}
 	
 	
 	private void UrbanParksStaffViewJobsActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			createUrbanParksStaffViewJobsPanel();
-			System.out.println("create Park manager job detail panel.");
-		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
-			System.out.println("back to park manager home.");
+			createUrbanParksStaffJobDetails(theSignal.getJobID());
+		} else if (theSignal.getButtonName().toLowerCase().equals("back")) {
+			createUrbanParksStaffSearchJobsPanel();
 		}
-		// TODO might be an issues when there is multiple "view job details" button signals
 	}
 	
 	private void createUrbanParksStaffHomePanel() {
@@ -524,6 +518,8 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
+	
+	//TODO crashes the program
 	private void createUrbanParksStaffSearchJobsPanel() {
 		remove(myCurrentPanel);
 		UrbanParksStaffSearchJobsPanel searchPanel = new UrbanParksStaffSearchJobsPanel();
@@ -571,7 +567,7 @@ public class GUI extends JFrame implements Observer {
 		if (theButton.getButtonName().toLowerCase(Locale.US).equals("home")) {
 			createUrbanParksStaffHomePanel();
 		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
-			//TODO needs search result method
+			createUrbanParksStaffViewJobsPanel();
 		}
 	}
 	
