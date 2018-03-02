@@ -154,7 +154,8 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * Check whether a Job is overlapped with theJob.
+	 * Check whether a Job is overlapped with theJob
+	 * if they have overlapping start and end dates.
 	 * 
 	 * @param theJob
 	 * @return true if a Job is overlapped with theJob; false otherwise.
@@ -202,10 +203,18 @@ public class Job implements Serializable, Comparable<Job> {
 	
 	/**
 	 * Checks to see if the job is already passed by comparing the start date with today's date.
-	 * @return true is the job is already passed; false otherwise.
+	 * @return true if the job is already passed; false otherwise.
 	 */
 	public boolean isPassed() {
 		return myStartDate.isBefore(LocalDate.now());
+	}
+	
+	/**
+	 * Checks to see if the start date of this job is before the end date
+	 * @return true if the job's start date is before the job end date; false otherwise.
+	 */
+	public boolean isStartDateBeforeEnddate() {
+		return myStartDate.isBefore(myEndDate);
 	}
 
 	/**

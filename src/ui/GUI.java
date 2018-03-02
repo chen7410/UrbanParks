@@ -139,7 +139,6 @@ public class GUI extends JFrame implements Observer {
 				myParkManager = (ParkManager) user;
 				//TODO: this panel is not working correctly..
 				createParkManagerHomePanel();
-				System.out.println("PARK MANGER");
 			} else if (user instanceof Staff) {
 				myStaff = (Staff) user;
 				createUrbanParksStaffHomePanel();

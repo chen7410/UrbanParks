@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_park_manager;
 
 import java.awt.BorderLayout;
@@ -15,23 +19,27 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * @author  Group 7
+ * @version February 28, 2018
+ */
 public class ParkManagerSubmitVerification extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
+	
+	/**
+	 * Creates a new panel that verifies the submission of the 
+	 * specified job.
+	 * 
+	 * @param theJob the job that is being submitted.
+	 */
 	public ParkManagerSubmitVerification(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
-	}
-	
-	public JPanel getPanel() {
-		return myPanel;
-	}
-	
-	public String getPanelName() {
-		return "Submit A Job";
 	}
 	
 	private void init() {
@@ -100,4 +108,12 @@ public class ParkManagerSubmitVerification extends Observable {
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
 	}
+	
+	/**
+	 * @return an instance of ParkManagerSubmitVerification.
+	 */
+	public JPanel getPanel() {
+		return myPanel;
+	}
+
 }

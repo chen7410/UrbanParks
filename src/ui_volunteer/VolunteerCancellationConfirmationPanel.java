@@ -39,7 +39,13 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 	private Job myJob;
 	private List<Job> myJobs;
 
-	
+	/**
+	 * Creates a panel that will confirm the cancellation of the 
+	 * specified job. 
+	 * 
+	 * @param theJob              being cancelled
+	 * @param theVolunteerJobList a list of all the jobs that a volunteer has.
+	 */
 	public VolunteerCancellationConfirmationPanel(final Job theJob,
 			final List<Job> theVolunteerJobList) {
 		myPanel = new JPanel(new BorderLayout());
@@ -127,6 +133,9 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 
 	}
 	
+	/**
+	 * @return an instance of VolunteerCancellationConfirmationPanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

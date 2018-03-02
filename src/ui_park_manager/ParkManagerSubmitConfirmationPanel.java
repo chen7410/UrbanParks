@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_park_manager;
 
 import java.awt.BorderLayout;
@@ -23,12 +27,25 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class ParkManagerSubmitConfirmationPanel extends Observable {
 	
 	private JPanel myPanel;
 	private Job myJob;
 	private List<Job> myJobs;
 	
+    /**
+     * Creates a new park manager panel that confirms the 
+     * submission of the specified job.
+     *
+     * @param theJob                the job that is being confirmed.
+     * @param theParkManagerJobList the park manager's job list.
+     */
 	public ParkManagerSubmitConfirmationPanel(final Job theJob, 
 			final List<Job> theParkManagerJobList) {
 		myPanel = new JPanel(new BorderLayout());
@@ -125,8 +142,7 @@ public class ParkManagerSubmitConfirmationPanel extends Observable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return an instance of ParkManagerSubmitConfirmationPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

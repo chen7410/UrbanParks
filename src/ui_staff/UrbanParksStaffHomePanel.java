@@ -2,7 +2,6 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
-
 package ui_staff;
 
 import java.awt.BorderLayout;
@@ -32,6 +31,9 @@ public class UrbanParksStaffHomePanel extends Observable{
 	
 	private JPanel myPanel;
 	
+	/**
+	 * Creates a new home panel for Urban Parks staff.
+	 */
 	public UrbanParksStaffHomePanel() {
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
@@ -105,6 +107,9 @@ public class UrbanParksStaffHomePanel extends Observable{
 		myPanel.add(buttonsPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * @return an instance of UrbanParksStaffHomePanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

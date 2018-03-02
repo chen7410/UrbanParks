@@ -32,7 +32,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * This class will create a park manager home panel that will
+ * show all the park manager's upcoming jobs on the left, and 
+ * a list of options on the right. The options are: submit a 
+ * new job, view all upcoming jobs and log out.
  * 
  * @author Group 7
  * @version March 5, 2018
@@ -43,6 +46,14 @@ public class ParkManagerHomePanel extends Observable {
 	private int mySelectedJobID;
 	private List<Job> myAllUpcomingJobs;
 	
+    /**
+     * Creates a new park manager home panel with a list of of jobs that belong
+     * to the park manager and options to: submit a job, view all upcoming jobs
+     * and log out.  
+     *
+     * @param theJobList a list of all the jobs that belongs to 
+     * 					 a certain park manager. 
+     */
 	public ParkManagerHomePanel(final List<Job> theJobList) {
 		myAllUpcomingJobs = theJobList;
 		myPanel = new JPanel(new BorderLayout());
@@ -203,7 +214,7 @@ public class ParkManagerHomePanel extends Observable {
 		myPanel.add(splitPane, BorderLayout.CENTER);
 	}
 	
-	public JRadioButton createRadioButton(final Job theJob) {
+	private JRadioButton createRadioButton(final Job theJob) {
 		JRadioButton radioButton = new JRadioButton(
 				new AbstractAction(theJob.getJobSummary()) {
 
@@ -218,6 +229,9 @@ public class ParkManagerHomePanel extends Observable {
 		return radioButton;
 	}
 	
+	/**
+	 * @return an instance of ParkManagerHomePanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

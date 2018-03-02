@@ -34,7 +34,7 @@ import ui.GUI;
  * successfully. It will notify observers when a button is pressed.
  * 
  * @author Group 7
- * @version February 18, 2018
+ * @version  March 5, 2018
  */
 
 public class VolunteerSignUpConfirmationPanel extends Observable {
@@ -44,9 +44,11 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	private List<Job> myJobs;
 	
 	/**
+	 * Creates a new panel that will confirm signing up for
+	 * a job to a volunteer.
 	 * 
-	 * @param theJob
-	 * @param theVolunteerJobList
+	 * @param theJob              that is being signed up for.
+	 * @param theVolunteerJobList a list of all the volunteer's jobs.
 	 */
 	public VolunteerSignUpConfirmationPanel(final Job theJob,
 			final List<Job> theVolunteerJobList) {
@@ -149,8 +151,7 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return an instance of VolunteerSignUpConfirmationPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

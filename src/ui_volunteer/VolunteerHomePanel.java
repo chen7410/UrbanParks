@@ -42,7 +42,12 @@ public class VolunteerHomePanel extends Observable {
 	private JPanel myPanel;
 	private int mySelectedJobID;
 	private List<Job> myAllUpcomingJobs;
-	
+
+	/**
+	 * Creates a new volunteer home panel.
+	 * 
+	 * @param theJobList all the jobs that belongs to the volunteer.
+	 */
 	public VolunteerHomePanel(final List<Job> theJobList) {
 		myAllUpcomingJobs = theJobList;
 		myPanel = new JPanel(new BorderLayout());
@@ -218,6 +223,9 @@ public class VolunteerHomePanel extends Observable {
 		return radioButton;
 	}
 	
+	/**
+	 * @return an instance of VolunteerHomePanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

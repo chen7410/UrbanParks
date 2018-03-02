@@ -24,8 +24,8 @@ import ui.ButtonSignal;
 import ui.GUI;
 /**
  * A JPanal that showing all upcoming jobs for a volunteer.
- * @author Group 7
- * @version February 17, 2018
+ * @author  Group 7
+ * @version March 5, 2018
  */
 public class VolunteerViewAllUpCommingJobPanel extends Observable {
  
@@ -35,7 +35,10 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all the jobs in the system.
+	 * Creates a panel that will display all the volunteer's
+	 * upcoming jobs. 
+	 * 
+	 * @param theJobList the volunteer's job list.
 	 */
 	public VolunteerViewAllUpCommingJobPanel(final List<Job> theJobList) {
 		myPanel = new JPanel(new BorderLayout());
@@ -45,9 +48,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		setup();
 	}
 
-	/**
-	 * Set up this VolunteerViewAllUpCommingJobPanel.
-	 */
+	
 	private void setup() {
 		JButton homeButton = makeHomeButton();
 		JButton jobDetailButton = makeViewJobDetailButton();
@@ -108,24 +109,14 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
-	/**
-	 * Set up top label.
-	 * @return return a label.
-	 */
+
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("All Upcomming Jobs");
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
 	
-	/**
-	 * Set up Home button.
-	 * Home button will fire a button signal which contains
-	 * the name of this button and the selected job id the 
-	 * and notify other observers.
-	 * 
-	 * @return the Home button.
-	 */
+
 	private JButton makeHomeButton() {
 		JButton homeButton = new JButton(new AbstractAction("Home") {
 			private static final long serialVersionUID = 1L;
@@ -141,13 +132,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		return homeButton;
 	}
 	
-	/**
-	 * Set up the View job detail button.
-	 * View job detail button will fire a button signal which contains 
-	 * the selected job id and the name of this button and notify other observers.
-	 * 
-	 * @return the view job detail button.
-	 */
 	private JButton makeViewJobDetailButton() {
 		JButton jobDetailButton = new JButton(new AbstractAction("View Job Details") {
 			private static final long serialVersionUID = 1L;
@@ -165,14 +149,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		return jobDetailButton;
 	}
 
-	/**
-	 * Set up a radio button.
-	 * A radio button will change mySelectedJobID to the 
-	 * current selected job' ID.
-	 * 
-	 * @param theEligibleJob 
-	 * @return a radio button.
-	 */
 	private JRadioButton makeRadioButton(final Job theEligibleJob) {
 		JRadioButton button = new JRadioButton(
 				new AbstractAction(theEligibleJob.getJobSummary()) {
@@ -188,7 +164,7 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 	}
 
 	/**
-	 * @return a VolunteerSignUpPanel.
+	 * @return an instance VolunteerSignUpPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

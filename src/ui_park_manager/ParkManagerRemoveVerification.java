@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_park_manager;
 
 import java.awt.BorderLayout;
@@ -17,10 +21,23 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class ParkManagerRemoveVerification extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
+    /**
+     * Creates a new park manager panel that confirms the removal of
+     * the specified job from the system.
+     *
+     * @param theJob the job that is being unsumbitted by the 
+     * 				 park manager. 
+     */
 	public ParkManagerRemoveVerification(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
@@ -28,13 +45,6 @@ public class ParkManagerRemoveVerification extends Observable {
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 	}
 	
-	public JPanel getPanel() {
-		return myPanel;
-	}
-	
-	public String getPanelName() {
-		return "Remove A Job";
-	}
 	
 	private void init() {
 		createButton();
@@ -105,4 +115,13 @@ public class ParkManagerRemoveVerification extends Observable {
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
 	}
+	
+	/**
+	 * @return an instance of ParkManagerRemoveVerification.
+	 */
+	public JPanel getPanel() {
+		return myPanel;
+	}
+
+
 }
