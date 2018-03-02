@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_volunteer;
 
 import java.awt.BorderLayout;
@@ -19,14 +23,20 @@ import ui.GUI;
  * Panel for when a volunteer views the details of a job they have
  * signed up for. It will notify Observers when a button is pressed.
  * 
- * @author Tuan Dinh
- * @version February 18, 2018
+ * @author  Group 7
+ * @version March 5, 2018
  */
 public class VolunteerSignedUpDetailsPanel extends Observable {
 	
 	private JPanel myPanel;
 	private Job myJob;
 	
+	/**
+	 * Creates a new panel that will display the specified 
+	 * job's detail to the volunteer.
+	 * 
+	 * @param theJob detail's that will be displayed.
+	 */
 	public VolunteerSignedUpDetailsPanel(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
@@ -34,13 +44,6 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 	}
 	
-	public JPanel getPanel() {
-		return myPanel;
-	}
-	
-	public String getPanelName() {
-		return "Job Details";
-	}
 	
 	private void init() {
 		createButton();
@@ -110,4 +113,12 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 		cover1.setBackground(Color.WHITE);
 		myPanel.add(cover1);
 	}
+	
+	/**
+	 * @return an instance VolunteerSignedUpDetailsPanel.
+	 */
+	public JPanel getPanel() {
+		return myPanel;
+	}
+
 }

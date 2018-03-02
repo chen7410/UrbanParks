@@ -43,7 +43,6 @@ import ui.GUI;
 
 /**
  * 
- * 
  * @author Group 7
  * @version March 5, 2018
  */
@@ -51,6 +50,10 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 	
 	private JPanel myPanel;
 	
+	/**
+	 * Creates a panel that will allow Urban Parks staff to search for
+	 * jobs within a given period.
+	 */
 	public UrbanParksStaffSearchJobsPanel() {
 		myPanel = new JPanel(new BorderLayout());
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
@@ -179,6 +182,9 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * @return an instance of UrbanParksStaffSearchJobsPanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}	

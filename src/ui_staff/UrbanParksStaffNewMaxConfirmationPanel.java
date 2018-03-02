@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_staff;
 
 import java.awt.BorderLayout;
@@ -23,14 +27,19 @@ import ui.GUI;
 /**
  * 
  * @author Group 7
- * @version March 1, 2018
+ * @version March 5, 2018
  */
 public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {
 
 	private JPanel myPanel;
 	private JobMap myJobs;
 
-	
+	/**
+	 * Creates a panel that will confirm the change of the maximum
+	 * number of pending jobs a system can have at any given time.
+	 * 
+	 * @param theJobs a JobMap that has all the jobs in the system.
+	 */
 	public UrbanParksStaffNewMaxConfirmationPanel(final JobMap theJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myJobs = theJobs;
@@ -91,8 +100,7 @@ public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return an instance of UrbanParksStaffNewMaxConfirmationPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

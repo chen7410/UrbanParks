@@ -32,7 +32,6 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * A JPanal for Urban parks staff to view all jobs between certain dates.
  * 
  * @author  Group 7
  * @version February 28, 2018
@@ -46,7 +45,14 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all the jobs in the system.
+	 * Creates a new panel that will allow Urban Parks staff
+	 * to view the result of searching for jobs within a 
+	 * given period.
+	 * 
+	 * @param theJobList   a list of the jobs within a period.
+	 * @param theStartDate of the period.
+	 * @param theEndDate   of the period.
+	 * 
 	 */
 	public UrbanParksStaffViewJobsPanel(final List<Job> theJobList, 
 			final LocalDate theStartDate, final LocalDate theEndDate) {

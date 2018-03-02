@@ -27,20 +27,24 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * A JPanal that showing all jobs a volunteer can sign up.
- * @author Minqing Chen
- * @version February 17, 2018
+ *
+ * 
+ * @author  Group 7
+ * @version March 5, 2018
  */
 public class VolunteerSignUpPanel extends Observable {
  
 	private List<Job> myEligibleJobs;
 	private JPanel myPanel;
 	
-	/**The job ID of the corresponding job of radio button. */
 	private int mySelectedJobID;
 
 	/**
-	 * @param theAllJobs all eligible jobs of a volunteer.
+	 * Creates a panel that will display all the jobs that
+	 * the volunteer is eligible to sign up for.
+	 * 
+	 * @param theEligibleJobs a list of all the jobs that a volunteer 
+	 *                        is eligible to sign up for. 
 	 */
 	public VolunteerSignUpPanel(final List<Job> theEligibleJobs) {
 		myPanel = new JPanel(new BorderLayout());
@@ -50,9 +54,6 @@ public class VolunteerSignUpPanel extends Observable {
 		setup();
 	}
 
-	/**
-	 * Set up this VolunteerSignUpPanel.
-	 */
 	private void setup() {
 		JButton homeButton = makeHomeButton();
 		JButton jobDetailButton = makeViewJobDetailButton();
@@ -103,24 +104,14 @@ public class VolunteerSignUpPanel extends Observable {
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 	
-	/**
-	 * Set up top label.
-	 * @return return a label.
-	 */
+
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("Sign Up A Job");
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
 	
-	/**
-	 * Set up Home button.
-	 * Home button will fire a button signal which contains
-	 * the name of this button and the selected job id the 
-	 * and notify other observers.
-	 * 
-	 * @return the Home button.
-	 */
+
 	private JButton makeHomeButton() {
 		JButton homeButton = new JButton(new AbstractAction("Home") {
 			private static final long serialVersionUID = 1L;
@@ -160,14 +151,6 @@ public class VolunteerSignUpPanel extends Observable {
 		return jobDetailButton;
 	}
 
-	/**
-	 * Set up a radio button.
-	 * A radio button will change mySelectedJobID to the 
-	 * current selected job' ID.
-	 * 
-	 * @param theEligibleJob 
-	 * @return a radio button.
-	 */
 	private JRadioButton makeRadioButton(final Job theEligibleJob) {
 		JRadioButton button = new JRadioButton(
 				new AbstractAction(theEligibleJob.getJobSummary()) {
@@ -182,7 +165,7 @@ public class VolunteerSignUpPanel extends Observable {
 	}
 
 	/**
-	 * @return a VolunteerSignUpPanel.
+	 * @return an instance of VolunteerSignUpPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;
