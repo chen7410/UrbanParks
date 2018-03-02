@@ -1,7 +1,6 @@
 package test_ui;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import model.Job;
 import model.JobMap;
