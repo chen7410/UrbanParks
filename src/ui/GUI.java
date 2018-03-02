@@ -401,7 +401,7 @@ public class GUI extends JFrame implements Observer {
 		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
 			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			
+			createParkManagerRemoveVerification(theSignal.getJobID());
 		}
 	}
 	
