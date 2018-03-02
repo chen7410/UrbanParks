@@ -419,7 +419,7 @@ public class GUI extends JFrame implements Observer {
 		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("remove")) {
 			myParkManager.removeJob(theButton.getJob());
 			myJobs.remove(theButton.getJob());
-			createParkManagerUnsubmitConfirmationPanel(myJobs.getJob(theButton.getJobID()));
+			createParkManagerUnsubmitConfirmationPanel(theButton.getJob());
 		}
 	}
 	
