@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @version March 5, 2018
  */
 public class Staff extends User {
-
+	
 	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
 	

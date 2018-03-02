@@ -541,7 +541,15 @@ public class GUI extends JFrame implements Observer {
 			remove(myCurrentPanel);
 			createLoginPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("search jobs")) {
-			
+			createUrbanParksStaffSearchJobsPanel();
+		}
+	}
+	
+	public void urbanParksStaffSearchJobsPanelActions(final ButtonSignal theSignal) {
+		if (theSignal.getButtonName().toLowerCase().equals("submit")) {
+			createUrbanParksStaffViewJobsPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			createUrbanParksStaffHomePanel();
 		}
 	}
 	

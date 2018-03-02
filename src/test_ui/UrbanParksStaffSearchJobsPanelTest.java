@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import model.JobMap;
 import ui_staff.UrbanParksStaffSearchJobsPanel;
 
 /**
@@ -24,6 +25,8 @@ public class UrbanParksStaffSearchJobsPanelTest {
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
+		
+		JobMap jobsList = new JobMap();
 		
 		UrbanParksStaffSearchJobsPanel currentPanel = new UrbanParksStaffSearchJobsPanel(); 
 		

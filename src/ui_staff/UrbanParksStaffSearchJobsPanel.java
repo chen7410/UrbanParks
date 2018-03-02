@@ -15,7 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.font.TextAttribute;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Scanner;
@@ -30,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -58,7 +62,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		mainPanel.setLayout(buttonPanelLayout);
 		
 		JLabel searchJobsLabel = new JLabel("Search Jobs");
-		searchJobsLabel.setFont(new Font(searchJobsLabel.getName(), Font.PLAIN, 25));
+		searchJobsLabel.setFont(new Font(searchJobsLabel.getName(), Font.PLAIN, 40));
 		
 		// Writing the code to underline the welcome label.
 		Font font = searchJobsLabel.getFont();
@@ -70,11 +74,11 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout());
 		startDatePanel.setMaximumSize(new Dimension(800, 0));
-		startDatePanel.setBackground(Color.WHITE);
+		startDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout());
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
-		endDatePanel.setBackground(Color.WHITE);
+		endDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		JLabel startDateLabel = new JLabel("Start date (MM/dd/yyyy): ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("", 10);
@@ -85,6 +89,8 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		// Panel for buttons at the south quadrant of the frame.
 		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
 		
 		JButton homeButton = new JButton(
 				new AbstractAction("Home") {
@@ -101,42 +107,65 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		homeButton.setSize(GUI.BUTTON_SIZE);
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		// Parsing the different values from the date input using a Scanner.
-		Scanner dateScanner = new Scanner(startDateInputField.getText());
-		dateScanner.useDelimiter("/");
 		
-		String startMonth = dateScanner.next();
-		int startMonthInt = Integer.parseInt(startMonth);
-		String startDay = dateScanner.next();
-		int startDayInt = Integer.parseInt(startDay);
-		String startYear = dateScanner.next();
-		int startYearInt = Integer.parseInt(startYear);
-		
-		@SuppressWarnings("deprecation")
-		Date startDate = new Date(startYearInt, startMonthInt, startDayInt);
-		
-		dateScanner.close();
-//		
-//		JButton submitButton = createRadioButton(startDate, endDate);
-//		
-//		buttonsPanel.add(homeButton);
-//		buttonsPanel.add(submitButton);
+		JButton submitButton = new JButton("Submit A Button");
+		submitButton.setEnabled(false);
 		
 		
+		if (!startDateInputField.getText().isEmpty() && !endDateInputField.getText().isEmpty()) {
+			submitButton.setEnabled(true);
+			
+			/*
+			 * Parsing the different values from the start date input
+			 * using a Scanner.
+			 */
+			Scanner startDateScanner = new Scanner(startDateInputField.getText());
+			startDateScanner.useDelimiter("/");
+			
+			String startMonth = startDateScanner.next();
+			int startMonthInt = Integer.parseInt(startMonth);
+			String startDay = startDateScanner.next();
+			int startDayInt = Integer.parseInt(startDay);
+			String startYear = startDateScanner.next();
+			int startYearInt = Integer.parseInt(startYear);
+			
+			@SuppressWarnings("deprecation")
+			Date startDate = new Date(startYearInt, startMonthInt, startDayInt);
+			
+			startDateScanner.close();
+			
+			
+			/*
+			 * Parsing the different values from the end date input
+			 * using a Scanner.
+			 */
+			Scanner endDateScanner = new Scanner(startDateInputField.getText());
+			startDateScanner.useDelimiter("/");
+			
+			String endMonth = endDateScanner.next();
+			int endMonthInt = Integer.parseInt(endMonth);
+			String endDay = endDateScanner.next();
+			int endDayInt = Integer.parseInt(endDay);
+			String endYear = endDateScanner.next();
+			int endYearInt = Integer.parseInt(endYear);
+			
+			@SuppressWarnings("deprecation")
+			Date endDate = new Date(startYearInt, startMonthInt, startDayInt);
+			
+			endDateScanner.close();
+			
+			
+			LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			
+			
+			submitButton = createSubmitButton(localStartDate, localEndDate);
+		}
+
 		
-//		try {
-//			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//			Date startDate = dateFormat.parse(startDateInputField.getText());
-//			Date endDate = dateFormat.parse(endDateInputField.getText());
-//			
-//			JButton submitButton = createRadioButton(startDate, endDate);
-//			
-//			buttonsPanel.add(homeButton);
-//			buttonsPanel.add(submitButton);
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		buttonsPanel.add(homeButton);
+		buttonsPanel.add(submitButton);
+
 		
 		startDatePanel.add(startDateLabel);
 		startDatePanel.add(startDateInputField);
@@ -145,18 +174,17 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		endDatePanel.add(endDateInputField);
 		
 		
-		mainPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		mainPanel.add(Box.createRigidArea(new Dimension(0, 150)));
 		mainPanel.add(searchJobsLabel);
-		mainPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		mainPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		mainPanel.add(startDatePanel);
-		//mainPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		mainPanel.add(endDatePanel);
 		
 		myPanel.add(mainPanel, BorderLayout.CENTER);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
-	public JButton createRadioButton(final Date theStartDate, final Date theEndDate) {
+	public JButton createSubmitButton(final LocalDate theLocalStartDate, final LocalDate theLocalEndDate) {
 		JButton button = new JButton(
 				new AbstractAction("Submit") {
 
