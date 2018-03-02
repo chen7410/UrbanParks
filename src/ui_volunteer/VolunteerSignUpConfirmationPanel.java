@@ -17,6 +17,7 @@ import java.util.Observable;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -65,9 +66,8 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 
 
 	private void createButtons() {
-		JPanel buttonPanel = new JPanel(
-				new FlowLayout(FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
-		
+		JPanel buttonPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 		
 		JButton homeButton = new JButton(new AbstractAction("Home") {
 			/**
@@ -99,53 +99,53 @@ public class VolunteerSignUpConfirmationPanel extends Observable {
 		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
-
-
+	
+	
+	
 	private void createSignUpConfirmation() {
+		
 		JPanel jobConfirmationDetails = new JPanel(new GridLayout(0, 1));
 		jobConfirmationDetails.setBackground(Color.WHITE);
 		
 		JLabel confirmationLabel = new JLabel(
 				" You have successfully signed up for:");
-		confirmationLabel.setFont(new Font(null, Font.BOLD, 30));
+		confirmationLabel.setFont(new Font(null, Font.BOLD, 20));
 		jobConfirmationDetails.add(confirmationLabel);
 		
-				String detail = "      " + myJob.getJobSummary();
+		String detail = "      " + myJob.getJobSummary();
 		JLabel jobDetailSummary = new JLabel(detail, JLabel.LEFT);
-		jobDetailSummary.setFont(new Font(null, Font.PLAIN, 15));
+		jobDetailSummary.setFont(new Font(null, Font.PLAIN, 13));
 		jobDetailSummary.setPreferredSize(GUI.JLABEL_LONG_TEXT);
 		jobConfirmationDetails.add(jobDetailSummary);
-
-		JPanel jobScrollPanel = new JPanel(new GridLayout(0, 1));
-		jobScrollPanel.setBackground(Color.WHITE);
+	
+		JPanel upcomingPanel = new JPanel();
+		upcomingPanel.setLayout(new BoxLayout(upcomingPanel, BoxLayout.Y_AXIS));
+		upcomingPanel.setBackground(Color.WHITE);
+		upcomingPanel.setBorder(GUI.VOLUNTEER_SIGNUP_PANEL_BORDER);
 		
 		for (Job job: myJobs) {
 			detail = "  " + job.getJobSummary();
-			
-			JLabel jobLabel = new JLabel(detail, JLabel.LEFT);
-			jobLabel.setFont(new Font(null, Font.PLAIN, 15));
-			jobLabel.setPreferredSize(GUI.JLABEL_LONG_TEXT);
-			jobScrollPanel.add(jobLabel);
+			jobDetailSummary = new JLabel(detail, JLabel.LEFT);
+			jobDetailSummary.setFont(new Font(null, Font.PLAIN, 13));
+			jobDetailSummary.setPreferredSize(GUI.JLABEL_SHORT_TEXT);
+			upcomingPanel.add(jobDetailSummary);
 		}
-
-		Border lower = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 		
-		
-		JScrollPane jobScrollPane = new JScrollPane(jobScrollPanel);
-		jobScrollPane.setBackground(Color.WHITE);
-		jobScrollPane.setBorder(BorderFactory.createTitledBorder(
-				lower, "Here are your upcoming jobs: "));
+		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		JScrollPane upcomingScrollPane = new JScrollPane(upcomingPanel);
+		upcomingScrollPane.setBorder(BorderFactory.createTitledBorder(
+				loweredetched, "Here are all your upcoming jobs: "));
 
 		JPanel eastPanel = new JPanel(new BorderLayout());
 		eastPanel.add(jobConfirmationDetails, BorderLayout.CENTER);
-		eastPanel.add(jobScrollPane, BorderLayout.SOUTH);
 		eastPanel.setBackground(Color.WHITE);
-
+	
 		JPanel northPanel = new JPanel(new BorderLayout());
 		northPanel.add(eastPanel, BorderLayout.NORTH);
 		northPanel.setBackground(Color.WHITE);
-
-		myPanel.add(northPanel, BorderLayout.CENTER);
+	
+		myPanel.add(northPanel, BorderLayout.NORTH);
+		myPanel.add(upcomingScrollPane, BorderLayout.CENTER);
 	}
 
 	/**
