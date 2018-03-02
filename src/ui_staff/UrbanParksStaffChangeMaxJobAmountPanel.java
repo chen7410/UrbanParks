@@ -22,6 +22,12 @@ import model.JobMap;
 import ui.ButtonSignal;
 import ui.GUI;
 
+/**
+ * 
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	
 	private JPanel myPanel;

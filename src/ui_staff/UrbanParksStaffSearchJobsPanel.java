@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,9 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -40,7 +44,7 @@ import ui.GUI;
 /**
  * 
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version March 5, 2018
  */
 public class UrbanParksStaffSearchJobsPanel extends Observable {
@@ -80,10 +84,10 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
 		endDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
-		JLabel startDateLabel = new JLabel("Start date (MM/dd/yyyy): ", SwingConstants.CENTER);
+		JLabel startDateLabel = new JLabel("Start date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("", 10);
 		
-		JLabel endDateLabel = new JLabel("End date (MM/dd/yyyy): ", SwingConstants.CENTER);
+		JLabel endDateLabel = new JLabel("End date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField endDateInputField = new JTextField("", 10);
 		
 		
@@ -108,60 +112,51 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		JButton submitButton = new JButton("Submit A Button");
-		submitButton.setEnabled(false);
-		
-		
-		if (!startDateInputField.getText().isEmpty() && !endDateInputField.getText().isEmpty()) {
-			submitButton.setEnabled(true);
-			
-			/*
-			 * Parsing the different values from the start date input
-			 * using a Scanner.
-			 */
-			Scanner startDateScanner = new Scanner(startDateInputField.getText());
-			startDateScanner.useDelimiter("/");
-			
-			String startMonth = startDateScanner.next();
-			int startMonthInt = Integer.parseInt(startMonth);
-			String startDay = startDateScanner.next();
-			int startDayInt = Integer.parseInt(startDay);
-			String startYear = startDateScanner.next();
-			int startYearInt = Integer.parseInt(startYear);
-			
-			@SuppressWarnings("deprecation")
-			Date startDate = new Date(startYearInt, startMonthInt, startDayInt);
-			
-			startDateScanner.close();
-			
-			
-			/*
-			 * Parsing the different values from the end date input
-			 * using a Scanner.
-			 */
-			Scanner endDateScanner = new Scanner(startDateInputField.getText());
-			startDateScanner.useDelimiter("/");
-			
-			String endMonth = endDateScanner.next();
-			int endMonthInt = Integer.parseInt(endMonth);
-			String endDay = endDateScanner.next();
-			int endDayInt = Integer.parseInt(endDay);
-			String endYear = endDateScanner.next();
-			int endYearInt = Integer.parseInt(endYear);
-			
-			@SuppressWarnings("deprecation")
-			Date endDate = new Date(startYearInt, startMonthInt, startDayInt);
-			
-			endDateScanner.close();
-			
-			
-			LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			
-			
-			submitButton = createSubmitButton(localStartDate, localEndDate);
-		}
+		JButton submitButton = new JButton(new AbstractAction("Submit A Button") {
 
+			/** */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (startDateInputField.getText().isEmpty() || endDateInputField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a valid date.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} else {
+					
+					DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+					
+					LocalDate localStartDate = null;
+					LocalDate localEndDate = null;
+					
+					try {
+						localStartDate = LocalDate.parse(startDateInputField.getText(), myDateFormatter);
+						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
+						
+						
+						// TODO: check if the start date is before or the same day as the end date
+						
+						Object[] localDateArray = new LocalDate[2];
+						localDateArray[0] = localStartDate;
+						localDateArray[1] = localEndDate;
+						
+						setChanged();
+						notifyObservers(new ButtonSignal("submit", localDateArray));
+						
+					} catch (final DateTimeParseException theException) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Invalid date. Please "
+								+ "enter the dates using"
+								+ " MM/DD/YY format.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}
+		});
+		submitButton.setSize(GUI.BUTTON_SIZE);
+		submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		
 		buttonsPanel.add(homeButton);
 		buttonsPanel.add(submitButton);
@@ -182,22 +177,6 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		myPanel.add(mainPanel, BorderLayout.CENTER);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
-	}
-	
-	public JButton createSubmitButton(final LocalDate theLocalStartDate, final LocalDate theLocalEndDate) {
-		JButton button = new JButton(
-				new AbstractAction("Submit") {
-
-			/** */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setChanged();
-				notifyObservers(new ButtonSignal("submit", 0));
-			}
-		});
-		return button;
 	}
 	
 	public JPanel getPanel() {
