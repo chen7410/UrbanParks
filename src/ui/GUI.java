@@ -402,9 +402,9 @@ public class GUI extends JFrame implements Observer {
 			remove(myCurrentPanel);
 			createLoginPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("submit a job")) {
-			
+			createParkManagerSubmitJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
-			
+			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
 			
 		}
