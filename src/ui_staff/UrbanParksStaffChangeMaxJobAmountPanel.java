@@ -2,6 +2,8 @@ package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -10,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import javax.swing.AbstractAction;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,12 +27,10 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	
 	private JPanel myPanel;
 	private JobMap myJobs;
-	private int myCurrentNumOfPendingJobs;
 	
 	public UrbanParksStaffChangeMaxJobAmountPanel(final JobMap theJobs) {
 		myPanel = new JPanel(new BorderLayout());
 		myJobs = theJobs;
-		myCurrentNumOfPendingJobs = myJobs.getMaxJobAmount();
 		setUp();
 	}
 	
@@ -49,7 +51,6 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO: Observer?
 				setChanged();
 				notifyObservers(new ButtonSignal("submit change", 0));
 			}
@@ -63,42 +64,44 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	
 	
 	private void createChangeNumberPanel() {
-		JPanel changeNumberPanel = new JPanel(new GridLayout(0, 1));
-		changeNumberPanel.setBackground(Color.WHITE);
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBackground(Color.WHITE);
+		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
+		centerPanel.setLayout(layout);
 		
+		JLabel currentNumberLabel = new JLabel("Current number of maximum pending jobs: "
+				 + myJobs.getMaxJobAmount());
+		currentNumberLabel.setFont(new Font(null, Font.PLAIN, 30));
+		currentNumberLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		JLabel currentMaxLabel = new JLabel("Current number of maximum pending jobs: "
-				+ myCurrentNumOfPendingJobs);
-		currentMaxLabel.setFont(new Font(null, Font.BOLD, 20));
-		changeNumberPanel.add(currentMaxLabel);
+		JPanel textFieldPanel = new JPanel();
+		textFieldPanel.setBackground(Color.WHITE);
 		
-		JLabel headerLabel = new JLabel("Please enter the new number in the box below.");
-		headerLabel.setFont(new Font(null, Font.BOLD, 20));
-		changeNumberPanel.add(headerLabel);
+		JLabel newNumberLabel = new JLabel("Enter new maximum number: ");
+		newNumberLabel.setFont(new Font(null, Font.PLAIN, 20));
+
+		JTextField newNumberTextField = new JTextField("", 20);
 		
-		JPanel textPanel = new JPanel();
-		textPanel.setBackground(Color.WHITE);
-		JLabel label = new JLabel("New Number: ");
-		textPanel.add(label);
-		
-		//TODO: ActionListener?
-		JTextField textField = new JTextField(20);
-		textField.addActionListener(new ActionListener() {
+		newNumberTextField.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String str = textField.getText();
+				String str = newNumberTextField.getText();
 				int newNumber = Integer.parseInt(str);
 				myJobs.setMaxJobAmount(newNumber);	
-			}
+			}	
 		});
 		
-		textPanel.add(textField);
+		textFieldPanel.add(newNumberLabel);
+		textFieldPanel.add(newNumberTextField);
+		
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		centerPanel.add(currentNumberLabel);
+		centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		centerPanel.add(textFieldPanel);
 
+		myPanel.add(centerPanel);
 		
-		changeNumberPanel.add(textPanel, BorderLayout.WEST);
-		
-		myPanel.add(changeNumberPanel, BorderLayout.CENTER);
 	}
 
 	public JPanel getPanel() {
