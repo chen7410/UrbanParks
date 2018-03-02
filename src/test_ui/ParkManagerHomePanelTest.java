@@ -33,7 +33,7 @@ public class ParkManagerHomePanelTest {
 		jobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		ParkManager currentParkManager = (ParkManager) users.getUser("matthew");
-		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getJobList(jobs)); 
+		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getSortedJobList(jobs)); 
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		

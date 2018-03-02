@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -86,6 +87,18 @@ public abstract class User implements Serializable {
 	public String getUserType() {
 		return myUserType;
 	}
+	
+	protected final void setUserType(final String theUserType) {
+		myUserType = theUserType;
+	}
+	
+	/**
+	 * Retrieves a String of user information including: first name, last name, and user type.
+	 * @return User's first name, last name, and user type.
+	 */
+	public String getUserInformation() {
+		return myFirstName + " " + myLastName + " - " + myUserType;
+	}
 
 	/**
 	 * Returns a list of job belongs to this user. This list can be empty but not
@@ -96,7 +109,7 @@ public abstract class User implements Serializable {
 	 * @return a list of job belongs to this user.
 	 * @throws IllegalArgumentException if theJobList is null
 	 */
-	public List<Job> getJobList(final JobMap theJobList) {
+	public List<Job> getSortedJobList(final JobMap theJobList) {
 		if(theJobList == null) {
 			throw new IllegalArgumentException("The job collection cannot be null.");
 		}
@@ -107,6 +120,7 @@ public abstract class User implements Serializable {
 				jobList.add(j);
 			}
 		}
+		Collections.sort(jobList);
 		return jobList;
 	}
 }

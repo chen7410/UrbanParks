@@ -30,7 +30,7 @@ public class VolunteerHomePanelTest {
 		users.loadUserMap(UserMap.USERS_DATA_FILE);
 		jobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		Volunteer currentVolunteer = (Volunteer) users.getUser("tuan");
-		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer.getJobList(jobs));
+		VolunteerHomePanel currentPanel = new VolunteerHomePanel(currentVolunteer.getSortedJobList(jobs));
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		

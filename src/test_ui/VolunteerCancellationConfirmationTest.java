@@ -39,7 +39,7 @@ public class VolunteerCancellationConfirmationTest {
     	myVolunteer = (Volunteer) myUsers.getUser("hasnah");
     	List<Job> jobs = myJobs.getEligibleJobs(myVolunteer);
     	myJob = (Job) jobs.get(0);
-    	myPanel = new VolunteerCancellationConfirmationPanel(myJob,  myVolunteer.getJobList(myJobs));
+    	myPanel = new VolunteerCancellationConfirmationPanel(myJob,  myVolunteer.getSortedJobList(myJobs));
     	
     	myFrame.add(myPanel.getPanel(), BorderLayout.CENTER);
     	myFrame.pack();

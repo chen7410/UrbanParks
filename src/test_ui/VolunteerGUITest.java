@@ -89,7 +89,7 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerHomePanel() {
 			remove(myCurrentPanel);
-			VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getJobList(myJobs));
+			VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getSortedJobList(myJobs));
 			myCurrentPanel = homePanel.getPanel();
 			homePanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
@@ -118,7 +118,7 @@ public class VolunteerGUITest {
 		private void createVolunteerSignUpConfirmationPanel(final int theJobID) {
 			remove(myCurrentPanel);
 			VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(myJobs.getJob(theJobID), 
-					myVolunteer.getJobList(myJobs));
+					myVolunteer.getSortedJobList(myJobs));
 			myCurrentPanel = confirmationPanel.getPanel();
 			confirmationPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
@@ -127,7 +127,7 @@ public class VolunteerGUITest {
 		
 		private void createVolunteerViewAllUpCommingJobPanel() {
 			remove(myCurrentPanel);
-			VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getJobList(myJobs));
+			VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
 			myCurrentPanel = upcomingPanel.getPanel();
 			upcomingPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
@@ -146,7 +146,7 @@ public class VolunteerGUITest {
 		private void createVolunteerCancellationConfirmationPanel(final int theJobID) {
 			remove(myCurrentPanel);
 			VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(
-					myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
+					myJobs.getJob(theJobID), myVolunteer.getSortedJobList(myJobs));
 			myCurrentPanel = confirmationPanel.getPanel();
 			confirmationPanel.addObserver(this);
 			add(myCurrentPanel, BorderLayout.CENTER);
