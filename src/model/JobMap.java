@@ -34,7 +34,7 @@ public class JobMap {
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
 	
 	/** The maximum number of pending jobs in the system.*/
-	private static int MAX_JOB_AMOUNT = 10;
+	private int maxJobAmount = 10;
 
 	private HashMap<Integer, Job> myJobs;
 
@@ -43,7 +43,15 @@ public class JobMap {
 	}
 
 	public int getMaxJobAmount() {
-		return MAX_JOB_AMOUNT;
+		return maxJobAmount;
+	}
+	
+	/**
+	 * Check if the system reach the maximum job amount.
+	 * @return true if full, false otherwise.
+	 */
+	public boolean isFull (){
+		return myJobs.size() >= maxJobAmount;
 	}
 	
 	/**
@@ -55,7 +63,7 @@ public class JobMap {
 		if (theMaxJobAmount <= 0) {
 			throw new IllegalArgumentException("Illegal job amount: " + theMaxJobAmount);
 		}
-		MAX_JOB_AMOUNT = theMaxJobAmount;
+		maxJobAmount = theMaxJobAmount;
 	}
 	
 	/**
@@ -170,7 +178,7 @@ public class JobMap {
     }
 
 	public boolean isLessMaxAmountJobs() {
-		return size() < MAX_JOB_AMOUNT;
+		return size() < maxJobAmount;
 	}
 	
 
