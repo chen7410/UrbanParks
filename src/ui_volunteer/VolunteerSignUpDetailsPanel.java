@@ -20,8 +20,9 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * Panel for when a volunteer views the details of a job they want
- * to sign up for. It will notify Observers when a button is pressed.
+ * A JPanel that will show the details of the job that volunteer
+ * wants to sign up for. The panel will also have an option to 
+ * return the home page or confirm the job sign up.
  * 
  * @author  Group 7
  * @version March 5, 2018

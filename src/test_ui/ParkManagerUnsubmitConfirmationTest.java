@@ -36,7 +36,7 @@ public class ParkManagerUnsubmitConfirmationTest {
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
 		myConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
-				myParkManager.getJobList(myJobs).get(0), myParkManager.getJobList(myJobs));
+				myParkManager.getSortedJobList(myJobs).get(0), myParkManager.getSortedJobList(myJobs));
     	
 		myFrame.setTitle("Urban Parks - Park Manager - " + myParkManager.getLastName());
 		myFrame.add(myConfirmationPanel.getPanel(), BorderLayout.CENTER);

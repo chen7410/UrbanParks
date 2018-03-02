@@ -177,20 +177,6 @@ public class JobMap {
         }
 	    return eligibleJobs;
     }
-	
-	/**
-	 * 
-	 * 
-	 * @return The list of all the jobs in the JobMap.
-	 */
-	public List<Job> getAllJobs() {
-	    Job[] jobs = getSortedJobsArray();
-	    List<Job> jobsList = new ArrayList<>();
-	    for (int i = 0; i < jobs.length; i++) {
-	    	jobsList.add(jobs[i]);
-        }
-	    return jobsList;
-    }
 
 	public boolean isLessMaxAmountJobs() {
 		return size() < maxJobAmount;

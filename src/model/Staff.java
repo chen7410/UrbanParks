@@ -23,6 +23,7 @@ public class Staff extends User {
 	 */
 	public Staff(String theUserName, String theFirstName, String theLastName) {
 		super(theUserName, theFirstName, theLastName);
+		setUserType("Staff");
 	}
 	
 	/**

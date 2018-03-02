@@ -36,7 +36,7 @@ public class ParkManagerViewAllUpCommingJobPanelTest {
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
 		myUpCommingJobPanel = new ParkManagerViewAllUpCommingJobPanel(
-				myParkManager.getJobList(myJobs));
+				myParkManager.getSortedJobList(myJobs));
 		
 		//System.out.println(myVolunteer.getJobList(myJobs).size());
 		

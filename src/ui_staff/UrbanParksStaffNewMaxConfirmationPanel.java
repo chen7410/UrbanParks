@@ -24,9 +24,15 @@ import model.Job;
 import model.JobMap;
 import ui.ButtonSignal;
 import ui.GUI;
+
 /**
+ * A JPanel that will allow Urban Parks staff that to 
+ * change the maximum number of pending jobs that are in 
+ * the system. This panel will show the current number of
+ * jobs and will have a text field where the new number of 
+ * job can be entered. 
  * 
- * @author Group 7
+ * @author  Group 7
  * @version March 5, 2018
  */
 public class UrbanParksStaffNewMaxConfirmationPanel extends Observable {

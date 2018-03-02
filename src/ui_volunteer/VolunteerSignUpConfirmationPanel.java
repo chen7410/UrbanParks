@@ -30,11 +30,14 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * This panel is used to confirm a volunteer that they have signed up for a job
- * successfully. It will notify observers when a button is pressed.
+ * A JPanel that will show the volunteers a confirmation of 
+ * the job they have signed up for. It will also display all
+ * the upcoming jobs that the volunteer has. The panel will
+ * have an option for the volunteer to either sign up for a
+ * new job or return to the home. 
  * 
- * @author Group 7
- * @version  March 5, 2018
+ * @author  Group 7
+ * @version March 5, 2018
  */
 
 public class VolunteerSignUpConfirmationPanel extends Observable {
