@@ -64,12 +64,13 @@ public class VolunteerHomePanel extends Observable {
 
 		// Panel on the left side of the overall home panel.		
 		JPanel upcomingJobsPanel = new JPanel(new BorderLayout());
-		upcomingJobsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		upcomingJobsPanel.setBackground(Color.WHITE);
 		upcomingJobsPanel.setBorder(BorderFactory.createTitledBorder("Your Upcoming Jobs"));
 		
 		// Radio buttons panel
-		JPanel radioButtonsPanel = new JPanel(new GridLayout(0, 1));
-		radioButtonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		JPanel radioButtonsPanel = new JPanel();
+		radioButtonsPanel.setLayout(new BoxLayout(radioButtonsPanel, BoxLayout.Y_AXIS));
+		radioButtonsPanel.setBackground(Color.WHITE);
 		radioButtonsPanel.setBorder(BorderFactory.createEmptyBorder());
 		
 		
@@ -97,6 +98,7 @@ public class VolunteerHomePanel extends Observable {
 				radioButton.setBackground(Color.WHITE);
 				buttonGroup.add(radioButton);
 				radioButtonsPanel.add(radioButton);
+				radioButtonsPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
 				if (index == 0) {
 					radioButton.setSelected(true);
 					// Selecting the first job as the default job to be viewed.
