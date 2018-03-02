@@ -217,11 +217,20 @@ public class ParkManagerHomePanel extends Observable {
 		myPanel.add(splitPane, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Creates a radio button used to place a the different jobs
+	 * which the Park Manager user has occurring at their park.
+	 * 
+	 * Pre-condition: The given job must have been initialized to a
+	 * 					non-null value;
+	 * @param theJob The given job to create a radio button for.
+	 * @return A radio button.
+	 */
 	private JRadioButton createRadioButton(final Job theJob) {
 		JRadioButton radioButton = new JRadioButton(
 				new AbstractAction(theJob.getJobSummary()) {
 
-			/** */
+			/** A generated serial version UID for object Serialization.*/
 			private static final long serialVersionUID = 1L;
 
 			@Override
