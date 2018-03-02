@@ -13,7 +13,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.JobMap;
@@ -33,34 +35,13 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 	
 	private void setUp() {
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
-		createButtons();
-		createChangeNumberPanel();
+		createPanel();
 	}
 	
 
-	private void createButtons() {
-		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
-				GUI.BUTTON_GAP_WIDTH,
-				GUI.BUTTON_GAP_HEIGHT));
-		JButton submitChangeButton = new JButton(new AbstractAction("Submit Changes") {
+	private void createPanel() {
 
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setChanged();
-				notifyObservers(new ButtonSignal("submit change", 0));
-			}
-		});
-		
-		submitChangeButton.setPreferredSize(GUI.BUTTON_SIZE);
-		buttonsPanel.add(submitChangeButton);
-		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
-		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
-	}
 	
-	
-	private void createChangeNumberPanel() {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(Color.WHITE);
 		BoxLayout layout = new BoxLayout(centerPanel, BoxLayout.Y_AXIS);
@@ -76,18 +57,36 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 		
 		JLabel newNumberLabel = new JLabel("Enter the new maximum number: ");
 		newNumberLabel.setFont(new Font(null, Font.BOLD, 15));
-
 		JTextField newNumberTextField = new JTextField("", 20);
 		
-		newNumberTextField.addActionListener(new ActionListener() {
-			
+		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
+				GUI.BUTTON_GAP_WIDTH,
+				GUI.BUTTON_GAP_HEIGHT));
+		JButton submitChangeButton = new JButton(new AbstractAction("Submit Change") {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String str = newNumberTextField.getText();
-				int newNumber = Integer.parseInt(str);
-				myJobs.setMaxJobAmount(newNumber);	
-			}	
+				if (str.length() > 0) {
+					int newNumber = Integer.parseInt(str);
+					myJobs.setMaxJobAmount(newNumber);
+					setChanged();
+					notifyObservers(new ButtonSignal("submit change", 0));
+					
+				} else {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a valid number.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
+		
+		submitChangeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		buttonsPanel.add(submitChangeButton);
+		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
+
 		
 		textFieldPanel.add(newNumberLabel);
 		textFieldPanel.add(newNumberTextField);
