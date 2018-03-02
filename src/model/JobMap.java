@@ -28,8 +28,9 @@ import java.util.List;
  * @see     HashMap
  */
 public class JobMap {
-	/*
-	 * TODO I don't think we need this. Just make it a private variable.
+	/**
+	 * The name of the serialized file that will be used to 
+	 * load the jobs' information from.
 	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
 	
