@@ -14,9 +14,11 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Observable;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 import model.Job;
 import model.ParkManager;
@@ -72,9 +76,9 @@ public class ParkManagerSubmitJobPanel extends Observable {
 	 * Set up this ParkManagerSubmitJobPanel.
 	 */
 	private void setup() {
-		JLabel topLabel= new JLabel("Please fill in the job detail");
+		JLabel topLabel= new JLabel("Fill in the job detail");
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
-		JPanel topLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(topLabel);
 		
 		JLabel parkName = new JLabel(" Park name: ");
@@ -110,13 +114,13 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		endDatePanel.add(endDateFormat);
 		
 		//text area
-		JPanel jobDescriptionPanel = new JPanel(new BorderLayout());
+		JPanel jobDescriptionPanel = new JPanel(new FlowLayout());
 		JScrollPane textAreaScrollPane = new JScrollPane(myJobDescriptionTa,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		//jlabel miss
-		jobDescriptionPanel.add(jobDescription, BorderLayout.NORTH);
-		jobDescriptionPanel.add(textAreaScrollPane, BorderLayout.CENTER);
+		
+		jobDescriptionPanel.add(jobDescription);
+		jobDescriptionPanel.add(textAreaScrollPane);
 		
 		BoxLayout box = new BoxLayout(myCenterPanel, BoxLayout.Y_AXIS);
 		myCenterPanel.setLayout(box);
@@ -124,7 +128,11 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		myCenterPanel.add(endDatePanel);
 		myCenterPanel.add(parkNamePanel);
 		myCenterPanel.add(locationPanel);
+		myCenterPanel.add(jobDescription);
 		myCenterPanel.add(textAreaScrollPane);
+		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+		myCenterPanel.setBorder(BorderFactory.createTitledBorder(
+				loweredetched, "Submit a job"));
 		
 
 		//Button
@@ -137,6 +145,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		buttonPanel.add(backButton);
 		buttonPanel.add(nextButton);
 		buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
 		myPanel.add(myCenterPanel, BorderLayout.CENTER);
@@ -172,16 +181,35 @@ public class ParkManagerSubmitJobPanel extends Observable {
 						|| myLocationTf.getText().isEmpty()
 						|| myJobDescriptionTa.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(new JFrame(),
-							"Please fill in all the needed information!",
+							"Please fill in all the information!",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
-				//TODO Needs to check for date in wrong format
-//				Job job = createCandidateJob(myStartDateTf.getText(),
-//				myEndDateTf.getText(), myParkNameTf.getText(),
-//				myParkManager, myLocationTf.getText(),
-//				myJobDescriptionTa.getText());
-//				mySubmittingJob = job;
-				
+				LocalDate startDate = null;
+				LocalDate endDate = null;
+				//check format
+				try {
+					startDate = LocalDate.parse(myStartDateTf.getText(),
+							GUI.DATE_FORMATTER);
+					endDate = LocalDate.parse(myEndDateTf.getText(),
+							GUI.DATE_FORMATTER);
+				} catch (final DateTimeParseException theException) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a valid date format MM/DD/YY",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				}
+				if (startDate.isBefore(LocalDate.now()) || endDate.isBefore(LocalDate.now())) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Invalid date. The date"
+										+ " has already passed.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} 
+				else if (startDate.isAfter(endDate)) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Start date cannot be after end date.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} 
+		 
+				//check job
 				Job job = createCandidateJob(myStartDateTf.getText(),
 						myEndDateTf.getText(), myParkNameTf.getText(),
 						myParkManager, myLocationTf.getText(),
@@ -193,25 +221,21 @@ public class ParkManagerSubmitJobPanel extends Observable {
 							+ Job.MAX_JOB_LENGTH + " days",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
-				
 				else if (!job.isJobEndsWithinMaxDays()) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"You cannot submit a job that is more than "
 							+ Job.MAX_END_DAY + " in the future",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				} 
+				}
 				else {
 					//send a job to observers
-					mySubmittingJob = job;
 					JOptionPane.showMessageDialog(new JFrame(),
-							"Job created! Temporary popup message",
-							"", JOptionPane.OK_OPTION);
+							"Job created!",
+							"", JOptionPane.DEFAULT_OPTION);
 					setChanged();
 					notifyObservers(new ButtonSignal("next", job));
 				}
-				
 			}
-			
 		});
 		btn.setPreferredSize(new Dimension(GUI.BUTTON_SIZE));
 		return btn;
