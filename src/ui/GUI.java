@@ -276,9 +276,9 @@ public class GUI extends JFrame implements Observer {
 		if (theSignal.getButtonName().toLowerCase().equals("home")) {
 			createVolunteerHomePanel();
 		} 
-//		else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
-//			createVolunteerViewAllUpCommingJobPanel();
-//		}
+		else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
+			createVolunteerViewAllUpCommingJobPanel();
+		}
 	}
 
 	private void volunteerPanelsCases(final Observable theObservable, final Object theMessage) {
@@ -313,7 +313,6 @@ public class GUI extends JFrame implements Observer {
 		submitJobPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
-		// TODO Needs to check for invalid date format
 	}
 	
 	private void ParkManagerSubmitJobActions(final ButtonSignal theSignal) {
@@ -400,7 +399,7 @@ public class GUI extends JFrame implements Observer {
 		} else if (theSignal.getButtonName().toLowerCase().equals("upcoming")) {
 			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
-			
+			createParkManagerRemoveVerification(theSignal.getJobID());
 		}
 	}
 	

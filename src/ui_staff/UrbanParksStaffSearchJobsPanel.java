@@ -119,7 +119,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		JButton submitButton = new JButton(new AbstractAction("Submit A Button") {
+		JButton searchButton = new JButton(new AbstractAction("Search") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -142,6 +142,8 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
 						
 						
+						
+						
 						// TODO: check if the start date is before or the same day as the end date
 						
 						Object[] localDateArray = new LocalDate[2];
@@ -161,12 +163,13 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 				}
 			}
 		});
-		submitButton.setSize(GUI.BUTTON_SIZE);
-		submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		searchButton.setSize(GUI.BUTTON_SIZE);
+		searchButton.setPreferredSize(GUI.BUTTON_SIZE);
+		searchButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
 		buttonsPanel.add(homeButton);
-		buttonsPanel.add(submitButton);
+		buttonsPanel.add(searchButton);
 
 		
 		startDatePanel.add(startDateLabel);

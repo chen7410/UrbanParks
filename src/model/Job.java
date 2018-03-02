@@ -154,7 +154,8 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * Check whether a Job is overlapped with theJob.
+	 * Check whether a Job is overlapped with theJob
+	 * if they have overlapping start and end dates.
 	 * 
 	 * @param theJob
 	 * @return true if a Job is overlapped with theJob; false otherwise.

@@ -83,22 +83,45 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String str = newNumberTextField.getText();
-				if (str.length() > 0) {
-					int newNumber = Integer.parseInt(str);
-					myJobs.setMaxJobAmount(newNumber);
-					setChanged();
-					notifyObservers(new ButtonSignal("submit change", 0));
-					
-				} else {
+				String str = null;
+				try {
+					str = newNumberTextField.getText();
+					if (str.length() > 0) {
+						int newNumber = Integer.parseInt(str);
+						myJobs.setMaxJobAmount(newNumber);
+						setChanged();
+						notifyObservers(new ButtonSignal("submit change", 0));
+						
+					} else {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Please enter a valid number.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (NumberFormatException theException) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Please enter a valid number.",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} catch (IllegalArgumentException theException) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a positive integer.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
+				
 			}
 		});
 		
+		JButton homeButton = new JButton(new AbstractAction("Home") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged();
+				notifyObservers(new ButtonSignal("home", 0));
+			}
+		});
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		submitChangeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		buttonsPanel.add(homeButton);
 		buttonsPanel.add(submitChangeButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
