@@ -2,7 +2,7 @@ package test_ui;
 
 import model.UserMap;
 
-public class addUser {
+public class addUserIgnoreThisClass {
 	private static UserMap myUsers;
 
 	public static void main(String[] args) {
