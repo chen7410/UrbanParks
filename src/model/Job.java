@@ -94,12 +94,6 @@ public class Job implements Serializable, Comparable<Job> {
 		if (theEndDate == null) {
 			throw new IllegalArgumentException("End date cannot be null");
 		}
-		if (!theStartDate.isBefore(theEndDate) && !theStartDate.isEqual(theEndDate)) {
-			throw new IllegalArgumentException("Start date cannot be after end date");
-		}
-		if (!theEndDate.isAfter(theStartDate) && !theEndDate.isEqual(theStartDate)) {
-			throw new IllegalArgumentException("End date cannot be before start date");
-		}
 		if (theParkName == null || theParkName.isEmpty()) {
 			throw new IllegalArgumentException("Park name cannot be null or empty");
 		}
@@ -278,18 +272,18 @@ public class Job implements Serializable, Comparable<Job> {
 		return details;
 	}
 
-//	@Override
-//	public String toString() {
-//		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
-//		StringBuilder sb = new StringBuilder(100);
-//		sb.append(">>> Park name: " + myParkName + '\n');
-//		sb.append("    Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName() + '\n');
-//		sb.append("    Park location: " + myLocation + '\n');
-//		sb.append("    Job start date: " + myStartDate.format(dateFormatter) + '\n');
-//		sb.append("    Job end date: " + myEndDate.format(dateFormatter) + '\n');
-//		sb.append("    Job description: " + myDescription + "\n");
-//		return sb.toString();
-//	}
+	@Override
+	public String toString() {
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		StringBuilder sb = new StringBuilder(100);
+		sb.append(">>> Park name: " + myParkName + '\n');
+		sb.append("    Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName() + '\n');
+		sb.append("    Park location: " + myLocation + '\n');
+		sb.append("    Job start date: " + myStartDate.format(dateFormatter) + '\n');
+		sb.append("    Job end date: " + myEndDate.format(dateFormatter) + '\n');
+		sb.append("    Job description: " + myDescription + "\n");
+		return sb.toString();
+	}
 
 	@Override
 	public int compareTo(Job theJob) {

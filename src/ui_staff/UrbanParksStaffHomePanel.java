@@ -55,8 +55,8 @@ public class UrbanParksStaffHomePanel extends Observable{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				setChanged();
-//				notifyObservers(new ButtonSignal("search jobs", 0));
+				setChanged();
+				notifyObservers(new ButtonSignal("search jobs", 0));
 			}
 		});
 		searchJobsButton.setSize(GUI.BUTTON_SIZE);
@@ -71,8 +71,8 @@ public class UrbanParksStaffHomePanel extends Observable{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				setChanged();
-//				notifyObservers(new ButtonSignal("pending jobs size", 0));
+				setChanged();
+				notifyObservers(new ButtonSignal("pending jobs size", 0));
 			}
 		});
 		pendingJobsSizeButton.setSize(GUI.BUTTON_SIZE);

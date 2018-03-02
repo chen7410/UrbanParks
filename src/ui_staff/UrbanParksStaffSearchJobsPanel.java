@@ -165,7 +165,8 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO: something 
+				setChanged();
+				notifyObservers(new ButtonSignal("submit", 0));
 			}
 		});
 		return button;
