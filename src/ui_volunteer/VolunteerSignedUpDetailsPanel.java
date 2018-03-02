@@ -20,8 +20,9 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * Panel for when a volunteer views the details of a job they have
- * signed up for. It will notify Observers when a button is pressed.
+ * A JPanel that will show the details of the job that the 
+ * volunteer wants to cancel. It will also give them an option 
+ * to return to the home page and to remove the job.
  * 
  * @author  Group 7
  * @version March 5, 2018

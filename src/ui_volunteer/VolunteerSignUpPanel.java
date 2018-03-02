@@ -26,8 +26,12 @@ import javax.swing.border.EtchedBorder;
 import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
+
 /**
- *
+ * A JPanel that will show all the jobs that a volunteer is 
+ * eligible to sign up for. At the bottom of the panel, there's
+ * an option to view the selected job details or return to the 
+ * home panel.
  * 
  * @author  Group 7
  * @version March 5, 2018

@@ -32,7 +32,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will be the volunteer's home panel. It will show a
+ * list of all their upcoming jobs on the left. On the right side, it
+ * will show the options that a volunteer can choose from. The options
+ * are: sign up, view all upcoming jobs, and log out.
  * 
  * @author Group 7
  * @version March 5, 2018
