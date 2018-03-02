@@ -98,7 +98,18 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 			}
 		});
 		
+		JButton homeButton = new JButton(new AbstractAction("Home") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setChanged();
+				notifyObservers(new ButtonSignal("home", 0));
+			}
+		});
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		submitChangeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		buttonsPanel.add(homeButton);
 		buttonsPanel.add(submitChangeButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);

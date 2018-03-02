@@ -189,6 +189,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 							"Please fill in all the information!",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
+				else {
 				LocalDate startDate = null;
 				LocalDate endDate = null;
 				//check format
@@ -197,50 +198,53 @@ public class ParkManagerSubmitJobPanel extends Observable {
 							GUI.DATE_FORMATTER);
 					endDate = LocalDate.parse(myEndDateTf.getText(),
 							GUI.DATE_FORMATTER);
+
+
+			 
+					//check job
+					Job job = createCandidateJob(myStartDateTf.getText(),
+								myEndDateTf.getText(), myParkNameTf.getText(),
+								myParkManager, myLocationTf.getText(),
+								myJobDescriptionTa.getText());
+					
+					
+					
+					if (!job.isJobWithinMaxDays()) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Job length cannot be more than "
+								+ Job.MAX_JOB_LENGTH + " days",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					}
+					else if (!job.isJobEndsWithinMaxDays()) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"You cannot submit a job that is more than "
+								+ Job.MAX_END_DAY + " in the future",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} else if (job.isPassed()) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Invalid date. The date"
+											+ " has already passed.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} else if (startDate.isAfter(endDate)) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Start date cannot be after end date.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} 
+					else {
+						//send a job to observers
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Job created!",
+								"", JOptionPane.DEFAULT_OPTION);
+						setChanged();
+						notifyObservers(new ButtonSignal("next", job));
+					}
 				} catch (final DateTimeParseException theException) {
 					JOptionPane.showMessageDialog(new JFrame(),
 							"Please enter a valid date format MM/DD/YY",
 							"Invalid input", JOptionPane.ERROR_MESSAGE);
 				}
-				if (startDate.isBefore(LocalDate.now()) || endDate.isBefore(LocalDate.now())) {
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Invalid date. The date"
-										+ " has already passed.",
-							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				} 
-				else if (startDate.isAfter(endDate)) {
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Start date cannot be after end date.",
-							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				} 
-		 
-				//check job
-				Job job = createCandidateJob(myStartDateTf.getText(),
-						myEndDateTf.getText(), myParkNameTf.getText(),
-						myParkManager, myLocationTf.getText(),
-						myJobDescriptionTa.getText());
 				
-				if (!job.isJobWithinMaxDays()) {
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Job length cannot be more than "
-							+ Job.MAX_JOB_LENGTH + " days",
-							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				}
-				else if (!job.isJobEndsWithinMaxDays()) {
-					JOptionPane.showMessageDialog(new JFrame(),
-							"You cannot submit a job that is more than "
-							+ Job.MAX_END_DAY + " in the future",
-							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					//send a job to observers
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Job created!",
-							"", JOptionPane.DEFAULT_OPTION);
-					setChanged();
-					notifyObservers(new ButtonSignal("next", job));
-				}
-			}
+			}}
 		});
 		btn.setPreferredSize(new Dimension(GUI.BUTTON_SIZE));
 		return btn;
