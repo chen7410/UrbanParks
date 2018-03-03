@@ -158,15 +158,15 @@ public class ParkManagerHomePanel extends Observable {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("myJobMap.isFull(): " + myJobMap.isFull());
-				
-				
-					
 				setChanged();
 				notifyObservers(new ButtonSignal("submit a job", 0));
 			}
 		});
 		
+		/*
+		 * Checking if the number of Jobs in the whole system is not
+		 * surpassing maximum number of job defined in the JobMap.
+		 */
 		if (myJobMap.isFull()) {
 			signUpButton.setEnabled(false);
 		} else {

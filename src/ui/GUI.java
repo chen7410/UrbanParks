@@ -372,7 +372,7 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
-				theJob, myParkManager.getJobList(myJobs));
+				theJob, myParkManager.getJobList(myJobs), myJobs);
 		myCurrentPanel = submitConfirmationPanel.getPanel();
 		submitConfirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);

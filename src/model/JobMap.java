@@ -51,9 +51,6 @@ public class JobMap {
 	 * @return true if full, false otherwise.
 	 */
 	public boolean isFull (){
-		System.out.println("myJobs.size(): " + myJobs.size());
-		System.out.println("	maxJobAmount: " + maxJobAmount);
-		
 		return myJobs.size() >= maxJobAmount;
 	}
 	

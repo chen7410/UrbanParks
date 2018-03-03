@@ -24,6 +24,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
 import model.Job;
+import model.JobMap;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -37,6 +38,7 @@ public class ParkManagerSubmitConfirmationPanel extends Observable {
 	
 	private JPanel myPanel;
 	private Job myJob;
+	private JobMap myJobMap;
 	private List<Job> myJobs;
 	
     /**
@@ -47,10 +49,11 @@ public class ParkManagerSubmitConfirmationPanel extends Observable {
      * @param theParkManagerJobList the park manager's job list.
      */
 	public ParkManagerSubmitConfirmationPanel(final Job theJob, 
-			final List<Job> theParkManagerJobList) {
+			final List<Job> theParkManagerJobList, final JobMap theJobMap) {
 		myPanel = new JPanel(new BorderLayout());
 		myJobs = theParkManagerJobList;
 		myJob = theJob;
+		myJobMap = theJobMap;
 		setUp();
 	}
 	
@@ -89,6 +92,18 @@ public class ParkManagerSubmitConfirmationPanel extends Observable {
 		});
 		submitAgainButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(submitAgainButton);
+		
+		
+		/*
+		 * Checking if the number of Jobs in the whole system is not
+		 * surpassing maximum number of job defined in the JobMap.
+		 */
+		if (myJobMap.isFull()) {
+			submitAgainButton.setEnabled(false);
+		} else {
+			submitAgainButton.setEnabled(true);
+		}
+		
 		
 		buttonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);

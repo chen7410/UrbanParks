@@ -36,7 +36,7 @@ public class ParkManagerSubmitConfirmationTest {
 		
 		myParkManager = (ParkManager) myUsers.getUser("brook");
 		myConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
-				myParkManager.getJobList(myJobs).get(0), myParkManager.getJobList(myJobs));
+				myParkManager.getJobList(myJobs).get(0), myParkManager.getJobList(myJobs), myJobs);
     	
 		myFrame.setTitle("Urban Parks - Park Manager - " + myParkManager.getLastName());
 		myFrame.add(myConfirmationPanel.getPanel(), BorderLayout.CENTER);
