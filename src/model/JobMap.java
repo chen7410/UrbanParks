@@ -56,6 +56,22 @@ public class JobMap {
 	}
 	
 	/**
+	 * The returned number do not indicate all the jobs in the system.
+	 * @return the number of job that the start date is today or after.
+	 */
+	public int getPendingJobAmount() {
+		int count = 0;
+		Job[] jobs = getSortedJobsArray();
+		for (Job j : jobs) {
+			if (!j.getStartDate().isBefore(LocalDate.now())) {
+				count++;
+			}
+		}
+		return count;
+		
+	}
+	
+	/**
 	 * 
 	 * @param theMaxJobA
 	 * @throws IllegalArgumentException if theJobAmount <= 0.
@@ -138,6 +154,7 @@ public class JobMap {
 	
 	/**
 	 * Returns the number of jobs in the system.
+	 * The size includes the job in the past.
 	 * 
 	 * @return the size of this JobMap.
 	 */

@@ -20,10 +20,9 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * A JPanel that will ask the park manager to verify whether they
- * want to submit a job or not. It will display the job's detail and 
- * will have two buttons at the bottom. One to return to the previous 
- * panel and one to submit the job.
+ * A JPanel that will display the job's detail and 
+ * will have one button that returns to the previous 
+ * panel at the bottom.
  * 
  * @author  Group 7
  * @version February 28, 2018
@@ -34,10 +33,9 @@ public class ParkManagerViewSelectedJobDetailPanel extends Observable {
 	
 	
 	/**
-	 * Creates a new panel that verifies the submission of the 
-	 * specified job.
+	 * Creates a new panel that showing the selected job detail.
 	 * 
-	 * @param theJob the job that is being submitted.
+	 * @param theJob the selected job.
 	 */
 	public ParkManagerViewSelectedJobDetailPanel(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
@@ -70,23 +68,7 @@ public class ParkManagerViewSelectedJobDetailPanel extends Observable {
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
 		
-		
-//		JButton signupButton = new JButton(new AbstractAction("Submit") {
-//			
-//			/**
-//		     * A generated serial version UID for object Serialization.
-//		     */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				setChanged();
-//				notifyObservers(new ButtonSignal("submit", myJob));
-//			}
-//		});
-//		signupButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonsPanel.add(backButton);
-//		buttonsPanel.add(signupButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
@@ -114,7 +96,7 @@ public class ParkManagerViewSelectedJobDetailPanel extends Observable {
 	}
 	
 	/**
-	 * @return an instance of ParkManagerSubmitVerification.
+	 * @return an instance of ParkManagerViewSelectedJobDetailPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

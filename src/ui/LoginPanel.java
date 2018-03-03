@@ -126,7 +126,7 @@ public class LoginPanel extends Observable {
 				System.exit(0);
 			}
 		});
-		exitButton.setSize(GUI.BUTTON_SIZE);
+		exitButton.setPreferredSize(logInButton.getMinimumSize());
 		exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		JPanel inputPanel = new JPanel(new FlowLayout());

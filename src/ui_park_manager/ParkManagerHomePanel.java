@@ -131,7 +131,7 @@ public class ParkManagerHomePanel extends Observable {
 				System.out.println("view selected job");
 			}
 		});
-		viewSelectedJobButton.setSize(GUI.BUTTON_SIZE);
+		viewSelectedJobButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
 		// The panel which simple has the viewSelectedJobButton.
@@ -175,7 +175,7 @@ public class ParkManagerHomePanel extends Observable {
 			signUpButton.setEnabled(true);
 		}
 		
-		signUpButton.setSize(GUI.BUTTON_SIZE);
+		signUpButton.setPreferredSize(GUI.BUTTON_SIZE);
 		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -191,7 +191,7 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewAllYourUpcommingJobsButton.setSize(GUI.BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -206,10 +206,21 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("logout", 0));
 			}
 		});
-		logOut.setSize(GUI.BUTTON_SIZE);
+		logOut.setPreferredSize(GUI.BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
+		//current job quantity.
+		JLabel jobAmount = new JLabel();
+		JPanel topLabelPanel = new JPanel();
+		topLabelPanel.add(jobAmount);
+
+		jobAmount.setText("Max job allowed: " + 
+				myJobMap.getMaxJobAmount() + 
+				"             Currently: " + myJobMap.getPendingJobAmount());
+		
+		//buttonsPanel.add(jobAmount);
+
 		// Adding the buttons onto the buttonsPanel.
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
 		buttonsPanel.add(signUpButton);
@@ -217,19 +228,20 @@ public class ParkManagerHomePanel extends Observable {
 		buttonsPanel.add(viewAllYourUpcommingJobsButton);
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		buttonsPanel.add(logOut);
-		
-		
-		
+
+		JPanel rightPanel = new JPanel(new BorderLayout());
+		rightPanel.add(topLabelPanel, BorderLayout.NORTH);
+		rightPanel.add(buttonsPanel, BorderLayout.CENTER);
+
 		// Adding panels to the SplitPane
 		splitPane.setLeftComponent(upcomingJobsPanel);
-		splitPane.setRightComponent(buttonsPanel);
+		splitPane.setRightComponent(rightPanel);
 		
 		
 		// Display specifics of the SplitPane
 		splitPane.setResizeWeight(0.5);
 		splitPane.setEnabled(false);
-		
-		
+
 		// Adding SplitPane to main panel
 		myPanel.add(splitPane, BorderLayout.CENTER);
 	}
