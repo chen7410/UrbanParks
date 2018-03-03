@@ -129,9 +129,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 			}
 		});
 		
-		
-		//JLabel startDateFormat = new JLabel("MM/DD/YY");
-		//JLabel endDateFormat = new JLabel("MM/DD/YY");
+
 		JLabel invGap1 = new JLabel("                    ");
 		JLabel invGap2 = new JLabel("                    ");
 		

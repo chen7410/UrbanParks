@@ -64,7 +64,7 @@ public class addUserIgnoreThisClass {
 		myUsers.addUser(john);
 		
 		Job job1 = new Job (LocalDate.of(2018, 03, 01), 
-				LocalDate.of(2018, 03, 24), 
+				LocalDate.of(2018, 03, 02), 
 				"Seward Park", matt, 
 				"5900 Lake Washington Blvd S, Seattle, WA 98118",
 				"Removing invasive species and covering the site with burlap and mulch");
