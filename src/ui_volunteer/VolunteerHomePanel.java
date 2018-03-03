@@ -124,10 +124,6 @@ public class VolunteerHomePanel extends Observable {
 		viewSelectedJobButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
-/*
- * TODO 
- */
-		
 		// The panel which simple has the viewSelectedJobButton.
 		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout(
 				FlowLayout.CENTER, 0, GUI.BUTTON_GAP_HEIGHT));

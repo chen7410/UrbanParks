@@ -138,11 +138,13 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 	 * @return return a label.
 	 */
 	private JLabel makeTopJlabel() {
-		JLabel topLabel = new JLabel("Between: " + myStartDate + " - " + myEndDate);
+		JLabel topLabel = new JLabel("Start date: " + 
+				myStartDate.format(GUI.DATE_FORMATTER) 
+		+ "           EndDate: " + myEndDate.format(GUI.DATE_FORMATTER));
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
-	
+
 	/**
 	 * Set up Home button.
 	 * Home button will fire a button signal which contains
