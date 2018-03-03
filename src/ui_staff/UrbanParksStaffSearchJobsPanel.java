@@ -141,18 +141,20 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 					try {
 						localStartDate = LocalDate.parse(startDateInputField.getText(), myDateFormatter);
 						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
+						if (localStartDate.isAfter(localEndDate)) {
+							JOptionPane.showMessageDialog(new JFrame(),
+									"Start date cannot be after end date.",
+									"Invalid input", JOptionPane.ERROR_MESSAGE);
+						} else {
+							Object[] localDateArray = new LocalDate[2];
+							localDateArray[0] = localStartDate;
+							localDateArray[1] = localEndDate;
+							
+							setChanged();
+							notifyObservers(new ButtonSignal("submit", localDateArray));
+						}
 						
 						
-						
-						
-						// TODO: check if the start date is before or the same day as the end date
-						
-						Object[] localDateArray = new LocalDate[2];
-						localDateArray[0] = localStartDate;
-						localDateArray[1] = localEndDate;
-						
-						setChanged();
-						notifyObservers(new ButtonSignal("submit", localDateArray));
 						
 					} catch (final DateTimeParseException theException) {
 						JOptionPane.showMessageDialog(new JFrame(),
@@ -160,7 +162,11 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 								+ "enter the dates using"
 								+ " MM/DD/YY format.",
 								"Invalid input", JOptionPane.ERROR_MESSAGE);
-					}
+					} catch (final IllegalArgumentException theException) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Start date cannot be after end date.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} 
 				}
 			}
 		});
