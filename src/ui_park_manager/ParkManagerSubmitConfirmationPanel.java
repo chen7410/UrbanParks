@@ -77,7 +77,7 @@ public class ParkManagerSubmitConfirmationPanel extends Observable {
 		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		buttonPanel.add(homeButton);
 		
-		JButton submitAgainButton = new JButton(new AbstractAction("Submit another job") {
+		JButton submitAgainButton = new JButton(new AbstractAction("Submit Another Job") {
 
 			private static final long serialVersionUID = 1L;
 

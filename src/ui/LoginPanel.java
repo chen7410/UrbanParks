@@ -89,8 +89,8 @@ public class LoginPanel extends Observable {
 		
 		JTextField userName = new JTextField("", 15);
 		
-		JButton logInButton = new JButton("Log in");
-		Action logInAction = new AbstractAction("Log in") {
+		JButton logInButton = new JButton();
+		Action logInAction = new AbstractAction("Log In") {
 			
 			/** */
 			private static final long serialVersionUID = 1L;

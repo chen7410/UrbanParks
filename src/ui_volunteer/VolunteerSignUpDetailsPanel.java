@@ -71,7 +71,7 @@ public class VolunteerSignUpDetailsPanel extends Observable {
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
 		
 		
-		JButton signupButton = new JButton(new AbstractAction("Sign up") {
+		JButton signupButton = new JButton(new AbstractAction("Sign Up") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.

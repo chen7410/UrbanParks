@@ -165,7 +165,7 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
-				new AbstractAction("View upcomming jobs") {
+				new AbstractAction("View Upcomming Jobs") {
 
 			/** */
 			private static final long serialVersionUID = 1L;

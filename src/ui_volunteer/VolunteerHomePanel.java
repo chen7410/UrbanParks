@@ -122,7 +122,7 @@ public class VolunteerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("view job details", mySelectedJobID));	
 			}
 		});
-		viewSelectedJobButton.setSize(GUI.BUTTON_SIZE);
+		viewSelectedJobButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
 		// The panel which simple has the viewSelectedJobButton.
@@ -143,7 +143,7 @@ public class VolunteerHomePanel extends Observable {
 		
 		
 		// Buttons to go on the buttonPanel.
-		JButton signUpButton = new JButton(new AbstractAction("Sign up") {
+		JButton signUpButton = new JButton(new AbstractAction("Sign Up") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -154,12 +154,12 @@ public class VolunteerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("signup", 0));
 			}
 		});
-		signUpButton.setSize(GUI.BUTTON_SIZE);
+		signUpButton.setPreferredSize(GUI.BUTTON_SIZE);
 		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
-				new AbstractAction("View all your upcomming jobs") {
+				new AbstractAction("View Upcomming Jobs") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -170,7 +170,7 @@ public class VolunteerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewAllYourUpcommingJobsButton.setSize(GUI.BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -185,7 +185,7 @@ public class VolunteerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("logout", 0));
 			}
 		});
-		logOut.setSize(GUI.BUTTON_SIZE);
+		logOut.setPreferredSize(GUI.BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		

@@ -552,6 +552,8 @@ public class GUI extends JFrame implements Observer {
 	private void urbanParksStaffChangeMaxJobAmountActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("submit change")) {
 			createUrbanParksStaffNewMaxConfirmationPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			createUrbanParksStaffHomePanel();
 		}
 	}
 	
