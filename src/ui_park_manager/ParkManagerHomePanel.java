@@ -211,7 +211,7 @@ public class ParkManagerHomePanel extends Observable {
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		//current job quantity.
+		//topLabelPanel
 		JLabel jobAmount = new JLabel();
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(jobAmount);
