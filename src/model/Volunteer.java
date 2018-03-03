@@ -105,8 +105,10 @@ public class Volunteer extends User implements Serializable {
 		}
 		boolean overlaps = false;
 		for (int i = 0; i < myJobs.size(); i++) {
-			overlaps = overlaps || theCandidateJob.isSameDayConflict
+			if (theJobList.getJob(myJobs.get(i)) != null) {
+				overlaps = overlaps || theCandidateJob.isSameDayConflict
 						(theJobList.getJob(myJobs.get(i)));
+			}
 		}
 		return overlaps;
 	}

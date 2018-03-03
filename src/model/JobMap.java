@@ -219,6 +219,11 @@ public class JobMap {
 	public Job[] getSortedJobsArray() {
 		List<Job> valuesList = new ArrayList<>(myJobs.values());
 		Collections.sort(valuesList);
+		for (Job j : valuesList) {
+			if (j == null) {
+				valuesList.remove(j);
+			}
+		}
 		Job[] jobList = new Job[valuesList.size()];
 		for (int i = 0; i < valuesList.size(); i++) {
 			jobList[i] = valuesList.get(i);
