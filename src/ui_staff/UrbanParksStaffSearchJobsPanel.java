@@ -67,7 +67,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 	
 	private void setup() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setBorder(BorderFactory.createSoftBevelBorder(1));
 		BoxLayout buttonPanelLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
 		mainPanel.setLayout(buttonPanelLayout);
@@ -85,16 +85,16 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout());
 		startDatePanel.setMaximumSize(new Dimension(800, 0));
-		startDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		startDatePanel.setBackground(Color.WHITE);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout());
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
-		endDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		endDatePanel.setBackground(Color.WHITE);
 		
 		JLabel startDateLabel = new JLabel("Start date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("", 10);
 		
-		JLabel endDateLabel = new JLabel("End date (MM/DD/YY): ", SwingConstants.CENTER);
+		JLabel endDateLabel = new JLabel("  End date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField endDateInputField = new JTextField("", 10);
 		
 		
