@@ -119,9 +119,6 @@ public class VolunteerTest {
 		mySecondJob = new Job(mySecondJobStartDate, mySecondJobEndDate, 
 								"Seward Park", myParkManager,
 								"Seattle", "Pick up leaves");
-
-//		System.out.println("s: " + mySecondJob.getStartDate().toString());
-//		System.out.println("e: " + mySecondJob.getEndDate().toString());
 		
 		myFirstJobCandidate = new Job(myFirstJobCandidateStartDate,
 										myFirstJobCandidateEndDate,
@@ -147,9 +144,6 @@ public class VolunteerTest {
 											myJobEndDate, "Cherry Park",
 											myParkManager, "Seattle, "
 											+ "WA", "Pick up leaves");
-		
-//		System.out.println(myJobEqualsToMinDaysAway.getStartDate().toString());
-//		System.out.println(myJobEqualsToMinDaysAway.getEndDate().toString());
 		
 		myJobMoreThanMinDayAway = new Job(myJobStartDateMoreThanMinDaysAway,
 											myJobEndDate, "Kerry Park",
@@ -194,9 +188,6 @@ public class VolunteerTest {
 	public void isSameDayConflict_ConflictingJobEndSameDayAsStartOfJobAlreadySignedUpFor_True() {
 		myVolunteer.signup(mySecondJob);
 		assertTrue(myVolunteer.isSameDayConflict(myFirstJobCandidate, myJobMap));
-		
-		System.out.println(mySecondJob.getStartDate().toString());
-		System.out.println(mySecondJob.getEndDate().toString());
 	}
 	
 	/**

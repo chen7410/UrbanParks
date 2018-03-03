@@ -17,7 +17,7 @@ import model.ParkManager;
  * JUnit to test the business rules for ParkManager.java
  * 
  * @author Group 7
- * @version 2/4/2018
+ * @version March 5, 2018
  */
 public class ParkManagerTest {
 

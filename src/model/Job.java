@@ -195,7 +195,7 @@ public class Job implements Serializable, Comparable<Job> {
 		boolean withinMaxDays = true;
 		Long daysDifference = ChronoUnit.DAYS.between(myStartDate, myEndDate);
 
-		if (daysDifference > Job.MAX_JOB_LENGTH) {
+		if (daysDifference >= Job.MAX_JOB_LENGTH) {
 			return false;
 		}
 		return withinMaxDays;

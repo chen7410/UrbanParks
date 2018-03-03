@@ -220,7 +220,7 @@ public class ParkManagerHomePanel extends Observable {
 //				myJobMap.getMaxJobAmount() + 
 //				"             Currently: " + myJobMap.getPendingJobAmount());
 		if (myJobMap.isFull()) {
-			jobAmount.setText("The pending job queue is full!");
+			jobAmount.setText("The pending jobs queue is full!");
 		}
 		
 		JPanel signUpButtonPanel = new JPanel();
