@@ -21,6 +21,8 @@ import model.ParkManager;
  */
 public class ParkManagerTest {
 
+	private final int ONE_DAY_LESS_THAN_MAX_DAY_NUM = 2;
+	
 	private ParkManager myPM;
 
 	private Job myJobEndsInFewerDaysThanMaxDays;
@@ -47,17 +49,18 @@ public class ParkManagerTest {
 	
 		// A job that takes one less day than max.
 		 myJobTakesOneDayLessThanMax = new Job(LocalDate.now(),
-				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH - 1), "Cal Anderson",
-				 myPM, "Seattle, WA", "Pick up leaves");
+				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH -
+					ONE_DAY_LESS_THAN_MAX_DAY_NUM), "Cal Anderson",
+				 	myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes exactly the max days.
 		 myJobTakesExactlyMaxDays = new Job(LocalDate.now(), 
-				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH), "Gas Works Park", 
+				 LocalDate.now().plusDays(Job.MAX_JOB_LENGTH - 1), "Gas Works Park", 
 				 myPM, "Seattle, WA", "Pick up leaves");
 
 		// A job that takes one more than max days.
 		myJobTakesOneDayMoreThanMax = new Job(LocalDate.now(), 
-				LocalDate.now().plusDays(Job.MAX_JOB_LENGTH + 1), "Volunteer Park", 
+				LocalDate.now().plusDays(Job.MAX_JOB_LENGTH), "Volunteer Park", 
 				myPM, "Seattle, WA", "Pick up leaves");
 	}
 
