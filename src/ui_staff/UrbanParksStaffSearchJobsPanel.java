@@ -99,7 +99,8 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		
 		// Panel for buttons at the south quadrant of the frame.
-		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		JPanel buttonsPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		
@@ -115,7 +116,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 				notifyObservers(new ButtonSignal("home", 0));
 			}
 		});
-		homeButton.setSize(GUI.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		

@@ -46,7 +46,6 @@ public class ParkManagerHomePanel extends Observable {
 	private JobMap myJobMap;
 	private int mySelectedJobID;
 	private List<Job> myAllUpcomingJobs;
-	private Dimension buttonSize;
 	
     /**
      * Creates a new park manager home panel with a list of of jobs that belong
@@ -60,7 +59,6 @@ public class ParkManagerHomePanel extends Observable {
 		myAllUpcomingJobs = theJobList;
 		myJobMap = theJobMap;
 		myPanel = new JPanel(new BorderLayout());
-		buttonSize = new Dimension(180, 40);
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myPanel.setBackground(Color.GREEN);
 		setup();
@@ -123,7 +121,6 @@ public class ParkManagerHomePanel extends Observable {
 		// The button to view the selected job from the radio buttons from above.
 		JButton viewSelectedJobButton = new JButton(new AbstractAction("View Selected Job") {
 
-			/** */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -132,12 +129,14 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("view selected job", mySelectedJobID));
 			}
 		});
-		viewSelectedJobButton.setPreferredSize(buttonSize);
+		viewSelectedJobButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
 		// The panel which simple has the viewSelectedJobButton.
-		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout());
+		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, 0, GUI.BUTTON_GAP_HEIGHT));
 		viewSelectedJobPanel.add(viewSelectedJobButton);
+		viewSelectedJobPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		if (upcomingJobSize > 0) {
 			upcomingJobsPanel.add(viewSelectedJobPanel, BorderLayout.SOUTH);
@@ -176,7 +175,7 @@ public class ParkManagerHomePanel extends Observable {
 			signUpButton.setEnabled(true);
 		}
 		
-		signUpButton.setPreferredSize(buttonSize);
+		signUpButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -193,7 +192,7 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewAllYourUpcommingJobsButton.setPreferredSize(buttonSize);
+		viewAllYourUpcommingJobsButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -208,7 +207,7 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("logout", 0));
 			}
 		});
-		logOut.setPreferredSize(buttonSize);
+		logOut.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -236,22 +235,19 @@ public class ParkManagerHomePanel extends Observable {
 		// Adding the buttons onto the buttonsPanel.
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
 		buttonsPanel.add(signUpButtonPanel);
-		//buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(Box.createVerticalGlue());
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 		buttonsPanel.add(viewAllJobsButtonPanel);
-		//buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
 		buttonsPanel.add(logOutButtonPanel);
 		
 		JPanel ivisiblePanel = new JPanel();
-		//ivisiblePanel.add(Box.createRigidArea(new Dimension(0, 200)));
 		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
 		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		buttonsPanel.add(ivisiblePanel);
 
 		JPanel rightPanel = new JPanel(new BorderLayout());
 		rightPanel.add(topLabelPanel, BorderLayout.NORTH);
 		rightPanel.add(buttonsPanel, BorderLayout.CENTER);
-		rightPanel.add(ivisiblePanel, 
-				BorderLayout.SOUTH);
 
 		// Adding panels to the SplitPane
 		splitPane.setLeftComponent(upcomingJobsPanel);
