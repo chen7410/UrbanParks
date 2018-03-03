@@ -48,7 +48,7 @@ public class JobMap {
 	}
 	
 	/**
-	 * Check if the system reach the maximum job amount.
+	 * Checks if the system reaches the maximum job amount.
 	 * @return true if full, false otherwise.
 	 */
 	public boolean isFull (){
@@ -56,14 +56,14 @@ public class JobMap {
 	}
 	
 	/**
-	 * The returned number do not indicate all the jobs in the system.
+	 * Returns the amount of upcoming jobs; does not include jobs in the past.
 	 * @return the number of job that the start date is today or after.
 	 */
 	public int getPendingJobAmount() {
 		int count = 0;
 		Job[] jobs = getSortedJobsArray();
 		for (Job j : jobs) {
-			if (!j.getStartDate().isBefore(LocalDate.now())) {
+			if (!j.isPassed()) {
 				count++;
 			}
 		}
