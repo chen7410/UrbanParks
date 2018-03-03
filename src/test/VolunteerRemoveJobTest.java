@@ -25,12 +25,7 @@ public class VolunteerRemoveJobTest {
 
 	private LocalDate myJobStartDateIsToday;
 	private LocalDate myJobStartDateIsYesterday;
-	private LocalDate myJobStartDateIsMinDay;
 	private LocalDate myJobStartDateIsMoreThanMinDay;
-
-	
-	
-	
 	private Volunteer anyVolunteer;
 	private ParkManager myParkManager;
 	private Job myCancelJobIsYesterdayMultiDayLength;
@@ -46,8 +41,6 @@ public class VolunteerRemoveJobTest {
 				LocalDate.now();
 		myJobStartDateIsYesterday = 
 				LocalDate.now().plusDays(-1);
-		myJobStartDateIsMinDay = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
 		myJobStartDateIsMoreThanMinDay = 
 				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 1);
 		

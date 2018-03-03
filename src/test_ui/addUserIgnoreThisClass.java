@@ -12,8 +12,8 @@ import model.Volunteer;
 public class addUserIgnoreThisClass {
 	private static UserMap myUsers;
 	private static JobMap myJobs;
-	private static LocalDate myStartDate = LocalDate.now().plusMonths(-1);
-	private static LocalDate myEndtDate = LocalDate.now().plusMonths(1);
+//	private static LocalDate myStartDate = LocalDate.now().plusMonths(-1);
+//	private static LocalDate myEndtDate = LocalDate.now().plusMonths(1);
 	
 	public static void main(String[] args) {
 		myUsers = new UserMap();

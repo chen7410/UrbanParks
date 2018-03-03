@@ -1,11 +1,8 @@
 package test_ui;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
-
 import model.JobMap;
-import model.ParkManager;
 import model.UserMap;
 import ui_staff.UrbanParksStaffViewJobsPanel;
 
@@ -15,7 +12,7 @@ public class UrbanParksStaffViewJobsPanelTest {
     
     private static UserMap myUsers;
     private static JobMap myJobs;
-    private static ParkManager myParkManager;
+//    private static ParkManager myParkManager;
     
     private static UrbanParksStaffViewJobsPanel myStaffViewJobPanel;
     
@@ -28,7 +25,7 @@ public class UrbanParksStaffViewJobsPanelTest {
 		myUsers.loadUserMap(UserMap.USERS_DATA_FILE);
 		myJobs.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
-		myParkManager = (ParkManager) myUsers.getUser("brook");
+//		myParkManager = (ParkManager) myUsers.getUser("brook");
 //		LocalDate startDate = new 
 //		myStaffViewJobPanel = new StaffViewJobsPanel(
 //				myParkManager.getJobList(myJobs), "03/03/18", "04/04");

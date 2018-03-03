@@ -110,6 +110,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void isJobWithinDates_NullEndDateJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myNullDate, myParkName, myPM, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	
@@ -147,6 +148,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructEmptyDescriptionJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myParkName, myPM, myEmptyString, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -156,6 +158,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullDescriptionJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myParkName, myPM, myNullString, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -165,6 +168,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructEmptyParkLocationJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myParkName, myPM, myEmptyString, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -174,6 +178,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullLocationJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myParkName, myPM, myNullString, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -183,6 +188,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructEmptyParkNameJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myEmptyString, myPM, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -192,6 +198,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullParkNameJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myNullString, myPM, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -201,6 +208,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullParkManagerJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myToday, myParkName, null, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	/**
@@ -210,6 +218,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullEndDateJob_IllegalArgumentException() {
 		Job job = new Job(myToday, myNullDate, myParkName, myPM, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	
@@ -220,6 +229,7 @@ public class JobTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void JobConstructor_ConstructNullStartDateJob_IllegalArgumentException() {
 		Job job = new Job(myNullDate, myToday, myParkName, myPM, myParkLocation, myJobDescription);
+		job.getClass();
 	}
 	
 	

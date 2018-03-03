@@ -65,7 +65,8 @@ public class LoginPanel extends Observable {
 		
 		// Writing the code to underline the welcome label.
 		Font font = welcomeLabel.getFont();
-		Map attributes = font.getAttributes();
+		@SuppressWarnings("unchecked")
+		Map<TextAttribute, Integer> attributes = (Map<TextAttribute, Integer>) font.getAttributes();
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		welcomeLabel.setFont(font.deriveFont(attributes));
 		

@@ -69,7 +69,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			}
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
-		JButton removeButton = new JButton(new AbstractAction("Remove") {
+		JButton removeButton = new JButton(new AbstractAction("Cancel") {
 			
 			/**
 		     * A generated serial version UID for object Serialization.
