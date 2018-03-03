@@ -237,9 +237,6 @@ public class ParkManagerSubmitJobPanel extends Observable {
 					} 
 					else {
 						//send a job to observers
-						JOptionPane.showMessageDialog(new JFrame(),
-								"Job created!",
-								"", JOptionPane.DEFAULT_OPTION);
 						setChanged();
 						notifyObservers(new ButtonSignal("next", job));
 					}

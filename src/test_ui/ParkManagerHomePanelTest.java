@@ -17,7 +17,7 @@ import ui_park_manager.ParkManagerHomePanel;
 /**
  * 
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version March 5, 2018
  */
 public class ParkManagerHomePanelTest {
@@ -28,12 +28,12 @@ public class ParkManagerHomePanelTest {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("UrbanParks");
 		UserMap users  = new UserMap();
-		JobMap jobs = new JobMap();
+		JobMap jobMap = new JobMap();
 		users.loadUserMap(UserMap.USERS_DATA_FILE);
-		jobs.loadJobMap(JobMap.JOBS_DATA_FILE);
+		jobMap.loadJobMap(JobMap.JOBS_DATA_FILE);
 		
 		ParkManager currentParkManager = (ParkManager) users.getUser("matthew");
-		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getSortedJobList(jobs)); 
+		ParkManagerHomePanel currentPanel = new ParkManagerHomePanel(currentParkManager.getSortedJobList(jobMap), jobMap); 
 		
 		frame.add(currentPanel.getPanel(), BorderLayout.CENTER);
 		

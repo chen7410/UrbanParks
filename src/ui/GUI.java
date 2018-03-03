@@ -344,7 +344,7 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerHomePanel() {
 		remove(myCurrentPanel);
 		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(
-				myParkManager.getSortedJobList(myJobs));
+				myParkManager.getSortedJobList(myJobs), myJobs);
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -372,7 +372,8 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
-				theJob, myParkManager.getSortedJobList(myJobs));
+					theJob, myParkManager.getSortedJobList(myJobs), myJobs);
+
 		myCurrentPanel = submitConfirmationPanel.getPanel();
 		submitConfirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -552,6 +553,8 @@ public class GUI extends JFrame implements Observer {
 	private void urbanParksStaffChangeMaxJobAmountActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("submit change")) {
 			createUrbanParksStaffNewMaxConfirmationPanel();
+		} else if (theSignal.getButtonName().toLowerCase().equals("home")) {
+			createUrbanParksStaffHomePanel();
 		}
 	}
 	

@@ -71,8 +71,8 @@ public class addUserIgnoreThisClass {
 		matt.createJob(job1);
 
 			
-		Job job2 = new Job (LocalDate.of(2018, 03, 25) 
-				, LocalDate.of(2018, 03, 26)
+		Job job2 = new Job (LocalDate.of(2018, 03, 02) 
+				, LocalDate.of(2018, 03, 03)
 				, "Discovery Park", brook 
 				, "3801 Discovery Park Blvd, Seattle, WA 98199" 
 				, "Replacing playground equipments");
