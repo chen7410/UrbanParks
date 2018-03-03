@@ -28,6 +28,11 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
+ * A JPanel that will display a confirmation of the 
+ * job that is being removed to the park manager. The
+ * panel will have an option to return to home panel or 
+ * to submit another job.
+ * 
  * 
  * @author  Group 7
  * @version February 28, 2018

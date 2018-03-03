@@ -37,7 +37,12 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * A JPanal for Park Manager to submit a job and enter job detail.
+ * A JPanal that will allow a park manager to fill out 
+ * information about the new job they want to submit. The 
+ * panel will have text fields for the start date, end date, 
+ * park name, park location and job description. 
+ * The panel will have two buttons at the bottom: one to return home and 
+ * one is Next and it's to move on to the next step of adding a job.
  * 
  * @author  Group 7
  * @version February 28, 2018
