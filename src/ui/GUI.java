@@ -101,7 +101,6 @@ public class GUI extends JFrame implements Observer {
 	private JobMap myJobs;
 	private Volunteer myVolunteer;
 	private ParkManager myParkManager;
-//	private Staff myStaff;
 	private JPanel myCurrentPanel;
 	private LocalDate myStaffSearchStartDate;
 	private LocalDate myStaffSearchEndDate;
@@ -144,14 +143,12 @@ public class GUI extends JFrame implements Observer {
 				myParkManager = (ParkManager) user;
 				createParkManagerHomePanel();
 			} else if (user instanceof Staff) {
-//				myStaff = (Staff) user;
 				createUrbanParksStaffHomePanel();
 			}
 		}
 	}
 	
 	/**************************Volunteer*******************************/
-
 
 	private void createVolunteerHomePanel() {
 		remove(myCurrentPanel);
@@ -306,8 +303,6 @@ public class GUI extends JFrame implements Observer {
 			volunteerCancellationConfirmationPanelActions(button);
 		}
 	}
-
-	
 	
 	/**************************Park Manager*******************************/
 	
@@ -422,11 +417,7 @@ public class GUI extends JFrame implements Observer {
 			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
 			createParkManagerRemoveVerification(theSignal.getJobID());
-		}
-		/*
-		 * TODO need to fix view selected job
-		 */
-		else if (theSignal.getButtonName().toLowerCase().equals("view selected job")) {
+		} else if (theSignal.getButtonName().toLowerCase().equals("view selected job")) {
 			createParkManagerViewSelectedJobDetailPanel(theSignal.getJobID());
 		}
 		
@@ -500,7 +491,6 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-	
 	private void UrbanParksStaffViewJobsActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
 			createUrbanParksStaffJobDetails(theSignal.getJobID());
@@ -556,7 +546,6 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-	
 	private void urbanParksStaffHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("pending jobs size")) {
 			createUrbanParksStaffChangeMaxJobAmountPanel();
@@ -599,7 +588,6 @@ public class GUI extends JFrame implements Observer {
 			createUrbanParksStaffViewJobsPanel();
 		}
 	}
-	
 	
 	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
 		ButtonSignal button = (ButtonSignal) theMessage;
