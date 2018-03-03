@@ -63,12 +63,16 @@ public class UrbanParksStaffHomePanel extends Observable{
 				notifyObservers(new ButtonSignal("search jobs", 0));
 			}
 		});
-		searchJobsButton.setSize(GUI.BUTTON_SIZE);
+		
+		searchJobsButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		searchJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JPanel searchJobsButtonPanel = new JPanel();
+		searchJobsButtonPanel.add(searchJobsButton);
+		searchJobsButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		
 		JButton pendingJobsSizeButton = new JButton(
-				new AbstractAction("Change Number of Pending Jobs Size") {
+				new AbstractAction("Change Max Pending Jobs") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -79,8 +83,11 @@ public class UrbanParksStaffHomePanel extends Observable{
 				notifyObservers(new ButtonSignal("pending jobs size", 0));
 			}
 		});
-		pendingJobsSizeButton.setSize(GUI.BUTTON_SIZE);
+		pendingJobsSizeButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		pendingJobsSizeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JPanel pendingJobsSizeButtonPanel = new JPanel();
+		pendingJobsSizeButtonPanel.add(pendingJobsSizeButton);
+		pendingJobsSizeButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		
 		JButton logOut = new JButton(new AbstractAction("Log Out") {
@@ -94,17 +101,24 @@ public class UrbanParksStaffHomePanel extends Observable{
 				notifyObservers(new ButtonSignal("logout", 0));
 			}
 		});
-		logOut.setSize(GUI.BUTTON_SIZE);
+		logOut.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JPanel logOutButtonPanel = new JPanel();
+		logOutButtonPanel.add(logOut);
+		logOutButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
+		JPanel ivisiblePanel = new JPanel();
+		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
+		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		// Adding the buttons onto the buttonsPanel.
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
-		buttonsPanel.add(searchJobsButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(pendingJobsSizeButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(logOut);
+		buttonsPanel.add(searchJobsButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(pendingJobsSizeButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(logOutButtonPanel);
+		buttonsPanel.add(ivisiblePanel);
 		
 		myPanel.add(buttonsPanel, BorderLayout.CENTER);
 	}

@@ -11,7 +11,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.Observable;
@@ -122,21 +121,22 @@ public class ParkManagerHomePanel extends Observable {
 		// The button to view the selected job from the radio buttons from above.
 		JButton viewSelectedJobButton = new JButton(new AbstractAction("View Selected Job") {
 
-			/** */
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setChanged();
-				notifyObservers(new ButtonSignal("view job details", mySelectedJobID));	
+				notifyObservers(new ButtonSignal("view selected job", mySelectedJobID));
 			}
 		});
-		viewSelectedJobButton.setSize(GUI.BUTTON_SIZE);
+		viewSelectedJobButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
 		// The panel which simple has the viewSelectedJobButton.
-		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout());
+		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, 0, GUI.BUTTON_GAP_HEIGHT));
 		viewSelectedJobPanel.add(viewSelectedJobButton);
+		viewSelectedJobPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		if (upcomingJobSize > 0) {
 			upcomingJobsPanel.add(viewSelectedJobPanel, BorderLayout.SOUTH);
@@ -175,12 +175,13 @@ public class ParkManagerHomePanel extends Observable {
 			signUpButton.setEnabled(true);
 		}
 		
-		signUpButton.setSize(GUI.BUTTON_SIZE);
+		signUpButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
+		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
-				new AbstractAction("View Upcomming Jobs") {
+				new AbstractAction("View All Upcomming Jobs") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -191,7 +192,7 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewAllYourUpcommingJobsButton.setSize(GUI.BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -206,30 +207,60 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("logout", 0));
 			}
 		});
-		logOut.setSize(GUI.BUTTON_SIZE);
+		logOut.setPreferredSize(GUI.LONG_BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
+		//topLabelPanel
+		JLabel jobAmount = new JLabel();
+		JPanel topLabelPanel = new JPanel();
+		topLabelPanel.add(jobAmount);
+
+//		jobAmount.setText("Max job allowed: " + 
+//				myJobMap.getMaxJobAmount() + 
+//				"             Currently: " + myJobMap.getPendingJobAmount());
+		if (myJobMap.isFull()) {
+			jobAmount.setText("The pending job queue is full!");
+		}
+		
+		JPanel signUpButtonPanel = new JPanel();
+		signUpButtonPanel.add(signUpButton);
+		signUpButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
+		JPanel viewAllJobsButtonPanel = new JPanel();
+		viewAllJobsButtonPanel.add(viewAllYourUpcommingJobsButton);
+		viewAllJobsButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
+		JPanel logOutButtonPanel = new JPanel();
+		logOutButtonPanel.add(logOut);
+		logOutButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+
 		// Adding the buttons onto the buttonsPanel.
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
-		buttonsPanel.add(signUpButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(viewAllYourUpcommingJobsButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(logOut);
+		buttonsPanel.add(signUpButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(viewAllJobsButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(logOutButtonPanel);
 		
-		
-		
+		JPanel ivisiblePanel = new JPanel();
+		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
+		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		buttonsPanel.add(ivisiblePanel);
+
+		JPanel rightPanel = new JPanel(new BorderLayout());
+		rightPanel.add(topLabelPanel, BorderLayout.NORTH);
+		rightPanel.add(buttonsPanel, BorderLayout.CENTER);
+
 		// Adding panels to the SplitPane
 		splitPane.setLeftComponent(upcomingJobsPanel);
-		splitPane.setRightComponent(buttonsPanel);
+		splitPane.setRightComponent(rightPanel);
 		
 		
 		// Display specifics of the SplitPane
 		splitPane.setResizeWeight(0.5);
 		splitPane.setEnabled(false);
-		
-		
+
 		// Adding SplitPane to main panel
 		myPanel.add(splitPane, BorderLayout.CENTER);
 	}

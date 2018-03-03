@@ -48,16 +48,31 @@ public class JobMap {
 	}
 	
 	/**
-	 * Check if the system reach the maximum job amount.
+	 * Checks if the system reaches the maximum job amount.
 	 * @return true if full, false otherwise.
 	 */
 	public boolean isFull (){
-		return myJobs.size() >= maxJobAmount;
+		return getPendingJobAmount() >= maxJobAmount;
+	}
+	
+	/**
+	 * Returns the amount of upcoming jobs; does not include jobs in the past.
+	 * @return the number of job that the start date is today or after.
+	 */
+	public int getPendingJobAmount() {
+		int count = 0;
+		Job[] jobs = getSortedJobsArray();
+		for (Job j : jobs) {
+			if (!j.isPassed()) {
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	/**
 	 * 
-	 * @param theMaxJobA
+	 * @param theMaxJobAmount
 	 * @throws IllegalArgumentException if theJobAmount <= 0.
 	 */
 	public void setMaxJobAmount(int theMaxJobAmount) {
@@ -138,6 +153,7 @@ public class JobMap {
 	
 	/**
 	 * Returns the number of jobs in the system.
+	 * The size includes the job in the past.
 	 * 
 	 * @return the size of this JobMap.
 	 */
@@ -219,6 +235,11 @@ public class JobMap {
 	public Job[] getSortedJobsArray() {
 		List<Job> valuesList = new ArrayList<>(myJobs.values());
 		Collections.sort(valuesList);
+		for (Job j : valuesList) {
+			if (j == null) {
+				valuesList.remove(j);
+			}
+		}
 		Job[] jobList = new Job[valuesList.size()];
 		for (int i = 0; i < valuesList.size(); i++) {
 			jobList[i] = valuesList.get(i);

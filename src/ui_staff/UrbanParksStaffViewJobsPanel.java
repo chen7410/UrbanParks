@@ -6,7 +6,6 @@ package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
@@ -23,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
@@ -138,11 +136,13 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 	 * @return return a label.
 	 */
 	private JLabel makeTopJlabel() {
-		JLabel topLabel = new JLabel("Between: " + myStartDate + " - " + myEndDate);
+		JLabel topLabel = new JLabel("Start date: " + 
+				myStartDate.format(GUI.DATE_FORMATTER) 
+		+ "           End date: " + myEndDate.format(GUI.DATE_FORMATTER));
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}
-	
+
 	/**
 	 * Set up Home button.
 	 * Home button will fire a button signal which contains
@@ -206,7 +206,6 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				mySelectedJobID = theEligibleJob.getJobID();
-				System.out.println("Radio button Selected Job ID " + theEligibleJob.getJobID());
 			}
 		});
 		return button;

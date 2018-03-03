@@ -12,20 +12,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.font.TextAttribute;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
-import java.util.Scanner;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -37,7 +34,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -65,6 +61,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		setup();
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void setup() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBackground(Color.WHITE);
@@ -77,11 +74,11 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		// Writing the code to underline the welcome label.
 		Font font = searchJobsLabel.getFont();
-		Map attributes = font.getAttributes();
+		Map<TextAttribute, Integer> attributes = (Map<TextAttribute, Integer>) font.getAttributes();
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		searchJobsLabel.setFont(font.deriveFont(attributes));
-		
 		searchJobsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout());
 		startDatePanel.setMaximumSize(new Dimension(800, 0));
@@ -91,15 +88,99 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
 		endDatePanel.setBackground(Color.WHITE);
 		
-		JLabel startDateLabel = new JLabel("Start date (MM/DD/YY): ", SwingConstants.CENTER);
-		JTextField startDateInputField = new JTextField("", 10);
+		JLabel startDateLabel = new JLabel("Start date: ", SwingConstants.CENTER);
+		JTextField startDateInputField = new JTextField("MM/DD/YY", 10);
+		startDateInputField.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (startDateInputField.getText().isEmpty()) {
+					startDateInputField.setText("MM/DD/YY");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (startDateInputField.getText().equals("MM/DD/YY")) {
+					startDateInputField.setText("");
+				}
+			}
+		});
 		
-		JLabel endDateLabel = new JLabel("End date (MM/DD/YY): ", SwingConstants.CENTER);
-		JTextField endDateInputField = new JTextField("", 10);
+		JLabel endDateLabel = new JLabel(" End date: ", SwingConstants.CENTER);
+		JTextField endDateInputField = new JTextField("MM/DD/YY", 10);
+		endDateInputField.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (endDateInputField.getText().isEmpty()) {
+					endDateInputField.setText("MM/DD/YY");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (endDateInputField.getText().equals("MM/DD/YY")) {
+					endDateInputField.setText("");
+				}
+			}
+		});
 		
+		Action searchAction = new AbstractAction("Search") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (startDateInputField.getText().isEmpty() || endDateInputField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Please enter a valid date.",
+							"Invalid input", JOptionPane.ERROR_MESSAGE);
+				} else {
+					
+					DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+					
+					LocalDate localStartDate = null;
+					LocalDate localEndDate = null;
+					
+					try {
+						localStartDate = LocalDate.parse(startDateInputField.getText(), myDateFormatter);
+						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
+						if (localStartDate.isAfter(localEndDate)) {
+							JOptionPane.showMessageDialog(new JFrame(),
+									"Start date cannot be after end date.",
+									"Invalid input", JOptionPane.ERROR_MESSAGE);
+						} else {
+							Object[] localDateArray = new LocalDate[2];
+							localDateArray[0] = localStartDate;
+							localDateArray[1] = localEndDate;
+							
+							setChanged();
+							notifyObservers(new ButtonSignal("submit", localDateArray));
+						}
+						
+						
+						
+					} catch (final DateTimeParseException theException) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Invalid date. Please "
+								+ "enter the dates using"
+								+ " MM/DD/YY format.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} catch (final IllegalArgumentException theException) {
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Start date cannot be after end date.",
+								"Invalid input", JOptionPane.ERROR_MESSAGE);
+					} 
+				}
+			}
+		};
 		
+		startDateInputField.addActionListener(searchAction);
+		endDateInputField.addActionListener(searchAction);
 		// Panel for buttons at the south quadrant of the frame.
-		JPanel buttonsPanel = new JPanel(new FlowLayout());
+		JPanel buttonsPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, GUI.BUTTON_GAP_WIDTH, GUI.BUTTON_GAP_HEIGHT));
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		
@@ -119,50 +200,8 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
-		JButton searchButton = new JButton(new AbstractAction("Search") {
-
-			/** */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (startDateInputField.getText().isEmpty() || endDateInputField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Please enter a valid date.",
-							"Invalid input", JOptionPane.ERROR_MESSAGE);
-				} else {
-					
-					DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
-					
-					LocalDate localStartDate = null;
-					LocalDate localEndDate = null;
-					
-					try {
-						localStartDate = LocalDate.parse(startDateInputField.getText(), myDateFormatter);
-						localEndDate = LocalDate.parse(endDateInputField.getText(), myDateFormatter);
-						
-						
-						
-						
-						// TODO: check if the start date is before or the same day as the end date
-						
-						Object[] localDateArray = new LocalDate[2];
-						localDateArray[0] = localStartDate;
-						localDateArray[1] = localEndDate;
-						
-						setChanged();
-						notifyObservers(new ButtonSignal("submit", localDateArray));
-						
-					} catch (final DateTimeParseException theException) {
-						JOptionPane.showMessageDialog(new JFrame(),
-								"Invalid date. Please "
-								+ "enter the dates using"
-								+ " MM/DD/YY format.",
-								"Invalid input", JOptionPane.ERROR_MESSAGE);
-					}
-				}
-			}
-		});
+		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(searchAction);
 		searchButton.setPreferredSize(GUI.BUTTON_SIZE);
 		searchButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		

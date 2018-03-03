@@ -5,9 +5,7 @@ import javax.swing.JFrame;
 import model.JobMap;
 import model.ParkManager;
 import model.UserMap;
-import model.Volunteer;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
-import ui_volunteer.VolunteerViewAllUpCommingJobPanel;
 
 /**
  * Tests for VolunteerSignUpPanel.

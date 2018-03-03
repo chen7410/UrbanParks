@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 import java.util.Observable;
@@ -65,7 +67,8 @@ public class LoginPanel extends Observable {
 		
 		// Writing the code to underline the welcome label.
 		Font font = welcomeLabel.getFont();
-		Map attributes = font.getAttributes();
+		@SuppressWarnings("unchecked")
+		Map<TextAttribute, Integer> attributes = (Map<TextAttribute, Integer>) font.getAttributes();
 		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		welcomeLabel.setFont(font.deriveFont(attributes));
 		
@@ -87,12 +90,26 @@ public class LoginPanel extends Observable {
 		
 		JLabel enterUserNameLabel = new JLabel("User Name: ");
 		
-		JTextField userName = new JTextField("", 15);
-		
+		JTextField userName = new JTextField("Username", 15);
+		userName.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (userName.getText().isEmpty()) {
+					userName.setText("Username");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (userName.getText().equals("Username")) {
+					userName.setText("");
+				}
+			}
+		});
 		JButton logInButton = new JButton();
 		Action logInAction = new AbstractAction("Log In") {
 			
-			/** */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -125,7 +142,7 @@ public class LoginPanel extends Observable {
 				System.exit(0);
 			}
 		});
-		exitButton.setSize(GUI.BUTTON_SIZE);
+		exitButton.setPreferredSize(logInButton.getMinimumSize());
 		exitButton.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		JPanel inputPanel = new JPanel(new FlowLayout());

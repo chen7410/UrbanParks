@@ -11,9 +11,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -83,7 +83,7 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 		JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,
 				GUI.BUTTON_GAP_WIDTH,
 				GUI.BUTTON_GAP_HEIGHT));
-		JButton submitChangeButton = new JButton(new AbstractAction("Submit Change") {
+		Action sumbitAction = new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -113,8 +113,10 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 				}
 				
 			}
-		});
-		
+		};
+		JButton submitChangeButton = new JButton("Submit Change");
+		newNumberTextField.addActionListener(sumbitAction);
+		submitChangeButton.addActionListener(sumbitAction);
 		JButton homeButton = new JButton(new AbstractAction("Home") {
 			private static final long serialVersionUID = 1L;
 

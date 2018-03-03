@@ -34,6 +34,7 @@ import ui_park_manager.ParkManagerSubmitJobPanel;
 import ui_park_manager.ParkManagerSubmitVerification;
 import ui_park_manager.ParkManagerUnsubmitConfirmationPanel;
 import ui_park_manager.ParkManagerViewAllUpCommingJobPanel;
+import ui_park_manager.ParkManagerViewSelectedJobDetailPanel;
 import ui_staff.UrbanParksStaffChangeMaxJobAmountPanel;
 import ui_staff.UrbanParksStaffHomePanel;
 import ui_staff.UrbanParksStaffJobDetails;
@@ -60,6 +61,9 @@ public class GUI extends JFrame implements Observer {
 
 	/** The size of all buttons. */
 	public static final Dimension BUTTON_SIZE = new Dimension(170, 40);
+	
+	/** The size of all buttons. */
+	public static final Dimension LONG_BUTTON_SIZE = new Dimension(190, 40);
 	
 	/** The size for label with short text */
 	public static final Dimension JLABEL_SHORT_TEXT = new Dimension(750, 30);
@@ -97,7 +101,6 @@ public class GUI extends JFrame implements Observer {
 	private JobMap myJobs;
 	private Volunteer myVolunteer;
 	private ParkManager myParkManager;
-//	private Staff myStaff;
 	private JPanel myCurrentPanel;
 	private LocalDate myStaffSearchStartDate;
 	private LocalDate myStaffSearchEndDate;
@@ -140,14 +143,12 @@ public class GUI extends JFrame implements Observer {
 				myParkManager = (ParkManager) user;
 				createParkManagerHomePanel();
 			} else if (user instanceof Staff) {
-//				myStaff = (Staff) user;
 				createUrbanParksStaffHomePanel();
 			}
 		}
 	}
 	
 	/**************************Volunteer*******************************/
-
 
 	private void createVolunteerHomePanel() {
 		remove(myCurrentPanel);
@@ -189,7 +190,8 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
+		VolunteerViewAllUpCommingJobPanel upcomingPanel = 
+				new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -301,10 +303,24 @@ public class GUI extends JFrame implements Observer {
 			volunteerCancellationConfirmationPanelActions(button);
 		}
 	}
-
-	
 	
 	/**************************Park Manager*******************************/
+	
+	private void createParkManagerViewSelectedJobDetailPanel(final int theJobID) {
+		remove(myCurrentPanel);
+		ParkManagerViewSelectedJobDetailPanel jobDetailPanel = 
+				new ParkManagerViewSelectedJobDetailPanel(myJobs.getJob(theJobID));
+		myCurrentPanel = jobDetailPanel.getPanel();
+		jobDetailPanel.addObserver(this);
+		add(myCurrentPanel, BorderLayout.CENTER);
+		pack();
+	}
+	
+	private void parkManagerViewSelectedJobDetailActions(final ButtonSignal theButton) {
+		if(theButton.getButtonName().toLowerCase(Locale.US).equals("back")) {
+			createParkManagerHomePanel();
+		}
+	}
 	
 	private void createParkManagerSubmitJobPanel() {
 		remove(myCurrentPanel);
@@ -325,7 +341,8 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createParkManagerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		ParkManagerViewAllUpCommingJobPanel upcomingPanel = new ParkManagerViewAllUpCommingJobPanel(myParkManager.getSortedJobList(myJobs));
+		ParkManagerViewAllUpCommingJobPanel upcomingPanel = 
+				new ParkManagerViewAllUpCommingJobPanel(myParkManager.getSortedJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -379,7 +396,6 @@ public class GUI extends JFrame implements Observer {
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
-
 	
 	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
@@ -401,7 +417,10 @@ public class GUI extends JFrame implements Observer {
 			createParkManagerViewAllUpCommingJobPanel();
 		} else if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
 			createParkManagerRemoveVerification(theSignal.getJobID());
+		} else if (theSignal.getButtonName().toLowerCase().equals("view selected job")) {
+			createParkManagerViewSelectedJobDetailPanel(theSignal.getJobID());
 		}
+		
 	}
 	
 	private void parkManagerSubmitVerificationActions(final ButtonSignal theButton) {
@@ -454,6 +473,8 @@ public class GUI extends JFrame implements Observer {
 			parkManagerHomePanelActions(button);
 		} else if (theObservable instanceof ParkManagerViewAllUpCommingJobPanel) {
 			parkManagerViewAllUpCommingJobPanelActions(button);
+		} else if (theObservable instanceof ParkManagerViewSelectedJobDetailPanel) {
+			parkManagerViewSelectedJobDetailActions(button);
 		}
 	}
 	
@@ -469,7 +490,6 @@ public class GUI extends JFrame implements Observer {
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
-	
 	
 	private void UrbanParksStaffViewJobsActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("view job details")) {
@@ -517,8 +537,6 @@ public class GUI extends JFrame implements Observer {
 		pack();
 	}
 	
-	
-	//TODO crashes the program
 	private void createUrbanParksStaffSearchJobsPanel() {
 		remove(myCurrentPanel);
 		UrbanParksStaffSearchJobsPanel searchPanel = new UrbanParksStaffSearchJobsPanel();
@@ -527,7 +545,6 @@ public class GUI extends JFrame implements Observer {
 		add(myCurrentPanel, BorderLayout.CENTER);
 		pack();
 	}
-	
 	
 	private void urbanParksStaffHomePanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("pending jobs size")) {
@@ -571,7 +588,6 @@ public class GUI extends JFrame implements Observer {
 			createUrbanParksStaffViewJobsPanel();
 		}
 	}
-	
 	
 	private void staffPanelsCases(final Observable theObservable,final Object theMessage) {
 		ButtonSignal button = (ButtonSignal) theMessage;

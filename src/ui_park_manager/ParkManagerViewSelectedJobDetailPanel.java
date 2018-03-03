@@ -2,7 +2,7 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
-package ui_volunteer;
+package ui_park_manager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,31 +20,29 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * A JPanel that will show the details of the job that the 
- * volunteer wants to cancel. It will also give them an option 
- * to return to the home page and to remove the job.
+ * A JPanel that will display the job's detail and 
+ * will have one button that returns to the previous 
+ * panel at the bottom.
  * 
  * @author  Group 7
- * @version March 5, 2018
+ * @version February 28, 2018
  */
-public class VolunteerSignedUpDetailsPanel extends Observable {
-	
+public class ParkManagerViewSelectedJobDetailPanel extends Observable {
 	private JPanel myPanel;
 	private Job myJob;
 	
+	
 	/**
-	 * Creates a new panel that will display the specified 
-	 * job's detail to the volunteer.
+	 * Creates a new panel that showing the selected job detail.
 	 * 
-	 * @param theJob detail's that will be displayed.
+	 * @param theJob the selected job.
 	 */
-	public VolunteerSignedUpDetailsPanel(final Job theJob) {
+	public ParkManagerViewSelectedJobDetailPanel(final Job theJob) {
 		myPanel = new JPanel(new BorderLayout());
 		myJob = theJob;
 		init();
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 	}
-	
 	
 	private void init() {
 		createButton();
@@ -69,26 +67,8 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 			}
 		});
 		backButton.setPreferredSize(GUI.BUTTON_SIZE);
-		JButton removeButton = new JButton(new AbstractAction("Cancel") {
-			
-			/**
-		     * A generated serial version UID for object Serialization.
-		     */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setChanged();
-				notifyObservers(new ButtonSignal("remove", myJob.getJobID()));
-				
-			}
-		});
-		if (!myJob.isJobRemovable()) {
-			removeButton.setEnabled(false);
-		}
-		removeButton.setPreferredSize(GUI.BUTTON_SIZE);
+		
 		buttonsPanel.add(backButton);
-		buttonsPanel.add(removeButton);
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		myPanel.add(buttonsPanel, BorderLayout.SOUTH);
 	}
@@ -116,7 +96,7 @@ public class VolunteerSignedUpDetailsPanel extends Observable {
 	}
 	
 	/**
-	 * @return an instance VolunteerSignedUpDetailsPanel.
+	 * @return an instance of ParkManagerViewSelectedJobDetailPanel.
 	 */
 	public JPanel getPanel() {
 		return myPanel;

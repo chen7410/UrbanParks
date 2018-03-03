@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 
 import model.JobMap;
 import model.UserMap;
-import ui_staff.UrbanParksStaffChangeMaxJobAmountPanel;
 import ui_staff.UrbanParksStaffNewMaxConfirmationPanel;
 
 public class UrbanParksStaffNewMaxConfirmationTest {
