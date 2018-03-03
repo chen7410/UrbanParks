@@ -137,21 +137,21 @@ public class addUserIgnoreThisClass {
 		
 		
 		
-//		Job job10 = new Job(LocalDate.of(2018, 04, 04)
-//				, LocalDate.of(2018, 04, 05)
-//				, "Woodland Park", matt
-//				, "5500 Phinney Ave N, Seattle, WA 98103"
-//				, "Planting and mulching flowerbeds");
-//		matt.createJob(job10);
-//		
-//		
-//		
-//		Job job11 = new Job (LocalDate.of(2018, 04, 06), 
-//				LocalDate.of(2018, 04, 07), 
-//				"Kerry Park", matt, 
-//				"211 W Highland Dr, Seattle, WA 98119",
-//				"Weeding and mulching flowerbeds");
-//		matt.createJob(job11);
+		Job job10 = new Job(LocalDate.of(2018, 04, 04)
+				, LocalDate.of(2018, 04, 05)
+				, "Woodland Park", matt
+				, "5500 Phinney Ave N, Seattle, WA 98103"
+				, "Planting and mulching flowerbeds");
+		matt.createJob(job10);
+		
+		
+		
+		Job job11 = new Job (LocalDate.of(2018, 04, 06), 
+				LocalDate.of(2018, 04, 07), 
+				"Kerry Park", matt, 
+				"211 W Highland Dr, Seattle, WA 98119",
+				"Weeding and mulching flowerbeds");
+		matt.createJob(job11);
 //
 //			
 //		Job job12 = new Job (LocalDate.of(2018, 04, 8) 
@@ -231,8 +231,8 @@ public class addUserIgnoreThisClass {
 		myJobs.addJob(job7);
 		myJobs.addJob(job8);
 		myJobs.addJob(job9);
-//		myJobs.addJob(job10);
-//		myJobs.addJob(job11);
+		myJobs.addJob(job10);
+		myJobs.addJob(job11);
 //		myJobs.addJob(job12);
 //		myJobs.addJob(job13);
 //		myJobs.addJob(job14);

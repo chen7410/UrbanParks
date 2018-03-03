@@ -216,9 +216,12 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(jobAmount);
 
-		jobAmount.setText("Max job allowed: " + 
-				myJobMap.getMaxJobAmount() + 
-				"             Currently: " + myJobMap.getPendingJobAmount());
+//		jobAmount.setText("Max job allowed: " + 
+//				myJobMap.getMaxJobAmount() + 
+//				"             Currently: " + myJobMap.getPendingJobAmount());
+		if (myJobMap.isFull()) {
+			jobAmount.setText("The pending job queue is full!");
+		}
 		
 		JPanel signUpButtonPanel = new JPanel();
 		signUpButtonPanel.add(signUpButton);
