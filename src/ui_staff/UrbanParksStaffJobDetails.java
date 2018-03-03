@@ -20,7 +20,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will display the job's detail of 
+ * the selected job. It will have two buttons at the 
+ * bottom: One to return home and one to return to the previous
+ * panel.
  * 
  * @author Group 7
  * @version March 5, 2018

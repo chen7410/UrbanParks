@@ -27,7 +27,12 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will allow Urban Parks staff to change 
+ * the maximum number of pending jobs that can be in the 
+ * system. The Panel will display the current number of 
+ * maximum allowed pending jobs in the system. It will 
+ * give the staff an option to return home or to change 
+ * the number of jobs.
  * 
  * @author Group 7
  * @version March 5, 2018

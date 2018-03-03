@@ -75,11 +75,9 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
-		//int size = 0;
+
 		for (int i = 0; i < size; i++) {
 
-			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
-			//System.out.println(b.toString());
 			JRadioButton b = makeRadioButton(myAllUpCommingJobs.get(i));
 			b.setBackground(Color.WHITE);
 			group.add(b);
@@ -166,7 +164,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				mySelectedJobID = theEligibleJob.getJobID();
-				System.out.println("Radio button Selected Job ID " + theEligibleJob.getJobID());
 			}
 		});
 		return button;

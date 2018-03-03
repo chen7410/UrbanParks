@@ -29,7 +29,9 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- *
+ * A JPanel that will display all the upcoming jobs for a park
+ * manager. It will have two options one to view the details 
+ * of the selected job and one to return to the home panel.
  *
  * @author Group 7
  * @version February 17, 2018
@@ -114,10 +116,6 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 
-	/**
-	 * Set up top label.
-	 * @return return a label.
-	 */
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("All Upcomming Jobs");
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
@@ -187,7 +185,6 @@ public class ParkManagerViewAllUpCommingJobPanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				mySelectedJobID = theEligibleJob.getJobID();
-				System.out.println("Radio button Selected Job ID " + theEligibleJob.getJobID());
 			}
 		});
 		return button;

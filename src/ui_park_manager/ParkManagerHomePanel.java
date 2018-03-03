@@ -32,7 +32,7 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * This class will create a park manager home panel that will
+ * A JPanel thats will create a park manager home panel that will
  * show all the park manager's upcoming jobs on the left, and 
  * a list of options on the right. The options are: submit a 
  * new job, view all upcoming jobs and log out.

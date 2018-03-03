@@ -20,6 +20,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
+ * A JPanel that will ask the park manager to verify whether they
+ * want to submit a job or not. It will display the job's detail and 
+ * will have two buttons at the bottom. One to return to the previous 
+ * panel and one to submit the job.
  * 
  * @author  Group 7
  * @version February 28, 2018
