@@ -9,6 +9,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Observable;
@@ -71,8 +73,8 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		myPanel.setPreferredSize(GUI.PANEL_SIZE);
 		myParkNameTf = new JTextField(textFieldSize);
 		myLocationTf = new JTextField(textFieldSize);
-		myStartDateTf = new JTextField(textFieldSize);
-		myEndDateTf = new JTextField(textFieldSize);
+		myStartDateTf = new JTextField("MM/DD/YY", textFieldSize);
+		myEndDateTf = new JTextField("MM/DD/YY", textFieldSize);
 		myJobDescriptionTa = new JTextArea(textAreaWidth, textAreaHeight);
 		myParkManager = theParkManager;
 		setup();
@@ -93,8 +95,43 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		JLabel endDate = new JLabel("    End date: ");
 		JLabel jobDescription = new JLabel("Description: ");
 		
-		JLabel startDateFormat = new JLabel("MM/DD/YY");
-		JLabel endDateFormat = new JLabel("MM/DD/YY");
+		myStartDateTf.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (myStartDateTf.getText().isEmpty()) {
+					myStartDateTf.setText("MM/DD/YY");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (myStartDateTf.getText().equals("MM/DD/YY")) {
+					myStartDateTf.setText("");
+				}
+			}
+		});
+		
+		myEndDateTf.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (myEndDateTf.getText().isEmpty()) {
+					myEndDateTf.setText("MM/DD/YY");
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (myEndDateTf.getText().equals("MM/DD/YY")) {
+					myEndDateTf.setText("");
+				}
+			}
+		});
+		
+		
+		//JLabel startDateFormat = new JLabel("MM/DD/YY");
+		//JLabel endDateFormat = new JLabel("MM/DD/YY");
 		JLabel invGap1 = new JLabel("                    ");
 		JLabel invGap2 = new JLabel("                    ");
 		
@@ -102,22 +139,22 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		JPanel parkNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		parkNamePanel.add(parkName);
 		parkNamePanel.add(myParkNameTf);
-		parkNamePanel.add(invGap1);
+		//parkNamePanel.add(invGap1);
 		
 		JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		locationPanel.add(location);
 		locationPanel.add(myLocationTf);
-		locationPanel.add(invGap2);
+		//locationPanel.add(invGap2);
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		startDatePanel.add(startDate);
 		startDatePanel.add(myStartDateTf);
-		startDatePanel.add(startDateFormat);
+		//startDatePanel.add(startDateFormat);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		endDatePanel.add(endDate);
 		endDatePanel.add(myEndDateTf);
-		endDatePanel.add(endDateFormat);
+		//endDatePanel.add(endDateFormat);
 		
 		//text area
 		JPanel jobDescriptionPanel = new JPanel(new FlowLayout());
