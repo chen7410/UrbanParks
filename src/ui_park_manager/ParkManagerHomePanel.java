@@ -127,7 +127,8 @@ public class ParkManagerHomePanel extends Observable {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setChanged();
-				notifyObservers(new ButtonSignal("view job details", mySelectedJobID));	
+				notifyObservers(new ButtonSignal("view selected job", mySelectedJobID));
+				System.out.println("view selected job");
 			}
 		});
 		viewSelectedJobButton.setSize(GUI.BUTTON_SIZE);
@@ -179,7 +180,7 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		JButton viewAllYourUpcommingJobsButton = new JButton(
-				new AbstractAction("View Upcomming Jobs") {
+				new AbstractAction("View All Upcomming Jobs") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
