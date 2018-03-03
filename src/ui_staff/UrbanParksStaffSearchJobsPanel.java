@@ -67,7 +67,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 	
 	private void setup() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setBorder(BorderFactory.createSoftBevelBorder(1));
 		BoxLayout buttonPanelLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
 		mainPanel.setLayout(buttonPanelLayout);
@@ -85,11 +85,11 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout());
 		startDatePanel.setMaximumSize(new Dimension(800, 0));
-		startDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		startDatePanel.setBackground(Color.WHITE);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout());
 		endDatePanel.setPreferredSize(new Dimension(800, 0));
-		endDatePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		endDatePanel.setBackground(Color.WHITE);
 		
 		JLabel startDateLabel = new JLabel("Start date (MM/DD/YY): ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("", 10);
@@ -115,7 +115,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 				notifyObservers(new ButtonSignal("home", 0));
 			}
 		});
-		homeButton.setSize(GUI.BUTTON_SIZE);
+		homeButton.setPreferredSize(GUI.BUTTON_SIZE);
 		homeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
@@ -163,7 +163,6 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 				}
 			}
 		});
-//		searchButton.setSize(GUI.BUTTON_SIZE);
 		searchButton.setPreferredSize(GUI.BUTTON_SIZE);
 		searchButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
