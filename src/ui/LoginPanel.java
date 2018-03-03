@@ -34,9 +34,12 @@ import model.User;
 import model.UserMap;
 
 /**
+ * A JPanel that will be the first panel displayed to the 
+ * users. It will display a welcome message and ask them to 
+ * log in using their username. It also gives the users an 
+ * option to exit the program.
  * 
- * 
- * @author Brook Negussie
+ * @author  Group 7
  * @version March 5, 2018
  */
 public class LoginPanel extends Observable {
