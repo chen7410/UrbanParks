@@ -62,6 +62,9 @@ public class GUI extends JFrame implements Observer {
 	/** The size of all buttons. */
 	public static final Dimension BUTTON_SIZE = new Dimension(170, 40);
 	
+	/** The size of all buttons. */
+	public static final Dimension LONG_BUTTON_SIZE = new Dimension(190, 40);
+	
 	/** The size for label with short text */
 	public static final Dimension JLABEL_SHORT_TEXT = new Dimension(750, 30);
 
@@ -190,7 +193,8 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
+		VolunteerViewAllUpCommingJobPanel upcomingPanel = 
+				new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);

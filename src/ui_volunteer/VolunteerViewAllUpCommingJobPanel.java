@@ -6,6 +6,7 @@ package ui_volunteer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import model.Job;
@@ -74,7 +76,6 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 		//radio button group
 		ButtonGroup group = new ButtonGroup();
 		int size = myAllUpCommingJobs.size();
-
 		for (int i = 0; i < size; i++) {
 
 			JRadioButton b = makeRadioButton(myAllUpCommingJobs.get(i));
@@ -98,20 +99,18 @@ public class VolunteerViewAllUpCommingJobPanel extends Observable {
 
 		//radio button scroll pane
 		Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-		
 		JScrollPane radioScrollPane = new JScrollPane(radioPanel);
 		radioScrollPane.setBorder(BorderFactory.createTitledBorder(
 				loweredetched, "Select a job"));
 
 		myPanel.add(topLabelPanel, BorderLayout.NORTH);
-		
 		if (size != 0) {
+			
 			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		} else {
 			radioPanel.add(new JLabel("No upcomming jobs."));
-			myPanel.add(radioPanel, BorderLayout.CENTER);
+			myPanel.add(radioScrollPane, BorderLayout.CENTER);
 		}
-		
 		myPanel.add(buttonPanel, BorderLayout.SOUTH);
 	}
 

@@ -81,7 +81,7 @@ public class VolunteerHomePanel extends Observable {
 			 * signed up for.
 			 */
 			JLabel noCurrentJobsAvailableLabel = new JLabel("You do not have any upcoming jobs.", SwingConstants.CENTER);
-			noCurrentJobsAvailableLabel.setFont(new Font(noCurrentJobsAvailableLabel.getName(), Font.PLAIN, 20));
+			noCurrentJobsAvailableLabel.setFont(new Font(noCurrentJobsAvailableLabel.getName(), Font.PLAIN, 12));
 			
 			upcomingJobsPanel.add(noCurrentJobsAvailableLabel, BorderLayout.CENTER);
 		} else {
@@ -124,9 +124,15 @@ public class VolunteerHomePanel extends Observable {
 		viewSelectedJobButton.setPreferredSize(GUI.BUTTON_SIZE);
 		viewSelectedJobButton.setAlignmentX(Box.CENTER_ALIGNMENT);
 		
+/*
+ * TODO 
+ */
+		
 		// The panel which simple has the viewSelectedJobButton.
-		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout());
+		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout(
+				FlowLayout.CENTER, 0, GUI.BUTTON_GAP_HEIGHT));
 		viewSelectedJobPanel.add(viewSelectedJobButton);
+		viewSelectedJobPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		if (upcomingJobSize > 0) {
 			upcomingJobsPanel.add(viewSelectedJobPanel, BorderLayout.SOUTH);
@@ -187,14 +193,31 @@ public class VolunteerHomePanel extends Observable {
 		logOut.setPreferredSize(GUI.BUTTON_SIZE);
 		logOut.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
+		JPanel signUpButtonPanel = new JPanel();
+		signUpButtonPanel.add(signUpButton);
+		signUpButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
+		JPanel viewAllJobsButtonPanel = new JPanel();
+		viewAllJobsButtonPanel.add(viewAllYourUpcommingJobsButton);
+		viewAllJobsButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
+		JPanel logOutButtonPanel = new JPanel();
+		logOutButtonPanel.add(logOut);
+		logOutButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
+		JPanel ivisiblePanel = new JPanel();
+		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
+		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		
 		
 		// Adding the buttons onto the buttonsPanel.
 		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
-		buttonsPanel.add(signUpButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(viewAllYourUpcommingJobsButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-		buttonsPanel.add(logOut);
+		buttonsPanel.add(signUpButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(viewAllJobsButtonPanel);
+		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(logOutButtonPanel);
+		buttonsPanel.add(ivisiblePanel);
 		
 		
 		

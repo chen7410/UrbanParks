@@ -52,7 +52,7 @@ public class JobMap {
 	 * @return true if full, false otherwise.
 	 */
 	public boolean isFull (){
-		return myJobs.size() >= maxJobAmount;
+		return getPendingJobAmount() >= maxJobAmount;
 	}
 	
 	/**

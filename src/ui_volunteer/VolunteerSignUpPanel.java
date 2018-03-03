@@ -76,8 +76,6 @@ public class VolunteerSignUpPanel extends Observable {
 		int size = myEligibleJobs.size();
 		for (int i = 0; i < size; i++) {
 
-			//JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
-			//System.out.println(b.toString());
 			JRadioButton b = makeRadioButton(myEligibleJobs.get(i));
 			b.setBackground(Color.WHITE);
 			group.add(b);
