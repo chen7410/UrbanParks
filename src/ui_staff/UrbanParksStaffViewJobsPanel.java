@@ -6,7 +6,6 @@ package ui_staff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
@@ -23,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
@@ -140,7 +138,7 @@ public class UrbanParksStaffViewJobsPanel extends Observable {
 	private JLabel makeTopJlabel() {
 		JLabel topLabel = new JLabel("Start date: " + 
 				myStartDate.format(GUI.DATE_FORMATTER) 
-		+ "           EndDate: " + myEndDate.format(GUI.DATE_FORMATTER));
+		+ "           End date: " + myEndDate.format(GUI.DATE_FORMATTER));
 		topLabel.setSize(GUI.JLABEL_SHORT_TEXT);
 		return topLabel;
 	}

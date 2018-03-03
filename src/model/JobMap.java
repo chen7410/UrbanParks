@@ -72,7 +72,7 @@ public class JobMap {
 	
 	/**
 	 * 
-	 * @param theMaxJobA
+	 * @param theMaxJobAmount
 	 * @throws IllegalArgumentException if theJobAmount <= 0.
 	 */
 	public void setMaxJobAmount(int theMaxJobAmount) {

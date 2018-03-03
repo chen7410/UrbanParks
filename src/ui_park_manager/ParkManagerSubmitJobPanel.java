@@ -129,32 +129,22 @@ public class ParkManagerSubmitJobPanel extends Observable {
 			}
 		});
 		
-		
-		//JLabel startDateFormat = new JLabel("MM/DD/YY");
-		//JLabel endDateFormat = new JLabel("MM/DD/YY");
-		JLabel invGap1 = new JLabel("                    ");
-		JLabel invGap2 = new JLabel("                    ");
-		
 		//pairs label and text field
 		JPanel parkNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		parkNamePanel.add(parkName);
 		parkNamePanel.add(myParkNameTf);
-		//parkNamePanel.add(invGap1);
 		
 		JPanel locationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		locationPanel.add(location);
 		locationPanel.add(myLocationTf);
-		//locationPanel.add(invGap2);
 		
 		JPanel startDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		startDatePanel.add(startDate);
 		startDatePanel.add(myStartDateTf);
-		//startDatePanel.add(startDateFormat);
 		
 		JPanel endDatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		endDatePanel.add(endDate);
 		endDatePanel.add(myEndDateTf);
-		//endDatePanel.add(endDateFormat);
 		
 		//text area
 		JPanel jobDescriptionPanel = new JPanel(new FlowLayout());
