@@ -97,7 +97,7 @@ public class GUI extends JFrame implements Observer {
 	private JobMap myJobs;
 	private Volunteer myVolunteer;
 	private ParkManager myParkManager;
-	private Staff myStaff;
+//	private Staff myStaff;
 	private JPanel myCurrentPanel;
 	private LocalDate myStaffSearchStartDate;
 	private LocalDate myStaffSearchEndDate;
@@ -132,15 +132,15 @@ public class GUI extends JFrame implements Observer {
 	private void loginPanelActions(final ButtonSignal theSignal) {
 		if (theSignal.getButtonName().toLowerCase().equals("login")) {
 			User user = theSignal.getUser();
+			setTitle("Urban Parks - " + user.getUserInformation());
 			if (user instanceof Volunteer) {
 				myVolunteer = (Volunteer) user;
 				createVolunteerHomePanel();
 			} else if(user instanceof ParkManager) {
 				myParkManager = (ParkManager) user;
-				//TODO: this panel is not working correctly..
 				createParkManagerHomePanel();
 			} else if (user instanceof Staff) {
-				myStaff = (Staff) user;
+//				myStaff = (Staff) user;
 				createUrbanParksStaffHomePanel();
 			}
 		}
@@ -151,7 +151,7 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerHomePanel() {
 		remove(myCurrentPanel);
-		VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getJobList(myJobs));
+		VolunteerHomePanel homePanel = new VolunteerHomePanel(myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -180,7 +180,7 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerSignUpConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerSignUpConfirmationPanel confirmationPanel = new VolunteerSignUpConfirmationPanel(
-				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
+				myJobs.getJob(theJobID), myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -189,7 +189,7 @@ public class GUI extends JFrame implements Observer {
 
 	private void createVolunteerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getJobList(myJobs));
+		VolunteerViewAllUpCommingJobPanel upcomingPanel = new VolunteerViewAllUpCommingJobPanel(myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -208,7 +208,7 @@ public class GUI extends JFrame implements Observer {
 	private void createVolunteerCancellationConfirmationPanel(final int theJobID) {
 		remove(myCurrentPanel);
 		VolunteerCancellationConfirmationPanel confirmationPanel = new VolunteerCancellationConfirmationPanel(
-				myJobs.getJob(theJobID), myVolunteer.getJobList(myJobs));
+				myJobs.getJob(theJobID), myVolunteer.getSortedJobList(myJobs));
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -325,7 +325,7 @@ public class GUI extends JFrame implements Observer {
 	
 	private void createParkManagerViewAllUpCommingJobPanel() {
 		remove(myCurrentPanel);
-		ParkManagerViewAllUpCommingJobPanel upcomingPanel = new ParkManagerViewAllUpCommingJobPanel(myParkManager.getJobList(myJobs));
+		ParkManagerViewAllUpCommingJobPanel upcomingPanel = new ParkManagerViewAllUpCommingJobPanel(myParkManager.getSortedJobList(myJobs));
 		myCurrentPanel = upcomingPanel.getPanel();
 		upcomingPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -344,7 +344,7 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerHomePanel() {
 		remove(myCurrentPanel);
 		ParkManagerHomePanel homePanel = new ParkManagerHomePanel(
-				myParkManager.getJobList(myJobs), myJobs);
+				myParkManager.getSortedJobList(myJobs), myJobs);
 		myCurrentPanel = homePanel.getPanel();
 		homePanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -372,7 +372,8 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerSubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerSubmitConfirmationPanel submitConfirmationPanel = new ParkManagerSubmitConfirmationPanel(
-				theJob, myParkManager.getJobList(myJobs), myJobs);
+					theJob, myParkManager.getSortedJobList(myJobs), myJobs);
+
 		myCurrentPanel = submitConfirmationPanel.getPanel();
 		submitConfirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -383,7 +384,7 @@ public class GUI extends JFrame implements Observer {
 	private void createParkManagerUnsubmitConfirmationPanel(final Job theJob) {
 		remove(myCurrentPanel);
 		ParkManagerUnsubmitConfirmationPanel unSubmitConfirmationPanel = new ParkManagerUnsubmitConfirmationPanel(
-				theJob, myParkManager.getJobList(myJobs));
+				theJob, myParkManager.getSortedJobList(myJobs));
 		myCurrentPanel = unSubmitConfirmationPanel.getPanel();
 		unSubmitConfirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -419,7 +420,7 @@ public class GUI extends JFrame implements Observer {
 		} else if (theButton.getButtonName().toLowerCase(Locale.US).equals("remove")) {
 			myParkManager.removeJob(theButton.getJob());
 			myJobs.remove(theButton.getJob());
-			createParkManagerUnsubmitConfirmationPanel(myJobs.getJob(theButton.getJobID()));
+			createParkManagerUnsubmitConfirmationPanel(theButton.getJob());
 		}
 	}
 	

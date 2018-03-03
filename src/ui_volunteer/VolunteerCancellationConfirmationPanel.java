@@ -27,11 +27,11 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * This panel is used to confirm a volunteer that they have cancelled
- * a job successfully. It will notify observers when a button is pressed.
+ * A JPanel that will display to the volunteer a confirmation of 
+ * the job that they cancelled and show the job's detail.
  * 
- * @author Hasnah Said
- * @version February 18, 2018
+ * @author  Group 7
+ * @version March 5, 2018
  */
 public class VolunteerCancellationConfirmationPanel extends Observable {
 
@@ -43,8 +43,8 @@ public class VolunteerCancellationConfirmationPanel extends Observable {
 	 * Creates a panel that will confirm the cancellation of the 
 	 * specified job. 
 	 * 
-	 * @param theJob              being cancelled
-	 * @param theVolunteerJobList a list of all the jobs that a volunteer has.
+	 * @param theJob               being cancelled
+	 * @param theVolunteerJobList  a list of all the jobs that a volunteer has.
 	 */
 	public VolunteerCancellationConfirmationPanel(final Job theJob,
 			final List<Job> theVolunteerJobList) {

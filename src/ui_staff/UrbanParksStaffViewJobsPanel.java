@@ -32,9 +32,12 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
+ * A JPanel that will display the result of the search.
+ * This panel will show all the jobs that are in the period
+ * specified by the staff.
  * 
  * @author  Group 7
- * @version February 28, 2018
+ * @version March 5, 2018
  */
 
 public class UrbanParksStaffViewJobsPanel extends Observable {

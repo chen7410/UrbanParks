@@ -23,6 +23,7 @@ public class Volunteer extends User implements Serializable {
 	public Volunteer(final String theUserName, final String theFirstName,
 						final String theLastName) {
 		super(theUserName, theFirstName, theLastName);
+		setUserType("Volunteer");
 	}
 
 	/**

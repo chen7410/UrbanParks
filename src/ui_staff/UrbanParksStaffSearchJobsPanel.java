@@ -42,8 +42,12 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
+ * A JPanel that lets Urban Parks Staff search the system
+ * for jobs in a given period. This panel will have two text
+ * fields that are for the start date of the period and the 
+ * end date of the period.
  * 
- * @author Group 7
+ * @author  Group 7
  * @version March 5, 2018
  */
 public class UrbanParksStaffSearchJobsPanel extends Observable {

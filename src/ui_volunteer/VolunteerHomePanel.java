@@ -32,7 +32,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will be the volunteer's home panel. It will show a
+ * list of all their upcoming jobs on the left. On the right side, it
+ * will show the options that a volunteer can choose from. The options
+ * are: sign up, view all upcoming jobs, and log out.
  * 
  * @author Group 7
  * @version March 5, 2018
@@ -61,12 +64,13 @@ public class VolunteerHomePanel extends Observable {
 
 		// Panel on the left side of the overall home panel.		
 		JPanel upcomingJobsPanel = new JPanel(new BorderLayout());
-		upcomingJobsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		upcomingJobsPanel.setBackground(Color.WHITE);
 		upcomingJobsPanel.setBorder(BorderFactory.createTitledBorder("Your Upcoming Jobs"));
 		
 		// Radio buttons panel
-		JPanel radioButtonsPanel = new JPanel(new GridLayout(0, 1));
-		radioButtonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		JPanel radioButtonsPanel = new JPanel();
+		radioButtonsPanel.setLayout(new BoxLayout(radioButtonsPanel, BoxLayout.Y_AXIS));
+		radioButtonsPanel.setBackground(Color.WHITE);
 		radioButtonsPanel.setBorder(BorderFactory.createEmptyBorder());
 		
 		
@@ -94,6 +98,7 @@ public class VolunteerHomePanel extends Observable {
 				radioButton.setBackground(Color.WHITE);
 				buttonGroup.add(radioButton);
 				radioButtonsPanel.add(radioButton);
+				radioButtonsPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
 				if (index == 0) {
 					radioButton.setSelected(true);
 					// Selecting the first job as the default job to be viewed.

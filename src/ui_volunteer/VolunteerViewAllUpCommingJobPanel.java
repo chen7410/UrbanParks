@@ -1,3 +1,7 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
 package ui_volunteer;
 
 import java.awt.BorderLayout;
@@ -23,7 +27,12 @@ import model.Job;
 import ui.ButtonSignal;
 import ui.GUI;
 /**
- * A JPanal that showing all upcoming jobs for a volunteer.
+ * A JPanel that will display all the upcoming jobs of the 
+ * volunteer that is currently logged in. At the bottom of the 
+ * panel, there will be two buttons that will take the volunteer
+ * to the home panel or allow the volunteer to view the details
+ * of the job that is selected.
+ *
  * @author  Group 7
  * @version March 5, 2018
  */
