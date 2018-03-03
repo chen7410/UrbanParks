@@ -91,15 +91,16 @@ public class LoginPanel extends Observable {
 		centerPanel.add(slogan);
 		centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
 		
-		JLabel enterUserNameLabel = new JLabel("User Name: ");
-		
+		JLabel enterUserNameLabel = new JLabel("Username: ");
 		JTextField userName = new JTextField("Username", 15);
+		userName.setForeground(Color.GRAY);
 		userName.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (userName.getText().isEmpty()) {
 					userName.setText("Username");
+					userName.setForeground(Color.GRAY);
 				}
 			}
 			
@@ -107,6 +108,7 @@ public class LoginPanel extends Observable {
 			public void focusGained(FocusEvent e) {
 				if (userName.getText().equals("Username")) {
 					userName.setText("");
+					userName.setForeground(Color.BLACK);
 				}
 			}
 		});

@@ -5,6 +5,7 @@
 package ui_park_manager;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -94,13 +95,14 @@ public class ParkManagerSubmitJobPanel extends Observable {
 		JLabel startDate = new JLabel("  Start date: ");
 		JLabel endDate = new JLabel("    End date: ");
 		JLabel jobDescription = new JLabel("Description: ");
-		
+		myStartDateTf.setForeground(Color.GRAY);
 		myStartDateTf.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (myStartDateTf.getText().isEmpty()) {
 					myStartDateTf.setText("MM/DD/YY");
+					myStartDateTf.setForeground(Color.GRAY);
 				}
 			}
 			
@@ -108,16 +110,18 @@ public class ParkManagerSubmitJobPanel extends Observable {
 			public void focusGained(FocusEvent e) {
 				if (myStartDateTf.getText().equals("MM/DD/YY")) {
 					myStartDateTf.setText("");
+					myStartDateTf.setForeground(Color.BLACK);
 				}
 			}
 		});
-		
+		myEndDateTf.setForeground(Color.GRAY);
 		myEndDateTf.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (myEndDateTf.getText().isEmpty()) {
 					myEndDateTf.setText("MM/DD/YY");
+					myEndDateTf.setForeground(Color.GRAY);
 				}
 			}
 			
@@ -125,6 +129,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 			public void focusGained(FocusEvent e) {
 				if (myEndDateTf.getText().equals("MM/DD/YY")) {
 					myEndDateTf.setText("");
+					myEndDateTf.setForeground(Color.BLACK);
 				}
 			}
 		});

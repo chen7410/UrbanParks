@@ -90,12 +90,14 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 		
 		JLabel startDateLabel = new JLabel("Start date: ", SwingConstants.CENTER);
 		JTextField startDateInputField = new JTextField("MM/DD/YY", 10);
+		startDateInputField.setForeground(Color.GRAY);
 		startDateInputField.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (startDateInputField.getText().isEmpty()) {
 					startDateInputField.setText("MM/DD/YY");
+					startDateInputField.setForeground(Color.GRAY);
 				}
 			}
 			
@@ -103,18 +105,21 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 			public void focusGained(FocusEvent e) {
 				if (startDateInputField.getText().equals("MM/DD/YY")) {
 					startDateInputField.setText("");
+					startDateInputField.setForeground(Color.BLACK);
 				}
 			}
 		});
 		
 		JLabel endDateLabel = new JLabel(" End date: ", SwingConstants.CENTER);
 		JTextField endDateInputField = new JTextField("MM/DD/YY", 10);
+		endDateInputField.setForeground(Color.GRAY);
 		endDateInputField.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (endDateInputField.getText().isEmpty()) {
 					endDateInputField.setText("MM/DD/YY");
+					endDateInputField.setForeground(Color.GRAY);
 				}
 			}
 			
@@ -122,6 +127,7 @@ public class UrbanParksStaffSearchJobsPanel extends Observable {
 			public void focusGained(FocusEvent e) {
 				if (endDateInputField.getText().equals("MM/DD/YY")) {
 					endDateInputField.setText("");
+					endDateInputField.setForeground(Color.BLACK);
 				}
 			}
 		});
