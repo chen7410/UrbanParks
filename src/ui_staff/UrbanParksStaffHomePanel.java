@@ -22,7 +22,9 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will be the home panel for staff. It 
+ * will show the three options that a staff can perform. The 
+ * options are search for jobs, change pending jobs and log out.
  * 
  * @author Group 7
  * @version March 5, 2018

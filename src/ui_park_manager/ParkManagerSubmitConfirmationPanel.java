@@ -28,7 +28,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will display to the park manager a 
+ * confirmation of the job they have submitted.
+ * The panel will include a button to return to the 
+ * home panel and another button to submit another job.
  * 
  * @author Group 7
  * @version March 5, 2018

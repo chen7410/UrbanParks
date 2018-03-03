@@ -22,7 +22,10 @@ import ui.ButtonSignal;
 import ui.GUI;
 
 /**
- * 
+ * A JPanel that will display a verification to the park manager
+ * when a job is removed from the system. The panel will have two 
+ * buttons at the bottom, one to return to home and one to confrim the 
+ * removal. 
  * 
  * @author Group 7
  * @version March 5, 2018
