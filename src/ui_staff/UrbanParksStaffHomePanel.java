@@ -108,7 +108,7 @@ public class UrbanParksStaffHomePanel extends Observable{
 		logOutButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		JPanel ivisiblePanel = new JPanel();
-		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
+		ivisiblePanel.setPreferredSize(GUI.INVISBLE_PANEL_AREA);
 		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		// Adding the buttons onto the buttonsPanel.

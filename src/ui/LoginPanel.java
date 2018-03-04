@@ -44,6 +44,14 @@ import model.UserMap;
  */
 public class LoginPanel extends Observable {
 	
+	private static final int LOG_IN_BUTTON_PADDING = 25;
+	private static final int SLOGAN_LABEL_PADDING = 50;
+	private static final int SLOGAN_LABEL_SIZE = 20;
+	private static final int USERNAME_TEXTBOX_WIDTH_SIZE = 15;
+	private static final int WELCOME_LABEL_PADDING = 75;
+	private static final int WELCOME_LABEL_SIZE = 40;
+	
+	
 	private JPanel myPanel;
 	private UserMap myUsers;
 	
@@ -66,33 +74,42 @@ public class LoginPanel extends Observable {
 		
 		
 		JLabel welcomeLabel = new JLabel("Welcome to Urban Parks");
-		welcomeLabel.setFont(new Font(welcomeLabel.getName(), Font.PLAIN, 40));
+		welcomeLabel.setFont(new Font(welcomeLabel.getName(),
+									Font.PLAIN, WELCOME_LABEL_SIZE));
 		
 		// Writing the code to underline the welcome label.
 		Font font = welcomeLabel.getFont();
 		@SuppressWarnings("unchecked")
-		Map<TextAttribute, Integer> attributes = (Map<TextAttribute, Integer>) font.getAttributes();
-		attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		Map<TextAttribute, Integer> attributes = (Map<TextAttribute,
+									Integer>) font.getAttributes();
+		attributes.put(TextAttribute.UNDERLINE,
+						TextAttribute.UNDERLINE_ON);
 		welcomeLabel.setFont(font.deriveFont(attributes));
 		
 		welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		
 		JLabel slogan = new JLabel("Where you can sign up or create a"
-									+ " volunteering job.", SwingConstants.CENTER); 
-		slogan.setFont(new Font(slogan.getName(), Font.PLAIN, 20));
+									+ " volunteering job.",
+											SwingConstants.CENTER);
+		slogan.setFont(new Font(slogan.getName(), Font.PLAIN,
+												SLOGAN_LABEL_SIZE));
 		slogan.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		// Adding the labels to the center panel.
-		
-		centerPanel.add(Box.createRigidArea(new Dimension(0, 75)));
+		// Adding the labels to the center panel with proper padding.
+		centerPanel.add(Box.createRigidArea(new Dimension(0,
+											WELCOME_LABEL_PADDING)));
 		centerPanel.add(welcomeLabel);
-		centerPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+		centerPanel.add(Box.createRigidArea(new Dimension(0,
+											SLOGAN_LABEL_PADDING)));
 		centerPanel.add(slogan);
-		centerPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+		centerPanel.add(Box.createRigidArea(new Dimension(0,
+											LOG_IN_BUTTON_PADDING)));
+		
 		
 		JLabel enterUserNameLabel = new JLabel("Username: ");
-		JTextField userName = new JTextField("Username", 15);
+		JTextField userName = new JTextField("Username",
+										USERNAME_TEXTBOX_WIDTH_SIZE);
 		userName.setForeground(Color.GRAY);
 		userName.addFocusListener(new FocusListener() {
 			

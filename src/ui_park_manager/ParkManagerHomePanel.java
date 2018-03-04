@@ -48,14 +48,15 @@ public class ParkManagerHomePanel extends Observable {
 	private List<Job> myAllUpcomingJobs;
 	
     /**
-     * Creates a new park manager home panel with a list of of jobs that belong
-     * to the park manager and options to: submit a job, view all upcoming jobs
-     * and log out.  
+     * Creates a new park manager home panel with a list of of jobs
+     * that belong to the park manager and options to: submit a job,
+     * view all upcoming jobs and log out.  
      *
      * @param theJobList a list of all the jobs that belongs to 
      * 					 a certain park manager. 
      */
-	public ParkManagerHomePanel(final List<Job> theJobList, final JobMap theJobMap) {
+	public ParkManagerHomePanel(final List<Job> theJobList,
+											final JobMap theJobMap) {
 		myAllUpcomingJobs = theJobList;
 		myJobMap = theJobMap;
 		myPanel = new JPanel(new BorderLayout());
@@ -68,16 +69,19 @@ public class ParkManagerHomePanel extends Observable {
 	 * Setting up this ParkManagerHomePanel.
 	 */
 	private void setup() {
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		JSplitPane splitPane = new JSplitPane(
+										JSplitPane.HORIZONTAL_SPLIT);
 
 		// Panel on the left side of the overall home panel.		
 		JPanel upcomingJobsPanel = new JPanel(new BorderLayout());
 		upcomingJobsPanel.setBackground(Color.WHITE);
-		upcomingJobsPanel.setBorder(BorderFactory.createTitledBorder("Your Upcoming Jobs"));
+		upcomingJobsPanel.setBorder(BorderFactory.createTitledBorder(
+												"Your Upcoming Jobs"));
 		
 		// Radio buttons panel
 		JPanel radioButtonsPanel = new JPanel();
-		radioButtonsPanel.setLayout(new BoxLayout(radioButtonsPanel, BoxLayout.Y_AXIS));
+		radioButtonsPanel.setLayout(new BoxLayout(radioButtonsPanel,
+													BoxLayout.Y_AXIS));
 		radioButtonsPanel.setBackground(Color.WHITE);
 		radioButtonsPanel.setBorder(BorderFactory.createEmptyBorder());
 		
@@ -89,10 +93,15 @@ public class ParkManagerHomePanel extends Observable {
 			 * This is for when the volunteer does not have any jobs
 			 * signed up for.
 			 */
-			JLabel noCurrentJobsAvailableLabel = new JLabel("You do not have any upcoming jobs.", SwingConstants.CENTER);
-			noCurrentJobsAvailableLabel.setFont(new Font(noCurrentJobsAvailableLabel.getName(), Font.PLAIN, 20));
+			JLabel noCurrentJobsAvailableLabel = new JLabel(
+								"You do not have any upcoming jobs.",
+								SwingConstants.CENTER);
+			noCurrentJobsAvailableLabel.setFont(new Font(
+								noCurrentJobsAvailableLabel.getName(),
+								Font.PLAIN, 20));
 			
-			upcomingJobsPanel.add(noCurrentJobsAvailableLabel, BorderLayout.CENTER);
+			upcomingJobsPanel.add(noCurrentJobsAvailableLabel,
+												BorderLayout.CENTER);
 		} else {
 			/*
 			 * This case is for displaying the volunteer's upcoming
@@ -100,33 +109,46 @@ public class ParkManagerHomePanel extends Observable {
 			 */
 			ButtonGroup buttonGroup = new ButtonGroup();
 			int index = 0;
-			while (index < upcomingJobSize && index < GUI.UPCOMING_JOBS_MAX_NUM_DISPLAY) {
+			while (index < upcomingJobSize && index <
+								GUI.UPCOMING_JOBS_MAX_NUM_DISPLAY) {
 				// 
-				JRadioButton radioButton = createRadioButton(myAllUpcomingJobs.get(index));
+				JRadioButton radioButton = createRadioButton(
+										myAllUpcomingJobs.get(index));
 				radioButton.setBackground(Color.WHITE);
 				buttonGroup.add(radioButton);
 				radioButtonsPanel.add(radioButton);
-				radioButtonsPanel.add(Box.createRigidArea(GUI.RADIO_BUTTNON_RIGID_AREA));
+				radioButtonsPanel.add(Box.createRigidArea(
+										GUI.RADIO_BUTTNON_RIGID_AREA));
 				if (index == 0) {
 					radioButton.setSelected(true);
-					// Selecting the first job as the default job to be viewed.
-					mySelectedJobID = myAllUpcomingJobs.get(index).getJobID();
+					/*
+					 * Selecting the first job as the default job
+					 * to be viewed.
+					 */
+					mySelectedJobID = myAllUpcomingJobs.get(index)
+															.getJobID();
 				}
 				
 				index++;
 			}
-			upcomingJobsPanel.add(radioButtonsPanel, BorderLayout.CENTER);
+			upcomingJobsPanel.add(radioButtonsPanel,
+									BorderLayout.CENTER);
 		}
 		
-		// The button to view the selected job from the radio buttons from above.
-		JButton viewSelectedJobButton = new JButton(new AbstractAction("View Selected Job") {
+		/*
+		 * The button to view the selected job from the radio
+		 * buttons from above.
+		 */
+		JButton viewSelectedJobButton = new JButton(
+							new AbstractAction("View Selected Job") {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setChanged();
-				notifyObservers(new ButtonSignal("view selected job", mySelectedJobID));
+				notifyObservers(new ButtonSignal("view selected job",
+													mySelectedJobID));
 			}
 		});
 		viewSelectedJobButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
@@ -136,10 +158,12 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel viewSelectedJobPanel = new JPanel(new FlowLayout(
 				FlowLayout.CENTER, 0, GUI.BUTTON_GAP_HEIGHT));
 		viewSelectedJobPanel.add(viewSelectedJobButton);
-		viewSelectedJobPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		viewSelectedJobPanel.setBackground(
+									GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		if (upcomingJobSize > 0) {
-			upcomingJobsPanel.add(viewSelectedJobPanel, BorderLayout.SOUTH);
+			upcomingJobsPanel.add(viewSelectedJobPanel,
+									BorderLayout.SOUTH);
 		}
 		
 		
@@ -147,13 +171,15 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		buttonsPanel.setBorder(BorderFactory.createSoftBevelBorder(1));
-		BoxLayout buttonPanelLayout = new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS);
+		BoxLayout buttonPanelLayout = new BoxLayout(buttonsPanel,
+													BoxLayout.Y_AXIS);
 		buttonsPanel.setLayout(buttonPanelLayout);
 		
 		
 		// Buttons to go on the buttonPanel.
 		JButton signUpButton = new JButton("Submit A Job");
-		signUpButton.addActionListener(new AbstractAction("Submit A Job") {
+		signUpButton.addActionListener(new AbstractAction(
+											"Submit A Job") {
 
 			/** */
 			private static final long serialVersionUID = 1L;
@@ -192,8 +218,10 @@ public class ParkManagerHomePanel extends Observable {
 				notifyObservers(new ButtonSignal("upcoming", 0));
 			}
 		});
-		viewAllYourUpcommingJobsButton.setPreferredSize(GUI.LONG_BUTTON_SIZE);
-		viewAllYourUpcommingJobsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		viewAllYourUpcommingJobsButton.setPreferredSize(
+											GUI.LONG_BUTTON_SIZE);
+		viewAllYourUpcommingJobsButton.setAlignmentX(
+										Component.CENTER_ALIGNMENT);
 		
 		
 		JButton logOut = new JButton(new AbstractAction("Log Out") {
@@ -216,9 +244,6 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(jobAmount);
 
-//		jobAmount.setText("Max job allowed: " + 
-//				myJobMap.getMaxJobAmount() + 
-//				"             Currently: " + myJobMap.getPendingJobAmount());
 		if (myJobMap.isFull()) {
 			jobAmount.setText("The pending jobs queue is full!");
 		}
@@ -229,22 +254,26 @@ public class ParkManagerHomePanel extends Observable {
 		
 		JPanel viewAllJobsButtonPanel = new JPanel();
 		viewAllJobsButtonPanel.add(viewAllYourUpcommingJobsButton);
-		viewAllJobsButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
+		viewAllJobsButtonPanel.setBackground(
+									GUI.VOLUNTEER_PANELS_BGCOLOR);
 		
 		JPanel logOutButtonPanel = new JPanel();
 		logOutButtonPanel.add(logOut);
 		logOutButtonPanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 
 		// Adding the buttons onto the buttonsPanel.
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 200)));
+		buttonsPanel.add(Box.createRigidArea(
+									GUI.ABOVE_BUTTON_PADDING_AREA));
 		buttonsPanel.add(signUpButtonPanel);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(Box.createRigidArea(
+								GUI.BETWEEN_BUTTONS_PADDING_AREA));
 		buttonsPanel.add(viewAllJobsButtonPanel);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+		buttonsPanel.add(Box.createRigidArea(
+								GUI.BETWEEN_BUTTONS_PADDING_AREA));
 		buttonsPanel.add(logOutButtonPanel);
 		
 		JPanel ivisiblePanel = new JPanel();
-		ivisiblePanel.setPreferredSize(new Dimension(0, 200));
+		ivisiblePanel.setPreferredSize(GUI.INVISBLE_PANEL_AREA);
 		ivisiblePanel.setBackground(GUI.VOLUNTEER_PANELS_BGCOLOR);
 		buttonsPanel.add(ivisiblePanel);
 
@@ -278,7 +307,10 @@ public class ParkManagerHomePanel extends Observable {
 		JRadioButton radioButton = new JRadioButton(
 				new AbstractAction(theJob.getJobSummary()) {
 
-			/** A generated serial version UID for object Serialization.*/
+			/**
+			 * A generated serial version UID for object
+			 * serialization.
+			 * */
 			private static final long serialVersionUID = 1L;
 
 			@Override
