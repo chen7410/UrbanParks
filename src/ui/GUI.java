@@ -68,6 +68,7 @@ public class GUI extends JFrame implements Observer {
 	/** The size of all buttons. */
 	public static final Dimension BUTTON_SIZE = new Dimension(170, 40);
 	
+	/** Used on certain panel to make the layout look great.*/
 	public static final Dimension INVISBLE_PANEL_AREA =
 												new Dimension(0, 200);
 

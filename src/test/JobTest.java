@@ -18,7 +18,7 @@ import model.ParkManager;
 /**
  * Testing the isJobRemovable method in the Job class.
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version February 21, 2018
  */
 public class JobTest {

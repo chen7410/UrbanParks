@@ -18,24 +18,28 @@ import model.Volunteer;
 /**
  * JUnit tests for volunteer.
  * 
- * @author Minqing Chen
- * @version February 19, 2018
+ * @author Group 7
+ * @version March 5, 2018
  */
 public class VolunteerRemoveJobTest {
 
 	private LocalDate myJobStartDateIsToday;
 	private LocalDate myJobStartDateIsYesterday;
 	private LocalDate myJobStartDateIsMoreThanMinDay;
-	private Volunteer anyVolunteer;
+	
+	private Volunteer myAnyVolunteer;
+	
 	private ParkManager myParkManager;
+	
 	private Job myCancelJobIsYesterdayMultiDayLength;
 	private Job myCancelJobIsToday;
 	private Job myCancelJobIsMoreThanMinDay;
 	private Job myCancelJobIsExactMinDay;
+	private Job myNullJob;
 	
 	@Before
 	public void setUp() throws Exception {
-		anyVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
+		myAnyVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
 		myParkManager = new ParkManager("tom", "Tom", "Hanks");
 		myJobStartDateIsToday =
 				LocalDate.now();
@@ -63,10 +67,12 @@ public class VolunteerRemoveJobTest {
 						myParkManager, "Seattle, WA",
 						"Park mointoring");
 		
-		anyVolunteer.signup(myCancelJobIsMoreThanMinDay);
-		anyVolunteer.signup(myCancelJobIsYesterdayMultiDayLength);
-		anyVolunteer.signup(myCancelJobIsExactMinDay);
-		anyVolunteer.signup(myCancelJobIsToday);
+		myNullJob = null;
+		
+		myAnyVolunteer.signup(myCancelJobIsMoreThanMinDay);
+		myAnyVolunteer.signup(myCancelJobIsYesterdayMultiDayLength);
+		myAnyVolunteer.signup(myCancelJobIsExactMinDay);
+		myAnyVolunteer.signup(myCancelJobIsToday);
 	}
 	
 	/**
@@ -75,7 +81,7 @@ public class VolunteerRemoveJobTest {
 	@Test
 	public void cancelJob_CancelJobStartDateToday_False() {
 		assertFalse("cancel job fail " + myCancelJobIsToday.getStartDate(),
-				anyVolunteer.cancelJob(myCancelJobIsToday));
+				myAnyVolunteer.cancelJob(myCancelJobIsToday));
 	}
 	
 	/**
@@ -86,7 +92,7 @@ public class VolunteerRemoveJobTest {
 	@Test
 	public void cancelJob_CancelJogStartDateYesterDayMultiDayLength_False() {
 		assertFalse("cancel job fail " + myCancelJobIsYesterdayMultiDayLength.getStartDate(),
-				anyVolunteer.cancelJob(myCancelJobIsYesterdayMultiDayLength));
+				myAnyVolunteer.cancelJob(myCancelJobIsYesterdayMultiDayLength));
 	}
 	/**
 	 * Test volunteer unvolunteers for a job that starts more 
@@ -95,7 +101,7 @@ public class VolunteerRemoveJobTest {
 	@Test
 	public void cancelJob_CancelJogStartDateMoreThanMinDay_True() {
 		assertTrue("cancel job fail " + myCancelJobIsMoreThanMinDay.getStartDate(),
-				anyVolunteer.cancelJob(myCancelJobIsMoreThanMinDay));
+				myAnyVolunteer.cancelJob(myCancelJobIsMoreThanMinDay));
 	}
 	
 	/**
@@ -105,6 +111,11 @@ public class VolunteerRemoveJobTest {
 	@Test
 	public void cancelJob_CancelJogStartDateIsExactMinDay_True() {
 		assertTrue("cancel job fail " + myCancelJobIsExactMinDay.getStartDate(),
-				anyVolunteer.cancelJob(myCancelJobIsExactMinDay));
+				myAnyVolunteer.cancelJob(myCancelJobIsExactMinDay));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void cancelJob_PassingInNullJobObject_IllegalArgumentException() {
+		myAnyVolunteer.cancelJob(myNullJob);
 	}
 }

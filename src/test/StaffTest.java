@@ -1,3 +1,8 @@
+/*
+ * TCSS 360 - Winter 2018
+ * Urban Parks Project
+ */
+
 package test;
 
 import java.time.LocalDate;
@@ -6,6 +11,12 @@ import org.junit.Test;
 import model.JobMap;
 import model.Staff;
 
+/**
+ * JUnit to test the business rules for Staff.java
+ * 
+ * @author Group 7
+ * @version March 5, 2018
+ */
 public class StaffTest {
 
 	private Staff myStaff;

@@ -2,6 +2,7 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
+
 package test;
 
 import static org.junit.Assert.*;
@@ -60,7 +61,16 @@ public class VolunteerTest {
 	private Job myJobEqualsToMinDaysAway;
 	private Job myJobMoreThanMinDayAway;
 	
+	private Job myNullJob;
+	
 	private JobMap myJobMap;
+	private JobMap myNullJobMap;
+	
+	/**
+	 * The null string represents a null string being passed into
+	 * the constructor to initialize the Volunteer class.
+	 */
+	private String myNullString;
 	
 	private Volunteer myAnyVolunteer;
 	private Volunteer myVolunteer;
@@ -106,7 +116,9 @@ public class VolunteerTest {
 				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 20);
 		myJobEndDate = 
 				LocalDate.now().plusDays(0); 
-		
+		myNullJob = null;
+		myNullJobMap = null;
+		myNullString = null;
 		
 		
 		myVolunteer = new Volunteer("hasnah", "Hasnah", "Said");
@@ -219,5 +231,30 @@ public class VolunteerTest {
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanMinimumNumberDays_False() {
 		assertFalse("Start date: " + myJobLessThanMinDaysAway.getStartDate(), 
 					myAnyVolunteer.isAtLeastMinDays(myJobLessThanMinDaysAway));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void signup_PassingInNullJobObject_IllegalArgumentException() {
+		myAnyVolunteer.signup(myNullJob);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void isAtLeastMinDays_PassingInNullJobObject_IllegalArgumentException() {
+		myAnyVolunteer.isAtLeastMinDays(myNullJob);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void isSameDayConflict_PassingInNullJobObject_IllegalArgumentException() {
+		myAnyVolunteer.isSameDayConflict(myNullJob, myJobMap);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void isSameDayConflict_PassingInNullJobMapObject_IllegalArgumentException() {
+		myAnyVolunteer.isSameDayConflict(myFirstJob, myNullJobMap);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void Volunteer_PassingInNullJobObject_IllegalArgumentException() {
+		Volunteer currentVolunteer = new Volunteer(myNullString, myNullString, myNullString);
 	}
 }

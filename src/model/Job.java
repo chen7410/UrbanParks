@@ -1,5 +1,5 @@
 /*
- * TCSS 360 - Winter 2018
+  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
 
@@ -157,8 +157,10 @@ public class Job implements Serializable, Comparable<Job> {
 	 * Check whether a Job is overlapped with theJob
 	 * if they have overlapping start and end dates.
 	 * 
-	 * @param theJob
+	 * Pre-condition: The given job cannot be null.
+	 * @param theJob The given job.
 	 * @return true if a Job is overlapped with theJob; false otherwise.
+	 * @throws IllegalArgumentException If given a null Job object.
 	 */
 	public boolean isSameDayConflict(final Job theJob) {
 		if (theJob == null) {

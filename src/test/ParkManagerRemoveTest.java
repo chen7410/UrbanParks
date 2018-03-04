@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 /**
  * Testing the removeJob method in the Park Managers class.
  * 
- * @author Brook Negussie
+ * @author Group 7
  * @version February 21, 2018
  */
 public class ParkManagerRemoveTest {
@@ -27,6 +27,7 @@ public class ParkManagerRemoveTest {
 	private Job myJobStartsPriorToCurrentDay;
 	private Job myJobStartsMoreThanMinDaysAway;
 	private Job myJobStartsExactlyMinDaysAway;
+	private Job myNullJob;
 	
 	private ParkManager myPM;
 	
@@ -55,6 +56,8 @@ public class ParkManagerRemoveTest {
 		myJobStartsExactlyMinDaysAway = new Job(myDateIsExactlyMinDaysAway,
 				myDateIsExactlyMinDaysAway.plusDays(1), "Gas Works Park", myPM, 
 				"Seattle", "Pick up leaves");
+		
+		myNullJob = null;
 		
 		myPM.createJob(myJobStartsOnCurrentDay);
 		myPM.createJob(myJobStartsPriorToCurrentDay);
@@ -97,5 +100,10 @@ public class ParkManagerRemoveTest {
 	@Test
 	public void removeJob_JobStartsExactlyMinDaysAway_True() {
 		assertTrue(myPM.removeJob(myJobStartsExactlyMinDaysAway));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void removeJob_PassingInNullJobObject_IllegalArgumentException() {
+		myPM.removeJob(myNullJob);
 	}
 }

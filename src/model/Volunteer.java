@@ -2,6 +2,7 @@
  * TCSS 360 - Winter 2018
  * Urban Parks Project
  */
+
 package model;
 
 import java.io.Serializable;
@@ -20,8 +21,10 @@ public class Volunteer extends User implements Serializable {
 	/**
 	 * {@inheritDoc}}
 	 */
-	public Volunteer(final String theUserName, final String theFirstName,
-						final String theLastName) {
+	public Volunteer(final String theUserName,
+										final String theFirstName,
+										final String theLastName) {
+		
 		super(theUserName, theFirstName, theLastName);
 		setUserType("Volunteer");
 	}

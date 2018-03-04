@@ -31,6 +31,13 @@ public class ParkManagerTest {
 	private Job myJobTakesOneDayLessThanMax;
 	private Job myJobTakesExactlyMaxDays;
 	private Job myJobTakesOneDayMoreThanMax;
+	private Job myNullJob;
+	
+	/**
+	 * The null string represents a null string being passed into
+	 * the constructor to initialize the ParkManager class.
+	 */
+	private String myNullString;
 
 	@Before
 	public void setUp() throws Exception {
@@ -62,6 +69,9 @@ public class ParkManagerTest {
 		myJobTakesOneDayMoreThanMax = new Job(LocalDate.now(), 
 				LocalDate.now().plusDays(Job.MAX_JOB_LENGTH), "Volunteer Park", 
 				myPM, "Seattle, WA", "Pick up leaves");
+		
+		myNullJob = null;
+		myNullString = null;
 	}
 
 	@Test
@@ -98,5 +108,15 @@ public class ParkManagerTest {
 	public void isJobWithinMaxDays_JobTakesOneMoreDayThanMax_False() {
 		assertFalse("The job takes one day more than the maximum days.", 
 				myJobTakesOneDayMoreThanMax.isJobWithinMaxDays());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void createJob_PassingInNullJobObject_IllegalArgumentException() {
+		myPM.createJob(myNullJob);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void ParkManager_PassingInNullJobObject_IllegalArgumentException() {
+		ParkManager currentPM = new ParkManager(myNullString, myNullString, myNullString);
 	}
 }
