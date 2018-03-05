@@ -9,7 +9,7 @@ import model.Staff;
 import model.UserMap;
 import model.Volunteer;
 
-public class addUserIgnoreThisClass {
+public class AddUserAddJobIgnoreThisClass {
 	private static UserMap myUsers;
 	private static JobMap myJobs;
 //	private static LocalDate myStartDate = LocalDate.now().plusMonths(-1);

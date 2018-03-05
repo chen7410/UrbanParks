@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.JobMap;
+import model.UserMap;
 import ui.ButtonSignal;
 import ui.GUI;
 

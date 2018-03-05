@@ -306,6 +306,8 @@ public class GUI extends JFrame implements Observer {
 			createVolunteerSignUpPanel();
 		} else {
 			myVolunteer.signup(myJobs.getJob(theSignal.getJobID()));
+			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
 			createVolunteerSignUpConfirmationPanel(
 												theSignal.getJobID());
 			
@@ -343,6 +345,8 @@ public class GUI extends JFrame implements Observer {
 		if (theSignal.getButtonName().toLowerCase().equals("remove")) {
 			
 			myVolunteer.cancelJob(myJobs.getJob(theSignal.getJobID()));
+			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
 			createVolunteerCancellationConfirmationPanel(
 											theSignal.getJobID());
 			
@@ -579,6 +583,8 @@ public class GUI extends JFrame implements Observer {
 			
 			myParkManager.createJob(theButton.getJob());
 			myJobs.addJob(theButton.getJob());
+			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
 			createParkManagerSubmitConfirmationPanel(
 												theButton.getJob());
 			
@@ -597,6 +603,8 @@ public class GUI extends JFrame implements Observer {
 			
 			myParkManager.removeJob(theButton.getJob());
 			myJobs.remove(theButton.getJob());
+			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
 			createParkManagerUnsubmitConfirmationPanel(
 												theButton.getJob());
 			
@@ -727,7 +735,12 @@ public class GUI extends JFrame implements Observer {
 		remove(myCurrentPanel);
 		UrbanParksStaffNewMaxConfirmationPanel confirmationPanel =
 					new UrbanParksStaffNewMaxConfirmationPanel(myJobs);
-		
+
+//		myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+//		myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
+		/*
+		 * TODO store change
+		 */
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -783,7 +796,11 @@ public class GUI extends JFrame implements Observer {
 		
 		if (theSignal.getButtonName().toLowerCase()
 										.equals("submit change")) {
-			
+//			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
+//			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
+			/*
+			 * TODO store change
+			 */
 			createUrbanParksStaffNewMaxConfirmationPanel();
 		} else if (theSignal.getButtonName().toLowerCase()
 												.equals("home")) {

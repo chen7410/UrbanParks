@@ -86,7 +86,7 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		int upcomingJobSize = myAllUpcomingJobs.size();
-		
+		System.out.println(myAllUpcomingJobs.size());
 		if (upcomingJobSize == 0) {
 			/*
 			 * This is for when the volunteer does not have any jobs
@@ -97,7 +97,7 @@ public class ParkManagerHomePanel extends Observable {
 								SwingConstants.CENTER);
 			noCurrentJobsAvailableLabel.setFont(new Font(
 								noCurrentJobsAvailableLabel.getName(),
-								Font.PLAIN, 20));
+								Font.PLAIN, 12));
 			
 			upcomingJobsPanel.add(noCurrentJobsAvailableLabel,
 												BorderLayout.CENTER);
@@ -243,6 +243,11 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(jobAmount);
 
+		jobAmount.setText("current " + myJobMap.getPendingJobAmount() + "max: " + myJobMap.getMaxJobAmount());
+		/*
+		 * TODO delete.
+		 */
+		
 		if (myJobMap.isFull()) {
 			jobAmount.setText("The pending jobs queue is full!");
 		}

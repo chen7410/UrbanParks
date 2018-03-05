@@ -51,7 +51,7 @@ public class ParkManagerSubmitJobPanel extends Observable {
 	private JPanel myCenterPanel;
 	private final int textFieldSize = 35;
 	private final int textAreaWidth = 20;
-	private final int textAreaHeight =42;
+	private final int textAreaHeight = 20;
 	
 	private final JTextField myParkNameTf;
 	private final JTextField myLocationTf;

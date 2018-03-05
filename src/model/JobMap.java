@@ -33,9 +33,13 @@ public class JobMap {
 	 * load the jobs' information from.
 	 */
 	public static final String JOBS_DATA_FILE = "UpcomingJobs.ser";
+	/**
+	 * Load the saved max job amount.
+	 */
+	public static final String MAX_JOB_AMOUNT = "MaxJobAmount.ser";
 	
 	/** The maximum number of pending jobs in the system.*/
-	private int maxJobAmount = 10;
+	private int myMaxJobAmount = 10;
 
 	private HashMap<Integer, Job> myJobs;
 
@@ -43,8 +47,13 @@ public class JobMap {
 		myJobs = new HashMap<Integer, Job>();
 	}
 
+//	public JobMap(final int theMaxJobAmount) {
+//		myMaxJobAmount = theMaxJobAmount;
+//		myJobs = new HashMap<Integer, Job>();
+//	}
+	
 	public int getMaxJobAmount() {
-		return maxJobAmount;
+		return myMaxJobAmount;
 	}
 	
 	/**
@@ -52,7 +61,7 @@ public class JobMap {
 	 * @return true if full, false otherwise.
 	 */
 	public boolean isFull (){
-		return getPendingJobAmount() >= maxJobAmount;
+		return getPendingJobAmount() >= myMaxJobAmount;
 	}
 	
 	/**
@@ -83,7 +92,8 @@ public class JobMap {
 													+ theMaxJobAmount);
 			
 		}
-		maxJobAmount = theMaxJobAmount;
+		myMaxJobAmount = theMaxJobAmount;
+		storeJobMap(JobMap.JOBS_DATA_FILE);
 	}
 	
 	/**
@@ -112,6 +122,13 @@ public class JobMap {
 			out.writeObject(myJobs);
 			out.close();
 			file.close();
+			
+			FileOutputStream maxJobFile = new FileOutputStream(MAX_JOB_AMOUNT);
+			ObjectOutputStream outMaxJob = new ObjectOutputStream(maxJobFile);
+			outMaxJob.writeObject(myMaxJobAmount);
+			outMaxJob.close();
+			maxJobFile.close();
+			
 		} catch (IOException theIOException) {
 			theIOException.printStackTrace();
 			System.out.println("Save job information fail!");
@@ -133,6 +150,14 @@ public class JobMap {
 			myJobs = (HashMap<Integer, Job>) in.readObject();
 			in.close();
 			file.close();
+			
+			FileInputStream maxJobFile = new FileInputStream(MAX_JOB_AMOUNT);
+			ObjectInputStream inMaxJob = new ObjectInputStream(maxJobFile);
+			myMaxJobAmount = (int) inMaxJob.readObject();
+			inMaxJob.close();
+			maxJobFile.close();
+			
+			
 		} catch (FileNotFoundException theFileNotFoundException) {
 			System.out.println("No such a file!");
 			theFileNotFoundException.printStackTrace();
@@ -199,7 +224,7 @@ public class JobMap {
     }
 
 	public boolean isLessMaxAmountJobs() {
-		return size() < maxJobAmount;
+		return size() < myMaxJobAmount;
 	}
 	
 

@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.JobMap;
+import model.UserMap;
 import ui.ButtonSignal;
 import ui.GUI;
 
@@ -94,6 +95,11 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 					if (str.length() > 0) {
 						int newNumber = Integer.parseInt(str);
 						myJobs.setMaxJobAmount(newNumber);
+						/*
+						 * TODO store change max job amount
+						 * seems working, but i think the correct way to doing it is pass a Staff to this panel,
+						 * and Staff.setMaxJobAmount(int, JobMap), not JobMap.setMaxJobAmount(int).
+						 */
 						setChanged();
 						notifyObservers(new ButtonSignal("submit change", 0));
 						

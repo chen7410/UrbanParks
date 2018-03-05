@@ -5,6 +5,7 @@
 
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @author Group 7
  * @version March 5, 2018
  */
-public class Staff extends User {
+public class Staff extends User implements Serializable {
 	
 	/** A generated serial version UID for object Serialization.*/
 	private static final long serialVersionUID = 1L;
@@ -30,7 +31,8 @@ public class Staff extends User {
 	}
 	
 	/**
-	 * Set the maximum pending jobs allowed by the system.
+	 * Set the maximum pending jobs allowed by the system. 
+	 * 
 	 * 
 	 * @param theMaxJobAmount
 	 * @param theJobmap
