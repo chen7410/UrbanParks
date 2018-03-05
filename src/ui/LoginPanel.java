@@ -180,6 +180,9 @@ public class LoginPanel extends Observable {
 		myPanel.add(centerPanel, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * @return an instance of the LoginPanel.
+	 */
 	public JPanel getPanel() {
 		return myPanel;
 	}

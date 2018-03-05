@@ -117,30 +117,51 @@ public class Job implements Serializable, Comparable<Job> {
 		}
 	}
 
+	/**
+	 * @return The job ID
+	 */
 	public int getJobID() {
 		return myJobID;
 	}
 
+	/**
+	 * @return the start date of a job.
+	 */
 	public LocalDate getStartDate() {
 		return myStartDate;
 	}
-
+	
+	/**
+	 * @return the end date of a job.
+	 */
 	public LocalDate getEndDate() {
 		return myEndDate;
 	}
-
+	
+	/**
+	 * @return the name of the park where the job is located.
+	 */
 	public String getParkName() {
 		return myParkName;
 	}
-
+	
+	/**
+	 * @return the name of the park manager in charge of the job.
+	 */
 	public ParkManager getParkManager() {
 		return myPM;
 	}
-
+	
+	/**
+	 * @return the location of the park where the job will take place.
+	 */
 	public String getMyLocation() {
 		return myLocation;
 	}
-
+	
+	/**
+	 * @return a description of the job.
+	 */
 	public String getDescription() {
 		return myDescription;
 	}

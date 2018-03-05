@@ -58,9 +58,6 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the username of this user.
-	 * This username is a non-null string.
-	 * 
 	 * @return the username of this user.
 	 */
 	public String getUserName() {
@@ -68,9 +65,6 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the first name of this user.
-	 * This first name is a non-null string.
-	 * 
 	 * @return the first name of this user.
 	 */
 	public String getFirstName() {
@@ -78,9 +72,6 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the last name of this user.
-	 * This last name is a non-null string.
-	 * 
 	 * @return the last name of this user.
 	 */
 	public String getLastName() {
@@ -88,9 +79,6 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the user type of this user.
-	 * This user type is a non-null string.
-	 * 
 	 * @return the user type of this user.
 	 */
 	public String getUserType() {
