@@ -18,7 +18,7 @@ import model.Volunteer;
 /**
  * JUnit tests for volunteer.
  * 
- * @author Group 7
+ * @author  Group 7
  * @version March 5, 2018
  */
 public class VolunteerRemoveJobTest {
