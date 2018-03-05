@@ -46,11 +46,6 @@ public class JobMap {
 	public JobMap() {
 		myJobs = new HashMap<Integer, Job>();
 	}
-
-//	public JobMap(final int theMaxJobAmount) {
-//		myMaxJobAmount = theMaxJobAmount;
-//		myJobs = new HashMap<Integer, Job>();
-//	}
 	
 	public int getMaxJobAmount() {
 		return myMaxJobAmount;
@@ -82,7 +77,7 @@ public class JobMap {
 	}
 	
 	/**
-	 * 
+	 * This method will call storeJobMap method when you set the max job amount.
 	 * @param theMaxJobAmount
 	 * @throws IllegalArgumentException if theJobAmount <= 0.
 	 */
