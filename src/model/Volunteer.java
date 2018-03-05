@@ -30,8 +30,9 @@ public class Volunteer extends User implements Serializable {
 	}
 
 	/**
-	 * Cancels the specified job in the Volunteer's job list. If the job is not
-	 * in the job list. The list remain unchanged and return false.
+	 * Cancels the specified job in the Volunteer's job list. If the
+	 * job is not in the job list. The list remain unchanged and
+	 * return false.
 	 * 
 	 * Pre-condition: The specified job not be null and must be in the
 	 * 					job list.
@@ -70,8 +71,8 @@ public class Volunteer extends User implements Serializable {
 	}
 
 	/**
-	 * Check whether the start date of the jobs being signed up is allowed by
-	 * the minimum day from the current date.
+	 * Check whether the start date of the jobs being signed up is
+	 * allowed by the minimum day from the current date.
 	 * 
 	 * Pre-condition: The Job has been initialized with a non-null values.
 	 * @param theJob

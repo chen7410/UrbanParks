@@ -26,8 +26,9 @@ public abstract class User implements Serializable {
 	protected List<Integer> myJobs;
 
 	/**
-	 * Constructs a user with the given username, first name, and last name;
-	 * initializes a collection of job ID belongs to this user.
+	 * Constructs a user with the given username, first name,
+	 * and last name; initializes a collection of job ID
+	 * belongs to this user.
 	 * 
 	 * Pre-condition: The given parameters must not be null nor empty.
 	 * 
@@ -38,12 +39,16 @@ public abstract class User implements Serializable {
 	 * @param theLastName
 	 *            the last name of this user.
 	 * @throws IllegalArgumentException
-	 *             if any of the given parameters are either null or empty.
+	 *             if any of the given parameters are 
+	 *             either null or empty.
 	 */
-	protected User(final String theUserName, final String theFirstName, final String theLastName) {
+	protected User(final String theUserName,
+				final String theFirstName, final String theLastName) {
 
-		if (theUserName == null || theFirstName == null || theLastName == null || theUserName.isEmpty()
+		if (theUserName == null || theFirstName == null ||
+				theLastName == null || theUserName.isEmpty()
 				|| theFirstName.isEmpty() || theLastName.isEmpty()) {
+			
 			throw new IllegalArgumentException();
 		}
 		myUserName = theUserName;
@@ -53,7 +58,8 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the username of this user. This username is a non-null string.
+	 * Returns the username of this user.
+	 * This username is a non-null string.
 	 * 
 	 * @return the username of this user.
 	 */
@@ -62,7 +68,8 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the first name of this user. This first name is a non-null string.
+	 * Returns the first name of this user.
+	 * This first name is a non-null string.
 	 * 
 	 * @return the first name of this user.
 	 */
@@ -71,7 +78,8 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the last name of this user. This last name is a non-null string.
+	 * Returns the last name of this user.
+	 * This last name is a non-null string.
 	 * 
 	 * @return the last name of this user.
 	 */
@@ -80,7 +88,8 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns the user type of this user. This user type is a non-null string.
+	 * Returns the user type of this user.
+	 * This user type is a non-null string.
 	 * 
 	 * @return the user type of this user.
 	 */
@@ -93,7 +102,9 @@ public abstract class User implements Serializable {
 	}
 	
 	/**
-	 * Retrieves a String of user information including: first name, last name, and user type.
+	 * Retrieves a String of user information including: first name, 
+	 * last name, and user type.
+	 * 
 	 * @return User's first name, last name, and user type.
 	 */
 	public String getUserInformation() {
@@ -101,8 +112,9 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns a list of job belongs to this user. This list can be empty but not
-	 * null. The job collection argument cannot be null.
+	 * Returns a list of job belongs to this user. 
+	 * This list can be empty but not null. The job
+	 * collection argument cannot be null.
 	 * 
 	 * @param theJobList
 	 *            a collection of all the jobs in the system.
@@ -111,7 +123,8 @@ public abstract class User implements Serializable {
 	 */
 	public List<Job> getSortedJobList(final JobMap theJobList) {
 		if(theJobList == null) {
-			throw new IllegalArgumentException("The job collection cannot be null.");
+			throw new IllegalArgumentException(
+							"The job collection cannot be null.");
 		}
 		List<Job> jobList = new ArrayList<>();
 		for (int i = 0; i < myJobs.size(); i++) {

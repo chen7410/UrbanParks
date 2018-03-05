@@ -55,12 +55,15 @@ public class Job implements Serializable, Comparable<Job> {
 	 * @param thePM
 	 * @param theLocation
 	 * @param theDescription
-	 * @throws IllegalArgumentException if null or empty fields pass in during construction.
+	 * @throws IllegalArgumentException if null or empty fields 
+	 * 									pass in during construction.
 	 */
-	public Job(final LocalDate theStartDate, final LocalDate theEndDate, final String theParkName,
-			final ParkManager thePM, final String theLocation, final String theDescription) {
+	public Job(final LocalDate theStartDate, final LocalDate theEndDate,
+				final String theParkName, final ParkManager thePM,
+				final String theLocation, final String theDescription) {
 
-		checkArgumentException(theStartDate, theEndDate, theParkName, thePM, theLocation, theDescription);
+		checkArgumentException(theStartDate, theEndDate, theParkName,
+									thePM, theLocation, theDescription);
 
 		myStartDate = theStartDate;
 		myEndDate = theEndDate;
@@ -83,19 +86,25 @@ public class Job implements Serializable, Comparable<Job> {
 	 * @throws IllegalArgumentException
 	 *             if theStartDate == null or theEndDate == null or 
 	 *             theParkName == null || theParkName.isEmpty() or 
-	 *             thePM == null or theLocation == null || theLocation.isEmpty() or
-	 *             theDescription == null || theDescription.isEmpty().
+	 *             thePM == null or theLocation == null || 
+	 *             theLocation.isEmpty() or theDescription == null ||
+	 *             theDescription.isEmpty().
 	 */
-	private void checkArgumentException(final LocalDate theStartDate, final LocalDate theEndDate,
-			final String theParkName, final ParkManager thePM, final String theLocation, final String theDescription) {
+	private void checkArgumentException(final LocalDate theStartDate,
+					final LocalDate theEndDate, final String theParkName,
+					final ParkManager thePM, final String theLocation,
+					final String theDescription) {
 		if (theStartDate == null) {
-			throw new IllegalArgumentException("Start date cannot be null");
+			throw new IllegalArgumentException(
+										"Start date cannot be null");
 		}
 		if (theEndDate == null) {
-			throw new IllegalArgumentException("End date cannot be null");
+			throw new IllegalArgumentException(
+										"End date cannot be null");
 		}
 		if (theParkName == null || theParkName.isEmpty()) {
-			throw new IllegalArgumentException("Park name cannot be null or empty");
+			throw new IllegalArgumentException(
+								"Park name cannot be null or empty");
 		}
 		if (thePM == null) {
 			throw new IllegalArgumentException("Park manager cannot be null");
@@ -146,10 +155,13 @@ public class Job implements Serializable, Comparable<Job> {
 	 */
 	public boolean isAtLeastMinDays(final int theMinimumDaysInFuture) {
 		if (theMinimumDaysInFuture < 0) {
-			throw new IllegalArgumentException("Illegal day: " + theMinimumDaysInFuture);
+			throw new IllegalArgumentException("Illegal day: "
+										+ theMinimumDaysInFuture);
 		}
 
-		LocalDate minimumDate = LocalDate.now().plusDays(theMinimumDaysInFuture);
+		LocalDate minimumDate = LocalDate.now()
+									.plusDays(theMinimumDaysInFuture);
+		
 		return !myStartDate.isBefore(minimumDate);
 	}
 
@@ -168,11 +180,16 @@ public class Job implements Serializable, Comparable<Job> {
 		}
 
 		boolean overlaps = false;
-		overlaps = overlaps || getStartDate().isEqual(theJob.getStartDate())
-				|| getStartDate().isEqual(theJob.getEndDate()) || getEndDate().isEqual(theJob.getStartDate())
+		overlaps = overlaps || getStartDate().isEqual(
+				theJob.getStartDate())
+				|| getStartDate().isEqual(theJob.getEndDate())
+				|| getEndDate().isEqual(theJob.getStartDate())
 				|| getEndDate().isEqual(theJob.getEndDate())
-				|| getEndDate().isAfter(theJob.getStartDate()) && getEndDate().isBefore(theJob.getEndDate())
-				|| getStartDate().isAfter(theJob.getStartDate()) && getStartDate().isBefore(theJob.getEndDate());
+				|| getEndDate().isAfter(theJob.getStartDate())
+				&& getEndDate().isBefore(theJob.getEndDate())
+				|| getStartDate().isAfter(theJob.getStartDate())
+				&& getStartDate().isBefore(theJob.getEndDate());
+		
 		return overlaps;
 	}
 
@@ -182,9 +199,11 @@ public class Job implements Serializable, Comparable<Job> {
 	 * @return true if a job is removable; false otherwise.
 	 */
 	public boolean isJobRemovable() {
-		LocalDate minimumDate = LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
+		LocalDate minimumDate = LocalDate.now().plusDays(
+											Job.MIN_DAYS_TO_SIGN_UP);
 
-		return myStartDate.isEqual(minimumDate) || myEndDate.isAfter(minimumDate);
+		return myStartDate.isEqual(minimumDate) 
+									|| myEndDate.isAfter(minimumDate);
 	}
 
 	/**
@@ -195,7 +214,8 @@ public class Job implements Serializable, Comparable<Job> {
 	 */
 	public boolean isJobWithinMaxDays() {
 		boolean withinMaxDays = true;
-		Long daysDifference = ChronoUnit.DAYS.between(myStartDate, myEndDate);
+		Long daysDifference = ChronoUnit.DAYS.between(
+											myStartDate, myEndDate);
 
 		if (daysDifference >= Job.MAX_JOB_LENGTH) {
 			return false;
@@ -204,7 +224,9 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 	
 	/**
-	 * Checks to see if the job is already passed by comparing the start date with today's date.
+	 * Checks to see if the job is already passed by comparing the 
+	 * start date with today's date.
+	 * 
 	 * @return true if the job is already passed; false otherwise.
 	 */
 	public boolean isPassed() {
@@ -212,50 +234,62 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 	
 	/**
-	 * Checks to see if the start date of this job is before the end date
-	 * @return true if the job's start date is before the job end date; false otherwise.
+	 * Checks to see if the start date of this job is before the end
+	 * date.
+	 * 
+	 * @return true if the job's start date is before the job end date;
+	 * 			false otherwise.
 	 */
 	public boolean isStartDateBeforeEnddate() {
 		return myStartDate.isBefore(myEndDate);
 	}
 
 	/**
-	 * Test if the job end date is less than or equal MAX_END_DAY days from now.
+	 * Test if the job end date is less than or equal MAX_END_DAY
+	 * days from now.
 	 * 
 	 * @param theJob
 	 *            The job to check
 	 * @return True if end date is MAX_END_DAY days or less from now.
 	 */
 	public boolean isJobEndsWithinMaxDays() {
-		return myEndDate.isBefore(LocalDate.now().plusDays(Job.MAX_END_DAY + 1));
+		return myEndDate.isBefore(LocalDate.now().plusDays(
+											Job.MAX_END_DAY + 1));
 	}
 
 	/**
-	 * Check whether a Job is within theStartDate and theEndDate, inclusive.
+	 * Check whether a Job is within theStartDate and theEndDate,
+	 * inclusive.
 	 * 
 	 * @param theStartDate
 	 * @param theEndDate
 	 * @return true if it is; false otherwise.
 	 */
-	public boolean isJobWithinDates(final LocalDate theStartDate, final LocalDate theEndDate) {
+	public boolean isJobWithinDates(final LocalDate theStartDate,
+										final LocalDate theEndDate) {
 		if (theStartDate == null) {
-			throw new IllegalArgumentException("Start date cannot be null");
+			throw new IllegalArgumentException(
+										"Start date cannot be null");
 		}
 		if (theEndDate == null) {
-			throw new IllegalArgumentException("End date cannot be null");
+			throw new IllegalArgumentException(
+										"End date cannot be null");
 		}
 		if (theStartDate.isAfter(theEndDate)) {
-			throw new IllegalArgumentException("Start date cannot be after end date");
+			throw new IllegalArgumentException(
+							"Start date cannot be after end date");
 		}
-		return !myStartDate.isBefore(theStartDate) && !myEndDate.isAfter(theEndDate);
+		return !myStartDate.isBefore(theStartDate)
+								&& !myEndDate.isAfter(theEndDate);
 	}
 
 	/**
-	 * @return String summary of the job in the following format: Park Name:
-	 *         Start Date - End Date
+	 * @return String summary of the job in the following format:
+	 *          Park Name: Start Date - End Date
 	 */
 	public String getJobSummary() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		DateTimeFormatter formatter = DateTimeFormatter
+											.ofPattern("MM/dd/uu");
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(myStartDate.format(formatter));
 		sb.append(" - ");
@@ -269,26 +303,42 @@ public class Job implements Serializable, Comparable<Job> {
 	 * @return the detail of this job.
 	 */
 	public List<String> getJobDetailsList() {
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		DateTimeFormatter dateFormatter = DateTimeFormatter
+											.ofPattern("MM/dd/uu");
+		
 		List<String> details = new ArrayList<>();
 		details.add("Park name: " + myParkName);
-		details.add("Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName());
+		details.add("Park manager: " + myPM.getFirstName() + ' '
+												+ myPM.getLastName());
+		
 		details.add("Park location: " + myLocation);
-		details.add("Job start date: " + myStartDate.format(dateFormatter));
-		details.add("Job end date: " + myEndDate.format(dateFormatter));
+		details.add("Job start date: " + myStartDate
+											.format(dateFormatter));
+		
+		details.add("Job end date: " + myEndDate
+											.format(dateFormatter));
+		
 		details.add("Job description: " + myDescription);
 		return details;
 	}
 
 	@Override
 	public String toString() {
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/uu");
+		DateTimeFormatter dateFormatter = DateTimeFormatter
+											.ofPattern("MM/dd/uu");
+		
 		StringBuilder sb = new StringBuilder(100);
 		sb.append(">>> Park name: " + myParkName + '\n');
-		sb.append("    Park manager: " + myPM.getFirstName() + ' ' + myPM.getLastName() + '\n');
+		sb.append("    Park manager: " + myPM.getFirstName() + ' '
+										+ myPM.getLastName() + '\n');
+		
 		sb.append("    Park location: " + myLocation + '\n');
-		sb.append("    Job start date: " + myStartDate.format(dateFormatter) + '\n');
-		sb.append("    Job end date: " + myEndDate.format(dateFormatter) + '\n');
+		sb.append("    Job start date: " + myStartDate
+									.format(dateFormatter) + '\n');
+		
+		sb.append("    Job end date: " + myEndDate
+									.format(dateFormatter) + '\n');
+		
 		sb.append("    Job description: " + myDescription + "\n");
 		return sb.toString();
 	}
@@ -297,7 +347,9 @@ public class Job implements Serializable, Comparable<Job> {
 	public int compareTo(Job theJob) {
 		if (myStartDate.isBefore(theJob.getStartDate())) {
 			return -1;
-		} else if (myStartDate.isEqual(theJob.getStartDate()) && myEndDate.isBefore(theJob.getEndDate())) {
+		} else if (myStartDate.isEqual(theJob.getStartDate()) 
+						&& myEndDate.isBefore(theJob.getEndDate())) {
+			
 			return -1;
 		} else if (myStartDate.isAfter(theJob.getStartDate())) {
 			return 1;

@@ -26,6 +26,18 @@ import model.Volunteer;
 public class VolunteerTest {
 	
 	/*
+	 * These  values are arbitrary in a sense, but also specific
+	 * because they help create jobs on specific dates apart
+	 * from now so we can make sure to test different conflicts
+	 * and also have jobs that don't conflict.
+	 */
+	private static final int ARBITRARY_DATE_DISTANCE_1 = 7;
+	private static final int ARBITRARY_DATE_DISTANCE_2 = 13;
+	private static final int ARBITRARY_DATE_DISTANCE_3 = 11;
+	private static final int ARBITRARY_DATE_DISTANCE_4 = 15;
+	private static final int ARBITRARY_DATE_DISTANCE_5 = 20;
+	
+	/*
 	 * These dates are used to create different jobs on different
 	 * dates to test whether the different business rules are
 	 * satisfied. 
@@ -82,38 +94,50 @@ public class VolunteerTest {
 	@Before
 	public void setUp() {
 		myFirstJobStartDate = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 7);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_1);
+		
 		myFirstJobEndDate = 
 				myFirstJobStartDate.plusDays(3);
 		
-		
 		mySecondJobStartDate = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 13);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_2);
+		
 		mySecondJobEndDate = 
 				mySecondJobStartDate.plusDays(3);
 		
 		myFirstJobCandidateStartDate = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 11);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_3);
+		
 		myFirstJobCandidateEndDate = 
 				myFirstJobCandidateStartDate.plusDays(3);
 		
 		mySecondJobCandidateStartDate = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 15);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_4);
+		
 		mySecondJobCandidateEndDate = 
 				mySecondJobCandidateStartDate;
 		
 		myThirdJobCandidateStartDate = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 13);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_2);
+		
 		myThirdJobCandidateEndDate = 
 				myThirdJobCandidateStartDate;
 		
 		myJobStartDateLessThanMinDaysAway =
 				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP - 1);
+		
 		myJobStartDateMinDaysAway = 
 				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP);
 		
 		myJobStartDateMoreThanMinDaysAway = 
-				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP + 20);
+				LocalDate.now().plusDays(Job.MIN_DAYS_TO_SIGN_UP
+										+ ARBITRARY_DATE_DISTANCE_5);
+		
 		myJobEndDate = 
 				LocalDate.now().plusDays(0); 
 		myNullJob = null;
@@ -229,7 +253,7 @@ public class VolunteerTest {
 	 */
 	@Test
 	public void isAtLeastMinDays_VolunteersSignUpJobsBeginLessThanMinimumNumberDays_False() {
-		assertFalse("Start date: " + myJobLessThanMinDaysAway.getStartDate(), 
+		assertFalse("Start date: " + myJobLessThanMinDaysAway.getStartDate(),
 					myAnyVolunteer.isAtLeastMinDays(myJobLessThanMinDaysAway));
 	}
 	
@@ -253,8 +277,13 @@ public class VolunteerTest {
 		myAnyVolunteer.isSameDayConflict(myFirstJob, myNullJobMap);
 	}
 	
+	/**
+	 * Testing the constructor by passing null values for the username,
+	 * first and last name parameter values.
+	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void Volunteer_PassingInNullJobObject_IllegalArgumentException() {
-		Volunteer currentVolunteer = new Volunteer(myNullString, myNullString, myNullString);
+		Volunteer currentVolunteer = new Volunteer(myNullString,
+										myNullString, myNullString);
 	}
 }

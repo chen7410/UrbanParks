@@ -56,7 +56,9 @@ public class JobMap {
 	}
 	
 	/**
-	 * Returns the amount of upcoming jobs; does not include jobs in the past.
+	 * Returns the amount of upcoming jobs; does not include jobs
+	 * in the past.
+	 * 
 	 * @return the number of job that the start date is today or after.
 	 */
 	public int getPendingJobAmount() {
@@ -77,7 +79,9 @@ public class JobMap {
 	 */
 	public void setMaxJobAmount(int theMaxJobAmount) {
 		if (theMaxJobAmount <= 0) {
-			throw new IllegalArgumentException("Illegal job amount: " + theMaxJobAmount);
+			throw new IllegalArgumentException("Illegal job amount: "
+													+ theMaxJobAmount);
+			
 		}
 		maxJobAmount = theMaxJobAmount;
 	}
@@ -209,10 +213,11 @@ public class JobMap {
 	 *            the beginning the period.
 	 * @param theEndDate
 	 *            the end of the period.
-	 * @return jobsWithinPeriod that contains jobs between theStartDate and
-	 *         theEndDate.
+	 * @return jobsWithinPeriod that contains jobs between 
+	 * 			theStartDate and theEndDate.
 	 */
-	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate, final LocalDate theEndDate) {
+	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate,
+											final LocalDate theEndDate) {
 		Job[] sortedJobs = getSortedJobsArray();
 		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
 		for (Job job : sortedJobs) {

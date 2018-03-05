@@ -16,9 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * A class that will be our User collection. This class is implemented using 
- * HashMap. The key of this collection is a String object which will be the 
- * user's name, the value will be a User object.
+ * A class that will be our User collection. This class is
+ * implemented using HashMap. The key of this collection is
+ * a String object which will be the user's name, the value
+ * will be a User object.
  * 
  * @author  Group 7
  * @version February 12, 2018
@@ -28,7 +29,8 @@ import java.util.List;
 public class UserMap {
 		
 	/**
-	 * The default name of the serialized file where all users' data are loaded/stored.
+	 * The default name of the serialized file where all users'
+	 * data are loaded/stored.
 	 */
 	public static final String USERS_DATA_FILE = "UsersInformations.ser";
 	
@@ -36,7 +38,8 @@ public class UserMap {
 		
 	
 	/**
-	 * Constructs an empty UserMap. The key is an String and the value is a User object.
+	 * Constructs an empty UserMap. The key is an String and the
+	 * value is a User object.
 	 */
 	public UserMap() {
 		myUsers = new HashMap<String, User>();
@@ -49,7 +52,8 @@ public class UserMap {
 	 * @param theFilename
 	 *            The name of the serialized file where users' data
 	 *            are written to.
-	 * @throws IOException when an I/O exception (either failed or interrupted) occurs.
+	 * @throws IOException when an I/O exception (either failed
+	 * 										or interrupted) occurs.
 	 */
 	public void storeUserMap(final String theFilename) {
 		try {
@@ -66,12 +70,14 @@ public class UserMap {
 	
 	/**
 	 * Loads user information from a file, using the given file name,
-	 * into the UserMap. The file must be create by the storeUserMap method.
+	 * into the UserMap. The file must be create by the
+	 * storeUserMap method.
 	 * 
 	 * @param theFilename
 	 *            The serialized file name from where users' data
 	 *            are loaded from and put in this UserMap.
-	 * @throws IOException when an I/O exception (either failed or interrupted) occurs.          
+	 * @throws IOException when an I/O exception (either failed
+	 * 										or interrupted) occurs.          
 	 */
 	@SuppressWarnings("unchecked")
 	public void loadUserMap(final String theFilename) {
