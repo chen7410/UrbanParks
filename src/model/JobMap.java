@@ -23,7 +23,7 @@ import java.util.List;
  * be the job's ID, the value will be a Job object.
  * 
  * @author  Group 7
- * @version February 12, 2018
+ * @version March 5, 2018
  * @see     Collection
  * @see     HashMap
  */
@@ -198,6 +198,14 @@ public class JobMap {
 	    return eligibleJobs;
     }
 
+	/**
+	 * Checks if the current size of the JobMap is less
+	 * than the default maximum allowed number of pending jobs
+	 * in the system.
+	 * 
+	 * @return true if the current size is less than the maximum allowed
+	 * 			    number of jobs in system.
+	 */
 	public boolean isLessMaxAmountJobs() {
 		return size() < maxJobAmount;
 	}

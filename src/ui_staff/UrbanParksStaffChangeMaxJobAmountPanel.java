@@ -117,6 +117,7 @@ public class UrbanParksStaffChangeMaxJobAmountPanel extends Observable {
 		JButton submitChangeButton = new JButton("Submit Change");
 		newNumberTextField.addActionListener(sumbitAction);
 		submitChangeButton.addActionListener(sumbitAction);
+		
 		JButton homeButton = new JButton(new AbstractAction("Home") {
 			private static final long serialVersionUID = 1L;
 
