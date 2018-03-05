@@ -86,7 +86,6 @@ public class ParkManagerHomePanel extends Observable {
 		
 		
 		int upcomingJobSize = myAllUpcomingJobs.size();
-		System.out.println(myAllUpcomingJobs.size());
 		if (upcomingJobSize == 0) {
 			/*
 			 * This is for when the volunteer does not have any jobs
@@ -243,7 +242,7 @@ public class ParkManagerHomePanel extends Observable {
 		JPanel topLabelPanel = new JPanel();
 		topLabelPanel.add(jobAmount);
 
-		jobAmount.setText("current " + myJobMap.getPendingJobAmount() + "max: " + myJobMap.getMaxJobAmount());
+		//jobAmount.setText("current " + myJobMap.getPendingJobAmount() + "max: " + myJobMap.getMaxJobAmount());
 		/*
 		 * TODO delete.
 		 */
