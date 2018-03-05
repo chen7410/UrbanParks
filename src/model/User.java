@@ -100,7 +100,7 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Returns a list of job belongs to this user. 
+	 * Returns a sorted list of jobs belong to this user.
 	 * This list can be empty but not null. The job
 	 * collection argument cannot be null.
 	 * 

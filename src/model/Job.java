@@ -215,7 +215,7 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * Check if a job is able to be removed. The removable job must be 
+	 * Check if a job can be removed from the system or can be unvolunteered. 
 	 * 
 	 * @return true if a job is removable; false otherwise.
 	 */
@@ -280,11 +280,14 @@ public class Job implements Serializable, Comparable<Job> {
 
 	/**
 	 * Check whether a Job is within theStartDate and theEndDate,
-	 * inclusive.
+	 * inclusive. theStartDate and theEndDate cannot be null and
+	 * theStartDate cannot be after theEndDate.
 	 * 
 	 * @param theStartDate
 	 * @param theEndDate
 	 * @return true if it is; false otherwise.
+	 * @throws IllegalArgumentException if theStartDate or theEndDate is null,
+	 * 									or if theStartDate is after theEndDate.
 	 */
 	public boolean isJobWithinDates(final LocalDate theStartDate,
 										final LocalDate theEndDate) {
@@ -306,7 +309,7 @@ public class Job implements Serializable, Comparable<Job> {
 
 	/**
 	 * @return String summary of the job in the following format:
-	 *          Park Name: Start Date - End Date
+	 *          Start Date - End Date: Park Name 
 	 */
 	public String getJobSummary() {
 		DateTimeFormatter formatter = DateTimeFormatter
@@ -320,8 +323,9 @@ public class Job implements Serializable, Comparable<Job> {
 	}
 
 	/**
-	 * 
-	 * @return the detail of this job.
+	 * Returns a lit of String objects that include the park name, park manager,
+	 * start date, end date, and description of this job.
+	 * @return the list of the details of this job.
 	 */
 	public List<String> getJobDetailsList() {
 		DateTimeFormatter dateFormatter = DateTimeFormatter
@@ -375,7 +379,7 @@ public class Job implements Serializable, Comparable<Job> {
 		} else if (myStartDate.isAfter(theJob.getStartDate())) {
 			return 1;
 		} else {
-			return 0;
+			return myParkName.compareToIgnoreCase(theJob.myParkName);
 		}
 	}
 

@@ -77,8 +77,10 @@ public class JobMap {
 	}
 	
 	/**
-	 * This method will call storeJobMap method when you set the max job amount.
-	 * @param theMaxJobAmount
+	 * Changes the maximum amount of pending jobs that the system can hold.
+	 * theMaxJobAmount has to be a positive integer.
+	 * 
+	 * @param theMaxJobAmount the new maximum amount.
 	 * @throws IllegalArgumentException if theJobAmount <= 0.
 	 */
 	public void setMaxJobAmount(int theMaxJobAmount) {
@@ -88,7 +90,6 @@ public class JobMap {
 			
 		}
 		myMaxJobAmount = theMaxJobAmount;
-		storeJobMap(JobMap.JOBS_DATA_FILE);
 	}
 	
 	/**
@@ -114,6 +115,7 @@ public class JobMap {
 		try {
 			FileOutputStream file = new FileOutputStream(theFilename);
 			ObjectOutputStream out = new ObjectOutputStream(file);
+			//out.writeObject(this);
 			out.writeObject(myJobs);
 			out.close();
 			file.close();
@@ -168,8 +170,8 @@ public class JobMap {
 	/**
 	 * Retrieves a job from this JobMap.
 	 * 
-	 * @param  theJob the Job being retrieved from this JobMap.
-	 * @return a job object or null if the job doesn't exist.
+	 * @param  theJobID the job ID of the job being retrieved from this JobMap.
+	 * @return a job object that matches the job ID or null if the job doesn't exist.
 	 */
 	public Job getJob(final int theJobID) {
 		return myJobs.get(theJobID);
@@ -220,11 +222,11 @@ public class JobMap {
 
 	/**
 	 * Checks if the current size of the JobMap is less
-	 * than the default maximum allowed number of pending jobs
+	 * than the maximum allowed number of pending jobs
 	 * in the system.
 	 * 
 	 * @return true if the current size is less than the maximum allowed
-	 * 			    number of jobs in system.
+	 * 			    number of jobs in system; false otherwise.
 	 */
 	public boolean isLessMaxAmountJobs() {
 		return size() < myMaxJobAmount;
@@ -235,7 +237,8 @@ public class JobMap {
 	 * Searches this JobMap for jobs that start on the specified
 	 * start date and end on the specified end date, and all the 
 	 * jobs that fall in between the two dates. These jobs are added
-	 * to an ArrayList that is returned to this method caller.
+	 * to an ArrayList that is returned to this method caller. theStartDate 
+	 * and theEndDate cannot be null and theStartDate cannot be after theEndDate.
 	 * 
 	 * @param theStartDate
 	 *            the beginning the period.
@@ -243,9 +246,23 @@ public class JobMap {
 	 *            the end of the period.
 	 * @return jobsWithinPeriod that contains jobs between 
 	 * 			theStartDate and theEndDate.
+	 * @throws IllegalArgumentException if theStartDate or theEndDate is null,
+	 * 									or if theStartDate is after theEndDate.
 	 */
 	public ArrayList<Job> getJobsInPeriod(final LocalDate theStartDate,
 											final LocalDate theEndDate) {
+		if (theStartDate == null) {
+			throw new IllegalArgumentException(
+										"Start date cannot be null");
+		}
+		if (theEndDate == null) {
+			throw new IllegalArgumentException(
+										"End date cannot be null");
+		}
+		if (theStartDate.isAfter(theEndDate)) {
+			throw new IllegalArgumentException(
+							"Start date cannot be after end date");
+		}
 		Job[] sortedJobs = getSortedJobsArray();
 		ArrayList<Job> jobsWithinPeriod = new ArrayList<>();
 		for (Job job : sortedJobs) {

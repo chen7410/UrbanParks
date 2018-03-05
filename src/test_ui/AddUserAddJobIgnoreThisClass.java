@@ -121,7 +121,7 @@ public class AddUserAddJobIgnoreThisClass {
 		
 		
 		Job job8 = new Job(LocalDate.of(2018, 04, 01)
-				, LocalDate.of(2018, 04, 03)
+				, LocalDate.of(2018, 04, 02)
 				, "Salmon Bay Park", brook
 				, "2001 NW Canoe Pl, Seattle, WA 98117"
 				, "Setting up and tearing down stage");
@@ -146,8 +146,8 @@ public class AddUserAddJobIgnoreThisClass {
 		
 		
 		
-		Job job11 = new Job (LocalDate.of(2018, 04, 06), 
-				LocalDate.of(2018, 04, 07), 
+		Job job11 = new Job (LocalDate.of(2018, 03, 06), 
+				LocalDate.of(2018, 03, 07), 
 				"Kerry Park", matt, 
 				"211 W Highland Dr, Seattle, WA 98119",
 				"Weeding and mulching flowerbeds");

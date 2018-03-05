@@ -735,12 +735,6 @@ public class GUI extends JFrame implements Observer {
 		remove(myCurrentPanel);
 		UrbanParksStaffNewMaxConfirmationPanel confirmationPanel =
 					new UrbanParksStaffNewMaxConfirmationPanel(myJobs);
-
-//		myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
-//		myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
-		/*
-		 * TODO store change
-		 */
 		myCurrentPanel = confirmationPanel.getPanel();
 		confirmationPanel.addObserver(this);
 		add(myCurrentPanel, BorderLayout.CENTER);
@@ -796,11 +790,7 @@ public class GUI extends JFrame implements Observer {
 		
 		if (theSignal.getButtonName().toLowerCase()
 										.equals("submit change")) {
-//			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
-//			myUsers.storeUserMap(UserMap.USERS_DATA_FILE);
-			/*
-			 * TODO store change
-			 */
+			myJobs.storeJobMap(JobMap.JOBS_DATA_FILE);
 			createUrbanParksStaffNewMaxConfirmationPanel();
 		} else if (theSignal.getButtonName().toLowerCase()
 												.equals("home")) {
